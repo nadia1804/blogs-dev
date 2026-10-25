@@ -1,0 +1,101 @@
+<!-- ==========================================================================
+     Capsule Component: Floating Capsule Navigation
+     Path: /themes/capsule/component/nav.html
+     Technologies: Vanilla HTML, CSS, JavaScript (Zero dependencies)
+     ========================================================================== -->
+
+<header class="capsule-nav-container" id="capsuleNavContainer">
+  <nav class="capsule-nav" id="capsuleNav" aria-label="Main Navigation">
+    
+    <!-- Brand / Logo Capsule -->
+    <a href="#home" class="nav-brand" aria-label="Capsule Home">
+      <div class="brand-pill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5"></path>
+          <path d="M2 12l10 5 10-5"></path>
+        </svg>
+      </div>
+      <span class="brand-name">Capsule<span class="brand-dot">.</span></span>
+    </a>
+
+    <!-- Center Nav Links with active sliding indicator -->
+    <ul class="nav-links" id="navLinks" role="menubar">
+      <li role="none">
+        <a href="#home" class="nav-link active" role="menuitem" data-section="home">
+          <span>Beranda</span>
+        </a>
+      </li>
+      <li role="none">
+        <a href="#features" class="nav-link" role="menuitem" data-section="features">
+          <span>Fitur</span>
+        </a>
+      </li>
+      <li role="none">
+        <a href="#articles" class="nav-link" role="menuitem" data-section="articles">
+          <span>Artikel</span>
+        </a>
+      </li>
+      <li role="none">
+        <a href="#about" class="nav-link" role="menuitem" data-section="about">
+          <span>Tentang</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Right Actions: Theme Toggle + CTA Capsule Button + Mobile Trigger -->
+    <div class="nav-actions">
+      <!-- Dark/Light Mode Capsule Toggle -->
+      <button type="button" class="capsule-icon-btn" id="themeToggleBtn" aria-label="Toggle dark mode" title="Ganti Tema">
+        <!-- Sun Icon (shown in dark mode) -->
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (shown in light mode) -->
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Primary Action Pill Button -->
+      <a href="#subscribe" class="capsule-btn capsule-btn-accent">
+        <span>Mulai Baca</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-arrow-icon">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+
+      <!-- Mobile Hamburger Pill -->
+      <button type="button" class="mobile-toggle-btn" id="mobileNavToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Capsule Dropdown -->
+    <div class="mobile-dropdown-capsule" id="mobileDropdown">
+      <ul class="mobile-links">
+        <li><a href="#home" class="mobile-nav-link active">Beranda</a></li>
+        <li><a href="#features" class="mobile-nav-link">Fitur</a></li>
+        <li><a href="#articles" class="mobile-nav-link">Artikel</a></li>
+        <li><a href="#about" class="mobile-nav-link">Tentang</a></li>
+      </ul>
+      <div class="mobile-cta-box">
+        <a href="#subscribe" class="capsule-btn capsule-btn-accent w-full text-center">
+          Mulai Baca Gratis
+        </a>
+      </div>
+    </div>
+
+  </nav>
+</header>
