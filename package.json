@@ -1,0 +1,21 @@
+{
+  "name": "fruition-mini",
+  "version": "0.1.0",
+  "description": "Headless Notion SSG with Auto-Intelligence mapping and Fruit workspace manager",
+  "type": "module",
+  "bin": {
+    "fruit": "./src/admin/shell.js"
+  },
+  "scripts": {
+    "admin": "node src/admin/shell.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "notion",
+    "ssg",
+    "headless",
+    "fruition"
+  ],
+  "author": "",
+  "license": "MIT"
+}
