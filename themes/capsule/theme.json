@@ -1,0 +1,16 @@
+{
+  "id": "capsule",
+  "name": "Capsule",
+  "description": "Desain modern berbentuk kapsul (pill) yang aerodinamis, elegan, dan estetik dengan badge pil melengkung, floating capsule header, dan typography berkelas.",
+  "author": "Fruition Mini",
+  "version": "1.0.0",
+  "previewColor": "#f8fafc",
+  "accentColor": "#059669",
+  "settings": {
+    "primaryColor": "#059669",
+    "fontFamily": "Inter",
+    "maxWidth": "720px",
+    "pillRadius": "999px",
+    "showAuthorCard": true
+  }
+}

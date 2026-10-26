@@ -1,0 +1,1416 @@
+[
+  {
+    "object": "block",
+    "id": "3f793701-058a-809a-8565-cb0da927d4f0",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_1",
+    "heading_1": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Panduan Memulai Website",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Panduan Memulai Website",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-808f-94d0-d6404b2ffff4",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Website merupakan kumpulan halaman yang dapat diakses melalui browser. Website bisa digunakan untuk berbagi informasi, menampilkan portofolio, menulis artikel, hingga membangun layanan digital.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Website merupakan kumpulan halaman yang dapat diakses melalui browser. Website bisa digunakan untuk berbagi informasi, menampilkan portofolio, menulis artikel, hingga membangun layanan digital.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-808b-8fc9-eff3947f69a8",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_2",
+    "heading_2": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Apa yang Dibutuhkan untuk Membuat Website?",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Apa yang Dibutuhkan untuk Membuat Website?",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80cb-b164-d45677718982",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Ada beberapa teknologi dasar yang perlu dikenal sebelum mulai membangun website.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Ada beberapa teknologi dasar yang perlu dikenal sebelum mulai membangun website.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-800f-aa99-f859730844f2",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_3",
+    "heading_3": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "1. HTML",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "1. HTML",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80af-814d-edd951cf5d88",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "HTML digunakan untuk menyusun struktur konten, seperti judul, paragraf, gambar, daftar, dan tautan.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "HTML digunakan untuk menyusun struktur konten, seperti judul, paragraf, gambar, daftar, dan tautan.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80e6-a1d0-f52922f3d515",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_3",
+    "heading_3": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "2. CSS",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "2. CSS",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-804c-b2a6-c69f930e25ca",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "CSS digunakan untuk mengatur tampilan website, termasuk warna, ukuran teks, jarak antarbagian, dan tata letak halaman.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "CSS digunakan untuk mengatur tampilan website, termasuk warna, ukuran teks, jarak antarbagian, dan tata letak halaman.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8044-9c0a-c1016a05c9d6",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_3",
+    "heading_3": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "3. JavaScript",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "3. JavaScript",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80dd-b996-c60a605db3a0",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "JavaScript membuat website lebih interaktif. Contohnya adalah menu navigasi, pencarian artikel, tombol interaktif, dan validasi formulir.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "JavaScript membuat website lebih interaktif. Contohnya adalah menu navigasi, pencarian artikel, tombol interaktif, dan validasi formulir.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8084-bef3-c0fed9b72c30",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_2",
+    "heading_2": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Mengenal Halaman dan Artikel",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Mengenal Halaman dan Artikel",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-801b-8044-ffafbefde3dc",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Dalam sebuah website, halaman (",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Dalam sebuah website, halaman (",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Page",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": true,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Page",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": ") dan artikel (",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": ") dan artikel (",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Blog Post",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": true,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Blog Post",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": ") dapat memiliki tujuan berbeda.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": ") dapat memiliki tujuan berbeda.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8077-a0cc-c4cf5eb0cda2",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Halaman",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Halaman",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": " biasanya berisi informasi yang relatif tetap, misalnya:",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": " biasanya berisi informasi yang relatif tetap, misalnya:",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-807e-8788-eb96d5721518",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Tentang Kami",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Tentang Kami",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8087-ae0f-eb09efe32e4b",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Layanan",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Layanan",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80b3-a109-e8465f3d6bde",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Kontak",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Kontak",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80a0-bda6-e1930f2e2dbf",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Kebijakan Privasi",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Kebijakan Privasi",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-809d-846d-cc3ab1d9c33c",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Sementara itu, ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Sementara itu, ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "artikel blog",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "artikel blog",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": " biasanya berisi tulisan yang diterbitkan secara berkala, seperti tutorial, berita, dan catatan pengembangan.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": " biasanya berisi tulisan yang diterbitkan secara berkala, seperti tutorial, berita, dan catatan pengembangan.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80af-9cd8-e4ef813920a3",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_2",
+    "heading_2": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Langkah Membuat Website Sederhana",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Langkah Membuat Website Sederhana",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80e6-a75b-c260fc36457c",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Ikuti tahapan berikut untuk memulai:",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Ikuti tahapan berikut untuk memulai:",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-808a-a2e5-e989cb45b289",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Tentukan tujuan website.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Tentukan tujuan website.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80a3-a012-ef2780c53def",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Siapkan struktur konten dan navigasi.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Siapkan struktur konten dan navigasi.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8080-a731-f2e41a8fa926",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Buat tampilan menggunakan HTML dan CSS.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Buat tampilan menggunakan HTML dan CSS.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8042-864f-f64ec113ee16",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Tambahkan interaksi jika diperlukan.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Tambahkan interaksi jika diperlukan.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8098-8a84-f7b141932e81",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Uji website di berbagai ukuran layar.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Uji website di berbagai ukuran layar.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8026-916a-d836d8ed0148",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Bangun dan publikasikan website.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Bangun dan publikasikan website.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-80d1-ac94-ddf70b756697",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_2",
+    "heading_2": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Kesimpulan",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Kesimpulan",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-800c-97a4-d4f488f75f56",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Membuat website dapat dimulai dari teknologi dasar, kemudian dikembangkan sesuai kebutuhan. Memahami perbedaan antara halaman dan artikel juga membantu menjaga struktur konten tetap rapi, terutama saat menggunakan CMS atau static site generator seperti Astro.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Membuat website dapat dimulai dari teknologi dasar, kemudian dikembangkan sesuai kebutuhan. Memahami perbedaan antara halaman dan artikel juga membantu menjaga struktur konten tetap rapi, terutama saat menggunakan CMS atau static site generator seperti Astro.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f793701-058a-8009-860e-eeeeee13cd4a",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f793701-058a-8071-bd8e-ece39038a51e"
+    },
+    "created_time": "2026-10-12T04:27:00.000Z",
+    "last_edited_time": "2026-10-12T04:27:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Untuk mempelajari dasar-dasarnya, kamu dapat mulai dari halaman HTML, CSS, dan JavaScript sebelum membangun proyek yang lebih kompleks.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Untuk mempelajari dasar-dasarnya, kamu dapat mulai dari halaman HTML, CSS, dan JavaScript sebelum membangun proyek yang lebih kompleks.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  }
+]

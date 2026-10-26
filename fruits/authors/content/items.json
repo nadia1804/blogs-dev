@@ -1,0 +1,101 @@
+[
+  {
+    "id": "40293701-058a-801f-b786-eaff5882e64b",
+    "url": "https://app.notion.com/p/Deddy-Hidayat-40293701058a801fb786eaff5882e64b",
+    "createdTime": "2026-10-23T01:57:00.000Z",
+    "lastEditedTime": "2026-10-23T02:02:00.000Z",
+    "properties": {
+      "Pic": {
+        "type": "files",
+        "value": [
+          "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/c4418448-f90a-41e3-9056-b90f08cedccd/deddy-muz5ekul-480.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466V6RVA7EI%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061757Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAQaCXVzLXdlc3QtMiJHMEUCICowJKR%2FxWfM5NGF0gvNIDo17gqbD3j6nK9dnSFY3iTzAiEA8IWQ28QijuY8NTfMVwV7OVpl%2FvYx1fQ1lgTbtjpv7usqiAQIzP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDIdIgS2MtbWiuiCGsircAw3mgJf%2BbUj938AO1RA3rTnL%2FXdlNHjFEbp4sXUO9Jk4IAOcrIJj60cKRDKH6nUxVXnIJlF%2F7oSSS0Yvb%2FBIXSeOQj9%2BR%2FDr7z2b0hujudJNWqITb5tWFdH1%2BJuKAZoaTXh72zhcpJPprYL1aZP82aPk0Qy49euN8qFBb3XJuCkU4gMFLqba8xkgFVcLua11as1W3Otp%2BFAbd7UUUIUR84Ifk%2B0YHjjUpinlEp41PcVy6kSD3uveBFCKI2T5eI2jrwhjZ4A7D1f9lKbYVVS3PB6vkVkBUUAdsBa8PUKsSnEbizJxCI1HBaAjTsj3U3GeKP8uT2%2B%2FntqrkIaREtxPtUiQboxiVGnpLtvp4tcO1R3D6astgGug%2B0worxqOkW4HnyOzXMyWCP6Q5pNyfFTyQeKF7lJ3RjYYkzLKbJSR6a%2FP9oiHWs5zcMcI7mauy9Yc9Ld3UtNmKzxTpwmGO1tTL4PdOP4Dvmbpx%2FUN1njv9AQ0Wbb5%2FXA8U%2B9au5P9QPFChmr5%2BJdRHqBdIHSXP0VFhafY4DfNcr9cK3gAU%2Bw6%2F2pxNZDHSMeuSNfaOaC5ZkoDiavGebUy%2FBHyYnNx0GmRTYLfKr8WGhx22b67fWODi%2Fs3HqLuhZJPYKDiyd46MKCY%2B9YGOqUB3FGtGQST7dHOTyEdLVDqgQNuGlJrhtWvHz3i3BfYXOu41no27QMQ%2FQthExha%2BfMqrVtYMgwmv%2FgymxpGdp2Yx%2FvGb0zXe%2BuZBBAn0IYg%2B9qrFRppHh7XTpyTn0lDFawBEZlDrpB1dG4X6qOCx%2FT2SK6YGPyH%2BB5A8Q976kYlY72aE2WSHVdo6lN8snFQmR2ohBkMV%2Fckq%2FdBb%2FJghK6NyBTHx31C&X-Amz-Signature=ffa5dfa998f64f209cab17d24f1a502acc56b3993f868cb7231d30a38ffd29d1&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        ],
+        "raw": {
+          "id": "D%3B%40g",
+          "type": "files",
+          "files": [
+            {
+              "name": "deddy-muz5ekul-480.webp",
+              "type": "file",
+              "file": {
+                "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/c4418448-f90a-41e3-9056-b90f08cedccd/deddy-muz5ekul-480.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466V6RVA7EI%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061757Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAQaCXVzLXdlc3QtMiJHMEUCICowJKR%2FxWfM5NGF0gvNIDo17gqbD3j6nK9dnSFY3iTzAiEA8IWQ28QijuY8NTfMVwV7OVpl%2FvYx1fQ1lgTbtjpv7usqiAQIzP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDIdIgS2MtbWiuiCGsircAw3mgJf%2BbUj938AO1RA3rTnL%2FXdlNHjFEbp4sXUO9Jk4IAOcrIJj60cKRDKH6nUxVXnIJlF%2F7oSSS0Yvb%2FBIXSeOQj9%2BR%2FDr7z2b0hujudJNWqITb5tWFdH1%2BJuKAZoaTXh72zhcpJPprYL1aZP82aPk0Qy49euN8qFBb3XJuCkU4gMFLqba8xkgFVcLua11as1W3Otp%2BFAbd7UUUIUR84Ifk%2B0YHjjUpinlEp41PcVy6kSD3uveBFCKI2T5eI2jrwhjZ4A7D1f9lKbYVVS3PB6vkVkBUUAdsBa8PUKsSnEbizJxCI1HBaAjTsj3U3GeKP8uT2%2B%2FntqrkIaREtxPtUiQboxiVGnpLtvp4tcO1R3D6astgGug%2B0worxqOkW4HnyOzXMyWCP6Q5pNyfFTyQeKF7lJ3RjYYkzLKbJSR6a%2FP9oiHWs5zcMcI7mauy9Yc9Ld3UtNmKzxTpwmGO1tTL4PdOP4Dvmbpx%2FUN1njv9AQ0Wbb5%2FXA8U%2B9au5P9QPFChmr5%2BJdRHqBdIHSXP0VFhafY4DfNcr9cK3gAU%2Bw6%2F2pxNZDHSMeuSNfaOaC5ZkoDiavGebUy%2FBHyYnNx0GmRTYLfKr8WGhx22b67fWODi%2Fs3HqLuhZJPYKDiyd46MKCY%2B9YGOqUB3FGtGQST7dHOTyEdLVDqgQNuGlJrhtWvHz3i3BfYXOu41no27QMQ%2FQthExha%2BfMqrVtYMgwmv%2FgymxpGdp2Yx%2FvGb0zXe%2BuZBBAn0IYg%2B9qrFRppHh7XTpyTn0lDFawBEZlDrpB1dG4X6qOCx%2FT2SK6YGPyH%2BB5A8Q976kYlY72aE2WSHVdo6lN8snFQmR2ohBkMV%2Fckq%2FdBb%2FJghK6NyBTHx31C&X-Amz-Signature=ffa5dfa998f64f209cab17d24f1a502acc56b3993f868cb7231d30a38ffd29d1&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                "expiry_time": "2026-10-26T07:17:57.630Z"
+              }
+            }
+          ]
+        }
+      },
+      "Role": {
+        "type": "multi_select",
+        "value": [
+          "Educator"
+        ],
+        "raw": {
+          "id": "X%3BTb",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "5d29fe4d-c6df-4734-a5be-ff7657fe79c3",
+              "name": "Educator",
+              "color": "default"
+            }
+          ]
+        }
+      },
+      "Bio": {
+        "type": "rich_text",
+        "value": "Cats lover",
+        "raw": {
+          "id": "%7DDQG",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Cats lover",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Cats lover",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Name": {
+        "type": "title",
+        "value": "Deddy Hidayat",
+        "raw": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Deddy Hidayat",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Deddy Hidayat",
+              "href": null
+            }
+          ]
+        }
+      }
+    }
+  }
+]

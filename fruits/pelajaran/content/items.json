@@ -1,0 +1,547 @@
+[
+  {
+    "id": "3f893701-058a-8085-9fd2-cf059e466bf6",
+    "url": "https://app.notion.com/p/RPP-deep-learning-3f893701058a80859fd2cf059e466bf6",
+    "createdTime": "2026-10-13T13:31:00.000Z",
+    "lastEditedTime": "2026-10-26T05:49:00.000Z",
+    "properties": {
+      "mapel": {
+        "type": "multi_select",
+        "value": [
+          "semua mapel"
+        ],
+        "raw": {
+          "id": "%3Ei~%5B",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "e1846912-3ccc-468b-aed9-6587987732f5",
+              "name": "semua mapel",
+              "color": "yellow"
+            }
+          ]
+        }
+      },
+      "Authors": {
+        "type": "relation",
+        "value": [
+          "40293701-058a-801f-b786-eaff5882e64b"
+        ],
+        "raw": {
+          "id": "EIA%5E",
+          "type": "relation",
+          "relation": [
+            {
+              "id": "40293701-058a-801f-b786-eaff5882e64b"
+            }
+          ],
+          "has_more": false
+        }
+      },
+      "tp": {
+        "type": "rich_text",
+        "value": "Download RPP deep learning Fase A B C, kurikulum merdeka",
+        "raw": {
+          "id": "%5EauU",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Download RPP deep learning Fase A B C, kurikulum merdeka",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Download RPP deep learning Fase A B C, kurikulum merdeka",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Meta description": {
+        "type": "rich_text",
+        "value": "Download RPP deep learning Fase A B C, kurikulum merdeka",
+        "raw": {
+          "id": "cEV%5B",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Download RPP deep learning Fase A B C, kurikulum merdeka",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Download RPP deep learning Fase A B C, kurikulum merdeka",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Date": {
+        "type": "date",
+        "value": "2026-10-13",
+        "raw": {
+          "id": "fRit",
+          "type": "date",
+          "date": {
+            "start": "2026-10-13",
+            "end": null,
+            "time_zone": null
+          }
+        }
+      },
+      "File & media": {
+        "type": "files",
+        "value": [],
+        "raw": {
+          "id": "n%5B%5Bm",
+          "type": "files",
+          "files": []
+        }
+      },
+      "semester": {
+        "type": "multi_select",
+        "value": [
+          "semester 1 dan 2"
+        ],
+        "raw": {
+          "id": "uJuR",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "1be4e3e9-1074-48fd-b184-c7774196e99f",
+              "name": "semester 1 dan 2",
+              "color": "gray"
+            }
+          ]
+        }
+      },
+      "kelas": {
+        "type": "multi_select",
+        "value": [
+          "perangkat ajar"
+        ],
+        "raw": {
+          "id": "x%3FkU",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "4e5e83c2-7fb0-450f-a9b0-1da3ca1cc9ce",
+              "name": "perangkat ajar",
+              "color": "brown"
+            }
+          ]
+        }
+      },
+      "Nama": {
+        "type": "title",
+        "value": "RPP deep learning",
+        "raw": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "RPP deep learning",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "RPP deep learning",
+              "href": null
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "3f893701-058a-80d7-b0cc-c5fad778a938",
+    "url": "https://app.notion.com/p/Personal-pronouns-3f893701058a80d7b0ccc5fad778a938",
+    "createdTime": "2026-10-13T02:25:00.000Z",
+    "lastEditedTime": "2026-10-26T05:49:00.000Z",
+    "properties": {
+      "mapel": {
+        "type": "multi_select",
+        "value": [
+          "bahasa inggris"
+        ],
+        "raw": {
+          "id": "%3Ei~%5B",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "a2923279-ee18-4db1-a9a8-0b2341e94122",
+              "name": "bahasa inggris",
+              "color": "gray"
+            }
+          ]
+        }
+      },
+      "Authors": {
+        "type": "relation",
+        "value": [
+          "40293701-058a-801f-b786-eaff5882e64b"
+        ],
+        "raw": {
+          "id": "EIA%5E",
+          "type": "relation",
+          "relation": [
+            {
+              "id": "40293701-058a-801f-b786-eaff5882e64b"
+            }
+          ],
+          "has_more": false
+        }
+      },
+      "tp": {
+        "type": "rich_text",
+        "value": "memahami i, you, we, they, he, she, it",
+        "raw": {
+          "id": "%5EauU",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "memahami i, you, we, they, he, she, it",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "memahami i, you, we, they, he, she, it",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Meta description": {
+        "type": "rich_text",
+        "value": "memahami i, you, we, they, he, she, it",
+        "raw": {
+          "id": "cEV%5B",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "memahami i, you, we, they, he, she, it",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "memahami i, you, we, they, he, she, it",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Date": {
+        "type": "date",
+        "value": "2026-10-13",
+        "raw": {
+          "id": "fRit",
+          "type": "date",
+          "date": {
+            "start": "2026-10-13",
+            "end": null,
+            "time_zone": null
+          }
+        }
+      },
+      "File & media": {
+        "type": "files",
+        "value": [
+          "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/e59e7f17-f534-40aa-a43f-73d7fcee3de1/personal_pronouns_blogs.web.id.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XSM2S6ZI%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T060635Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAQaCXVzLXdlc3QtMiJHMEUCIQDGXCCmVDG9fkKxM9CG%2F0JEKPaodU30gKPXYpRvINLElwIgPd5Yzl3232hkugp0R60fKWEbC8jXU%2BYs8JJBRakxqe4qiAQIzf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDG15r8r9OmDGdjr7yyrcA2dvNtfaecWihDz4eIFwXznfx1yLzfMfkvVdeL7x20tLOLGbs3rIzYeAEpxhgZpyJq7t%2B5PaKQEXV%2BrbSm6tvX5vgP3TpNuNiUPiFtbk7lFuV040PN2pfUNiikrYm8mCc3mdbEVgT4R2dt8v0H1Nr8lTW9dPntyrwnYXdNLmxi8uXOBGsQ7gGnTCFP3o3DH2hgtpx%2FFKSsE6untgo21Vrr7MJdUtEw4obdiVU7hL2baFMPZ7YJL230RWx8A4dx%2FtpXBj5Fu8DOrWF31UVj6bXoMww9HS2uef2JNQiFjS9TOhJmLYNEO%2FiXdreZEgI7BDGVcvJxAFssbPsz0KxVLl9hBo%2BPM0%2FZgZ9n9lWOaZg24NKYhXRwEfinW9c0ZsNwfcjofj6q%2Fdkkqp%2FXjPc5PL75pwSgUHJ2DFxAbpZsc%2Bt6vCf2t01tDggTIbnrGVprdiAqOYI%2B35wGSmrKQcDe%2BaNEnPGf9ZTii4KYtpcjx%2BSHxQfnamxWbNlSoglxfWjsGjoedQmV7xCxGbgpspOSuc65z2wGXETMmLsG2uzfBwxhYHopspQiNRaJYDH7Ftd5EaOre97BaDs8hdeqbCtiMpuYpwRVcxvkrRbMvZB2gn4Z1Sd%2B3eC3u9T0YTPHC%2BMPaY%2B9YGOqUBvOSTDst%2FdpTQ0syZrGkBie3zmaYojcTpsqui1nCTMfNho%2BNveL7VaUiUxYzt%2FMUpoBmio66%2BlXmkVC0%2BWO89oOjsP7BuQj12BsKaQdgI8ZxL47ZlC7B2aSk77zw8tLrly2bd47PVP0JsmfND2fv%2BPVm5ODXQz581LK360LSn2gWLVH%2FFVMJM7MlOZGR%2B3g5LT4TYkHKfSC2xdIYrRuDqGQXFpjod&X-Amz-Signature=85f76290c153c9e72bd3817ceead23e5e8a78055686862c37aa03d0e72ec4ec6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        ],
+        "raw": {
+          "id": "n%5B%5Bm",
+          "type": "files",
+          "files": [
+            {
+              "name": "personal_pronouns_blogs.web.id.png",
+              "type": "file",
+              "file": {
+                "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/e59e7f17-f534-40aa-a43f-73d7fcee3de1/personal_pronouns_blogs.web.id.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466XSM2S6ZI%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T060635Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAQaCXVzLXdlc3QtMiJHMEUCIQDGXCCmVDG9fkKxM9CG%2F0JEKPaodU30gKPXYpRvINLElwIgPd5Yzl3232hkugp0R60fKWEbC8jXU%2BYs8JJBRakxqe4qiAQIzf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDG15r8r9OmDGdjr7yyrcA2dvNtfaecWihDz4eIFwXznfx1yLzfMfkvVdeL7x20tLOLGbs3rIzYeAEpxhgZpyJq7t%2B5PaKQEXV%2BrbSm6tvX5vgP3TpNuNiUPiFtbk7lFuV040PN2pfUNiikrYm8mCc3mdbEVgT4R2dt8v0H1Nr8lTW9dPntyrwnYXdNLmxi8uXOBGsQ7gGnTCFP3o3DH2hgtpx%2FFKSsE6untgo21Vrr7MJdUtEw4obdiVU7hL2baFMPZ7YJL230RWx8A4dx%2FtpXBj5Fu8DOrWF31UVj6bXoMww9HS2uef2JNQiFjS9TOhJmLYNEO%2FiXdreZEgI7BDGVcvJxAFssbPsz0KxVLl9hBo%2BPM0%2FZgZ9n9lWOaZg24NKYhXRwEfinW9c0ZsNwfcjofj6q%2Fdkkqp%2FXjPc5PL75pwSgUHJ2DFxAbpZsc%2Bt6vCf2t01tDggTIbnrGVprdiAqOYI%2B35wGSmrKQcDe%2BaNEnPGf9ZTii4KYtpcjx%2BSHxQfnamxWbNlSoglxfWjsGjoedQmV7xCxGbgpspOSuc65z2wGXETMmLsG2uzfBwxhYHopspQiNRaJYDH7Ftd5EaOre97BaDs8hdeqbCtiMpuYpwRVcxvkrRbMvZB2gn4Z1Sd%2B3eC3u9T0YTPHC%2BMPaY%2B9YGOqUBvOSTDst%2FdpTQ0syZrGkBie3zmaYojcTpsqui1nCTMfNho%2BNveL7VaUiUxYzt%2FMUpoBmio66%2BlXmkVC0%2BWO89oOjsP7BuQj12BsKaQdgI8ZxL47ZlC7B2aSk77zw8tLrly2bd47PVP0JsmfND2fv%2BPVm5ODXQz581LK360LSn2gWLVH%2FFVMJM7MlOZGR%2B3g5LT4TYkHKfSC2xdIYrRuDqGQXFpjod&X-Amz-Signature=85f76290c153c9e72bd3817ceead23e5e8a78055686862c37aa03d0e72ec4ec6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                "expiry_time": "2026-10-26T07:06:35.274Z"
+              }
+            }
+          ]
+        }
+      },
+      "semester": {
+        "type": "multi_select",
+        "value": [
+          "semester 1"
+        ],
+        "raw": {
+          "id": "uJuR",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "6c03523e-49e5-4dd8-ad88-a693d6dd3750",
+              "name": "semester 1",
+              "color": "yellow"
+            }
+          ]
+        }
+      },
+      "kelas": {
+        "type": "multi_select",
+        "value": [
+          "kelas 6"
+        ],
+        "raw": {
+          "id": "x%3FkU",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "ba036d9f-5852-4503-8e1d-69329c3218e0",
+              "name": "kelas 6",
+              "color": "red"
+            }
+          ]
+        }
+      },
+      "Nama": {
+        "type": "title",
+        "value": "Personal pronouns",
+        "raw": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Personal pronouns",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Personal pronouns",
+              "href": null
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "3f793701-058a-80b4-9f3c-d9661d572f6a",
+    "url": "https://app.notion.com/p/Sinonim-dan-antonim-3f793701058a80b49f3cd9661d572f6a",
+    "createdTime": "2026-10-12T02:38:00.000Z",
+    "lastEditedTime": "2026-10-26T05:48:00.000Z",
+    "properties": {
+      "mapel": {
+        "type": "multi_select",
+        "value": [
+          "bahasa indonesia"
+        ],
+        "raw": {
+          "id": "%3Ei~%5B",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "22450ed9-30ed-4ea7-a263-f8b6fb720bc4",
+              "name": "bahasa indonesia",
+              "color": "brown"
+            }
+          ]
+        }
+      },
+      "Authors": {
+        "type": "relation",
+        "value": [
+          "40293701-058a-801f-b786-eaff5882e64b"
+        ],
+        "raw": {
+          "id": "EIA%5E",
+          "type": "relation",
+          "relation": [
+            {
+              "id": "40293701-058a-801f-b786-eaff5882e64b"
+            }
+          ],
+          "has_more": false
+        }
+      },
+      "tp": {
+        "type": "rich_text",
+        "value": "memahami sinonim dan antonim",
+        "raw": {
+          "id": "%5EauU",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "memahami sinonim dan antonim",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "memahami sinonim dan antonim",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Meta description": {
+        "type": "rich_text",
+        "value": "memahami sinonim dan antonim",
+        "raw": {
+          "id": "cEV%5B",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "memahami sinonim dan antonim",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "memahami sinonim dan antonim",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Date": {
+        "type": "date",
+        "value": "2026-10-12",
+        "raw": {
+          "id": "fRit",
+          "type": "date",
+          "date": {
+            "start": "2026-10-12",
+            "end": null,
+            "time_zone": null
+          }
+        }
+      },
+      "File & media": {
+        "type": "files",
+        "value": [],
+        "raw": {
+          "id": "n%5B%5Bm",
+          "type": "files",
+          "files": []
+        }
+      },
+      "semester": {
+        "type": "multi_select",
+        "value": [
+          "semester 1"
+        ],
+        "raw": {
+          "id": "uJuR",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "6c03523e-49e5-4dd8-ad88-a693d6dd3750",
+              "name": "semester 1",
+              "color": "yellow"
+            }
+          ]
+        }
+      },
+      "kelas": {
+        "type": "multi_select",
+        "value": [
+          "kelas 6"
+        ],
+        "raw": {
+          "id": "x%3FkU",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "ba036d9f-5852-4503-8e1d-69329c3218e0",
+              "name": "kelas 6",
+              "color": "red"
+            }
+          ]
+        }
+      },
+      "Nama": {
+        "type": "title",
+        "value": "Sinonim dan antonim",
+        "raw": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Sinonim dan antonim",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Sinonim dan antonim",
+              "href": null
+            }
+          ]
+        }
+      }
+    }
+  }
+]

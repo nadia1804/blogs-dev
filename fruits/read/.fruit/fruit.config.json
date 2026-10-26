@@ -1,0 +1,130 @@
+{
+  "name": "read",
+  "targetType": "read",
+  "notion": {
+    "apiKey": "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",
+    "databaseId": "3f793701058a800fb229e5ee4a935d31",
+    "databaseTitle": "Post"
+  },
+  "mapping": {
+    "required": [
+      {
+        "key": "title",
+        "label": "Title [Main content]",
+        "notionType": "title",
+        "required": true,
+        "mappedTo": "Title"
+      },
+      {
+        "key": "slug",
+        "label": "Slug",
+        "notionType": "rich_text",
+        "required": true,
+        "mappedTo": "Slug"
+      },
+      {
+        "key": "meta_description",
+        "label": "Meta Description",
+        "notionType": "rich_text",
+        "required": false,
+        "mappedTo": "Meta_description"
+      },
+      {
+        "key": "date",
+        "label": "Date (for sorting)",
+        "notionType": "date",
+        "required": true,
+        "mappedTo": "Date"
+      },
+      {
+        "key": "og",
+        "label": "Open Graph / Thumbnail",
+        "notionType": "files",
+        "required": false,
+        "mappedTo": "OG"
+      },
+      {
+        "key": "category",
+        "label": "Category",
+        "notionType": "select",
+        "required": false,
+        "mappedTo": "Category"
+      },
+      {
+        "key": "tags",
+        "label": "Tags",
+        "notionType": "multi_select",
+        "required": false,
+        "mappedTo": "Tags"
+      },
+      {
+        "key": "authors",
+        "label": "Authors",
+        "notionType": "relation",
+        "required": false,
+        "mappedTo": "Authors"
+      },
+      {
+        "key": "published",
+        "label": "Status Publish/Draft",
+        "notionType": "checkbox",
+        "required": true,
+        "mappedTo": "Published"
+      }
+    ],
+    "custom": [],
+    "discovered": [
+      {
+        "key": "Meta_description",
+        "type": "rich_text"
+      },
+      {
+        "key": "Slug",
+        "type": "rich_text"
+      },
+      {
+        "key": "Tags",
+        "type": "multi_select"
+      },
+      {
+        "key": "Authors",
+        "type": "relation"
+      },
+      {
+        "key": "Published",
+        "type": "checkbox"
+      },
+      {
+        "key": "OG",
+        "type": "files"
+      },
+      {
+        "key": "Date",
+        "type": "date"
+      },
+      {
+        "key": "Category",
+        "type": "select"
+      },
+      {
+        "key": "Title",
+        "type": "title"
+      }
+    ],
+    "columns": {
+      "title": "Title",
+      "slug": "Slug",
+      "authors": "Authors",
+      "date": "Published",
+      "published": "Published",
+      "meta_description": "Meta_description",
+      "og": "OG",
+      "bio": "_none_",
+      "role": "_none_",
+      "pic": "_none_"
+    }
+  },
+  "createdAt": "2026-10-26T05:09:59.223Z",
+  "updatedAt": "2026-10-26T06:17:03.560Z",
+  "lastSyncAt": "2026-10-26T06:15:45.340Z"
+}

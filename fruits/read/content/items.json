@@ -1,0 +1,356 @@
+[
+  {
+    "id": "3f893701-058a-80c1-9e62-c9c95bb850d0",
+    "url": "https://app.notion.com/p/Script-penyalin-google-drive-3f893701058a80c19e62c9c95bb850d0",
+    "createdTime": "2026-10-13T13:53:00.000Z",
+    "lastEditedTime": "2026-10-23T09:40:00.000Z",
+    "properties": {
+      "Meta_description": {
+        "type": "rich_text",
+        "value": "Script penyalin folder google drive otomatis",
+        "raw": {
+          "id": "DGM%3B",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Script penyalin folder google drive otomatis",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Script penyalin folder google drive otomatis",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Slug": {
+        "type": "rich_text",
+        "value": "/gdrive",
+        "raw": {
+          "id": "De%40%3D",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "/gdrive",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "/gdrive",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Tags": {
+        "type": "multi_select",
+        "value": [
+          "app script"
+        ],
+        "raw": {
+          "id": "PKij",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "30c4e292-f894-4724-b5d7-365353867958",
+              "name": "app script",
+              "color": "pink"
+            }
+          ]
+        }
+      },
+      "Authors": {
+        "type": "relation",
+        "value": [
+          "40293701-058a-801f-b786-eaff5882e64b"
+        ],
+        "raw": {
+          "id": "QhXd",
+          "type": "relation",
+          "relation": [
+            {
+              "id": "40293701-058a-801f-b786-eaff5882e64b"
+            }
+          ],
+          "has_more": false
+        }
+      },
+      "Published": {
+        "type": "checkbox",
+        "value": true,
+        "raw": {
+          "id": "W%3F_i",
+          "type": "checkbox",
+          "checkbox": true
+        }
+      },
+      "OG": {
+        "type": "files",
+        "value": [
+          "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/560ac7aa-d1a7-45ab-b429-1d23e83bf823/open_graph_butterfly.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466TVEKAP5V%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061554Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAYaCXVzLXdlc3QtMiJIMEYCIQDSbGocscAnb3FVAsRHk4XPuyaepGHYU3w0WtNA7ZRFBAIhAJ0bY4tI09azB6vi7GpTL2CI9VqLQNqBrQKFRaPgGsKpKogECM%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwRtoKa7Rpx%2FCwmTnIq3AMZBb%2FyvsC0QWJ4jxzWldmKg1%2FoWpw8WGypFw%2Fbv%2FgYXoRmxpunoOMrbZ4yb6AhVUnBR9nYOfv0jrYZayxm%2FdjcGP%2FeJ5wZV59NNKfpGkeHgRQEr0bEdhDf8cY2%2BdNq1d76EwniL9K8q6iLcyC2dxTueZC14HkSHPE%2Bq4qyy%2BXlh7imyLkEDYCaDiUoHb%2FASRaZjmB7GBrA44hPreWu1ku3JdFGlfHqGp9jEeWsgeGpfDFMvFWdCfAOGcTnLLFOklp7vmZHEqk3MJbeOZBU4jRIeO8mu7nmFdU%2FBsA1lZAsUe2%2BCJI1LSzBDQdJeb2w%2Fxr1UPuxJOhyS1SyzxJLd6aKeUeMFKg1SwrWfhj40FZ66ck%2FWgBxELPzfHNcoOk2ZaIEj1z5TMb6NWsIv77h1n7E6WYnxP4iv8gMa93um6Su8aMHH2Da6XEaFIRNCXOSql09PlZueEnSW%2BUDUTP%2BeUQ8ww2CNmKekBtu8BbL%2Besv3YRTBB7TfiqVsrmkoh6gXRH1tK5duPnbDTzOv3yW2X%2FcBH6jfd3Eap%2FrC7iybd27taNjpwyHkxxIm9r1qBO0apUTUqaK2TJbcCw96M6e9K06Fa60p3FhaQoTWUFMpNNJytAMuzeIfYs1Wa6RCTDi3PvWBjqkAY%2FuLYHe2o2gI%2FTDjh5UWItwRXrQ2MYhTSXEXyNbhB%2BUzb8ScdnFO8u8ROAWhtJZ2Awpt5Y1RhKU%2BZczZUOsBzz1eVXjjqDPKEQEOb8lfI%2FQsVcCDg1j41UpbdMkSD42JF8fINwaXVOO2kRz3Tm6S0SLtywQGtEQHFH9d97vBBxm9uHAdJRzy34wlXEM%2Fap78nF9UMX92yyYyD%2BwelXWJTM%2FGk1u&X-Amz-Signature=f45e171550cc98e7ed10d6d9677c935d835812929ded2111648d4e59aa606dda&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        ],
+        "raw": {
+          "id": "YC%7Bg",
+          "type": "files",
+          "files": [
+            {
+              "name": "open graph butterfly.png",
+              "type": "file",
+              "file": {
+                "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/560ac7aa-d1a7-45ab-b429-1d23e83bf823/open_graph_butterfly.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466TVEKAP5V%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061554Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAYaCXVzLXdlc3QtMiJIMEYCIQDSbGocscAnb3FVAsRHk4XPuyaepGHYU3w0WtNA7ZRFBAIhAJ0bY4tI09azB6vi7GpTL2CI9VqLQNqBrQKFRaPgGsKpKogECM%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwRtoKa7Rpx%2FCwmTnIq3AMZBb%2FyvsC0QWJ4jxzWldmKg1%2FoWpw8WGypFw%2Fbv%2FgYXoRmxpunoOMrbZ4yb6AhVUnBR9nYOfv0jrYZayxm%2FdjcGP%2FeJ5wZV59NNKfpGkeHgRQEr0bEdhDf8cY2%2BdNq1d76EwniL9K8q6iLcyC2dxTueZC14HkSHPE%2Bq4qyy%2BXlh7imyLkEDYCaDiUoHb%2FASRaZjmB7GBrA44hPreWu1ku3JdFGlfHqGp9jEeWsgeGpfDFMvFWdCfAOGcTnLLFOklp7vmZHEqk3MJbeOZBU4jRIeO8mu7nmFdU%2FBsA1lZAsUe2%2BCJI1LSzBDQdJeb2w%2Fxr1UPuxJOhyS1SyzxJLd6aKeUeMFKg1SwrWfhj40FZ66ck%2FWgBxELPzfHNcoOk2ZaIEj1z5TMb6NWsIv77h1n7E6WYnxP4iv8gMa93um6Su8aMHH2Da6XEaFIRNCXOSql09PlZueEnSW%2BUDUTP%2BeUQ8ww2CNmKekBtu8BbL%2Besv3YRTBB7TfiqVsrmkoh6gXRH1tK5duPnbDTzOv3yW2X%2FcBH6jfd3Eap%2FrC7iybd27taNjpwyHkxxIm9r1qBO0apUTUqaK2TJbcCw96M6e9K06Fa60p3FhaQoTWUFMpNNJytAMuzeIfYs1Wa6RCTDi3PvWBjqkAY%2FuLYHe2o2gI%2FTDjh5UWItwRXrQ2MYhTSXEXyNbhB%2BUzb8ScdnFO8u8ROAWhtJZ2Awpt5Y1RhKU%2BZczZUOsBzz1eVXjjqDPKEQEOb8lfI%2FQsVcCDg1j41UpbdMkSD42JF8fINwaXVOO2kRz3Tm6S0SLtywQGtEQHFH9d97vBBxm9uHAdJRzy34wlXEM%2Fap78nF9UMX92yyYyD%2BwelXWJTM%2FGk1u&X-Amz-Signature=f45e171550cc98e7ed10d6d9677c935d835812929ded2111648d4e59aa606dda&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                "expiry_time": "2026-10-26T07:15:54.322Z"
+              }
+            }
+          ]
+        }
+      },
+      "Date": {
+        "type": "date",
+        "value": "2026-10-13",
+        "raw": {
+          "id": "%5B%40n%7C",
+          "type": "date",
+          "date": {
+            "start": "2026-10-13",
+            "end": null,
+            "time_zone": null
+          }
+        }
+      },
+      "Category": {
+        "type": "select",
+        "value": "Tech",
+        "raw": {
+          "id": "yNSK",
+          "type": "select",
+          "select": {
+            "id": "dee89da7-80b1-44e2-9c36-dddf9baed4b2",
+            "name": "Tech",
+            "color": "default"
+          }
+        }
+      },
+      "Title": {
+        "type": "title",
+        "value": "Script penyalin google drive",
+        "raw": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Script penyalin google drive",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Script penyalin google drive",
+              "href": null
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "3f793701-058a-80b6-88e5-e6baf008ce4d",
+    "url": "https://app.notion.com/p/Hello-World-HTML-Block-Components-Test-3f793701058a80b688e5e6baf008ce4d",
+    "createdTime": "2026-10-12T01:39:00.000Z",
+    "lastEditedTime": "2026-10-23T11:45:00.000Z",
+    "properties": {
+      "Meta_description": {
+        "type": "rich_text",
+        "value": "Hello World! Ini adalah paragraf standar untuk menguji apakah Notion API dapat mengambil teks, mempertahankan urutan konten, dan merender paragraf dengan benar di website.",
+        "raw": {
+          "id": "DGM%3B",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Hello World! Ini adalah paragraf standar untuk menguji apakah Notion API dapat mengambil teks, mempertahankan urutan konten, dan merender paragraf dengan benar di website.",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Hello World! Ini adalah paragraf standar untuk menguji apakah Notion API dapat mengambil teks, mempertahankan urutan konten, dan merender paragraf dengan benar di website.",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Slug": {
+        "type": "rich_text",
+        "value": "/hello-world",
+        "raw": {
+          "id": "De%40%3D",
+          "type": "rich_text",
+          "rich_text": [
+            {
+              "type": "text",
+              "text": {
+                "content": "/hello-world",
+                "link": null
+              },
+              "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "/hello-world",
+              "href": null
+            }
+          ]
+        }
+      },
+      "Tags": {
+        "type": "multi_select",
+        "value": [
+          "notion"
+        ],
+        "raw": {
+          "id": "PKij",
+          "type": "multi_select",
+          "multi_select": [
+            {
+              "id": "1d9a82f8-deb2-4ecf-bf16-fa69ccafbc51",
+              "name": "notion",
+              "color": "blue"
+            }
+          ]
+        }
+      },
+      "Authors": {
+        "type": "relation",
+        "value": [
+          "40293701-058a-801f-b786-eaff5882e64b"
+        ],
+        "raw": {
+          "id": "QhXd",
+          "type": "relation",
+          "relation": [
+            {
+              "id": "40293701-058a-801f-b786-eaff5882e64b"
+            }
+          ],
+          "has_more": false
+        }
+      },
+      "Published": {
+        "type": "checkbox",
+        "value": true,
+        "raw": {
+          "id": "W%3F_i",
+          "type": "checkbox",
+          "checkbox": true
+        }
+      },
+      "OG": {
+        "type": "files",
+        "value": [
+          "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/95510056-8318-462a-b9a8-27c018b5102a/open_graph.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466TVEKAP5V%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061554Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAYaCXVzLXdlc3QtMiJIMEYCIQDSbGocscAnb3FVAsRHk4XPuyaepGHYU3w0WtNA7ZRFBAIhAJ0bY4tI09azB6vi7GpTL2CI9VqLQNqBrQKFRaPgGsKpKogECM%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwRtoKa7Rpx%2FCwmTnIq3AMZBb%2FyvsC0QWJ4jxzWldmKg1%2FoWpw8WGypFw%2Fbv%2FgYXoRmxpunoOMrbZ4yb6AhVUnBR9nYOfv0jrYZayxm%2FdjcGP%2FeJ5wZV59NNKfpGkeHgRQEr0bEdhDf8cY2%2BdNq1d76EwniL9K8q6iLcyC2dxTueZC14HkSHPE%2Bq4qyy%2BXlh7imyLkEDYCaDiUoHb%2FASRaZjmB7GBrA44hPreWu1ku3JdFGlfHqGp9jEeWsgeGpfDFMvFWdCfAOGcTnLLFOklp7vmZHEqk3MJbeOZBU4jRIeO8mu7nmFdU%2FBsA1lZAsUe2%2BCJI1LSzBDQdJeb2w%2Fxr1UPuxJOhyS1SyzxJLd6aKeUeMFKg1SwrWfhj40FZ66ck%2FWgBxELPzfHNcoOk2ZaIEj1z5TMb6NWsIv77h1n7E6WYnxP4iv8gMa93um6Su8aMHH2Da6XEaFIRNCXOSql09PlZueEnSW%2BUDUTP%2BeUQ8ww2CNmKekBtu8BbL%2Besv3YRTBB7TfiqVsrmkoh6gXRH1tK5duPnbDTzOv3yW2X%2FcBH6jfd3Eap%2FrC7iybd27taNjpwyHkxxIm9r1qBO0apUTUqaK2TJbcCw96M6e9K06Fa60p3FhaQoTWUFMpNNJytAMuzeIfYs1Wa6RCTDi3PvWBjqkAY%2FuLYHe2o2gI%2FTDjh5UWItwRXrQ2MYhTSXEXyNbhB%2BUzb8ScdnFO8u8ROAWhtJZ2Awpt5Y1RhKU%2BZczZUOsBzz1eVXjjqDPKEQEOb8lfI%2FQsVcCDg1j41UpbdMkSD42JF8fINwaXVOO2kRz3Tm6S0SLtywQGtEQHFH9d97vBBxm9uHAdJRzy34wlXEM%2Fap78nF9UMX92yyYyD%2BwelXWJTM%2FGk1u&X-Amz-Signature=6593f6d1340d2ca229f24e3c0cf07ed1b2377a04f999953deb6d008e816ebc24&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"
+        ],
+        "raw": {
+          "id": "YC%7Bg",
+          "type": "files",
+          "files": [
+            {
+              "name": "open graph.png",
+              "type": "file",
+              "file": {
+                "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/95510056-8318-462a-b9a8-27c018b5102a/open_graph.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466TVEKAP5V%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061554Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAYaCXVzLXdlc3QtMiJIMEYCIQDSbGocscAnb3FVAsRHk4XPuyaepGHYU3w0WtNA7ZRFBAIhAJ0bY4tI09azB6vi7GpTL2CI9VqLQNqBrQKFRaPgGsKpKogECM%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQABoMNjM3NDIzMTgzODA1IgwRtoKa7Rpx%2FCwmTnIq3AMZBb%2FyvsC0QWJ4jxzWldmKg1%2FoWpw8WGypFw%2Fbv%2FgYXoRmxpunoOMrbZ4yb6AhVUnBR9nYOfv0jrYZayxm%2FdjcGP%2FeJ5wZV59NNKfpGkeHgRQEr0bEdhDf8cY2%2BdNq1d76EwniL9K8q6iLcyC2dxTueZC14HkSHPE%2Bq4qyy%2BXlh7imyLkEDYCaDiUoHb%2FASRaZjmB7GBrA44hPreWu1ku3JdFGlfHqGp9jEeWsgeGpfDFMvFWdCfAOGcTnLLFOklp7vmZHEqk3MJbeOZBU4jRIeO8mu7nmFdU%2FBsA1lZAsUe2%2BCJI1LSzBDQdJeb2w%2Fxr1UPuxJOhyS1SyzxJLd6aKeUeMFKg1SwrWfhj40FZ66ck%2FWgBxELPzfHNcoOk2ZaIEj1z5TMb6NWsIv77h1n7E6WYnxP4iv8gMa93um6Su8aMHH2Da6XEaFIRNCXOSql09PlZueEnSW%2BUDUTP%2BeUQ8ww2CNmKekBtu8BbL%2Besv3YRTBB7TfiqVsrmkoh6gXRH1tK5duPnbDTzOv3yW2X%2FcBH6jfd3Eap%2FrC7iybd27taNjpwyHkxxIm9r1qBO0apUTUqaK2TJbcCw96M6e9K06Fa60p3FhaQoTWUFMpNNJytAMuzeIfYs1Wa6RCTDi3PvWBjqkAY%2FuLYHe2o2gI%2FTDjh5UWItwRXrQ2MYhTSXEXyNbhB%2BUzb8ScdnFO8u8ROAWhtJZ2Awpt5Y1RhKU%2BZczZUOsBzz1eVXjjqDPKEQEOb8lfI%2FQsVcCDg1j41UpbdMkSD42JF8fINwaXVOO2kRz3Tm6S0SLtywQGtEQHFH9d97vBBxm9uHAdJRzy34wlXEM%2Fap78nF9UMX92yyYyD%2BwelXWJTM%2FGk1u&X-Amz-Signature=6593f6d1340d2ca229f24e3c0cf07ed1b2377a04f999953deb6d008e816ebc24&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+                "expiry_time": "2026-10-26T07:15:54.322Z"
+              }
+            }
+          ]
+        }
+      },
+      "Date": {
+        "type": "date",
+        "value": "2026-10-12",
+        "raw": {
+          "id": "%5B%40n%7C",
+          "type": "date",
+          "date": {
+            "start": "2026-10-12",
+            "end": null,
+            "time_zone": null
+          }
+        }
+      },
+      "Category": {
+        "type": "select",
+        "value": "Tech",
+        "raw": {
+          "id": "yNSK",
+          "type": "select",
+          "select": {
+            "id": "dee89da7-80b1-44e2-9c36-dddf9baed4b2",
+            "name": "Tech",
+            "color": "default"
+          }
+        }
+      },
+      "Title": {
+        "type": "title",
+        "value": "Hello World: HTML Block Components Test",
+        "raw": {
+          "id": "title",
+          "type": "title",
+          "title": [
+            {
+              "type": "text",
+              "text": {
+                "content": "Hello World: HTML Block Components Test",
+                "link": null
+              },
+              "annotations": {
+                "bold": true,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+              },
+              "plain_text": "Hello World: HTML Block Components Test",
+              "href": null
+            }
+          ]
+        }
+      }
+    }
+  }
+]

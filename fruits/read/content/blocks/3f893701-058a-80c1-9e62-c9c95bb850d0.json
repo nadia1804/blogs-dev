@@ -1,0 +1,1135 @@
+[
+  {
+    "object": "block",
+    "id": "3f893701-058a-80b6-bc87-fc5d1dc55421",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:55:00.000Z",
+    "last_edited_time": "2026-10-13T14:17:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Script ini berfungsi untuk ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Script ini berfungsi untuk ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "menyalin link google drive ",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "menyalin link google drive ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "ke google drive anda. ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "ke google drive anda. ",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-8065-86cc-c7fa727249c2",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:17:00.000Z",
+    "last_edited_time": "2026-10-13T14:21:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "kapan anda perlu script ini? google tidak menyediakan cara menyalin “folder sekaligus” jadi cara ini praktis untuk menyalin semua isi folder",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "kapan anda perlu script ini? google tidak menyediakan cara menyalin “folder sekaligus” jadi cara ini praktis untuk menyalin semua isi folder",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80fd-bfa6-fb964a3214de",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:14:00.000Z",
+    "last_edited_time": "2026-10-13T14:15:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "image",
+    "image": {
+      "caption": [],
+      "type": "file",
+      "file": {
+        "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/5483fe65-d77a-4912-aa69-99b8aed9c6b9/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466Y62IIJHF%2F20261026%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261026T061554Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAQaCXVzLXdlc3QtMiJHMEUCIQCq8xmkRcBRb2y3yM1VyBqAjmeAXIitQZ1EIAV9K5yDZgIgasARXKcOuePs6wHGmAqcBPfFsuORpDpJPvOBzpzShBYqiAQIzP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARAAGgw2Mzc0MjMxODM4MDUiDJy5rf5IlrYGkzlKWircA0S2POKpAAYvvVcBo8GyGLQce9nYjCvrXQrDYZ1C3ewqf96rQ%2BQLjSRm%2Bc%2Be97OzRGsDA6%2BDVPQgNbEAZUZwjzFOwby4FcdpeuPjlmuNyXZ1SS%2Fy%2BQk5u7I07iOg%2F9%2FHRZ0eIg81%2FZ6S2Ty%2B4rRNun9qyKgxm3G1Csy9VSdC6SzKuAQCAEZGaW6V28vJ0GhwhA%2BL914XyiWN9Lb0MfEyx6Nj34C59yb6TAWQo4sopbEz%2BjCujQT%2FN%2FzhqViPs7hiBAOxVoNig29jgKZ8wobJT10%2FGWa%2BR%2BU9FjmQau5zZG1IRxwpRR%2Fvc%2FqIalkn6zSszNKlyfWJghuwHeCNuoEnurJjKFiqItjTTns%2FfkLNYg7JQAk45tOQlsLN3Ka2CkcwhfOO8QLyDu64UWG%2Faq%2BGp5m%2BgViweHp2f2jjViFTFJvVgW2iqU2Tg0RD7uYfbbgtNzrP9Z7pA5my6DLVklQZpi3bhRG16SZRYVhWc9nMh3Ahi%2FwvThf3CnxDmDwKVdNds%2Fp%2BRF%2B6VSue8T8C%2B7Pmrx694yGJcvdcpYiCanacnfHvFDlcmWEkF7wYdg9V2QGMzVRl9beFOcqdI4WXlW06%2FM6WnqTZu86vhufNzaOyqvm3Ho%2Ft348wnnvwiPJfMLWX%2B9YGOqUBY9IfBPDZi%2FbwhYyG5VMjUpTTcrwcmxQuz3uL3PMK6Rivsy0zmhzUqvFzC%2Bp9CKRghtYR%2B8oZ22%2Bj4rXbRl%2FBE7VGCJJE4tygsmWm%2FpP8B5qtrRqWt%2FAHz787tyoVNVoVg0AEyLkDeU50tggiGIHQDb9Zd4i4McP%2BM6ZdDhsX28Q8RPAnnsDh6g6H4RCxM%2BbsRLjzcm80KVPLWL%2BL2NrmL%2FICdgaK&X-Amz-Signature=9a1e2d9db3d69f07bcc68447fe7baf68b9da4f8457db4f9cb3a4c5ef80fedafe&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+        "expiry_time": "2026-10-26T07:15:54.669Z"
+      }
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-8017-a920-cc2f145f8f89",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:56:00.000Z",
+    "last_edited_time": "2026-10-13T13:56:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_2",
+    "heading_2": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "cara penggunaan",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "cara penggunaan",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80a1-a2c2-ff4f5d81abbe",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:56:00.000Z",
+    "last_edited_time": "2026-10-14T00:52:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "buka ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "buka ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "google app script",
+            "link": {
+              "url": "https://script.google.com/home"
+            }
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "google app script",
+          "href": "https://script.google.com/home"
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80ee-b06a-c2fc777d1dcf",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:59:00.000Z",
+    "last_edited_time": "2026-10-14T00:57:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "klik ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "klik ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "new projects",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": true,
+            "color": "default"
+          },
+          "plain_text": "new projects",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f993701-058a-80be-8135-e4a666ec7385",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-14T00:57:00.000Z",
+    "last_edited_time": "2026-10-14T01:00:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "copy script (yang ada dibawah), salin ke project anda",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "copy script (yang ada dibawah), salin ke project anda",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80ea-ab41-e94eb748f043",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:59:00.000Z",
+    "last_edited_time": "2026-10-14T01:00:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "edit dan sesuaikan : “",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "edit dan sesuaikan : “",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "link google drive",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": true,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "link google drive",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "” dan “",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "” dan “",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "nama folder",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": true,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "nama folder",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "” yang inginkan",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "” yang inginkan",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80f4-9067-ede3bc0536a7",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:12:00.000Z",
+    "last_edited_time": "2026-10-14T01:02:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "klik ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "klik ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "run",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": true,
+            "color": "default"
+          },
+          "plain_text": "run",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": " {jalankan), ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": " {jalankan), ",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f993701-058a-8020-8f01-e2c3dbe78cf4",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-14T01:02:00.000Z",
+    "last_edited_time": "2026-10-14T01:02:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "pertama kali script dijalankan, muncul pop up untuk meminta izin ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "pertama kali script dijalankan, muncul pop up untuk meminta izin ",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-8054-a0c6-c6f1a17b8f65",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:15:00.000Z",
+    "last_edited_time": "2026-10-13T14:15:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "tunggu script jalan sampai selesai menyalin",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "tunggu script jalan sampai selesai menyalin",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-809c-b7d3-e6e9906a0675",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:15:00.000Z",
+    "last_edited_time": "2026-10-14T00:53:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "numbered_list_item",
+    "numbered_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "hasilnya silahkan cek di google drive ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "hasilnya silahkan cek di google drive ",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80a9-9145-ce51de92e065",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:02:00.000Z",
+    "last_edited_time": "2026-10-13T14:09:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "heading_2",
+    "heading_2": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Batasan",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Batasan",
+          "href": null
+        }
+      ],
+      "is_toggleable": false,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-8021-941a-c3b83c028a25",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:09:00.000Z",
+    "last_edited_time": "2026-10-13T14:09:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "callout",
+    "callout": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "untuk akun google versi gratisan, waktu menjalankan script dibatasi selama 6 menit.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "untuk akun google versi gratisan, waktu menjalankan script dibatasi selama 6 menit.",
+          "href": null
+        }
+      ],
+      "icon": {
+        "type": "emoji",
+        "emoji": "⚠️"
+      },
+      "color": "green_background"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80c1-996e-e24da826e89d",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:08:00.000Z",
+    "last_edited_time": "2026-10-14T00:54:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "solusinya, anda cukup ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "solusinya, anda cukup ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "klik tombol \"",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "klik tombol \"",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "Run",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": true,
+            "color": "default"
+          },
+          "plain_text": "Run",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "\" (Jalankan) sekali lagi",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "\" (Jalankan) sekali lagi",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": " di halaman Google Apps Script.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": " di halaman Google Apps Script.",
+          "href": null
+        }
+      ],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-807a-86b6-fec91dce66ef",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:08:00.000Z",
+    "last_edited_time": "2026-10-13T14:08:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Skrip akan langsung mendeteksi folder hasil salinan sebelumnya.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Skrip akan langsung mendeteksi folder hasil salinan sebelumnya.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-801d-b496-c75bf0800c47",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:08:00.000Z",
+    "last_edited_time": "2026-10-13T14:08:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Skrip akan memeriksa file yang sudah masuk, lalu otomatis melanjutkan menyalin file dan sub-folder yang ",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Skrip akan memeriksa file yang sudah masuk, lalu otomatis melanjutkan menyalin file dan sub-folder yang ",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": "belum sempat tersalin",
+            "link": null
+          },
+          "annotations": {
+            "bold": true,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "belum sempat tersalin",
+          "href": null
+        },
+        {
+          "type": "text",
+          "text": {
+            "content": " sebelum waktu habis.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": " sebelum waktu habis.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-803a-8333-de9abcc1e3a3",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T14:08:00.000Z",
+    "last_edited_time": "2026-10-13T14:08:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "bulleted_list_item",
+    "bulleted_list_item": {
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Anda tidak perlu khawatir file akan menjadi ganda (duplikat), karena skrip sudah dilengkapi fitur pengecekan nama file.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Anda tidak perlu khawatir file akan menjadi ganda (duplikat), karena skrip sudah dilengkapi fitur pengecekan nama file.",
+          "href": null
+        }
+      ],
+      "color": "default"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80a0-8a01-d9138a32db7d",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:55:00.000Z",
+    "last_edited_time": "2026-10-13T13:58:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "code",
+    "code": {
+      "caption": [],
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "function jalankanPenyalinan() {\n  // ==========================================\n  // PENGATURAN: TEMPEL URL FOLDER DI SINI\n  // ==========================================\n  var urlFolderSumber = \"TEMPEL_URL_FOLDER_DI_SINI\";\n  var namaFolderBaru = \"Hasil Salinan Folder\"; \n  // ==========================================\n\n  var idSumber = ambilIdDariUrl(urlFolderSumber);\n  if (!idSumber) {\n    Logger.log(\"Error: URL Folder tidak valid!\");\n    return;\n  }\n\n  var properti = PropertiesService.getUserProperties();\n  var idTujuan = properti.getProperty(\"ID_FOLDER_TUJUAN\");\n  \n  var folderSumber = DriveApp.getFolderById(idSumber);\n  var folderTujuan;\n\n  if (!idTujuan) {\n    folderTujuan = DriveApp.createFolder(namaFolderBaru);\n    properti.setProperty(\"ID_FOLDER_TUJUAN\", folderTujuan.getId());\n    Logger.log(\"Membuat folder induk baru: \" + folderTujuan.getName());\n  } else {\n    try {\n      folderTujuan = DriveApp.getFolderById(idTujuan);\n      Logger.log(\"Melanjutkan penyalinan ke folder yang sudah ada...\");\n    } catch(e) {\n      folderTujuan = DriveApp.createFolder(namaFolderBaru);\n      properti.setProperty(\"ID_FOLDER_TUJUAN\", folderTujuan.getId());\n    }\n  }\n\n  var waktuMulai = new Date().getTime();\n  \n  // Jalankan proses penyalinan dengan pengecekan waktu\n  var selesai = salinIsiFolderDenganWaktu(folderSumber, folderTujuan, waktuMulai, properti);\n  \n  if (selesai) {\n    Logger.log(\"PROSES SELESAI Sempurna! Seluruh file telah disalin.\");\n    properti.deleteProperty(\"ID_FOLDER_TUJUAN\"); // Reset status jika selesai\n  } else {\n    Logger.log(\"⚠️ Waktu hampir habis (5 menit). Skrip dihentikan sementara untuk keamanan.\");\n    Logger.log(\"Silakan KLIK TOMBOL RUN LAGI untuk melanjutkan sisa file.\");\n  }\n}\n\nfunction salinIsiFolderDenganWaktu(sumber, tujuan, waktuMulai, properti) {\n  // 1. Salin File\n  var file2 = sumber.getFiles();\n  while (file2.hasNext()) {\n    // Cek apakah waktu eksekusi sudah berjalan lebih dari 5 menit (300.000 milidetik)\n    if (new Date().getTime() - waktuMulai > 300000) {\n      return false; \n    }\n    \n    var file = file2.next();\n    \n    // Validasi agar tidak menyalin file dengan nama yang sama di folder tujuan saat resume\n    var fileSudahAda = tujuan.getFilesByName(file.getName());\n    if (!fileSudahAda.hasNext()) {\n      file.makeCopy(file.getName(), tujuan);\n      Logger.log(\"Berhasil menyalin file: \" + file.getName());\n    }\n  }\n  \n  // 2. Salin Sub-Folder\n  var subFolders = sumber.getFolders();\n  while (subFolders.hasNext()) {\n    var subFolder = subFolders.next();\n    var folderTujuanBerikutnya;\n    \n    var subFolderSudahAda = tujuan.getFoldersByName(subFolder.getName());\n    if (subFolderSudahAda.hasNext()) {\n      folderTujuanBerikutnya = subFolderSudahAda.next();\n    } else {\n      folderTujuanBerikutnya = tujuan.createFolder(subFolder.getName());\n      Logger.log(\"Membuat sub-folder: \" + subFolder.getName());\n    }\n    \n    var subSelesai = salinIsiFolderDenganWaktu(subFolder, folderTujuanBerikutnya, waktuMulai, properti);\n    if (!subSelesai) {\n      return false;\n    }\n  }\n  \n  return true;\n}\n\nfunction ambilIdDariUrl(url) {\n  var id = \"\";\n  var match = url.match(/[-\\w]{25,}/);\n  if (match) { id = match[0]; }\n  return id;\n}\n\n// Gunakan fungsi ini jika Anda ingin mengulang proses dari awal sekali lagi\nfunction resetProgres() {\n  PropertiesService.getUserProperties().deleteProperty(\"ID_FOLDER_TUJUAN\");\n  Logger.log(\"Progres berhasil di-reset. Skrip akan membuat folder baru saat dijalankan.\");\n}\n",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "function jalankanPenyalinan() {\n  // ==========================================\n  // PENGATURAN: TEMPEL URL FOLDER DI SINI\n  // ==========================================\n  var urlFolderSumber = \"TEMPEL_URL_FOLDER_DI_SINI\";\n  var namaFolderBaru = \"Hasil Salinan Folder\"; \n  // ==========================================\n\n  var idSumber = ambilIdDariUrl(urlFolderSumber);\n  if (!idSumber) {\n    Logger.log(\"Error: URL Folder tidak valid!\");\n    return;\n  }\n\n  var properti = PropertiesService.getUserProperties();\n  var idTujuan = properti.getProperty(\"ID_FOLDER_TUJUAN\");\n  \n  var folderSumber = DriveApp.getFolderById(idSumber);\n  var folderTujuan;\n\n  if (!idTujuan) {\n    folderTujuan = DriveApp.createFolder(namaFolderBaru);\n    properti.setProperty(\"ID_FOLDER_TUJUAN\", folderTujuan.getId());\n    Logger.log(\"Membuat folder induk baru: \" + folderTujuan.getName());\n  } else {\n    try {\n      folderTujuan = DriveApp.getFolderById(idTujuan);\n      Logger.log(\"Melanjutkan penyalinan ke folder yang sudah ada...\");\n    } catch(e) {\n      folderTujuan = DriveApp.createFolder(namaFolderBaru);\n      properti.setProperty(\"ID_FOLDER_TUJUAN\", folderTujuan.getId());\n    }\n  }\n\n  var waktuMulai = new Date().getTime();\n  \n  // Jalankan proses penyalinan dengan pengecekan waktu\n  var selesai = salinIsiFolderDenganWaktu(folderSumber, folderTujuan, waktuMulai, properti);\n  \n  if (selesai) {\n    Logger.log(\"PROSES SELESAI Sempurna! Seluruh file telah disalin.\");\n    properti.deleteProperty(\"ID_FOLDER_TUJUAN\"); // Reset status jika selesai\n  } else {\n    Logger.log(\"⚠️ Waktu hampir habis (5 menit). Skrip dihentikan sementara untuk keamanan.\");\n    Logger.log(\"Silakan KLIK TOMBOL RUN LAGI untuk melanjutkan sisa file.\");\n  }\n}\n\nfunction salinIsiFolderDenganWaktu(sumber, tujuan, waktuMulai, properti) {\n  // 1. Salin File\n  var file2 = sumber.getFiles();\n  while (file2.hasNext()) {\n    // Cek apakah waktu eksekusi sudah berjalan lebih dari 5 menit (300.000 milidetik)\n    if (new Date().getTime() - waktuMulai > 300000) {\n      return false; \n    }\n    \n    var file = file2.next();\n    \n    // Validasi agar tidak menyalin file dengan nama yang sama di folder tujuan saat resume\n    var fileSudahAda = tujuan.getFilesByName(file.getName());\n    if (!fileSudahAda.hasNext()) {\n      file.makeCopy(file.getName(), tujuan);\n      Logger.log(\"Berhasil menyalin file: \" + file.getName());\n    }\n  }\n  \n  // 2. Salin Sub-Folder\n  var subFolders = sumber.getFolders();\n  while (subFolders.hasNext()) {\n    var subFolder = subFolders.next();\n    var folderTujuanBerikutnya;\n    \n    var subFolderSudahAda = tujuan.getFoldersByName(subFolder.getName());\n    if (subFolderSudahAda.hasNext()) {\n      folderTujuanBerikutnya = subFolderSudahAda.next();\n    } else {\n      folderTujuanBerikutnya = tujuan.createFolder(subFolder.getName());\n      Logger.log(\"Membuat sub-folder: \" + subFolder.getName());\n    }\n    \n    var subSelesai = salinIsiFolderDenganWaktu(subFolder, folderTujuanBerikutnya, waktuMulai, properti);\n    if (!subSelesai) {\n      return false;\n    }\n  }\n  \n  return true;\n}\n\nfunction ambilIdDariUrl(url) {\n  var id = \"\";\n  var match = url.match(/[-\\w]{25,}/);\n  if (match) { id = match[0]; }\n  return id;\n}\n\n// Gunakan fungsi ini jika Anda ingin mengulang proses dari awal sekali lagi\nfunction resetProgres() {\n  PropertiesService.getUserProperties().deleteProperty(\"ID_FOLDER_TUJUAN\");\n  Logger.log(\"Progres berhasil di-reset. Skrip akan membuat folder baru saat dijalankan.\");\n}\n",
+          "href": null
+        }
+      ],
+      "language": "javascript"
+    },
+    "archived": false
+  },
+  {
+    "object": "block",
+    "id": "3f893701-058a-80d3-9280-fe6a8e7ddafc",
+    "parent": {
+      "type": "page_id",
+      "page_id": "3f893701-058a-80c1-9e62-c9c95bb850d0"
+    },
+    "created_time": "2026-10-13T13:55:00.000Z",
+    "last_edited_time": "2026-10-13T13:55:00.000Z",
+    "created_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "last_edited_by": {
+      "object": "user",
+      "id": "3ded872b-594c-818b-bf2d-0002814fc791"
+    },
+    "has_children": false,
+    "in_trash": false,
+    "type": "paragraph",
+    "paragraph": {
+      "rich_text": [],
+      "icon": null,
+      "color": "default"
+    },
+    "archived": false
+  }
+]
