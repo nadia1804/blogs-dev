@@ -11,6 +11,10 @@
     "fontFamily": "Inter",
     "maxWidth": "720px",
     "pillRadius": "999px",
-    "showAuthorCard": true
+    "showAuthorCard": true,
+    "bgColor": "#f8fafc",
+    "fontSize": "17px",
+    "cardRadius": "24px",
+    "showPillBar": true
   }
 }
