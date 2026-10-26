@@ -8,13 +8,63 @@
   "accentColor": "#059669",
   "settings": {
     "primaryColor": "#059669",
-    "fontFamily": "Inter",
-    "maxWidth": "720px",
+    "fontFamily": "Plus Jakarta Sans",
+    "maxWidth": "780px",
     "pillRadius": "999px",
-    "showAuthorCard": true,
+    "showAuthorCard": false,
     "bgColor": "#f8fafc",
     "fontSize": "17px",
     "cardRadius": "24px",
-    "showPillBar": true
+    "showPillBar": false,
+    "showNavbar": true,
+    "navSticky": true,
+    "navBrandLogo": "B",
+    "navBrandText": "blogs",
+    "navStyle": "capsule-floating",
+    "navItems": [
+      {
+        "label": "Home",
+        "url": "/index.html",
+        "enabled": true
+      },
+      {
+        "label": "Read",
+        "url": "/read",
+        "enabled": true
+      },
+      {
+        "label": "Pelajaran",
+        "url": "/pelajaran",
+        "enabled": true
+      },
+      {
+        "label": "Authors",
+        "url": "/authors",
+        "enabled": true
+      },
+      {
+        "label": "About",
+        "url": "/page",
+        "enabled": true
+      }
+    ],
+    "showHero": true,
+    "heroAlign": "center",
+    "heroBadge": "✨ Selamat Datang di Blogs",
+    "heroTitle": "Pusat Belajar & Pengetahuan Digital",
+    "heroSubtitle": "Kumpulan artikel pilihan yang dikurasi langsung dari Notion",
+    "heroCtaText": "Mulai Membaca 🚀",
+    "heroCtaUrl": "#posts",
+    "heroSecondaryCtaText": "Tentang Kami",
+    "heroSecondaryCtaUrl": "/page",
+    "postCardLayout": "grid-3",
+    "postCardRadius": "20px",
+    "postCardFruitSource": "all",
+    "showCardCover": true,
+    "showCardCategory": true,
+    "showCardDate": true,
+    "showCardAuthor": true,
+    "showCardExcerpt": true,
+    "navBrandLogoImage": ""
   }
 }

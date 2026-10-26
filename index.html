@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blogs • Pusat Belajar & Pengetahuan Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="/assets/lucide.min.js"></script>
+  <style>
+    :root {
+      --primary: #059669;
+      --bg: #f8fafc;
+      --capsule-radius: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .capsule-post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08) !important;
+    }
+    .capsule-post-card:hover .post-card-img {
+      transform: scale(1.04);
+    }
+    .capsule-post-card:hover .post-title-link {
+      color: var(--primary) !important;
+    }
+    .capsule-nav-link:hover {
+      background: #05966915 !important;
+      color: #059669 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Navigasi Capsule -->
+  <div class="capsule-theme-navbar-wrap" style="position: sticky; top: 16px; z-index: 50; max-width: 900px; margin: 16px auto 32px auto; padding: 0 16px;">
+    <nav class="capsule-theme-navbar" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid #e2e8f0; border-radius: var(--capsule-radius); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);">
+      <a href="/preview?page=home" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+        <span style="width: 32px; height: 32px; border-radius: 999px; background: #059669; color: #ffffff; font-size: 14px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">B</span>
+        <span style="font-size: 16px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">blogs</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+        
+        <a href="/index.html" class="capsule-nav-link active" style="text-decoration: none; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; background: #059669; color: #ffffff;">
+          
+          <span>Home</span>
+        </a>
+      
+        <a href="/preview?fruit=read" class="capsule-nav-link " style="text-decoration: none; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; color: #334155;">
+          
+          <span>Read</span>
+        </a>
+      
+        <a href="/preview?fruit=pelajaran" class="capsule-nav-link " style="text-decoration: none; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; color: #334155;">
+          
+          <span>Pelajaran</span>
+        </a>
+      
+        <a href="/preview?fruit=authors" class="capsule-nav-link " style="text-decoration: none; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; color: #334155;">
+          
+          <span>Authors</span>
+        </a>
+      
+        <a href="/preview?fruit=page" class="capsule-nav-link " style="text-decoration: none; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; color: #334155;">
+          
+          <span>About</span>
+        </a>
+      
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  
+      <section class="capsule-hero-section" style="padding: 56px 20px 48px 20px; text-align: center; max-width: 860px; margin: 0 auto;">
+        
+          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 999px; font-size: 12px; font-weight: 700; color: #059669; box-shadow: 0 2px 6px rgba(0,0,0,0.03); margin-bottom: 20px;">
+            <span>✨ Selamat Datang di Blogs</span>
+          </div>
+        
+        <h1 style="font-size: 42px; font-weight: 800; line-height: 1.2; color: #0f172a; letter-spacing: -0.03em; margin: 0 0 16px 0;">
+          Pusat Belajar & Pengetahuan Digital
+        </h1>
+        <p style="font-size: 18px; line-height: 1.65; color: #64748b; margin: 0 0 28px 0; max-width: 680px; margin-left: auto; margin-right: auto;">
+          Kumpulan artikel pilihan yang dikurasi langsung dari Notion
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          
+            <a href="#posts" style="text-decoration: none; background: #059669; color: #ffffff; font-size: 14px; font-weight: 700; padding: 12px 26px; border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,0.1); transition: transform 0.15s, opacity 0.15s; display: inline-flex; align-items: center; gap: 8px;">
+              <span>Mulai Membaca 🚀</span>
+            </a>
+          
+          
+            <a href="/page" style="text-decoration: none; background: #ffffff; color: #334155; border: 1px solid #cbd5e1; font-size: 14px; font-weight: 700; padding: 12px 22px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px;">
+              <span>Tentang Kami</span>
+            </a>
+          
+        </div>
+      </section>
+    
+
+  <!-- Post Cards Section -->
+  <main id="posts" style="max-width: 1140px; margin: 0 auto; padding: 16px 20px 64px 20px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+      <div>
+        <h2 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0; letter-spacing: -0.02em;">
+          Artikel & Tulisan Terbaru
+        </h2>
+        <div style="font-size: 13px; color: #64748b;">
+          Daftar postingan terpilih yang baru saja diperbarui.
+        </div>
+      </div>
+      <span style="font-size: 12px; font-weight: 700; color: #059669; background: #ffffff; padding: 5px 12px; border-radius: 999px; border: 1px solid #e2e8f0;">
+        0 Artikel
+      </span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px;">
+      
+      <div style="grid-column: 1 / -1; padding: 48px; text-align: center; background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 20px; color: #64748b;">
+        <div style="font-size: 32px; margin-bottom: 12px;">📭</div>
+        <div style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Belum ada artikel yang dipublikasikan</div>
+        <div style="font-size: 13px;">Tarik data Notion dari menu Fruit untuk menampilkan artikel di beranda.</div>
+      </div>
+    
+    </div>
+  </main>
+
+  <!-- Footer Capsule -->
+  <footer style="border-top: 1px solid #e2e8f0; background: #ffffff; padding: 36px 20px; text-align: center; font-size: 13px; color: #64748b;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; font-weight: 800; color: #0f172a;">
+      <span style="width: 32px; height: 32px; border-radius: 999px; background: #059669; color: #ffffff; font-size: 14px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">B</span>
+      <span>blogs</span>
+    </div>
+    <div>Dipublikasikan dengan Fruition Mini • Capsule Design Theme</div>
+  </footer>
+
+  <script>
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+    document.addEventListener('keydown', function(e) {
+      var isCtrl = e.ctrlKey || e.metaKey;
+      if (isCtrl && !e.shiftKey && !e.altKey && (e.code === 'Space' || e.key === ' ')) {
+        e.preventDefault();
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'FRUITION_SHORTCUT', action: 'toggle-preview' }, '*');
+        }
+      } else if (isCtrl && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS')) {
+        e.preventDefault();
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'FRUITION_SHORTCUT', action: 'save' }, '*');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

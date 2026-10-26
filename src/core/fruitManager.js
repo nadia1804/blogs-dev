@@ -470,6 +470,7 @@ export class FruitManager {
   async rebuildAuthorProfilePages() {
     try {
       const authorsFruit = await this.loadFruit('authors');
+      await fs.mkdir(path.join(authorsFruit.path, 'dist'), { recursive: true });
       const allPosts = await this.getAllPosts();
       const cols = authorsFruit.config?.mapping?.columns || {};
 
@@ -505,6 +506,7 @@ export class FruitManager {
    */
   async rebuildFruitHtml(fruitName) {
     const fruit = await this.loadFruit(fruitName);
+    await fs.mkdir(path.join(fruit.path, 'dist'), { recursive: true });
     const cols = fruit.config?.mapping?.columns || {};
     const authors = await this.getAllAuthors();
 
@@ -588,6 +590,8 @@ export class FruitManager {
     );
 
     // Simpan rows yang ditarik ke content/items.json
+    await fs.mkdir(path.join(fruit.path, 'content', 'blocks'), { recursive: true });
+    await fs.mkdir(path.join(fruit.path, 'dist'), { recursive: true });
     await fs.writeFile(
       path.join(fruit.path, 'content', 'items.json'),
       JSON.stringify(rows, null, 2),
@@ -659,4 +663,386 @@ export class FruitManager {
       rows
     };
   }
+
+  /**
+   * Tarik data untuk seluruh Fruit secara sekaligus dari Notion
+   */
+  async syncAllFruitsFromNotion() {
+    const fruits = await this.listFruits();
+    // Prioritaskan fruit bertipe 'authors' terlebih dahulu agar relasi penulis pada post langsung sinkron
+    const sortedFruits = [...fruits].sort((a, b) => {
+      if (a.config?.targetType === 'authors') return -1;
+      if (b.config?.targetType === 'authors') return 1;
+      return 0;
+    });
+
+    const results = [];
+    for (const f of sortedFruits) {
+      if (f.config?.notion?.apiKey && f.config?.notion?.databaseId) {
+        try {
+          const res = await this.syncFruitFromNotion(f.name);
+          results.push({ name: f.name, success: true, count: res.count });
+        } catch (err) {
+          console.error(`Gagal menarik data untuk fruit ${f.name}:`, err.message);
+          results.push({ name: f.name, success: false, error: err.message });
+        }
+      }
+    }
+
+    await this.rebuildAuthorProfilePages();
+    return results;
+  }
+
+  /**
+   * Menghasilkan file index.html (Homepage / Beranda) lengkap berdasarkan tema aktif
+   */
+  async buildHomepageHtml(customSettings = null) {
+    let settings = customSettings;
+    if (!settings) {
+      try {
+        const themeData = JSON.parse(await fs.readFile(path.join(this.baseDir, 'themes', 'capsule', 'theme.json'), 'utf8'));
+        settings = themeData?.settings || {};
+      } catch {
+        settings = {};
+      }
+    }
+
+    const fruits = await this.listFruits();
+    const authors = await this.getAllAuthors();
+
+    // Tentukan sumber artikel
+    const sourceFruit = settings.postCardFruitSource || 'all';
+    let targetFruits = fruits.filter(f => f.config?.targetType === 'post');
+    if (sourceFruit !== 'all') {
+      targetFruits = targetFruits.filter(f => f.name.toLowerCase() === sourceFruit.toLowerCase());
+    }
+
+    const allPosts = [];
+    for (const f of targetFruits) {
+      const loaded = await this.loadFruit(f.name).catch(() => null);
+      if (!loaded || !loaded.items) continue;
+      const cols = loaded.config?.mapping?.columns || {};
+
+      for (const item of loaded.items) {
+        const core = this.resolveItemCoreFields(item, cols);
+        if (core.published === false) continue;
+
+        let authorObj = null;
+        if (core.authors && core.authors.length > 0) {
+          authorObj = authors.find(a => a.id === core.authors[0]);
+        }
+
+        const categoryVal = item.properties?.mapel?.value ||
+          item.properties?.Category?.value ||
+          item.properties?.Kategori?.value ||
+          f.name.toUpperCase();
+
+        allPosts.push({
+          id: item.id,
+          fruitName: f.name,
+          title: core.title || 'Tanpa Judul',
+          slug: core.slug || ('/' + item.id),
+          date: typeof core.date === 'string' ? core.date : '',
+          category: categoryVal,
+          excerpt: core.meta_description || '',
+          cover: (core.og && core.og[0]) ? core.og[0] : '',
+          author: authorObj ? {
+            name: authorObj.title || 'Penulis',
+            pic: (authorObj.og && authorObj.og[0]) || authorObj.pic || ''
+          } : null,
+          url: `/preview?fruit=${encodeURIComponent(f.name)}&pageId=${encodeURIComponent(item.id)}`,
+          staticUrl: `/fruits/${encodeURIComponent(f.name)}/dist/${encodeURIComponent(item.id)}.html`
+        });
+      }
+    }
+
+    // Variabel konfigurasi tema
+    const primary = settings.primaryColor || '#059669';
+    const bg = settings.bgColor || '#f8fafc';
+    const font = settings.fontFamily || 'Plus Jakarta Sans';
+    const brandText = settings.navBrandText || 'blogs';
+    const brandLogoImg = settings.navBrandLogoImage || '';
+    const brandLogo = settings.navBrandLogo || 'B';
+    const navSticky = settings.navSticky !== false;
+    const navStyle = settings.navStyle || 'capsule-floating';
+    const isPillNav = navStyle === 'capsule-floating';
+    const isMinimalNav = navStyle === 'minimal';
+
+    // Hero Config
+    const showHero = settings.showHero !== false;
+    const heroAlign = settings.heroAlign || 'center';
+    const heroBadge = settings.heroBadge || '✨ Selamat Datang di Blogs';
+    const heroTitle = settings.heroTitle || 'Catatan, Cerita & Wawasan Terkurasi';
+    const heroSubtitle = settings.heroSubtitle || 'Eksplorasi artikel mendalam seputar teknologi, tutorial, dan catatan penulis pilihan.';
+    const heroCtaText = settings.heroCtaText || 'Mulai Membaca 🚀';
+    const heroCtaUrl = settings.heroCtaUrl || '#posts';
+    const heroSecText = settings.heroSecondaryCtaText || 'Tentang Kami';
+    const heroSecUrl = settings.heroSecondaryCtaUrl || '/page';
+
+    // Post Card Config
+    const cardLayout = settings.postCardLayout || 'grid-3';
+    const cardRadius = settings.postCardRadius || '20px';
+    const showCover = settings.showCardCover !== false;
+    const showCat = settings.showCardCategory !== false;
+    const showDate = settings.showCardDate !== false;
+    const showAuthor = settings.showCardAuthor !== false;
+    const showExcerpt = settings.showCardExcerpt !== false;
+
+    // Render Navigation
+    const navItems = Array.isArray(settings.navItems) && settings.navItems.length > 0
+      ? settings.navItems.filter(it => it.enabled !== false)
+      : [
+          { label: 'Home', url: '/', icon: 'home', enabled: true },
+          { label: 'Read', url: '/read', icon: 'book-open', enabled: true },
+          { label: 'Pelajaran', url: '/pelajaran', icon: 'graduation-cap', enabled: true },
+          { label: 'Authors', url: '/authors', icon: 'users', enabled: true },
+          { label: 'About', url: '/page', icon: 'info', enabled: true }
+        ];
+
+    const navLinksHtml = navItems.map(item => {
+      const rawUrl = (item.url || '/').trim();
+      const isActive = rawUrl === '/' || rawUrl === '/index.html';
+      const iconTag = item.icon ? `<i data-lucide="${item.icon}" style="width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; display: inline-block;"></i>` : '';
+      let targetHref = rawUrl;
+      if (rawUrl === '/') targetHref = '/preview?page=home';
+      else {
+        const cleanSlug = rawUrl.replace(/^\//, '').toLowerCase();
+        const matched = fruits.find(f => f.name.toLowerCase() === cleanSlug);
+        if (matched) {
+          targetHref = `/preview?fruit=${encodeURIComponent(matched.name)}`;
+        }
+      }
+
+      return `
+        <a href="${targetHref}" class="capsule-nav-link ${isActive ? 'active' : ''}" style="text-decoration: none; font-size: 13px; font-weight: ${isActive ? '700' : '600'}; padding: 6px 14px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; ${isActive ? `background: ${primary}; color: #ffffff;` : 'color: #334155;'}">
+          ${iconTag}
+          <span>${item.label || 'Menu'}</span>
+        </a>
+      `;
+    }).join('');
+
+    const brandLogoHtml = brandLogoImg
+      ? `<img src="${brandLogoImg}" alt="${brandText}" style="height: 32px; max-width: 120px; object-fit: contain; vertical-align: middle; border-radius: 4px;" />`
+      : `<span style="width: 32px; height: 32px; border-radius: 999px; background: ${primary}; color: #ffffff; font-size: 14px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">${brandLogo}</span>`;
+
+    // Render Hero Section
+    const heroHtml = showHero ? `
+      <section class="capsule-hero-section" style="padding: 56px 20px 48px 20px; text-align: ${heroAlign}; max-width: 860px; margin: 0 auto;">
+        ${heroBadge ? `
+          <div style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 999px; font-size: 12px; font-weight: 700; color: ${primary}; box-shadow: 0 2px 6px rgba(0,0,0,0.03); margin-bottom: 20px;">
+            <span>${heroBadge}</span>
+          </div>
+        ` : ''}
+        <h1 style="font-size: 42px; font-weight: 800; line-height: 1.2; color: #0f172a; letter-spacing: -0.03em; margin: 0 0 16px 0;">
+          ${heroTitle}
+        </h1>
+        <p style="font-size: 18px; line-height: 1.65; color: #64748b; margin: 0 0 28px 0; max-width: 680px; ${heroAlign === 'center' ? 'margin-left: auto; margin-right: auto;' : ''}">
+          ${heroSubtitle}
+        </p>
+        <div style="display: flex; gap: 12px; ${heroAlign === 'center' ? 'justify-content: center;' : 'justify-content: flex-start;'} flex-wrap: wrap;">
+          ${heroCtaText ? `
+            <a href="${heroCtaUrl}" style="text-decoration: none; background: ${primary}; color: #ffffff; font-size: 14px; font-weight: 700; padding: 12px 26px; border-radius: 999px; box-shadow: 0 4px 14px rgba(0,0,0,0.1); transition: transform 0.15s, opacity 0.15s; display: inline-flex; align-items: center; gap: 8px;">
+              <span>${heroCtaText}</span>
+            </a>
+          ` : ''}
+          ${heroSecText ? `
+            <a href="${heroSecUrl}" style="text-decoration: none; background: #ffffff; color: #334155; border: 1px solid #cbd5e1; font-size: 14px; font-weight: 700; padding: 12px 22px; border-radius: 999px; transition: all 0.15s; display: inline-flex; align-items: center; gap: 8px;">
+              <span>${heroSecText}</span>
+            </a>
+          ` : ''}
+        </div>
+      </section>
+    ` : '';
+
+    // Render Post Cards
+    let gridTemplate = 'grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));';
+    if (cardLayout === 'grid-2') {
+      gridTemplate = 'grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));';
+    } else if (cardLayout === 'list') {
+      gridTemplate = 'grid-template-columns: 1fr;';
+    }
+
+    const postCardsHtml = allPosts.map(post => {
+      const coverHtml = showCover ? (post.cover ? `
+        <div style="position: relative; width: 100%; height: ${cardLayout === 'list' ? '180px' : '200px'}; overflow: hidden; background: #e2e8f0;">
+          <img src="${post.cover}" alt="${post.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;" class="post-card-img" />
+        </div>
+      ` : `
+        <div style="width: 100%; height: ${cardLayout === 'list' ? '150px' : '150px'}; background: linear-gradient(135deg, ${primary}15, #f1f5f9); display: flex; align-items: center; justify-content: center; color: ${primary}; font-size: 28px;">
+          <span>📝</span>
+        </div>
+      `) : '';
+
+      return `
+        <article class="capsule-post-card" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: ${cardRadius}; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.03); transition: transform 0.2s ease, box-shadow 0.2s ease; display: flex; flex-direction: column;">
+          ${coverHtml}
+          <div style="padding: 22px; display: flex; flex-direction: column; flex: 1;">
+            ${showCat && post.category ? `
+              <div style="margin-bottom: 10px;">
+                <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; background: ${primary}18; color: ${primary}; padding: 4px 10px; border-radius: 999px;">
+                  ${post.category}
+                </span>
+              </div>
+            ` : ''}
+            <h2 style="font-size: 18px; font-weight: 800; line-height: 1.35; margin: 0 0 10px 0; color: #0f172a;">
+              <a href="${post.url}" style="text-decoration: none; color: inherit; transition: color 0.15s;" class="post-title-link">
+                ${post.title}
+              </a>
+            </h2>
+            ${showExcerpt && post.excerpt ? `
+              <p style="font-size: 14px; line-height: 1.6; color: #64748b; margin: 0 0 16px 0; flex: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+                ${post.excerpt}
+              </p>
+            ` : '<div style="flex: 1;"></div>'}
+
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; border-top: 1px solid #f1f5f9; padding-top: 14px; font-size: 12px; color: #94a3b8;">
+              ${showAuthor && post.author ? `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  ${post.author.pic ? `<img src="${post.author.pic}" style="width: 24px; height: 24px; border-radius: 999px; object-fit: cover;" />` : ''}
+                  <span style="font-weight: 600; color: #475569;">${post.author.name}</span>
+                </div>
+              ` : '<div></div>'}
+              ${showDate && post.date ? `
+                <div style="display: flex; align-items: center; gap: 4px;">
+                  <i data-lucide="calendar" style="width: 12px; height: 12px;"></i>
+                  <span>${post.date}</span>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    const emptyPostsHtml = `
+      <div style="grid-column: 1 / -1; padding: 48px; text-align: center; background: #ffffff; border: 1px dashed #cbd5e1; border-radius: ${cardRadius}; color: #64748b;">
+        <div style="font-size: 32px; margin-bottom: 12px;">📭</div>
+        <div style="font-size: 16px; font-weight: 700; color: #0f172a; margin-bottom: 6px;">Belum ada artikel yang dipublikasikan</div>
+        <div style="font-size: 13px;">Tarik data Notion dari menu Fruit untuk menampilkan artikel di beranda.</div>
+      </div>
+    `;
+
+    const html = `<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${brandText} • ${heroTitle}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="/assets/lucide.min.js"></script>
+  <style>
+    :root {
+      --primary: ${primary};
+      --bg: ${bg};
+      --capsule-radius: 999px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: '${font}', sans-serif;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .capsule-post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08) !important;
+    }
+    .capsule-post-card:hover .post-card-img {
+      transform: scale(1.04);
+    }
+    .capsule-post-card:hover .post-title-link {
+      color: var(--primary) !important;
+    }
+    .capsule-nav-link:hover {
+      background: ${primary}15 !important;
+      color: ${primary} !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Navigasi Capsule -->
+  <div class="capsule-theme-navbar-wrap" style="${navSticky ? 'position: sticky; top: 16px; z-index: 50;' : ''} max-width: 900px; margin: 16px auto 32px auto; padding: 0 16px;">
+    <nav class="capsule-theme-navbar" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px; background: ${isMinimalNav ? 'transparent' : 'rgba(255, 255, 255, 0.92)'}; ${navSticky && !isMinimalNav ? 'backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);' : ''} border: ${isMinimalNav ? 'none' : '1px solid #e2e8f0'}; border-radius: ${isPillNav ? 'var(--capsule-radius)' : '12px'}; box-shadow: ${isMinimalNav ? 'none' : '0 4px 16px rgba(0, 0, 0, 0.04)'};">
+      <a href="/preview?page=home" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+        ${brandLogoHtml}
+        <span style="font-size: 16px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">${brandText}</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+        ${navLinksHtml}
+      </div>
+    </nav>
+  </div>
+
+  <!-- Hero Section -->
+  ${heroHtml}
+
+  <!-- Post Cards Section -->
+  <main id="posts" style="max-width: 1140px; margin: 0 auto; padding: 16px 20px 64px 20px;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+      <div>
+        <h2 style="font-size: 22px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0; letter-spacing: -0.02em;">
+          Artikel & Tulisan Terbaru
+        </h2>
+        <div style="font-size: 13px; color: #64748b;">
+          Daftar postingan terpilih yang baru saja diperbarui.
+        </div>
+      </div>
+      <span style="font-size: 12px; font-weight: 700; color: ${primary}; background: #ffffff; padding: 5px 12px; border-radius: 999px; border: 1px solid #e2e8f0;">
+        ${allPosts.length} Artikel
+      </span>
+    </div>
+
+    <div style="display: grid; ${gridTemplate} gap: 24px;">
+      ${allPosts.length > 0 ? postCardsHtml : emptyPostsHtml}
+    </div>
+  </main>
+
+  <!-- Footer Capsule -->
+  <footer style="border-top: 1px solid #e2e8f0; background: #ffffff; padding: 36px 20px; text-align: center; font-size: 13px; color: #64748b;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; font-weight: 800; color: #0f172a;">
+      ${brandLogoHtml}
+      <span>${brandText}</span>
+    </div>
+    <div>Dipublikasikan dengan Fruition Mini • Capsule Design Theme</div>
+  </footer>
+
+  <script>
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+    document.addEventListener('keydown', function(e) {
+      var isCtrl = e.ctrlKey || e.metaKey;
+      if (isCtrl && !e.shiftKey && !e.altKey && (e.code === 'Space' || e.key === ' ')) {
+        e.preventDefault();
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'FRUITION_SHORTCUT', action: 'toggle-preview' }, '*');
+        }
+      } else if (isCtrl && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS')) {
+        e.preventDefault();
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'FRUITION_SHORTCUT', action: 'save' }, '*');
+        }
+      }
+    });
+  </script>
+</body>
+</html>`;
+
+    // Tulis ke dist/index.html dan index.html di root
+    await fs.mkdir(path.join(this.baseDir, 'dist'), { recursive: true });
+        // Salin library lucide.min.js ke folder dist untuk ekspor statis offline
+    try {
+      const localLucidePath = path.join(this.baseDir, 'node_modules', 'lucide', 'dist', 'umd', 'lucide.min.js');
+      await fs.copyFile(localLucidePath, path.join(this.baseDir, 'dist', 'lucide.min.js'));
+    } catch {}
+    await fs.writeFile(path.join(this.baseDir, 'dist', 'index.html'), html, 'utf8');
+    await fs.writeFile(path.join(this.baseDir, 'index.html'), html, 'utf8');
+
+    return html;
+  }
+
 }

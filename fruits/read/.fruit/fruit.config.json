@@ -115,16 +115,16 @@
       "title": "Title",
       "slug": "Slug",
       "authors": "Authors",
-      "date": "Published",
+      "date": "_auto_created_",
       "published": "Published",
       "meta_description": "Meta_description",
       "og": "OG",
-      "bio": "_none_",
-      "role": "_none_",
-      "pic": "_none_"
+      "bio": null,
+      "role": null,
+      "pic": null
     }
   },
   "createdAt": "2026-10-26T05:09:59.223Z",
-  "updatedAt": "2026-10-26T06:17:03.560Z",
-  "lastSyncAt": "2026-10-26T06:15:45.340Z"
+  "updatedAt": "2026-10-26T12:13:24.495Z",
+  "lastSyncAt": "2026-10-26T12:13:25.713Z"
 }

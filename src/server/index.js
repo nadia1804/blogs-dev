@@ -41,6 +41,7 @@ const renderShellHtml = (options) => {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="/assets/lucide.min.js"></script>
   <style>
     :root {
       --bg: #f8fafc;
@@ -663,6 +664,7 @@ const renderShellHtml = (options) => {
       display: flex;
       flex-direction: column;
       gap: 3px;
+      padding: 8px;
     }
 
     .theme-nav-list-title {
@@ -671,8 +673,7 @@ const renderShellHtml = (options) => {
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-dim);
-      padding: 6px 8px 4px 8px;
-      margin-top: 6px;
+      padding: 4px 8px 4px 8px;
     }
 
     .theme-setting-nav-btn {
@@ -1264,6 +1265,73 @@ const renderShellHtml = (options) => {
       border: none;
       background: #ffffff;
     }
+
+    /* Toggle Switch On/Off UI */
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+      flex-shrink: 0;
+      margin: 0;
+      vertical-align: middle;
+    }
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 24px;
+    }
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #ffffff;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+    .toggle-switch input:checked + .toggle-slider {
+      background-color: var(--primary, #0f172a);
+    }
+    .toggle-switch input:focus-visible + .toggle-slider {
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.2);
+    }
+    .toggle-switch input:checked + .toggle-slider:before {
+      transform: translateX(18px);
+    }
+
+    /* Small size toggle switch untuk baris item tabel */
+    .toggle-switch-sm {
+      width: 32px;
+      height: 18px;
+    }
+    .toggle-switch-sm .toggle-slider {
+      border-radius: 18px;
+    }
+    .toggle-switch-sm .toggle-slider:before {
+      height: 12px;
+      width: 12px;
+      left: 3px;
+      bottom: 3px;
+    }
+    .toggle-switch-sm input:checked + .toggle-slider:before {
+      transform: translateX(14px);
+    }
   </style>
 </head>
 <body>
@@ -1319,6 +1387,9 @@ const renderShellHtml = (options) => {
               <form action="/api/delete-fruit" method="POST" style="margin: 0;" onsubmit="return confirm('Hapus fruit \\'${f.name}\\' dari lokal?');">
                 <input type="hidden" name="fruitName" value="${f.name}" />
                 <button type="submit" class="btn-del-mini" title="Hapus Fruit">🗑️</button>
+
+                
+
               </form>
             </div>
           `;
@@ -1370,31 +1441,53 @@ const renderShellHtml = (options) => {
 
         <div class="top-bar-right">
           ${view === 'themes' ? `
-            <button type="button" class="btn-top-action" onclick="openLivePreviewModal()">
+            <button type="button" class="btn-top-action" onclick="openLivePreviewModal()" title="Shortcut: Ctrl + Space (Tekan lagi untuk kembali)">
               <span>👁️</span>
               <span>Preview</span>
+              <kbd style="font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: var(--surface-subtle); border: 1px solid var(--border); color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">Ctrl+Space</kbd>
             </button>
-            ${fruits.length > 0 ? `
-              <a href="/?fruit=${encodeURIComponent(fruits[0].name)}" class="btn-top-action btn-top-primary">
-                <span>🍉</span>
-                <span>Kembali ke Workspace</span>
-              </a>
-            ` : ''}
+            <button type="submit" form="form-theme-settings" class="btn-top-action btn-top-primary" title="Shortcut: Ctrl + S">
+              <span>💾</span>
+              <span>Simpan</span>
+              <kbd style="font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35); color: #ffffff; font-family: 'JetBrains Mono', monospace;">Ctrl+S</kbd>
+            </button>
+            <a href="/index.html" target="_blank" class="btn-top-action" style="text-decoration: none;" title="Buka file index.html di tab baru browser">
+              <span>🌐</span>
+              <span>Buka index.html</span>
+            </a>
+            <form action="/api/sync-all-fruits" method="POST" style="margin: 0;" onsubmit="const b = this.querySelector('button'); if(b){ b.disabled = true; b.innerHTML = '<span>⏳</span><span>Menarik Semua Data...</span>'; }">
+              <input type="hidden" name="returnTo" value="/?view=themes&theme=${encodeURIComponent(currentSelectedTheme?.id || 'capsule')}" />
+              <button type="submit" class="btn-top-action" title="Tarik seluruh data dari semua database Fruit secara sekaligus">
+                <span>🔄</span>
+                <span>Tarik Data Semua</span>
+              </button>
+            </form>
           ` : (activeFruit ? `
             <!-- Tombol 1: Preview (Khusus Melihat Tampilan Tema / Hasil Compile) -->
-            <button type="button" class="btn-top-action" onclick="openLivePreviewModal()">
+            <button type="button" class="btn-top-action" onclick="openLivePreviewModal()" title="Shortcut: Ctrl + Space (Tekan lagi untuk kembali)">
               <span>👁️</span>
               <span>Preview</span>
+              <kbd style="font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: var(--surface-subtle); border: 1px solid var(--border); color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">Ctrl+Space</kbd>
             </button>
 
-            <!-- Tombol 2: Theme setting (Daftar Tema & Pengaturan) -->
-            <a href="/?view=themes" class="btn-top-action">
-              <span>🎨</span>
-              <span>Theme setting</span>
-            </a>
+            <!-- Tombol 2: Simpan (Shortcut Ctrl + S) -->
+            <button type="button" class="btn-top-action" onclick="triggerShortcutSave()" title="Shortcut: Ctrl + S">
+              <span>💾</span>
+              <span>Simpan</span>
+              <kbd style="font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 4px; background: var(--surface-subtle); border: 1px solid var(--border); color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">Ctrl+S</kbd>
+            </button>
 
-            <!-- Tombol 3: Tarik Data Notion (Primary Action) -->
-            <form action="/api/sync-fruit" method="POST" style="margin: 0;">
+            <!-- Tombol 3: Tarik Data Semua (Menarik semua data fruit sekaligus) -->
+            <form action="/api/sync-all-fruits" method="POST" style="margin: 0;" onsubmit="const b = this.querySelector('button'); if(b){ b.disabled = true; b.innerHTML = '<span>⏳</span><span>Menarik Semua Data...</span>'; }">
+              <input type="hidden" name="returnTo" value="/?fruit=${encodeURIComponent(activeFruit.name)}" />
+              <button type="submit" class="btn-top-action" title="Tarik seluruh data dari semua database Fruit secara sekaligus">
+                <span>🔄</span>
+                <span>Tarik Data Semua</span>
+              </button>
+            </form>
+
+            <!-- Tombol 4: Tarik Data Notion (Fruit Aktif) -->
+            <form action="/api/sync-fruit" method="POST" style="margin: 0;" onsubmit="const b = this.querySelector('button'); if(b){ b.disabled = true; b.innerHTML = '<span>⏳</span><span>Menarik Data...</span>'; }">
               <input type="hidden" name="fruitName" value="${activeFruit.name}" />
               <button type="submit" class="btn-top-action btn-top-primary">
                 <span>⚡</span>
@@ -1430,67 +1523,43 @@ const renderShellHtml = (options) => {
                 </div>
                 <span class="badge-active-theme" style="font-size: 10px; padding: 2px 7px;">✓ Aktif</span>
               </div>
-            </div>
 
-            <!-- Pengaturan Tema dalam Bentuk List -->
-            <div class="theme-nav-list-section">
-              <div class="theme-nav-list-title">PENGATURAN TEMA</div>
+              <!-- Pengaturan Tema dalam Bentuk List (di dalam kontainer Capsule Design) -->
+              <div class="theme-nav-list-section">
+                <div class="theme-nav-list-title">PENGATURAN TEMA</div>
 
-              <button type="button" class="theme-setting-nav-btn active" id="nav-btn-colors" onclick="switchThemeSettingSection('colors', this)">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">🎨</span>
-                  <span>Warna & Latar Belakang</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
+                <button type="button" class="theme-setting-nav-btn active" id="nav-btn-layout" onclick="switchThemeSettingSection('layout', this)">
+                  <div class="nav-btn-content">
+                    <span class="nav-btn-icon">📐</span>
+                    <span>1. Tata Letak & Lebar Konten</span>
+                  </div>
+                  <span class="nav-chevron">›</span>
+                </button>
 
-              <button type="button" class="theme-setting-nav-btn" id="nav-btn-typography" onclick="switchThemeSettingSection('typography', this)">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">🔤</span>
-                  <span>Tipografi & Ukuran Teks</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
+                <button type="button" class="theme-setting-nav-btn" id="nav-btn-navigation" onclick="switchThemeSettingSection('navigation', this)">
+                  <div class="nav-btn-content">
+                    <span class="nav-btn-icon">🧭</span>
+                    <span>2. Pengaturan & Manajemen Navigasi</span>
+                  </div>
+                  <span class="nav-chevron">›</span>
+                </button>
 
-              <button type="button" class="theme-setting-nav-btn" id="nav-btn-capsule" onclick="switchThemeSettingSection('capsule', this)">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">💊</span>
-                  <span>Desain Kapsul & Radius</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
+                <button type="button" class="theme-setting-nav-btn" id="nav-btn-hero" onclick="switchThemeSettingSection('hero', this)">
+                  <div class="nav-btn-content">
+                    <span class="nav-btn-icon">✨</span>
+                    <span>3. Hero (Header Beranda)</span>
+                  </div>
+                  <span class="nav-chevron">›</span>
+                </button>
 
-              <button type="button" class="theme-setting-nav-btn" id="nav-btn-layout" onclick="switchThemeSettingSection('layout', this)">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">📐</span>
-                  <span>Tata Letak & Lebar Konten</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
-
-              <button type="button" class="theme-setting-nav-btn" id="nav-btn-components" onclick="switchThemeSettingSection('components', this)">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">🧩</span>
-                  <span>Komponen Halaman</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
-
-              <button type="button" class="theme-setting-nav-btn" id="nav-btn-css" onclick="switchThemeSettingSection('css', this)">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">📁</span>
-                  <span>File CSS Mandiri</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
-
-              <button type="button" class="theme-setting-nav-btn" id="nav-btn-all" onclick="switchThemeSettingSection('all', this)" style="margin-top: 6px; border-top: 1px dashed var(--border-subtle); padding-top: 10px;">
-                <div class="nav-btn-content">
-                  <span class="nav-btn-icon">📋</span>
-                  <span>Tampilkan Semua Pengaturan</span>
-                </div>
-                <span class="nav-chevron">›</span>
-              </button>
+                <button type="button" class="theme-setting-nav-btn" id="nav-btn-postcard" onclick="switchThemeSettingSection('postcard', this)">
+                  <div class="nav-btn-content">
+                    <span class="nav-btn-icon">🃏</span>
+                    <span>4. Desain Kartu Artikel (Post Card)</span>
+                  </div>
+                  <span class="nav-chevron">›</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -1505,125 +1574,31 @@ const renderShellHtml = (options) => {
                   Konfigurasi tersimpan di <code>themes/${currentSelectedTheme?.id || 'capsule'}/theme.json</code> • File CSS mandiri di <code>themes/${currentSelectedTheme?.id || 'capsule'}/style.css</code>
                 </div>
               </div>
-              <div style="display: flex; gap: 8px; align-items: center;">
-                <button type="button" class="btn-top-action" onclick="openLivePreviewModal()">
-                  <span>👁️</span>
-                  <span>Preview</span>
-                </button>
-                <button type="submit" form="form-theme-settings" class="btn-top-action btn-top-primary">
-                  <span>💾</span>
-                  <span>Simpan Pengaturan</span>
-                </button>
-              </div>
             </div>
 
             <div class="panel3-body">
-              <div id="panel3-status-banner">
-                <div class="status-banner-active">
-                  <span style="font-size: 18px;">🟢</span>
-                  <div>
-                    <div style="font-weight: 700; font-size: 13px; color: #065f46;">Tema Aktif Utama: Capsule Design</div>
-                    <div style="font-size: 11px; color: #047857;">Pilih opsi pengaturan dari list di sebelah kiri untuk menyesuaikan tampilan di workspace ini.</div>
-                  </div>
-                </div>
-              </div>
 
               <!-- Form Multi-Pengaturan Tema -->
               <form action="/api/save-theme-settings" method="POST" id="form-theme-settings">
                 <input type="hidden" name="themeId" id="panel3-form-themeId" value="${currentSelectedTheme?.id || 'capsule'}" />
 
-                <!-- Section 1: Warna & Latar -->
-                <div class="theme-setting-section-card" id="section-colors">
-                  <div class="section-card-title">
-                    <span>🎨</span>
-                    <span>1. Skema Warna & Latar Belakang</span>
-                  </div>
-                  <div class="section-card-desc">Atur warna aksen utama dan palet latar belakang artikel.</div>
-
-                  <div class="grid-2">
-                    <div class="form-group">
-                      <label class="form-label">Warna Utama (Primary / Accent Color)</label>
-                      <div style="display: flex; gap: 8px; align-items: center;">
-                        <input type="color" name="primaryColor" id="input-color-picker" value="${currentSelectedTheme?.settings?.primaryColor || currentSelectedTheme?.accentColor || '#059669'}" style="width: 44px; height: 38px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; padding: 2px; background: #ffffff;" oninput="document.getElementById('input-color-hex').value = this.value;" />
-                        <input type="text" id="input-color-hex" name="primaryColorHex" class="form-control" value="${currentSelectedTheme?.settings?.primaryColor || currentSelectedTheme?.accentColor || '#059669'}" style="flex: 1;" oninput="document.getElementById('input-color-picker').value = this.value;" />
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label">Warna Latar Konten (Background)</label>
-                      <select name="bgColor" id="panel3-bgColor" class="form-control">
-                        <option value="#f8fafc" ${currentSelectedTheme?.settings?.bgColor === '#f8fafc' || !currentSelectedTheme?.settings?.bgColor ? 'selected' : ''}>#f8fafc (Clean Light / Standar)</option>
-                        <option value="#ffffff" ${currentSelectedTheme?.settings?.bgColor === '#ffffff' ? 'selected' : ''}>#ffffff (Pure White)</option>
-                        <option value="#f1f5f9" ${currentSelectedTheme?.settings?.bgColor === '#f1f5f9' ? 'selected' : ''}>#f1f5f9 (Soft Neutral Gray)</option>
-                      </select>
-                    </div>
-                  </div>
+                <!-- Simpan nilai pengaturan lain yang belum diubah -->
+                <div style="display: none !important;">
+                  <input type="hidden" name="primaryColor" id="input-color-picker" value="${currentSelectedTheme?.settings?.primaryColor || currentSelectedTheme?.accentColor || '#059669'}" />
+                  <input type="hidden" name="bgColor" id="panel3-bgColor" value="${currentSelectedTheme?.settings?.bgColor || '#f8fafc'}" />
+                  <input type="hidden" name="fontFamily" id="panel3-fontFamily" value="${currentSelectedTheme?.settings?.fontFamily || 'Plus Jakarta Sans'}" />
+                  <input type="hidden" name="fontSize" id="panel3-fontSize" value="${currentSelectedTheme?.settings?.fontSize || '17px'}" />
+                  <input type="hidden" name="pillRadius" id="panel3-pillRadius" value="${currentSelectedTheme?.settings?.pillRadius || '999px'}" />
+                  <input type="hidden" name="cardRadius" id="panel3-cardRadius" value="${currentSelectedTheme?.settings?.cardRadius || '24px'}" />
+                  <input type="hidden" name="showAuthorCard" id="panel3-showAuthorCard" value="${currentSelectedTheme?.settings?.showAuthorCard !== false ? 'true' : 'false'}" />
+                  <input type="hidden" name="showPillBar" id="panel3-showPillBar" value="${currentSelectedTheme?.settings?.showPillBar !== false ? 'true' : 'false'}" />
                 </div>
 
-                <!-- Section 2: Tipografi -->
-                <div class="theme-setting-section-card" id="section-typography" style="display: none;">
-                  <div class="section-card-title">
-                    <span>🔤</span>
-                    <span>2. Tipografi & Ukuran Teks</span>
-                  </div>
-                  <div class="section-card-desc">Sesuaikan keluarga font dan ukuran teks konten untuk kenyamanan membaca.</div>
-
-                  <div class="grid-2">
-                    <div class="form-group">
-                      <label class="form-label">Font Family Utama</label>
-                      <select name="fontFamily" id="panel3-fontFamily" class="form-control">
-                        <option value="Plus Jakarta Sans" ${currentSelectedTheme?.settings?.fontFamily === 'Plus Jakarta Sans' ? 'selected' : ''}>Plus Jakarta Sans (Modern Sans)</option>
-                        <option value="Inter" ${currentSelectedTheme?.settings?.fontFamily === 'Inter' ? 'selected' : ''}>Inter (Clean Sans)</option>
-                        <option value="Georgia" ${currentSelectedTheme?.settings?.fontFamily === 'Georgia' ? 'selected' : ''}>Georgia (Editorial Serif)</option>
-                        <option value="JetBrains Mono" ${currentSelectedTheme?.settings?.fontFamily === 'JetBrains Mono' ? 'selected' : ''}>JetBrains Mono (Monospace)</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label">Ukuran Teks Body Artikel</label>
-                      <select name="fontSize" id="panel3-fontSize" class="form-control">
-                        <option value="16px" ${currentSelectedTheme?.settings?.fontSize === '16px' ? 'selected' : ''}>16px (Standar)</option>
-                        <option value="17px" ${currentSelectedTheme?.settings?.fontSize === '17px' || !currentSelectedTheme?.settings?.fontSize ? 'selected' : ''}>17px (Kenyamanan Baca Optimal)</option>
-                        <option value="18px" ${currentSelectedTheme?.settings?.fontSize === '18px' ? 'selected' : ''}>18px (Besar & Lega)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Section 3: Desain Kapsul -->
-                <div class="theme-setting-section-card" id="section-capsule" style="display: none;">
-                  <div class="section-card-title">
-                    <span>💊</span>
-                    <span>3. Sistem Desain Kapsul (Pill Design)</span>
-                  </div>
-                  <div class="section-card-desc">Atur tingkat kebulatan kapsul (border radius) pada tombol, badge, dan sudut kartu.</div>
-
-                  <div class="grid-2">
-                    <div class="form-group">
-                      <label class="form-label">Kebulatan Kapsul (Pill Radius)</label>
-                      <select name="pillRadius" id="panel3-pillRadius" class="form-control">
-                        <option value="999px" ${currentSelectedTheme?.settings?.pillRadius === '999px' || !currentSelectedTheme?.settings?.pillRadius ? 'selected' : ''}>999px (Desain Kapsul Penuh / Pill)</option>
-                        <option value="24px" ${currentSelectedTheme?.settings?.pillRadius === '24px' ? 'selected' : ''}>24px (Soft Rounded Capsule)</option>
-                        <option value="12px" ${currentSelectedTheme?.settings?.pillRadius === '12px' ? 'selected' : ''}>12px (Subtle Rounded)</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="form-label">Sudut Lengkung Kartu (Card Radius)</label>
-                      <select name="cardRadius" id="panel3-cardRadius" class="form-control">
-                        <option value="24px" ${currentSelectedTheme?.settings?.cardRadius === '24px' || !currentSelectedTheme?.settings?.cardRadius ? 'selected' : ''}>24px (Standar Kapsul)</option>
-                        <option value="16px" ${currentSelectedTheme?.settings?.cardRadius === '16px' ? 'selected' : ''}>16px (Medium Rounded)</option>
-                        <option value="10px" ${currentSelectedTheme?.settings?.cardRadius === '10px' ? 'selected' : ''}>10px (Subtle Rounded)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Section 4: Layout -->
-                <div class="theme-setting-section-card" id="section-layout" style="display: none;">
+                <!-- Section 1: Tata Letak & Lebar Konten (Terisolasi) -->
+                <div class="theme-setting-section-card" id="section-layout">
                   <div class="section-card-title">
                     <span>📐</span>
-                    <span>4. Tata Letak & Lebar Konten</span>
+                    <span>1. Tata Letak & Lebar Konten</span>
                   </div>
                   <div class="section-card-desc">Tentukan lebar maksimal container artikel dan kerapatan tinggi baris.</div>
 
@@ -1648,55 +1623,334 @@ const renderShellHtml = (options) => {
                   </div>
                 </div>
 
-                <!-- Section 5: Komponen & Toggles -->
-                <div class="theme-setting-section-card" id="section-components" style="display: none;">
+                <!-- Section 2: Pengaturan & Manajemen Navigasi (Terisolasi) -->
+                <div class="theme-setting-section-card" id="section-navigation" style="display: none;">
                   <div class="section-card-title">
-                    <span>🧩</span>
-                    <span>5. Komponen Halaman</span>
+                    <span>🧭</span>
+                    <span>2. Pengaturan & Manajemen Navigasi</span>
                   </div>
-                  <div class="section-card-desc">Aktifkan atau nonaktifkan elemen pelengkap seperti kartu penulis dan floating pill bar.</div>
+                  <div class="section-card-desc">Atur tampilan bar navigasi atas serta kelola daftar link menu navigasi website Anda.</div>
 
-                  <div class="grid-2">
-                    <div class="form-group" style="padding: 14px 16px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0;">
-                      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 600;">
-                        <input type="checkbox" name="showAuthorCard" id="panel3-showAuthorCard" value="true" ${currentSelectedTheme?.settings?.showAuthorCard !== false ? 'checked' : ''} style="width: 16px; height: 16px; accent-color: var(--primary);" />
-                        <span>Tampilkan Kartu Profil Penulis di Bawah Artikel</span>
-                      </label>
+                  <!-- Sub-bagian A: Pengaturan Tampilan Navigasi -->
+                  <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+                    <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px;">
+                      ⚙️ Pengaturan Bar Navigasi
                     </div>
 
-                    <div class="form-group" style="padding: 14px 16px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0;">
-                      <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 13px; font-weight: 600;">
-                        <input type="checkbox" name="showPillBar" id="panel3-showPillBar" value="true" ${currentSelectedTheme?.settings?.showPillBar !== false ? 'checked' : ''} style="width: 16px; height: 16px; accent-color: var(--primary);" />
-                        <span>Tampilkan Floating Pill Bar Kategori di Atas Judul</span>
-                      </label>
+                    <div class="grid-2" style="margin-bottom: 14px;">
+                      <div class="form-group" style="padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Tampilkan Header Navigasi</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Aktifkan atau nonaktifkan navbar situs.</div>
+                        </div>
+                        <label class="toggle-switch" title="Toggle On/Off Tampilkan Header Navigasi">
+                          <input type="checkbox" name="showNavbar" id="panel3-showNavbar" value="true" ${currentSelectedTheme?.settings?.showNavbar !== false ? 'checked' : ''} onchange="renderNavMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+
+                      <div class="form-group" style="padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Sticky & Blur Transparan</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Navbar tetap melayang saat halaman di-scroll.</div>
+                        </div>
+                        <label class="toggle-switch" title="Toggle On/Off Sticky & Blur">
+                          <input type="checkbox" name="navSticky" id="panel3-navSticky" value="true" ${currentSelectedTheme?.settings?.navSticky !== false ? 'checked' : ''} onchange="renderNavMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; align-items: start;">
+                      <!-- Identitas Brand & Upload Logo -->
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" style="display: flex; justify-content: space-between; align-items: center;">
+                          <span>Identitas Brand (Logo & Nama Website)</span>
+                          <span style="font-size: 11px; font-weight: normal; color: var(--text-dim);">Dukungan: Gambar (PNG/SVG/JPG/WebP) atau Inisial</span>
+                        </label>
+
+                        <div style="display: flex; gap: 12px; align-items: center; background: #ffffff; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                          <!-- Box Pratinjau Logo -->
+                          <div id="brand-logo-preview-box" style="width: 44px; height: 44px; border-radius: 8px; border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; background: var(--surface-subtle); flex-shrink: 0; overflow: hidden;">
+                            ${currentSelectedTheme?.settings?.navBrandLogoImage ?
+                              `<img id="brand-logo-img-preview" src="${currentSelectedTheme.settings.navBrandLogoImage}" style="width: 100%; height: 100%; object-fit: contain;" />` :
+                              `<span id="brand-logo-text-preview" style="font-size: 16px; font-weight: 800; color: var(--primary);">${currentSelectedTheme?.settings?.navBrandLogo || 'B'}</span>`
+                            }
+                          </div>
+
+                          <div style="flex: 1; display: flex; flex-direction: column; gap: 6px;">
+                            <div style="display: flex; gap: 8px;">
+                              <input type="text" name="navBrandText" id="panel3-navBrandText" class="form-control" value="${currentSelectedTheme?.settings?.navBrandText || 'blogs'}" placeholder="Nama Website (misal: blogs)" style="flex: 1; font-weight: 700; padding: 6px 10px; font-size: 13px;" oninput="renderNavMiniPreview()" />
+                              <input type="text" name="navBrandLogo" id="panel3-navBrandLogo" class="form-control" value="${currentSelectedTheme?.settings?.navBrandLogo || 'B'}" placeholder="Inisial (B)" style="width: 80px; text-align: center; font-weight: 800; padding: 6px 8px; font-size: 13px;" oninput="updateBrandLogoText(this.value)" title="Inisial atau teks alternatif logo" />
+                            </div>
+
+                            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                              <input type="hidden" name="navBrandLogoImage" id="panel3-navBrandLogoImage" value="${currentSelectedTheme?.settings?.navBrandLogoImage || ''}" />
+                              <input type="file" id="brand-logo-file-input" accept="image/png, image/jpeg, image/svg+xml, image/webp, image/gif" style="display: none;" onchange="handleBrandLogoUpload(event)" />
+                              
+                              <button type="button" class="btn btn-secondary" onclick="document.getElementById('brand-logo-file-input').click()" style="padding: 4px 10px; font-size: 11px; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
+                                <span>📤 Unggah Logo</span>
+                              </button>
+                              
+                              <button type="button" id="btn-remove-brand-logo" onclick="removeBrandLogoImage()" class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px; color: #dc2626; border-color: #fecaca; background: #fff5f5; display: ${currentSelectedTheme?.settings?.navBrandLogoImage ? 'inline-flex' : 'none'}; align-items: center; gap: 4px;" title="Hapus gambar & kembali ke teks inisial">
+                                <span>🗑️ Hapus Gambar</span>
+                              </button>
+                              
+                              <span style="font-size: 11px; color: var(--text-dim);" id="brand-logo-status-text">
+                                ${currentSelectedTheme?.settings?.navBrandLogoImage ? 'Logo gambar aktif' : 'Gunakan inisial teks'}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Gaya Desain Navigasi -->
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Gaya Desain Navigasi</label>
+                        <select name="navStyle" id="panel3-navStyle" class="form-control" style="padding: 9px 12px;" onchange="renderNavMiniPreview()">
+                          <option value="capsule-floating" ${currentSelectedTheme?.settings?.navStyle === 'capsule-floating' || !currentSelectedTheme?.settings?.navStyle ? 'selected' : ''}>Floating Capsule Pill (Kapsul Melayang)</option>
+                          <option value="full-bar" ${currentSelectedTheme?.settings?.navStyle === 'full-bar' ? 'selected' : ''}>Full Width Header Bar</option>
+                          <option value="minimal" ${currentSelectedTheme?.settings?.navStyle === 'minimal' ? 'selected' : ''}>Minimalis Tanpa Border</option>
+                        </select>
+                        <div style="font-size: 11px; color: var(--text-dim); margin-top: 6px;">Pilih format container bar navigasi website.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Pratinjau Langsung Bar Navigasi -->
+                  <div style="margin-bottom: 20px;">
+                    <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;">
+                      👁️ Pratinjau Tampilan Navigasi
+                    </div>
+                    <div id="nav-mini-preview-box" style="background: #f1f5f9; border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 16px; display: flex; justify-content: center; align-items: center;">
+                    </div>
+                  </div>
+
+                  <!-- Sub-bagian B: Daftar & Pengaturan Menu Navigasi -->
+                  <div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                      <div>
+                        <div style="font-size: 13px; font-weight: 800; color: var(--text);">📋 Daftar Menu Navigasi</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">Tambah, ubah label/tautan, atur urutan (↑/↓), atau hapus menu navigasi.</div>
+                      </div>
+                      <button type="button" class="btn-top-action btn-top-primary" style="height: 34px; padding: 0 12px; font-size: 12px;" onclick="addNavItem()">
+                        <span>+</span>
+                        <span>Tambah Menu</span>
+                      </button>
+                    </div>
+
+                    <input type="hidden" name="navItemsJson" id="input-nav-items-json" value="" />
+
+                    <div id="nav-items-editor-list" style="display: flex; flex-direction: column; gap: 8px;">
                     </div>
                   </div>
                 </div>
 
-                <!-- Section 6: Info Isolasi CSS -->
-                <div class="theme-setting-section-card" id="section-css" style="display: none;">
+                <!-- Section 3: Hero (Header Beranda) (Terisolasi) -->
+                <div class="theme-setting-section-card" id="section-hero" style="display: none;">
                   <div class="section-card-title">
-                    <span>📁</span>
-                    <span>6. File CSS Mandiri (Terpisah dari Core)</span>
+                    <span>✨</span>
+                    <span>3. Bagian Hero (Header Beranda)</span>
                   </div>
-                  <div class="section-card-desc">Informasi penyimpanan file styling tema Capsule.</div>
+                  <div class="section-card-desc">Atur headline sambutan, subjudul, badge kapsul, dan tombol aksi pada halaman beranda (index.html).</div>
 
-                  <div class="css-isolation-box">
-                    <div style="font-weight: 700; color: var(--text); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                      <span>📂</span>
-                      <span>CSS Tema Terpisah dari Core</span>
+                  <!-- Toggle Section Hero -->
+                  <div class="form-group" style="padding: 14px 16px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                    <div>
+                      <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Tampilkan Bagian Hero di Beranda</div>
+                      <div style="font-size: 11px; color: var(--text-dim); margin-top: 2px;">Aktifkan banner sambutan besar di atas daftar artikel beranda.</div>
                     </div>
-                    <div style="color: var(--text-muted); font-size: 13px; line-height: 1.6;">
-                      Seluruh style visual tema disimpan di <code id="panel3-css-path">themes/${currentSelectedTheme?.id || 'capsule'}/style.css</code>. Core SSG tidak memuat CSS ini secara langsung, menjaga isolasi kode yang bersih. Anda dapat menambahkan custom CSS langsung ke file tersebut.
+                    <label class="toggle-switch" title="Toggle On/Off Bagian Hero">
+                      <input type="checkbox" name="showHero" id="panel3-showHero" value="true" ${currentSelectedTheme?.settings?.showHero !== false ? 'checked' : ''} onchange="renderHeroMiniPreview()" />
+                      <span class="toggle-slider"></span>
+                    </label>
+                  </div>
+
+                  <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 20px;">
+                    <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 14px;">
+                      📝 Teks & Tipografi Hero
+                    </div>
+
+                    <div class="grid-2" style="margin-bottom: 14px;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Teks Badge Kapsul (Pill Tagline)</label>
+                        <input type="text" name="heroBadge" id="panel3-heroBadge" class="form-control" value="${currentSelectedTheme?.settings?.heroBadge || '✨ Selamat Datang di Blogs'}" placeholder="misal: ✨ Selamat Datang" oninput="renderHeroMiniPreview()" />
+                      </div>
+
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Perataan Konten (Alignment)</label>
+                        <select name="heroAlign" id="panel3-heroAlign" class="form-control" onchange="renderHeroMiniPreview()">
+                          <option value="center" ${currentSelectedTheme?.settings?.heroAlign === 'center' || !currentSelectedTheme?.settings?.heroAlign ? 'selected' : ''}>Rata Tengah (Center - Rekomendasi)</option>
+                          <option value="left" ${currentSelectedTheme?.settings?.heroAlign === 'left' ? 'selected' : ''}>Rata Kiri (Modern Editorial)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 14px;">
+                      <label class="form-label">Judul Utama (Headline)</label>
+                      <input type="text" name="heroTitle" id="panel3-heroTitle" class="form-control" value="${currentSelectedTheme?.settings?.heroTitle || 'Catatan, Cerita & Wawasan Terkurasi'}" placeholder="Judul besar beranda..." style="font-weight: 800; font-size: 15px;" oninput="renderHeroMiniPreview()" />
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label class="form-label">Subjudul / Deskripsi Pendek</label>
+                      <textarea name="heroSubtitle" id="panel3-heroSubtitle" class="form-control" rows="2" style="resize: vertical; font-size: 13px;" oninput="renderHeroMiniPreview()">${currentSelectedTheme?.settings?.heroSubtitle || 'Eksplorasi artikel mendalam seputar teknologi, tutorial, dan catatan penulis pilihan.'}</textarea>
+                    </div>
+                  </div>
+
+                  <!-- Tombol Call To Action -->
+                  <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 20px;">
+                    <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 14px;">
+                      🔘 Tombol Aksi (Call To Action Buttons)
+                    </div>
+
+                    <div class="grid-2" style="margin-bottom: 14px;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Tombol Utama: Label Teks</label>
+                        <input type="text" name="heroCtaText" id="panel3-heroCtaText" class="form-control" value="${currentSelectedTheme?.settings?.heroCtaText || 'Mulai Membaca 🚀'}" placeholder="misal: Mulai Membaca 🚀" oninput="renderHeroMiniPreview()" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Tombol Utama: URL Target</label>
+                        <input type="text" name="heroCtaUrl" id="panel3-heroCtaUrl" class="form-control" value="${currentSelectedTheme?.settings?.heroCtaUrl || '#posts'}" placeholder="misal: #posts atau /read" oninput="renderHeroMiniPreview()" />
+                      </div>
+                    </div>
+
+                    <div class="grid-2">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Tombol Kedua: Label Teks (Opsional)</label>
+                        <input type="text" name="heroSecondaryCtaText" id="panel3-heroSecondaryCtaText" class="form-control" value="${currentSelectedTheme?.settings?.heroSecondaryCtaText || 'Tentang Kami'}" placeholder="misal: Tentang Kami" oninput="renderHeroMiniPreview()" />
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Tombol Kedua: URL Target</label>
+                        <input type="text" name="heroSecondaryCtaUrl" id="panel3-heroSecondaryCtaUrl" class="form-control" value="${currentSelectedTheme?.settings?.heroSecondaryCtaUrl || '/page'}" placeholder="misal: /page" oninput="renderHeroMiniPreview()" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Pratinjau Mini Hero -->
+                  <div>
+                    <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;">
+                      👁️ Pratinjau Tampilan Hero
+                    </div>
+                    <div id="hero-mini-preview-box" style="background: #ffffff; border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 32px 20px; text-align: center;">
                     </div>
                   </div>
                 </div>
 
-                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end;">
-                  <button type="submit" class="btn-top-action btn-top-primary" style="height: 44px; padding: 0 24px; font-size: 14px;">
-                    <span>💾</span>
-                    <span>Simpan Pengaturan Tema</span>
-                  </button>
+                <!-- Section 4: Desain Kartu Artikel (Post Card) (Terisolasi) -->
+                <div class="theme-setting-section-card" id="section-postcard" style="display: none;">
+                  <div class="section-card-title">
+                    <span>🃏</span>
+                    <span>4. Desain Kartu Artikel (Post Card)</span>
+                  </div>
+                  <div class="section-card-desc">Atur tampilan grid kartu artikel, thumbnail cover, sudut lengkungan, dan metadata postingan pada beranda.</div>
+
+                  <!-- Grid Layout & Radius -->
+                  <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 20px;">
+                    <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 14px;">
+                      📐 Format Grid & Bentuk Kapsul
+                    </div>
+
+                    <div class="grid-3" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Gaya Layout Grid</label>
+                        <select name="postCardLayout" id="panel3-postCardLayout" class="form-control" onchange="renderPostCardMiniPreview()">
+                          <option value="grid-3" ${currentSelectedTheme?.settings?.postCardLayout === 'grid-3' || !currentSelectedTheme?.settings?.postCardLayout ? 'selected' : ''}>3 Kolom (Modern Grid)</option>
+                          <option value="grid-2" ${currentSelectedTheme?.settings?.postCardLayout === 'grid-2' ? 'selected' : ''}>2 Kolom (Lebar)</option>
+                          <option value="list" ${currentSelectedTheme?.settings?.postCardLayout === 'list' ? 'selected' : ''}>List Vertikal (Editorial)</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Lengkungan Sudut Kartu</label>
+                        <select name="postCardRadius" id="panel3-postCardRadius" class="form-control" onchange="renderPostCardMiniPreview()">
+                          <option value="16px" ${currentSelectedTheme?.settings?.postCardRadius === '16px' ? 'selected' : ''}>16px (Standard Rounded)</option>
+                          <option value="20px" ${currentSelectedTheme?.settings?.postCardRadius === '20px' || !currentSelectedTheme?.settings?.postCardRadius ? 'selected' : ''}>20px (Capsule Medium)</option>
+                          <option value="24px" ${currentSelectedTheme?.settings?.postCardRadius === '24px' ? 'selected' : ''}>24px (Pill Aerodynamic)</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Sumber Artikel Beranda</label>
+                        <select name="postCardFruitSource" id="panel3-postCardFruitSource" class="form-control">
+                          <option value="all" ${currentSelectedTheme?.settings?.postCardFruitSource === 'all' || !currentSelectedTheme?.settings?.postCardFruitSource ? 'selected' : ''}>Semua Fruit Artikel</option>
+                          ${fruits.filter(f => f.config?.targetType === 'post').map(f => `<option value="${f.name}" ${currentSelectedTheme?.settings?.postCardFruitSource === f.name ? 'selected' : ''}>Fruit: ${f.name}</option>`).join('')}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Toggles Komponen Kartu -->
+                  <div style="background: var(--surface-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 20px;">
+                    <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 14px;">
+                      👁️ Elemen & Metadata yang Ditampilkan
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                      <div class="form-group" style="padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Gambar Cover / Thumbnail</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Tampilkan foto Open Graph di bagian atas kartu.</div>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" name="showCardCover" id="panel3-showCardCover" value="true" ${currentSelectedTheme?.settings?.showCardCover !== false ? 'checked' : ''} onchange="renderPostCardMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+
+                      <div class="form-group" style="padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Badge Kategori Kapsul</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Label pil kategori di atas judul artikel.</div>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" name="showCardCategory" id="panel3-showCardCategory" value="true" ${currentSelectedTheme?.settings?.showCardCategory !== false ? 'checked' : ''} onchange="renderPostCardMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+
+                      <div class="form-group" style="padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Tanggal Publikasi</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Tampilkan tanggal rilis artikel di footer kartu.</div>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" name="showCardDate" id="panel3-showCardDate" value="true" ${currentSelectedTheme?.settings?.showCardDate !== false ? 'checked' : ''} onchange="renderPostCardMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+
+                      <div class="form-group" style="padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Info Penulis (Author)</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Tampilkan avatar dan nama penulis artikel.</div>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" name="showCardAuthor" id="panel3-showCardAuthor" value="true" ${currentSelectedTheme?.settings?.showCardAuthor !== false ? 'checked' : ''} onchange="renderPostCardMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+
+                      <div class="form-group" style="grid-column: 1 / -1; padding: 12px 14px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                        <div>
+                          <div style="font-size: 13px; font-weight: 700; color: var(--text-main);">Ringkasan Artikel (Excerpt)</div>
+                          <div style="font-size: 11px; color: var(--text-dim); margin-top: 1px;">Tampilkan cuplikan deskripsi artikel maksimal 3 baris.</div>
+                        </div>
+                        <label class="toggle-switch">
+                          <input type="checkbox" name="showCardExcerpt" id="panel3-showCardExcerpt" value="true" ${currentSelectedTheme?.settings?.showCardExcerpt !== false ? 'checked' : ''} onchange="renderPostCardMiniPreview()" />
+                          <span class="toggle-slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Pratinjau Mini Post Card -->
+                  <div>
+                    <div style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 8px;">
+                      👁️ Pratinjau Contoh Kartu Artikel
+                    </div>
+                    <div id="postcard-mini-preview-box" style="background: var(--surface-subtle); border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 24px; display: flex; justify-content: center;">
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -2420,13 +2674,25 @@ const renderShellHtml = (options) => {
       });
     }
 
-    // Modal Live Preview Logic
+    // Modal Live Preview Logic & Previous State Tracking
     let currentPreviewFruit = '${activeFruit ? encodeURIComponent(activeFruit.name) : (fruits[0] ? encodeURIComponent(fruits[0].name) : "")}';
     let currentPreviewPageId = '${firstItemId}';
+    let previousWorkspaceState = null;
 
     function openLivePreviewModal() {
       const modal = document.getElementById('live-preview-modal');
-      if (modal) modal.classList.add('open');
+      if (!modal) return;
+
+      // Simpan state sebelumnya (elemen fokus & posisi scroll workspace) sebelum masuk ke Preview
+      const wsPanel = document.querySelector('.panel-right-workspace');
+      const themePanel = document.getElementById('theme-settings-panel');
+      previousWorkspaceState = {
+        activeElement: document.activeElement,
+        wsScrollTop: wsPanel ? wsPanel.scrollTop : 0,
+        themeScrollTop: themePanel ? themePanel.scrollTop : 0
+      };
+
+      modal.classList.add('open');
       updateIframeSrc();
     }
 
@@ -2442,7 +2708,111 @@ const renderShellHtml = (options) => {
       if (modal) modal.classList.remove('open');
       const iframe = document.getElementById('preview-iframe');
       if (iframe) iframe.src = 'about:blank';
+
+      // Kembalikan ke state sebelumnya (scroll & fokus)
+      if (previousWorkspaceState) {
+        const wsPanel = document.querySelector('.panel-right-workspace');
+        const themePanel = document.getElementById('theme-settings-panel');
+        if (wsPanel) wsPanel.scrollTop = previousWorkspaceState.wsScrollTop || 0;
+        if (themePanel) themePanel.scrollTop = previousWorkspaceState.themeScrollTop || 0;
+        if (previousWorkspaceState.activeElement && typeof previousWorkspaceState.activeElement.focus === 'function') {
+          try { previousWorkspaceState.activeElement.focus(); } catch(e) {}
+        }
+      }
     }
+
+    function togglePreviewAndBack() {
+      const modal = document.getElementById('live-preview-modal');
+      if (modal && modal.classList.contains('open')) {
+        closeLivePreviewModal();
+      } else {
+        openLivePreviewModal();
+      }
+    }
+
+    function triggerShortcutSave() {
+      // 1. Jika di halaman pengaturan tema
+      const themeForm = document.getElementById('form-theme-settings');
+      if (themeForm) {
+        if (typeof themeForm.requestSubmit === 'function') {
+          themeForm.requestSubmit();
+        } else {
+          themeForm.submit();
+        }
+        return;
+      }
+
+      // 2. Jika di halaman tambah fruit baru
+      const createForm = document.querySelector('form[action="/api/create-fruit"]');
+      if (createForm) {
+        if (typeof createForm.requestSubmit === 'function') {
+          createForm.requestSubmit();
+        } else {
+          createForm.submit();
+        }
+        return;
+      }
+
+      // 3. Jika di tab pemetaan kolom (mapping)
+      const mappingPane = document.getElementById('tab-pane-mapping');
+      if (mappingPane && mappingPane.style.display !== 'none') {
+        const mapForm = mappingPane.querySelector('form[action="/api/save-mapping"]');
+        if (mapForm) {
+          if (typeof mapForm.requestSubmit === 'function') mapForm.requestSubmit();
+          else mapForm.submit();
+          return;
+        }
+      }
+
+      // 4. Jika di tab pengaturan Notion (settings)
+      const settingsPane = document.getElementById('tab-pane-settings');
+      if (settingsPane && settingsPane.style.display !== 'none') {
+        const cfgForm = settingsPane.querySelector('form[action="/api/save-config"]');
+        if (cfgForm) {
+          if (typeof cfgForm.requestSubmit === 'function') cfgForm.requestSubmit();
+          else cfgForm.submit();
+          return;
+        }
+      }
+
+      // Fallback: jika ada form save-mapping di halaman
+      const fallbackMapForm = document.querySelector('form[action="/api/save-mapping"]');
+      if (fallbackMapForm) {
+        if (typeof fallbackMapForm.requestSubmit === 'function') fallbackMapForm.requestSubmit();
+        else fallbackMapForm.submit();
+      }
+    }
+
+    // Global Keyboard Shortcuts:
+    // - Ctrl + S     = Save pengaturan aktif
+    // - Ctrl + Space = Buka Preview / Kembali (Back) ke state sebelumnya
+    document.addEventListener('keydown', (e) => {
+      const isCtrl = e.ctrlKey || e.metaKey;
+
+      // Ctrl + S = Save
+      if (isCtrl && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS')) {
+        e.preventDefault();
+        triggerShortcutSave();
+        return;
+      }
+
+      // Ctrl + Space = Preview / Back ke state sebelumnya
+      if (isCtrl && !e.shiftKey && !e.altKey && (e.code === 'Space' || e.key === ' ')) {
+        e.preventDefault();
+        togglePreviewAndBack();
+        return;
+      }
+    });
+
+    // Terima event shortcut dari dalam iframe Live Preview
+    window.addEventListener('message', (e) => {
+      if (!e.data || e.data.type !== 'FRUITION_SHORTCUT') return;
+      if (e.data.action === 'toggle-preview') {
+        togglePreviewAndBack();
+      } else if (e.data.action === 'save') {
+        triggerShortcutSave();
+      }
+    });
 
     function changeModalArticle(pageId) {
       currentPreviewPageId = pageId;
@@ -2756,27 +3126,432 @@ const renderShellHtml = (options) => {
       if (el) el.classList.add('active');
 
       const cards = document.querySelectorAll('.theme-setting-section-card');
-      if (tabId === 'all') {
-        cards.forEach(c => c.style.display = 'block');
-      } else {
-        cards.forEach(c => {
-          if (c.id === 'section-' + tabId) {
-            c.style.display = 'block';
-          } else {
-            c.style.display = 'none';
-          }
-        });
-      }
+      cards.forEach(c => {
+        if (c.id === 'section-' + tabId) {
+          c.style.display = 'block';
+        } else {
+          c.style.display = 'none';
+        }
+      });
       try { sessionStorage.setItem('active_theme_setting_tab', tabId); } catch(e) {}
+    }
+
+    // =========================================================
+    // NAVIGATION MENU EDITOR & LIVE MINI PREVIEW
+    // =========================================================
+    const defaultNavItems = [
+      { label: 'Home', url: '/', enabled: true },
+      { label: 'Read', url: '/read', enabled: true },
+      { label: 'Pelajaran', url: '/pelajaran', enabled: true },
+      { label: 'Authors', url: '/authors', enabled: true },
+      { label: 'About', url: '/page', enabled: true }
+    ];
+
+    let navItemsState = ${JSON.stringify(
+      Array.isArray(currentSelectedTheme?.settings?.navItems) && currentSelectedTheme.settings.navItems.length > 0
+        ? currentSelectedTheme.settings.navItems
+        : [
+            { label: 'Home', url: '/', enabled: true },
+            { label: 'Read', url: '/read', enabled: true },
+            { label: 'Pelajaran', url: '/pelajaran', enabled: true },
+            { label: 'Authors', url: '/authors', enabled: true },
+            { label: 'About', url: '/page', enabled: true }
+          ]
+    )};
+
+    const availableFruitTargets = ${JSON.stringify(
+      fruits.map(f => ({ name: f.name, url: '/' + f.name, targetType: f.config?.targetType || 'post' }))
+    )};
+
+    
+    const LUCIDE_NAV_ICONS = [
+      { val: '', label: '🚫 Tanpa Ikon' },
+      { val: 'home', label: '🏠 home' },
+      { val: 'book-open', label: '📖 book-open' },
+      { val: 'book', label: '📚 book' },
+      { val: 'graduation-cap', label: '🎓 graduation-cap' },
+      { val: 'users', label: '👥 users' },
+      { val: 'user', label: '👤 user' },
+      { val: 'file-text', label: '📄 file-text' },
+      { val: 'newspaper', label: '📰 newspaper' },
+      { val: 'compass', label: '🧭 compass' },
+      { val: 'sparkles', label: '✨ sparkles' },
+      { val: 'feather', label: '🪶 feather' },
+      { val: 'pen-tool', label: '✒️ pen-tool' },
+      { val: 'lightbulb', label: '💡 lightbulb' },
+      { val: 'layers', label: '📑 layers' },
+      { val: 'tag', label: '🏷️ tag' },
+      { val: 'bookmark', label: '🔖 bookmark' },
+      { val: 'folder', label: '📁 folder' },
+      { val: 'info', label: 'ℹ️ info' },
+      { val: 'help-circle', label: '❓ help-circle' },
+      { val: 'mail', label: '✉️ mail' },
+      { val: 'heart', label: '❤️ heart' },
+      { val: 'star', label: '⭐ star' },
+      { val: 'search', label: '🔍 search' },
+      { val: 'coffee', label: '☕ coffee' },
+      { val: 'code', label: '💻 code' },
+      { val: 'terminal', label: '⌨️ terminal' },
+      { val: 'rocket', label: '🚀 rocket' },
+      { val: 'zap', label: '⚡ zap' },
+      { val: 'flame', label: '🔥 flame' },
+      { val: 'globe', label: '🌐 globe' },
+      { val: 'link', label: '🔗 link' },
+      { val: 'external-link', label: '↗️ external-link' },
+      { val: 'rss', label: '📡 rss' }
+    ];
+
+    function updateNavItemIcon(idx, val) {
+      if (!navItemsState[idx]) return;
+      if (val === '__custom__') {
+        const customIcon = prompt('Ketik nama icon Lucide (misal: "rocket", "shield", "database", "camera", "music"):', navItemsState[idx].icon || '');
+        if (customIcon !== null) {
+          navItemsState[idx].icon = customIcon.trim().toLowerCase();
+        }
+      } else {
+        navItemsState[idx].icon = val;
+      }
+      syncNavItemsHiddenInput();
+      renderNavItemsEditor();
+      renderNavMiniPreview();
+      renderHeroMiniPreview();
+      renderPostCardMiniPreview();
+    }
+
+    function escapeAttr(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function syncNavItemsHiddenInput() {
+      const hidden = document.getElementById('input-nav-items-json');
+      if (hidden) {
+        hidden.value = JSON.stringify(navItemsState);
+      }
+      renderNavMiniPreview();
+    }
+
+    
+    function handleBrandLogoUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (file.type === 'image/svg+xml') {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          applyBrandLogoData(e.target.result, 'SVG Logo');
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          let w = img.width;
+          let h = img.height;
+          const maxW = 360;
+          const maxH = 120;
+          if (w > maxW || h > maxH) {
+            const ratio = Math.min(maxW / w, maxH / h);
+            w = Math.round(w * ratio);
+            h = Math.round(h * ratio);
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          const outData = canvas.toDataURL(file.type === 'image/png' ? 'image/png' : 'image/jpeg', 0.92);
+          applyBrandLogoData(outData, 'Logo (' + w + 'x' + h + 'px)');
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function applyBrandLogoData(dataUrl, desc) {
+      const hiddenInput = document.getElementById('panel3-navBrandLogoImage');
+      if (hiddenInput) hiddenInput.value = dataUrl;
+
+      const previewBox = document.getElementById('brand-logo-preview-box');
+      if (previewBox) {
+        previewBox.innerHTML = '<img id="brand-logo-img-preview" src="' + dataUrl + '" style="width: 100%; height: 100%; object-fit: contain;" />';
+      }
+
+      const removeBtn = document.getElementById('btn-remove-brand-logo');
+      if (removeBtn) removeBtn.style.display = 'inline-flex';
+
+      const statusText = document.getElementById('brand-logo-status-text');
+      if (statusText) statusText.innerText = desc || 'Logo gambar aktif';
+
+      renderNavMiniPreview();
+    }
+
+    function removeBrandLogoImage() {
+      const hiddenInput = document.getElementById('panel3-navBrandLogoImage');
+      if (hiddenInput) hiddenInput.value = '';
+
+      const fileInput = document.getElementById('brand-logo-file-input');
+      if (fileInput) fileInput.value = '';
+
+      const textVal = document.getElementById('panel3-navBrandLogo')?.value || 'B';
+      const previewBox = document.getElementById('brand-logo-preview-box');
+      if (previewBox) {
+        previewBox.innerHTML = '<span id="brand-logo-text-preview" style="font-size: 16px; font-weight: 800; color: var(--primary);">' + escapeAttr(textVal) + '</span>';
+      }
+
+      const removeBtn = document.getElementById('btn-remove-brand-logo');
+      if (removeBtn) removeBtn.style.display = 'none';
+
+      const statusText = document.getElementById('brand-logo-status-text');
+      if (statusText) statusText.innerText = 'Gunakan inisial teks';
+
+      renderNavMiniPreview();
+    }
+
+    function updateBrandLogoText(val) {
+      const logoImg = document.getElementById('panel3-navBrandLogoImage')?.value;
+      if (!logoImg) {
+        const textPreview = document.getElementById('brand-logo-text-preview');
+        if (textPreview) {
+          textPreview.innerText = val || 'B';
+        }
+      }
+      renderNavMiniPreview();
+    }
+
+    
+    function renderHeroMiniPreview() {
+      const box = document.getElementById('hero-mini-preview-box');
+      if (!box) return;
+
+      const showHero = document.getElementById('panel3-showHero')?.checked !== false;
+      if (!showHero) {
+        box.innerHTML = '<div style="font-size: 12px; color: var(--text-dim); font-style: italic;">Bagian Hero dinonaktifkan (tidak ditampilkan di halaman beranda).</div>';
+        return;
+      }
+
+      const badge = document.getElementById('panel3-heroBadge')?.value || '✨ Selamat Datang di Blogs';
+      const align = document.getElementById('panel3-heroAlign')?.value || 'center';
+      const title = document.getElementById('panel3-heroTitle')?.value || 'Catatan, Cerita & Wawasan Terkurasi';
+      const subtitle = document.getElementById('panel3-heroSubtitle')?.value || '';
+      const ctaText = document.getElementById('panel3-heroCtaText')?.value || '';
+      const secText = document.getElementById('panel3-heroSecondaryCtaText')?.value || '';
+      const primaryColor = document.getElementById('input-color-picker')?.value || '#059669';
+
+      box.innerHTML =
+        '<div style="max-width: 680px; margin: 0 auto; text-align: ' + align + ';">' +
+          (badge ? '<span style="display: inline-block; font-size: 11px; font-weight: 700; color: ' + primaryColor + '; background: ' + primaryColor + '15; padding: 4px 12px; border-radius: 999px; margin-bottom: 12px;">' + escapeAttr(badge) + '</span>' : '') +
+          '<h3 style="font-size: 24px; font-weight: 800; line-height: 1.25; margin: 0 0 10px 0; color: #0f172a;">' + escapeAttr(title) + '</h3>' +
+          (subtitle ? '<p style="font-size: 13px; line-height: 1.6; color: #64748b; margin: 0 0 16px 0;">' + escapeAttr(subtitle) + '</p>' : '') +
+          '<div style="display: flex; gap: 8px; justify-content: ' + (align === 'center' ? 'center' : 'flex-start') + '; flex-wrap: wrap;">' +
+            (ctaText ? '<span style="font-size: 12px; font-weight: 700; background: ' + primaryColor + '; color: #ffffff; padding: 8px 18px; border-radius: 999px;">' + escapeAttr(ctaText) + '</span>' : '') +
+            (secText ? '<span style="font-size: 12px; font-weight: 700; background: #ffffff; border: 1px solid #cbd5e1; color: #334155; padding: 8px 16px; border-radius: 999px;">' + escapeAttr(secText) + '</span>' : '') +
+          '</div>' +
+        '</div>';
+    }
+
+    function renderPostCardMiniPreview() {
+      const box = document.getElementById('postcard-mini-preview-box');
+      if (!box) return;
+
+      const radius = document.getElementById('panel3-postCardRadius')?.value || '20px';
+      const showCover = document.getElementById('panel3-showCardCover')?.checked !== false;
+      const showCat = document.getElementById('panel3-showCardCategory')?.checked !== false;
+      const showDate = document.getElementById('panel3-showCardDate')?.checked !== false;
+      const showAuthor = document.getElementById('panel3-showCardAuthor')?.checked !== false;
+      const showExcerpt = document.getElementById('panel3-showCardExcerpt')?.checked !== false;
+      const primaryColor = document.getElementById('input-color-picker')?.value || '#059669';
+
+      box.innerHTML =
+        '<div style="width: 100%; max-width: 360px; background: #ffffff; border: 1px solid var(--border); border-radius: ' + radius + '; overflow: hidden; box-shadow: 0 4px 14px rgba(0,0,0,0.04);">' +
+          (showCover ? '<div style="height: 150px; background: linear-gradient(135deg, ' + primaryColor + '20, #e2e8f0); display: flex; align-items: center; justify-content: center; font-size: 28px;">🖼️</div>' : '') +
+          '<div style="padding: 16px;">' +
+            (showCat ? '<div style="margin-bottom: 8px;"><span style="font-size: 10px; font-weight: 800; text-transform: uppercase; background: ' + primaryColor + '18; color: ' + primaryColor + '; padding: 3px 8px; border-radius: 999px;">TEKNOLOGI</span></div>' : '') +
+            '<div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-bottom: 6px; line-height: 1.35;">Cara Menggunakan Notion Sebagai Headless CMS</div>' +
+            (showExcerpt ? '<div style="font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 12px;">Panduan langkah demi langkah mempublikasikan konten Notion ke website statis yang cepat...</div>' : '') +
+            '<div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 10px; font-size: 11px; color: #94a3b8;">' +
+              (showAuthor ? '<div style="display: flex; align-items: center; gap: 6px;"><span style="width: 18px; height: 18px; border-radius: 999px; background: #e2e8f0; display: inline-flex; align-items: center; justify-content: center; font-size: 9px;">👤</span><span style="font-weight: 600; color: #475569;">Penulis</span></div>' : '<div></div>') +
+              (showDate ? '<span>26 Okt 2026</span>' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>';
+    }
+
+    function renderNavMiniPreview() {
+      const box = document.getElementById('nav-mini-preview-box');
+      if (!box) return;
+
+      const showNavbar = document.getElementById('panel3-showNavbar')?.checked !== false;
+      if (!showNavbar) {
+        box.innerHTML = '<div style="font-size: 12px; color: var(--text-dim); font-style: italic;">Header Navigasi dinonaktifkan (tidak ditampilkan di halaman).</div>';
+        return;
+      }
+
+      const brandLogoImg = document.getElementById('panel3-navBrandLogoImage')?.value || '';
+      const brandLogo = document.getElementById('panel3-navBrandLogo')?.value || 'B';
+      const brandText = document.getElementById('panel3-navBrandText')?.value || 'blogs';
+      const navStyle = document.getElementById('panel3-navStyle')?.value || 'capsule-floating';
+      const primaryColor = document.getElementById('input-color-picker')?.value || '#059669';
+
+      const activeLinks = navItemsState.filter(it => it.enabled !== false);
+      const linksHtml = activeLinks.map((it, i) => {
+        const isFirst = i === 0;
+        const iconHtml = it.icon ? '<i data-lucide="' + escapeAttr(it.icon) + '" style="width: 13px; height: 13px; margin-right: 4px; vertical-align: -2px; display: inline-block;"></i>' : '';
+        return '<span style="font-size: 12px; font-weight: ' + (isFirst ? '700' : '600') + '; padding: 5px 12px; border-radius: 999px; display: inline-flex; align-items: center; ' +
+          (isFirst ? 'background: ' + primaryColor + '; color: #ffffff;' : 'color: #334155;') + '">' +
+          iconHtml +
+          '<span>' + escapeAttr(it.label || 'Menu') + '</span>' +
+        '</span>';
+      }).join('');
+
+      const isPill = navStyle === 'capsule-floating';
+      const isMinimal = navStyle === 'minimal';
+
+      box.innerHTML =
+        '<div style="width: 100%; max-width: 680px; display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; ' +
+        'background: ' + (isMinimal ? 'transparent' : 'rgba(255,255,255,0.92)') + '; ' +
+        'border: ' + (isMinimal ? 'none' : '1px solid #e2e8f0') + '; ' +
+        'border-radius: ' + (isPill ? '999px' : '10px') + '; ' +
+        'box-shadow: ' + (isMinimal ? 'none' : '0 2px 8px rgba(0,0,0,0.04)') + ';">' +
+          '<div style="display: flex; align-items: center; gap: 8px;">' +
+            (brandLogoImg
+              ? '<img src="' + escapeAttr(brandLogoImg) + '" alt="' + escapeAttr(brandText) + '" style="height: 26px; max-width: 90px; object-fit: contain; vertical-align: middle; border-radius: 4px;" />'
+              : '<span style="width: 28px; height: 28px; border-radius: 999px; background: ' + primaryColor + '; color: #fff; font-size: 12px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">' + escapeAttr(brandLogo) + '</span>') +
+            '<span style="font-size: 14px; font-weight: 800; color: #0f172a;">' + escapeAttr(brandText) + '</span>' +
+          '</div>' +
+          '<div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">' +
+            (linksHtml || '<span style="font-size: 11px; color: #94a3b8;">Belum ada menu aktif</span>') +
+          '</div>' +
+        '</div>';
+      setTimeout(function() { if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons(); }, 10);
+    }
+
+    function renderNavItemsEditor() {
+      const container = document.getElementById('nav-items-editor-list');
+      if (!container) return;
+
+      const quickOptions = [
+        '<option value="">⚡ Pilih Cepat Target...</option>',
+        '<option value="/">🏠 Beranda (/)</option>',
+        ...availableFruitTargets.map(f => '<option value="' + escapeAttr(f.url) + '">🍉 Fruit: ' + escapeAttr(f.name) + ' (' + escapeAttr(f.url) + ')</option>')
+      ].join('');
+
+      if (navItemsState.length === 0) {
+        container.innerHTML = '<div style="padding: 18px; text-align: center; background: var(--surface-subtle); border: 1px dashed var(--border); border-radius: var(--radius-sm); font-size: 12px; color: var(--text-dim);">Belum ada item menu navigasi. Klik "+ Tambah Menu" untuk membuat menu baru.</div>';
+        syncNavItemsHiddenInput();
+        return;
+      }
+
+      container.innerHTML = navItemsState.map((item, idx) => {
+        return (
+          '<div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: #ffffff; border: 1px solid var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);">' +
+            '<div style="display: flex; flex-direction: column; gap: 2px;">' +
+              '<button type="button" onclick="moveNavItem(' + idx + ', -1)" ' + (idx === 0 ? 'disabled' : '') + ' style="border: 1px solid var(--border); background: var(--surface-subtle); border-radius: 4px; font-size: 10px; line-height: 1; padding: 3px 5px; cursor: pointer; opacity: ' + (idx === 0 ? '0.35' : '1') + ';" title="Geser Naik">▲</button>' +
+              '<button type="button" onclick="moveNavItem(' + idx + ', 1)" ' + (idx === navItemsState.length - 1 ? 'disabled' : '') + ' style="border: 1px solid var(--border); background: var(--surface-subtle); border-radius: 4px; font-size: 10px; line-height: 1; padding: 3px 5px; cursor: pointer; opacity: ' + (idx === navItemsState.length - 1 ? '0.35' : '1') + ';" title="Geser Turun">▼</button>' +
+            '</div>' +
+
+            '<label class="toggle-switch toggle-switch-sm" title="Status Menu (On: Tampilkan / Off: Sembunyikan)">' +
+              '<input type="checkbox" ' + (item.enabled !== false ? 'checked' : '') + ' onchange="updateNavItemField(' + idx + ', \\\'enabled\\\', this.checked)" />' +
+              '<span class="toggle-slider"></span>' +
+            '</label>' +
+
+            '<div style="flex: 1; display: grid; grid-template-columns: 145px 1fr 1.1fr auto; gap: 8px; align-items: center;">' +
+              '<!-- Lucide Icon Picker -->' +
+              '<div style="display: flex; align-items: center; gap: 5px; background: var(--surface-subtle); border: 1px solid var(--border); border-radius: 6px; padding: 3px 6px;">' +
+                '<span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; color: var(--primary); flex-shrink: 0;" title="' + (item.icon ? 'Icon: ' + escapeAttr(item.icon) : 'Tanpa ikon') + '">' +
+                  (item.icon ? '<i data-lucide="' + escapeAttr(item.icon) + '" style="width: 16px; height: 16px;"></i>' : '<span style="font-size: 11px; color: #94a3b8;">—</span>') +
+                '</span>' +
+                '<select class="form-control" style="border: none; background: transparent; font-size: 11px; padding: 3px 2px; font-weight: 600; cursor: pointer; flex: 1;" onchange="updateNavItemIcon(' + idx + ', this.value)">' +
+                  LUCIDE_NAV_ICONS.map(function(ic) {
+                    return '<option value="' + escapeAttr(ic.val) + '" ' + (item.icon === ic.val ? 'selected' : '') + '>' + escapeAttr(ic.label) + '</option>';
+                  }).join('') +
+                  (item.icon && !LUCIDE_NAV_ICONS.some(function(ic) { return ic.val === item.icon; }) ? '<option value="' + escapeAttr(item.icon) + '" selected>✨ ' + escapeAttr(item.icon) + '</option>' : '') +
+                  '<option value="__custom__">➕ Ketik Icon...</option>' +
+                '</select>' +
+              '</div>' +
+
+              '<input type="text" class="form-control" value="' + escapeAttr(item.label) + '" placeholder="Label Menu (misal: Home)" oninput="updateNavItemField(' + idx + ', \\\'label\\\', this.value)" style="padding: 7px 10px; font-weight: 700;" />' +
+              '<input type="text" class="form-control" id="nav-item-url-' + idx + '" value="' + escapeAttr(item.url) + '" placeholder="URL / Target (misal: /read)" oninput="updateNavItemField(' + idx + ', \\\'url\\\', this.value)" style="padding: 7px 10px; font-family: \\\'JetBrains Mono\\\', monospace; font-size: 12px;" />' +
+              '<select class="form-control" style="width: 155px; padding: 7px 8px; font-size: 12px;" onchange="applyQuickTargetToNavItem(' + idx + ', this.value); this.value = \\\'\\\';">' +
+                quickOptions +
+              '</select>' +
+            '</div>' +
+
+            '<button type="button" onclick="removeNavItem(' + idx + ')" style="border: 1px solid #fecaca; background: #fff5f5; color: #dc2626; border-radius: 6px; width: 32px; height: 32px; cursor: pointer; font-size: 13px; display: inline-flex; align-items: center; justify-content: center;" title="Hapus Menu">🗑️</button>' +
+          '</div>'
+        );
+      }).join('');
+
+      syncNavItemsHiddenInput();
+      setTimeout(function() { if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons(); }, 10);
+    }
+
+    function updateNavItemField(idx, field, value) {
+      if (!navItemsState[idx]) return;
+      navItemsState[idx][field] = value;
+      syncNavItemsHiddenInput();
+    }
+
+    function applyQuickTargetToNavItem(idx, targetUrl) {
+      if (!targetUrl || !navItemsState[idx]) return;
+      navItemsState[idx].url = targetUrl;
+      const cleanSlug = targetUrl.startsWith('/') ? targetUrl.slice(1).toLowerCase() : targetUrl.toLowerCase();
+      
+      const iconSuggester = {
+        '': 'home',
+        'read': 'book-open',
+        'pelajaran': 'graduation-cap',
+        'authors': 'users',
+        'page': 'info'
+      };
+      if (iconSuggester[cleanSlug] && !navItemsState[idx].icon) {
+        navItemsState[idx].icon = iconSuggester[cleanSlug];
+      }
+
+      if (!navItemsState[idx].label || navItemsState[idx].label === 'Menu Baru') {
+        const cleanName = targetUrl === '/' ? 'Home' : (targetUrl.startsWith('/') ? targetUrl.slice(1) : targetUrl);
+        navItemsState[idx].label = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
+      }
+      renderNavItemsEditor();
+    }
+
+    function addNavItem() {
+      navItemsState.push({
+        label: 'Menu Baru',
+        url: '/',
+        icon: 'link',
+        enabled: true
+      });
+      renderNavItemsEditor();
+    }
+
+    function removeNavItem(idx) {
+      navItemsState.splice(idx, 1);
+      renderNavItemsEditor();
+    }
+
+    function moveNavItem(idx, direction) {
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= navItemsState.length) return;
+      const temp = navItemsState[idx];
+      navItemsState[idx] = navItemsState[targetIdx];
+      navItemsState[targetIdx] = temp;
+      renderNavItemsEditor();
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       try {
+        renderNavItemsEditor();
         const savedTab = sessionStorage.getItem('active_theme_setting_tab');
-        if (savedTab) {
-          const btn = document.getElementById('nav-btn-' + savedTab);
-          if (btn) switchThemeSettingSection(savedTab, btn);
-        }
+        const activeTab = (savedTab === 'navigation') ? 'navigation' : 'layout';
+        const btn = document.getElementById('nav-btn-' + activeTab);
+        if (btn) switchThemeSettingSection(activeTab, btn);
       } catch(e) {}
     });
 
@@ -2796,6 +3571,43 @@ const renderShellHtml = (options) => {
 // Simple HTTP Server
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
+
+  // Endpoint: Offline Lucide Icon Library (No Internet Dependency)
+  if (url.pathname === '/assets/lucide.min.js' || url.pathname === '/dist/lucide.min.js' || url.pathname === '/lucide.min.js') {
+    try {
+      const lucideFile = path.join(process.cwd(), 'node_modules', 'lucide', 'dist', 'umd', 'lucide.min.js');
+      const data = await fs.readFile(lucideFile);
+      res.writeHead(200, {
+        'Content-Type': 'application/javascript; charset=utf-8',
+        'Cache-Control': 'public, max-age=31536000'
+      });
+      res.end(data);
+      return;
+    } catch (err) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Lucide offline script not found');
+      return;
+    }
+  }
+
+  // Endpoint: Serve Homepage index.html
+  if (url.pathname === '/index.html' || url.pathname === '/dist/index.html' || url.pathname === '/home') {
+    try {
+      let html = '';
+      try {
+        html = await fs.readFile(path.join(process.cwd(), 'dist', 'index.html'), 'utf8');
+      } catch {
+        html = await manager.buildHomepageHtml();
+      }
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(html);
+      return;
+    } catch (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('Error loading index.html: ' + err.message);
+      return;
+    }
+  }
 
   // Endpoint: Main Shell UI
   if (url.pathname === '/') {
@@ -2897,6 +3709,12 @@ const server = http.createServer(async (req, res) => {
       const params = new URLSearchParams(body);
       const themeId = params.get('themeId');
       if (themeId) {
+        let parsedNavItems = [];
+        try {
+          const rawNav = params.get('navItemsJson');
+          if (rawNav) parsedNavItems = JSON.parse(rawNav);
+        } catch {}
+
         const settings = {
           primaryColor: params.get('primaryColor') || params.get('primaryColorHex'),
           bgColor: params.get('bgColor') || '#f8fafc',
@@ -2906,9 +3724,34 @@ const server = http.createServer(async (req, res) => {
           pillRadius: params.get('pillRadius') || '999px',
           cardRadius: params.get('cardRadius') || '24px',
           showAuthorCard: params.get('showAuthorCard') === 'true',
-          showPillBar: params.get('showPillBar') === 'true'
+          showPillBar: params.get('showPillBar') === 'true',
+          showNavbar: params.get('showNavbar') === 'true',
+          navSticky: params.get('navSticky') === 'true',
+          navBrandLogo: params.get('navBrandLogo') || 'B',
+          navBrandLogoImage: params.get('navBrandLogoImage') || '',
+          navBrandText: params.get('navBrandText') || 'blogs',
+          navStyle: params.get('navStyle') || 'capsule-floating',
+          navItems: Array.isArray(parsedNavItems) ? parsedNavItems : [],
+          showHero: params.get('showHero') === 'true',
+          heroAlign: params.get('heroAlign') || 'center',
+          heroBadge: params.get('heroBadge') || '',
+          heroTitle: params.get('heroTitle') || 'Catatan, Cerita & Wawasan Terkurasi',
+          heroSubtitle: params.get('heroSubtitle') || '',
+          heroCtaText: params.get('heroCtaText') || '',
+          heroCtaUrl: params.get('heroCtaUrl') || '#posts',
+          heroSecondaryCtaText: params.get('heroSecondaryCtaText') || '',
+          heroSecondaryCtaUrl: params.get('heroSecondaryCtaUrl') || '/page',
+          postCardLayout: params.get('postCardLayout') || 'grid-3',
+          postCardRadius: params.get('postCardRadius') || '20px',
+          postCardFruitSource: params.get('postCardFruitSource') || 'all',
+          showCardCover: params.get('showCardCover') === 'true',
+          showCardCategory: params.get('showCardCategory') === 'true',
+          showCardDate: params.get('showCardDate') === 'true',
+          showCardAuthor: params.get('showCardAuthor') === 'true',
+          showCardExcerpt: params.get('showCardExcerpt') === 'true'
         };
         await themeManager.updateThemeSettings(themeId, settings);
+        await manager.buildHomepageHtml(settings);
       }
       res.writeHead(302, { Location: `/?view=themes&theme=${encodeURIComponent(themeId || 'capsule')}` });
       res.end();
@@ -2943,16 +3786,42 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Endpoint: Preview single compiled HTML with Active Theme
+  // Endpoint: Preview single compiled HTML with Active Theme (or index.html homepage)
   if (url.pathname === '/preview') {
     const fruitName = url.searchParams.get('fruit');
     const pageId = url.searchParams.get('pageId');
+    const pageType = url.searchParams.get('page');
+
+    if (pageType === 'home' || (!fruitName && !pageId)) {
+      try {
+        const activeThemeId = await themeManager.getActiveThemeId();
+        const activeThemeData = await themeManager.getTheme(activeThemeId);
+        const homeHtml = await manager.buildHomepageHtml(activeThemeData?.settings || {});
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(homeHtml);
+        return;
+      } catch (homeErr) {
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Error generating homepage: ' + homeErr.message);
+        return;
+      }
+    }
 
     if (fruitName && pageId) {
       try {
         const fruit = await manager.loadFruit(fruitName);
         const htmlPath = path.join(fruit.path, 'dist', `${pageId}.html`);
-        let content = await fs.readFile(htmlPath, 'utf8');
+        let content;
+        try {
+          content = await fs.readFile(htmlPath, 'utf8');
+        } catch (readErr) {
+          if (readErr.code === 'ENOENT') {
+            await manager.rebuildFruitHtml(fruitName);
+            content = await fs.readFile(htmlPath, 'utf8');
+          } else {
+            throw readErr;
+          }
+        }
 
         // Ambil style CSS dari tema yang sedang aktif di themes/
         const activeThemeId = await themeManager.getActiveThemeId();
@@ -2993,12 +3862,109 @@ const server = http.createServer(async (req, res) => {
             ${activeThemeData.css || ''}
             ${dynamicOverrides ? `:root { ${dynamicOverrides} }` : ''}
           </style>
+          <script src="/assets/lucide.min.js"></script>
+          <script>
+            document.addEventListener('keydown', function(e) {
+              var isCtrl = e.ctrlKey || e.metaKey;
+              if (isCtrl && !e.shiftKey && !e.altKey && (e.code === 'Space' || e.key === ' ')) {
+                e.preventDefault();
+                if (window.parent && window.parent !== window) {
+                  window.parent.postMessage({ type: 'FRUITION_SHORTCUT', action: 'toggle-preview' }, '*');
+                }
+              } else if (isCtrl && !e.shiftKey && !e.altKey && (e.key === 's' || e.key === 'S' || e.code === 'KeyS')) {
+                e.preventDefault();
+                if (window.parent && window.parent !== window) {
+                  window.parent.postMessage({ type: 'FRUITION_SHORTCUT', action: 'save' }, '*');
+                }
+              }
+            });
+          </script>
         `;
 
         if (content.includes('</head>')) {
           content = content.replace('</head>', `${themeCss}\n</head>`);
         } else {
           content = themeCss + content;
+        }
+
+        // Inject Capsule Navigation Bar jika showNavbar aktif
+        const s = activeThemeData?.settings || {};
+        if (s.showNavbar !== false) {
+          const allFruits = await manager.listFruits();
+          const navItems = Array.isArray(s.navItems) && s.navItems.length > 0
+            ? s.navItems.filter(it => it.enabled !== false)
+            : [
+                { label: 'Home', url: '/', enabled: true },
+                { label: 'Read', url: '/read', enabled: true },
+                { label: 'Pelajaran', url: '/pelajaran', enabled: true },
+                { label: 'Authors', url: '/authors', enabled: true },
+                { label: 'About', url: '/page', enabled: true }
+              ];
+
+          const navStyle = s.navStyle || 'capsule-floating';
+          const isSticky = s.navSticky !== false;
+          const brandLogoImg = s.navBrandLogoImage || '';
+          const brandLogo = s.navBrandLogo || 'B';
+          const brandText = s.navBrandText || 'blogs';
+          const brandLogoHtml = brandLogoImg
+            ? `<img src="${brandLogoImg}" alt="${brandText}" style="height: 30px; max-width: 120px; object-fit: contain; vertical-align: middle; border-radius: 4px;" />`
+            : `<span style="width: 30px; height: 30px; border-radius: 999px; background: var(--primary, #059669); color: #ffffff; font-size: 13px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">${brandLogo}</span>`;
+
+          const resolvedLinksHtml = [];
+          for (const item of navItems) {
+            const rawUrl = (item.url || '/').trim();
+            const cleanSlug = rawUrl.replace(/^\//, '').toLowerCase();
+            let previewHref = rawUrl;
+            let isActiveLink = false;
+
+            if (rawUrl === '/' && fruitName === (allFruits[0]?.name || 'read')) {
+              const firstFruit = await manager.loadFruit(allFruits[0]?.name || 'read').catch(() => null);
+              if (firstFruit?.items?.[0]?.id) {
+                previewHref = `/preview?fruit=${encodeURIComponent(firstFruit.name)}&pageId=${encodeURIComponent(firstFruit.items[0].id)}`;
+              }
+            } else {
+              const matchedFruit = allFruits.find(f => f.name.toLowerCase() === cleanSlug);
+              if (matchedFruit) {
+                isActiveLink = matchedFruit.name === fruitName;
+                const loadedMatch = await manager.loadFruit(matchedFruit.name).catch(() => null);
+                if (loadedMatch?.items?.[0]?.id) {
+                  previewHref = `/preview?fruit=${encodeURIComponent(matchedFruit.name)}&pageId=${encodeURIComponent(loadedMatch.items[0].id)}`;
+                }
+              }
+            }
+
+            const iconHtml = item.icon
+              ? `<i data-lucide="${item.icon}" style="width: 14px; height: 14px; margin-right: 6px; vertical-align: -2px; display: inline-block;"></i>`
+              : '';
+
+            resolvedLinksHtml.push(`
+              <a href="${previewHref}" style="text-decoration: none; font-size: 13px; font-weight: ${isActiveLink ? '700' : '600'}; padding: 6px 14px; border-radius: var(--capsule-radius, 999px); transition: all 0.15s; display: inline-flex; align-items: center; ${isActiveLink ? 'background: var(--primary, #059669); color: #ffffff;' : 'color: #334155;'}">
+                ${iconHtml}
+                <span>${item.label || 'Menu'}</span>
+              </a>
+            `);
+          }
+
+          const navHtml = `
+            <div class="capsule-theme-navbar-wrap" style="${isSticky ? 'position: sticky; top: 16px; z-index: 50;' : ''} max-width: ${s.maxWidth || '780px'}; margin: 0 auto 32px auto;">
+              <nav class="capsule-theme-navbar" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px; background: ${navStyle === 'minimal' ? 'transparent' : 'rgba(255, 255, 255, 0.88)'}; ${isSticky && navStyle !== 'minimal' ? 'backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);' : ''} border: ${navStyle === 'minimal' ? 'none' : '1px solid #e2e8f0'}; border-radius: ${navStyle === 'capsule-floating' ? 'var(--capsule-radius, 999px)' : '12px'}; box-shadow: ${navStyle === 'minimal' ? 'none' : '0 4px 16px rgba(0, 0, 0, 0.04)'};">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="width: 30px; height: 30px; border-radius: 999px; background: var(--primary, #059669); color: #ffffff; font-size: 13px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center;">${brandLogo}</span>
+                  <span style="font-size: 15px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">${brandText}</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+                  ${resolvedLinksHtml.join('')}
+                </div>
+              </nav>
+            </div>
+          `;
+
+          if (content.includes('<body>')) {
+            content = content.replace('<body>', `<body>\n${navHtml}`);
+          }
+          if (content.includes('</body>')) {
+            content = content.replace('</body>', `<script>if (window.lucide) { lucide.createIcons(); }</script>\n</body>`);
+          }
         }
 
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
@@ -3054,6 +4020,24 @@ const server = http.createServer(async (req, res) => {
       } else {
         res.writeHead(302, { Location: '/' });
       }
+      res.end();
+    });
+    return;
+  }
+
+  // Form POST: Sync ALL Fruits from Notion Databases at once
+  if (url.pathname === '/api/sync-all-fruits' && req.method === 'POST') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', async () => {
+      const params = new URLSearchParams(body);
+      const returnTo = params.get('returnTo') || '/';
+      try {
+        await manager.syncAllFruitsFromNotion();
+      } catch (e) {
+        console.error('Error syncing all fruits:', e.message);
+      }
+      res.writeHead(302, { Location: returnTo });
       res.end();
     });
     return;
@@ -3154,6 +4138,9 @@ const server = http.createServer(async (req, res) => {
   res.end('Not Found');
 });
 
-server.listen(PORT, () => {
+server.listen(PORT, async () => {
+  try {
+    await manager.buildHomepageHtml();
+  } catch {}
   console.log(`[Fruition Mini] Web Shell UI running at http://localhost:${PORT}`);
 });
