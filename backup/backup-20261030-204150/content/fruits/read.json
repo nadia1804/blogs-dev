@@ -1,0 +1,28 @@
+{
+  "id": "read",
+  "name": "Catatan",
+  "databaseId": "3f793701058a800fb229e5ee4a935d31",
+  "postType": "read",
+  "routePattern": "/read/[slug]",
+  "archiveUrl": "/read",
+  "targetCollection": "read",
+  "showOnIndex": true,
+  "status": "active",
+  "lastSync": "2026-10-30T08:38:36.522Z",
+  "totalItems": 3,
+  "webpMediaCount": 3,
+  "schemaMapping": {
+    "title": "Title",
+    "slug": "Slug",
+    "status": "Published",
+    "statusPublishedValue": "true",
+    "date": "Date",
+    "author": "Authors",
+    "category": "Category",
+    "cover": "Cover"
+  },
+  "settings": {
+    "autoConvertWebp": true,
+    "fallbackColor": "Pastel Blossom"
+  }
+}

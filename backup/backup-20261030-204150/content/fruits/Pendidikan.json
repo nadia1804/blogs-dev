@@ -1,0 +1,28 @@
+{
+  "id": "Pendidikan",
+  "name": "Pendidikan",
+  "databaseId": "3f793701058a80afa8f3e79298e8bc45",
+  "postType": "pelajaran",
+  "routePattern": "/pelajaran/[slug]",
+  "archiveUrl": "/pelajaran",
+  "targetCollection": "pelajaran",
+  "showOnIndex": true,
+  "status": "active",
+  "lastSync": "2026-10-30T08:38:24.791Z",
+  "totalItems": 5,
+  "webpMediaCount": 5,
+  "schemaMapping": {
+    "title": "Title",
+    "slug": "Slug",
+    "status": "Published",
+    "statusPublishedValue": "true",
+    "date": "Date",
+    "author": "Authors",
+    "category": "Category",
+    "cover": "Cover"
+  },
+  "settings": {
+    "autoConvertWebp": true,
+    "fallbackColor": "Pastel Mint"
+  }
+}

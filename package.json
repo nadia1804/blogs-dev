@@ -1,27 +1,24 @@
 {
   "name": "fruition-mini",
-  "version": "0.1.0",
-  "description": "Headless Notion SSG with Auto-Intelligence mapping and Fruit workspace manager",
-  "type": "module",
-  "bin": {
-    "fruit": "./src/admin/shell.js"
-  },
+  "version": "0.2.8",
+  "description": "Headless Notion-powered static site and blog generator with dynamic thematic engine and GitHub-style admin shell.",
+  "main": "dev-server.js",
   "scripts": {
-    "start": "node src/server/index.js",
-    "server": "node src/server/index.js",
-    "admin": "node src/admin/shell.js",
-    "test": "node --test"
+    "dev": "node dev-server.js",
+    "start": "node dev-server.js",
+    "build": "astro build",
+    "astro:dev": "astro dev"
   },
   "keywords": [
     "notion",
-    "ssg",
-    "headless",
-    "fruition"
+    "cms",
+    "static-site-generator",
+    "fruition-mini",
+    "theme-engine"
   ],
-  "author": "",
+  "author": "Fruition Team",
   "license": "MIT",
-  "dependencies": {
-    "@notionhq/client": "^5.28.0",
-    "lucide": "^1.61.0"
+  "devDependencies": {
+    "astro": "^7.4.4"
   }
 }

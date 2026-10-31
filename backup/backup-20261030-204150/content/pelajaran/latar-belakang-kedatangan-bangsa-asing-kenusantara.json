@@ -1,0 +1,219 @@
+{
+  "id": "40793701-058a-8056-bf71-fe20172f261c",
+  "title": "latar belakang datangnya bangsa barat ke Nusantara",
+  "slug": "latar-belakang-kedatangan-bangsa-asing-kenusantara",
+  "postType": "pelajaran",
+  "published": true,
+  "createdTime": "2026-10-28T12:51:00.000Z",
+  "lastEditedTime": "2026-10-29T02:13:00.000Z",
+  "date": "2026-10-28",
+  "formattedDate": "28/10/2026",
+  "category": "sejarah",
+  "tags": [
+    "kelas 6",
+    "kelas x"
+  ],
+  "description": "Nusantara memiliki rempah-rempah bernilai tinggi seperti cengkih, pala, dan lada.",
+  "coverImage": "/assets/notion/pelajaran-latar-belakang-kedatangan-bangsa-asing-kenusantara-cover.png",
+  "fallbackPastel": "pastel-mint",
+  "author": {
+    "id": "40293701-058a-801f-b786-eaff5882e64b",
+    "name": "Deddy Hidayat",
+    "title": "Deddy Hidayat",
+    "slug": "deddy-hidayat",
+    "role": "Educator",
+    "bio": "Cats lover",
+    "avatar": "/assets/notion/author-deddy-hidayat.webp",
+    "published": true
+  },
+  "readingTime": "1 min read",
+  "wordCount": 159,
+  "toc": [
+    {
+      "id": "mengapa-bangsa-barat-datang-4079",
+      "text": "Mengapa bangsa Barat datang?",
+      "level": 2
+    },
+    {
+      "id": "1-mencari-rempah-rempah-4079",
+      "text": "1. Mencari rempah-rempah",
+      "level": 2
+    },
+    {
+      "id": "2-mencari-jalan-baru-4079",
+      "text": "2. Mencari jalan baru",
+      "level": 2
+    },
+    {
+      "id": "3-ingin-mendapatkan-kekayaan-dan-kejayaan-4079",
+      "text": "3. Ingin mendapatkan kekayaan dan kejayaan",
+      "level": 2
+    }
+  ],
+  "contentHtml": "<p class=\"notion-paragraph\">Nusantara sejak dahulu dikenal sebagai daerah yang menghasilkan banyak <strong>rempah-rempah</strong>. Beberapa rempah yang terkenal adalah <strong>cengkih, pala, dan lada</strong>.</p>\n<p class=\"notion-paragraph\">Pada zaman dahulu, rempah-rempah sangat berharga di Eropa. Harganya mahal dan digunakan untuk <strong>bumbu makanan, obat-obatan, dan kebutuhan lainnya</strong>.</p>\n<p class=\"notion-paragraph\">Karena ingin mendapatkan rempah-rempah, bangsa-bangsa Eropa melakukan perjalanan jauh melalui laut untuk mencari daerah penghasil rempah-rempah.</p>\n<h2 id=\"mengapa-bangsa-barat-datang-4079\" class=\"notion-h2\">Mengapa bangsa Barat datang?</h2>\n<p class=\"notion-paragraph\">Ada beberapa alasan yang mendorong mereka datang ke Nusantara.</p>\n<h2 id=\"1-mencari-rempah-rempah-4079\" class=\"notion-h2\"><strong>1. Mencari rempah-rempah</strong></h2>\n<p class=\"notion-paragraph\">Bangsa Eropa ingin mendapatkan rempah-rempah langsung dari daerah asalnya. Mereka berharap dapat memperoleh keuntungan besar dengan menjualnya kembali.</p>\n<h2 id=\"2-mencari-jalan-baru-4079\" class=\"notion-h2\"><strong>2. Mencari jalan baru</strong></h2>\n<p class=\"notion-paragraph\">Pada tahun 1453, Kota Konstantinopel dikuasai oleh Kesultanan Utsmaniyah. Jalur perdagangan yang biasa digunakan bangsa Eropa menjadi lebih sulit.</p>\n<p class=\"notion-paragraph\">Karena itu, mereka berusaha mencari <strong>jalur laut baru menuju Asia</strong>.</p>\n<h2 id=\"3-ingin-mendapatkan-kekayaan-dan-kejayaan-4079\" class=\"notion-h2\"><strong>3. Ingin mendapatkan kekayaan dan kejayaan</strong></h2>\n<p class=\"notion-paragraph\">Bangsa Eropa juga ingin memperluas kekayaan dan kekuasaan negaranya.</p>\n<p class=\"notion-paragraph\">Ada istilah <strong>3G</strong> yang digunakan untuk menjelaskan tujuan tersebut:</p>\n<ul class=\"notion-bulleted-list\">\n  <li class=\"notion-list-item\"><strong>Gold</strong> = mencari kekayaan</li>\n  <li class=\"notion-list-item\"><strong>Gospel</strong> = menyebarkan agama</li>\n  <li class=\"notion-list-item\"><strong>Glory</strong> = mencari kejayaan dan kekuasaan</li>\n</ul>\n<div class=\"notion-blank-line\" aria-hidden=\"true\"></div>\n",
+  "properties": {
+    "mapel": {
+      "id": "%3Ei~%5B",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "68009862-f55e-431c-9e02-1fe2410fea35",
+          "name": "sejarah",
+          "color": "blue"
+        }
+      ]
+    },
+    "Authors": {
+      "id": "EIA%5E",
+      "type": "relation",
+      "relation": [
+        {
+          "id": "40293701-058a-801f-b786-eaff5882e64b"
+        }
+      ],
+      "has_more": false
+    },
+    "tp": {
+      "id": "%5EauU",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "memahami penyebab kedatangan bangsa asing ke nusantara",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "memahami penyebab kedatangan bangsa asing ke nusantara",
+          "href": null
+        }
+      ]
+    },
+    "Meta description": {
+      "id": "cEV%5B",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Nusantara memiliki rempah-rempah bernilai tinggi seperti cengkih, pala, dan lada.",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Nusantara memiliki rempah-rempah bernilai tinggi seperti cengkih, pala, dan lada.",
+          "href": null
+        }
+      ]
+    },
+    "Date": {
+      "id": "fRit",
+      "type": "date",
+      "date": {
+        "start": "2026-10-28",
+        "end": null,
+        "time_zone": null
+      }
+    },
+    "OG": {
+      "id": "n%5B%5Bm",
+      "type": "files",
+      "files": [
+        {
+          "name": "img_blogs_web_id (6).png",
+          "type": "file",
+          "file": {
+            "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/83934a25-cd5c-4bca-ba9e-284387efa5a5/img_blogs_web_id_%286%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4663IGZNYYB%2F20261030%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261030T083804Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJIMEYCIQDQLhIsBlv7YWTh3LU0%2FAQQpertTv9jQ7CU%2Bga8kzkifAIhAJbpNdykBZb%2FZ3cgwdsmXrKN5eadFpFu4PwMvSInyzpGKv8DCDAQABoMNjM3NDIzMTgzODA1IgyLQ5wKo3DB603H2Vcq3AMeainCuu%2F4NSt1kAHVM4I6Agg5fKFts3bf1AwwDUxuY2AP1cnSswnPRvqYjfV44HYmTgpq6B4FtMbeiiFSZL%2Bybj%2F8QXAasaKU5DIuNFHyzfPWY%2B2r6LBYjLvC7VNh8i9Tuwp%2BXf6x6SsMOcGbhLoEjjOBbd%2Fe%2FLF%2F76BUsLe0jiHl07PvFZiXrKpI82u1cC683HT2C2OMg0aqtkRswKd4BfcLcSO1gEWkcQ54SP9wS5NgzJDV2DBuGcc4pobNxnGrtmfO1uwR%2BLGi93F4BAleyanBe2%2BXSVTcD4yn36NmYpNAIAobjBOa3PXJgfNFSpZRGtIv4U2UjiItJpRZ7Npm4VYm9kW4tZTvWn1UbxT3rNaLUygLMdVfimIJEx86xTrpiJg2mwws4mzzTjSyLbaSbC0rIV29HIVnnj25GOaf1zrKpP%2BqmaNoAjlMQb2U%2Bvrxc0idNXkX61ozR5ZvsiQh6yLY%2Bv%2FS9taqSOZ58tSWuv8ytX%2B4y%2BAW05sYw8SqWxKCuw6rithvyZQf%2FL0f0oQt99CDbelB4v7gzOjKhZwAKRRedpnx%2Bm074XS8V%2B3I7pZDVkqa0Cn%2BpLmIe1QDB3czKTgL8cBkW1MJaJA0Fcnvjfb7%2FwXbDJcc62AG1TDul5HXBjqkAfRuyoo8HDhf%2BAquwoS8Mq2XE3vdYfEuA%2F9rsJOw%2FrY7Q6oIjVP85SswOVaAkcZP5KXe%2FiMX3KeIo9WAIpJnsAH0%2B%2FFfTu7%2FafFGaO%2BhS6QUfApmfv%2BbX3qrcDNWc0xkMCEpZ9Bt9u%2FMsFQvIjtspR6dLxfhUaEIA5eF%2FAC1JxcGLjg9hN0h5jnBQDClsWMB4%2FHru1xBYNjApcdApIkXIoYw9YYY&X-Amz-Signature=b296835395b8d9a2ec04ed40070dc728ab77b9bcb2225ddd88ef46f627c63845&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "expiry_time": "2026-10-30T09:38:04.941Z"
+          }
+        }
+      ]
+    },
+    "semester": {
+      "id": "uJuR",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "6c03523e-49e5-4dd8-ad88-a693d6dd3750",
+          "name": "semester 1",
+          "color": "yellow"
+        }
+      ]
+    },
+    "kelas": {
+      "id": "x%3FkU",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "ba036d9f-5852-4503-8e1d-69329c3218e0",
+          "name": "kelas 6",
+          "color": "red"
+        },
+        {
+          "id": "31cf1cfa-e819-4477-ae9a-2711f68c2fab",
+          "name": "kelas x",
+          "color": "gray"
+        }
+      ]
+    },
+    "Slug": {
+      "id": "%7BOqD",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "latar-belakang-kedatangan-bangsa-asing-kenusantara",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "latar-belakang-kedatangan-bangsa-asing-kenusantara",
+          "href": null
+        }
+      ]
+    },
+    "Nama": {
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "latar belakang datangnya bangsa barat ke Nusantara",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "latar belakang datangnya bangsa barat ke Nusantara",
+          "href": null
+        }
+      ]
+    }
+  }
+}

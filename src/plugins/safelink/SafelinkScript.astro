@@ -1,0 +1,83 @@
+---
+import { getPluginConfig } from "../../utils/content.js";
+
+const safelinkConfig = getPluginConfig("safelink", { enabled: false, settings: {} });
+const isEnabled = Boolean(safelinkConfig.enabled);
+const settings = safelinkConfig.settings || {};
+const safelinkPath = settings.safelinkPath || "/safelink";
+const urlParam = settings.urlParam || "url";
+const encryption = settings.encryption || "base64";
+const whitelist = Array.isArray(settings.whitelist) ? settings.whitelist : ["localhost", "127.0.0.1"];
+const autoBackOrigin = Boolean(settings.autoBackOrigin);
+---
+
+{isEnabled && (
+  <script is:inline define:vars={{ safelinkPath, urlParam, encryption, whitelist, autoBackOrigin }}>
+    (function() {
+      function initSafelinkRewriter() {
+        // Target links within article prose, post content, and notion body
+        const container = document.querySelector('.notion-article-body, .post-prose, #main-content');
+        if (!container) return;
+
+        const links = container.querySelectorAll('a[href]');
+        const currentHost = window.location.hostname.toLowerCase();
+
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          if (!href) return;
+
+          // Check if link is http/https
+          if (!href.startsWith('http://') && !href.startsWith('https://')) return;
+
+          try {
+            const urlObj = new URL(href);
+            const linkHost = urlObj.hostname.toLowerCase();
+
+            // Ignore current host
+            if (linkHost === currentHost) return;
+
+            // Check whitelist
+            const isWhitelisted = whitelist.some(w => {
+              const cleaned = String(w).trim().toLowerCase();
+              return cleaned && (linkHost === cleaned || linkHost.endsWith('.' + cleaned));
+            });
+
+            if (isWhitelisted) return;
+
+            // Encode destination URL
+            let encodedUrl = href;
+            if (encryption === 'base64') {
+              try {
+                encodedUrl = btoa(href);
+              } catch (e) {
+                encodedUrl = encodeURIComponent(href);
+              }
+            } else {
+              encodedUrl = encodeURIComponent(href);
+            }
+
+            // Rewrite href to safelink route with ref origin parameter
+            const originRef = encodeURIComponent(window.location.href);
+            const safelinkUrl = `${safelinkPath}?${urlParam}=${encodedUrl}&ref=${originRef}`;
+            link.setAttribute('href', safelinkUrl);
+            if (autoBackOrigin) {
+              link.setAttribute('target', '_self');
+            } else {
+              link.setAttribute('target', '_blank');
+            }
+            link.setAttribute('rel', 'noopener noreferrer');
+            link.setAttribute('data-safelink-protected', 'true');
+          } catch (e) {
+            // Invalid URL, skip
+          }
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSafelinkRewriter);
+      } else {
+        initSafelinkRewriter();
+      }
+    })();
+  </script>
+)}

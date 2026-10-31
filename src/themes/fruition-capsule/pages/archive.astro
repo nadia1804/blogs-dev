@@ -1,0 +1,219 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = [
+  {
+    id: "1",
+    title: "Mastering Notion as a Headless CMS with Fruition Mini",
+    slug: "mastering-notion-headless-cms",
+    description: "Learn how Notion Fruit connectors pull structured schema, map blocks recursively, and generate pure static Astro assets.",
+    category: "Architecture",
+    date: "28/10/2026",
+    readingTime: "5 min read",
+    author: { name: "Dev Team", slug: "dev-team", avatarUrl: "/assets/avatar-dev.svg" },
+    pastelFallback: "blossom"
+  },
+  {
+    id: "2",
+    title: "High-Performance Image Optimization with Sharp WebP Pipeline",
+    slug: "sharp-webp-image-optimization",
+    description: "Eliminate expiring Notion S3 AWS URLs by converting all remote assets into compressed local WebP during SSG build.",
+    category: "Performance",
+    date: "26/10/2026",
+    readingTime: "4 min read",
+    author: { name: "Infra", slug: "infra", avatarUrl: "/assets/avatar-infra.svg" },
+    pastelFallback: "mint"
+  },
+  {
+    id: "3",
+    title: "Crafting Glassmorphic Micro-Interactions in CSS3",
+    slug: "crafting-glassmorphic-micro-interactions",
+    description: "Explore backdrop-filter techniques, hardware acceleration, and seamless capsule animations for modern UI navigation.",
+    category: "UI Design",
+    date: "24/10/2026",
+    readingTime: "7 min read",
+    author: { name: "Design", slug: "design", avatarUrl: "/assets/avatar-design.svg" },
+    pastelFallback: "periwinkle"
+  },
+  {
+    id: "4",
+    title: "Zero-Latency GitOps Workflow for Indie Writers & Teams",
+    slug: "zero-latency-gitops-workflow",
+    description: "Deploying static blogs effortlessly with commit-driven synchronization and atomic JSON state stores.",
+    category: "DevOps",
+    date: "20/10/2026",
+    readingTime: "3 min read",
+    author: { name: "Ops", slug: "ops", avatarUrl: "/assets/avatar-ops.svg" },
+    pastelFallback: "peach"
+  },
+  {
+    id: "5",
+    title: "Single-Capsule Responsive Layouts: Mobile to Ultra-Wide",
+    slug: "single-capsule-responsive-layouts",
+    description: "A deep dive into fluid typography, viewport clamping, and adaptive hamburger collapsing strategies.",
+    category: "Frontend",
+    date: "18/10/2026",
+    readingTime: "6 min read",
+    author: { name: "Frontend", slug: "frontend", avatarUrl: "/assets/avatar-frontend.svg" },
+    pastelFallback: "lilac"
+  },
+  {
+    id: "6",
+    title: "Content Modeling: Relations, Rollups, and Formulas in Static Sites",
+    slug: "content-modeling-notion-formulas",
+    description: "How to preserve complex relational databases without sacrificing page generation speed.",
+    category: "Notion",
+    date: "15/10/2026",
+    readingTime: "8 min read",
+    author: { name: "Dev Team", slug: "dev-team", avatarUrl: "/assets/avatar-dev.svg" },
+    pastelFallback: "mint"
+  }
+];
+
+// Dynamic topics: only display categories that actually have articles
+const uniqueCategories = Array.from(new Set(posts.map(p => p.category).filter(Boolean)));
+const categories = uniqueCategories.length > 0 ? ["All Topics", ...uniqueCategories] : [];
+
+function truncateText(text: string, maxLength: number = 80): string {
+  if (!text) return "";
+  const clean = text.trim();
+  if (clean.length <= maxLength) return clean;
+  return clean.slice(0, maxLength).trim() + "...";
+}
+---
+
+<BaseLayout title="Archive — Fruition Blog" description="Browse all articles, technical notes, and architecture guides.">
+  <div class="capsule-archive">
+    <div class="card-grid-container" style="padding-top: 40px;">
+      <div class="card-grid-header">
+        <div class="archive-heading-group">
+          <h2 class="grid-section-title">
+            <span id="gridTitleText">Archived Articles</span>
+            <span class="capsule-version-pill" id="postCountBadge">{posts.length} Posts</span>
+          </h2>
+          <div class="archive-meta-count" id="archiveFilterStatus">
+            Showing all {posts.length} articles
+          </div>
+        </div>
+
+        <!-- Dynamic Category Filter Pills: only shown if topics exist -->
+        {categories.length > 0 && (
+          <div class="archive-filter-bar" id="categoryFilterBar">
+            {categories.map((cat, idx) => (
+              <button 
+                type="button" 
+                class={`archive-filter-pill ${idx === 0 ? "active" : ""}`} 
+                data-category={cat === "All Topics" ? "All" : cat}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <!-- Capsule Card Grid -->
+      <div class="capsule-card-grid" id="capsuleCardGrid">
+        {posts.map((post) => (
+          <article class="capsule-card" data-category={post.category}>
+            <div class="card-cover-wrap">
+              <div class={`card-pastel-cover pastel-${post.pastelFallback}`}></div>
+            </div>
+            <div class="card-content">
+              <div class="card-meta-row">
+                {post.category && <span class="card-badge">{post.category}</span>}
+                <span class="card-reading-time">{post.readingTime}</span>
+              </div>
+              <h3 class="card-title">
+                <a href={`/articles/${post.slug}`} class="card-title-link">{post.title}</a>
+              </h3>
+              <p class="card-excerpt">{truncateText(post.description, 80)}</p>
+              <div class="card-footer">
+                <a href={`/author?author=${post.author.slug}`} class="card-author-link" title={`View ${post.author.name}'s profile`}>
+                  <img 
+                    src={post.author.avatarUrl} 
+                    alt={post.author.name} 
+                    class="card-author-avatar-img" 
+                  />
+                  <span class="card-author-name">{post.author.name}</span>
+                </a>
+                <span class="card-date">{post.date}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.archive-filter-pill');
+    const cards = document.querySelectorAll('.capsule-card');
+    const statusText = document.getElementById('archiveFilterStatus');
+    const postBadge = document.getElementById('postCountBadge');
+
+    let activeCategory = 'All';
+
+    function filterPosts() {
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const cat = card.getAttribute('data-category') || '';
+        const matchesCat = activeCategory === 'All' || cat.toLowerCase() === activeCategory.toLowerCase();
+        if (matchesCat) {
+          (card as HTMLElement).style.display = '';
+          visibleCount++;
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (statusText) {
+        if (activeCategory === 'All') {
+          statusText.textContent = `Showing all ${cards.length} articles`;
+        } else {
+          statusText.textContent = `Showing ${visibleCount} of ${cards.length} articles in "${activeCategory}"`;
+        }
+      }
+      if (postBadge) {
+        postBadge.textContent = `${visibleCount} Posts`;
+      }
+    }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCategory = btn.getAttribute('data-category') || 'All';
+        filterPosts();
+      });
+    });
+
+    // Make entire card clickable to article, while preserving author link and badge clicks
+    cards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('.card-author-link') || target.closest('.card-badge') || target.closest('a')) {
+          return;
+        }
+        const link = card.querySelector('.card-title-link') as HTMLAnchorElement;
+        if (link && link.href) {
+          window.location.href = link.href;
+        }
+      });
+    });
+
+    // Make category badge interactive to trigger category filter
+    document.querySelectorAll('.card-badge').forEach((badge) => {
+      (badge as HTMLElement).style.cursor = 'pointer';
+      (badge as HTMLElement).setAttribute('title', 'Filter by this topic');
+      badge.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const cat = badge.textContent?.trim() || '';
+        const targetBtn = Array.from(filterBtns).find(b => (b.getAttribute('data-category') || '').toLowerCase() === cat.toLowerCase()) as HTMLElement | undefined;
+        if (targetBtn) {
+          targetBtn.click();
+        }
+      });
+    });
+  </script>
+</BaseLayout>

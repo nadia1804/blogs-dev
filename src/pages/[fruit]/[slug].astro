@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../../themes/fruition-capsule/layouts/BaseLayout.astro";
+import { getAllPostsAcrossAllFruits, getSiteSettings, getThemeConfig } from "../../utils/content.js";
+import { getGithubIcon } from "../../icons/github-icons.js";
+import AdSlot from "../../plugins/adsense/AdSlot.astro";
+
+export async function getStaticPaths() {
+  const allPosts = getAllPostsAcrossAllFruits();
+  return allPosts.map((post: any) => ({
+    params: {
+      fruit: post.fruitType || "read",
+      slug: post.slug
+    },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const siteSettings = getSiteSettings();
+const themeConfig = getThemeConfig();
+
+const activePreset = (themeConfig.defaultPreset || "Blue Sky").toLowerCase().replace(/\s+/g, '-');
+const author = post.author || { name: "Author", slug: "author", role: "Contributor", bio: "Penulis di " + (siteSettings.siteName || "Blog") };
+const toc = Array.isArray(post.toc) ? post.toc : [];
+---
+
+<BaseLayout 
+  title={`${post.title} — ${siteSettings.siteName || "blogs"}`}
+  description={post.description || siteSettings.siteDescription}
+  preset={activePreset}
+>
+  <article class="capsule-single-post">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href={`/${post.fruitType}`}>{post.fruitName || post.fruitType}</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">{post.category || "Article"}</span>
+    </nav>
+
+    <!-- Post Header -->
+    <header class="post-header-capsule">
+      <h1 class="post-title">{post.title}</h1>
+
+      {post.description && (
+        <p class="post-lead">{post.description}</p>
+      )}
+
+      <!-- Meta Bar with Capsule Pill & Print Button -->
+      <div class="post-meta-bar">
+        <div class="post-meta-capsule" role="group" aria-label="Article metadata">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Published {post.formattedDate || post.date}
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            {post.readingTime || "3 min read"}
+          </span>
+          {post.wordCount && (
+            <span class="meta-item">
+              ~{post.wordCount.toLocaleString("id-ID")} words
+            </span>
+          )}
+        </div>
+
+        <button type="button" class="btn-print-article" onclick="window.print()" title="Print only article content">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Print Article</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Featured Media Banner -->
+    <div class="post-featured-media">
+      {post.coverImage ? (
+        <img src={post.coverImage} alt={post.title} style="width: 100%; max-height: 480px; object-fit: cover; border-radius: 12px;" />
+      ) : (
+        <div class={`card-pastel-cover pastel-${post.fallbackColor || "blossom"}`} style="height: 320px; border-radius: 12px;"></div>
+      )}
+    </div>
+
+    <!-- Plugin: Google AdSense Slot (Below Title / Cover) -->
+    <AdSlot slotKey="belowTitle" />
+
+    <!-- Post Body Grid: Main Content + Sticky Sidebar -->
+    <div class="post-body-layout">
+      <!-- Article Prose -->
+      <div class="post-prose">
+        {toc.length > 0 && (
+          <div class="mobile-toc-box">
+            <div class="sidebar-widget-title" style="margin-bottom: 12px;">Table of Contents</div>
+            <ul class="toc-list">
+              {toc.map((item: any) => (
+                <li style={`padding-left: ${(item.level - 1) * 12}px`}>
+                  <a href={`#${item.id}`}>{item.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Notion Rendered HTML Content -->
+        <div class="notion-article-body" set:html={post.contentHtml || "<p>Belum ada konten.</p>"}></div>
+
+        <!-- Plugin: Google AdSense Slot (Below Article Body) -->
+        <AdSlot slotKey="belowArticle" />
+
+        <!-- Social Share Bar -->
+        <div class="post-social-share" style="margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--theme-border-muted);">
+          <div class="share-label">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>Share this article:</span>
+          </div>
+          <div class="share-buttons">
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}`} target="_blank" rel="noopener" class="btn-share" title="Share on X">
+              <span>X</span>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php" target="_blank" rel="noopener" class="btn-share" title="Share on Facebook">
+              <span>Facebook</span>
+            </a>
+            <a href="https://api.whatsapp.com/send" target="_blank" rel="noopener" class="btn-share" title="Share on WhatsApp">
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Mobile Authors Box -->
+        <div class="mobile-authors-box">
+          <div class="sidebar-widget-title">Author</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
+            <img src={author.avatar || author.avatarUrl || "/assets/author-deddy-hidayat.webp"} alt={author.name} style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" />
+            <div>
+              <div style="font-weight: 700; font-size: 1rem; color: var(--theme-text);">{author.name}</div>
+              <div style="font-size: 0.82rem; color: var(--theme-text-muted);">{author.role || "Author"}</div>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--theme-text-muted); line-height: 1.55;">
+            {author.bio || "Penulis dan kontributor."}
+          </p>
+        </div>
+      </div>
+
+      <!-- Sticky Sidebar (Desktop & Tablet) -->
+      <aside class="post-sidebar">
+        {toc.length > 0 && (
+          <div class="sidebar-widget post-toc-card post-toc capsule-toc">
+            <div class="sidebar-widget-title">Table of Contents</div>
+            <ul class="toc-list">
+              {toc.map((item: any) => (
+                <li style={`padding-left: ${(item.level - 1) * 10}px`}>
+                  <a href={`#${item.id}`}>{item.text}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div class="sidebar-widget post-author-sidebar author-sidebar-card post-author-box">
+          <div class="sidebar-widget-title">Author</div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <img src={author.avatar || author.avatarUrl || "/assets/author-deddy-hidayat.webp"} alt={author.name} style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" />
+            <div>
+              <div style="font-weight: 700; font-size: 0.92rem; color: var(--theme-text);">{author.name}</div>
+              <div style="font-size: 0.8rem; color: var(--theme-text-muted);">{author.role || "Author"}</div>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--theme-text-muted); line-height: 1.5; margin-bottom: 12px;">
+            {author.bio || "Penulis dan kontributor blog."}
+          </p>
+          <a href={`/authors/${author.slug || 'author'}`} style="color: var(--theme-primary); font-size: 0.84rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+            <span>View Author Profile &rarr;</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

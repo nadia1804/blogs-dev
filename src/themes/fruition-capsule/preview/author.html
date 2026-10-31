@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-preset="blue-sky">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dev Team — Author Profile — Fruition-capsule</title>
+  <link rel="stylesheet" href="/capsule.css">
+  <style>
+    /* Live Preview Controller Dock */
+    .preview-controller-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 9999px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      font-size: 0.85rem;
+      color: #f8fafc;
+    }
+    .controller-label {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .controller-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .controller-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .controller-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+    }
+    .controller-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .btn-admin-link {
+      background: #10b981;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-admin-link:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body class="fruition-capsule-body" data-theme-preset="blue-sky">
+
+  <!-- ================= FLOATING SINGLE-CAPSULE HEADER ================= -->
+  <header class="capsule-header-wrapper" id="capsuleHeaderWrapper">
+    <nav class="capsule-header" aria-label="Main Navigation">
+      <!-- Brand / Capsule Identity with Uploaded Logo -->
+      <a href="/theme" class="capsule-brand">
+        <img src="/logo.png" alt="blogs" class="capsule-logo-img" />
+      </a>
+
+      <!-- Navigation links -->
+      <ul class="capsule-nav" id="capsuleNavList">
+        <li class="capsule-nav-item"><a href="/theme" class="active"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 011 8a7 7 0 017-7 .75.75 0 01.75.75v12.5A.75.75 0 018 15zm-.75-1.52A5.502 5.502 0 012.5 8c0-2.614 1.82-4.802 4.25-5.36v10.84zM5.25 5.5a.75.75 0 100-1.5.75.75 0 000 1.5zm-1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5zm1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg> <span>Home</span></a></li>
+        <li class="capsule-nav-item"><a href="/read"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.002 1H15.25a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.248a2.25 2.25 0 00-1.748.837l-.256.32a.75.75 0 01-1.176 0l-.256-.32a2.25 2.25 0 00-1.748-.837H.75a.75.75 0 01-.75-.75V1.75zM1.5 2.5v8.75h3.503c.71 0 1.385.247 1.928.694A3.75 3.75 0 018 10.75v-7.5a2.25 2.25 0 00-2.247-2.25H1.5zm8 8.25c.572-.447 1.248-.694 1.958-.694H14.5V2.5h-3.498a2.25 2.25 0 00-2.252 2.25v7.5z"></path></svg> <span>Catatan</span></a></li>
+        <li class="capsule-nav-item"><a href="/pelajaran"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"></path></svg> <span>Pendidikan</span></a></li>
+        <li class="capsule-nav-item"><a href="/authors"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.5 3.5a2 2 0 100 4 2 2 0 000-4zM2 5.5a3.5 3.5 0 117 0 3.5 3.5 0 01-7 0zm9 0a2 2 0 100-4 2 2 0 000 4zm1.5 2a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0zM1 13.5A2.5 2.5 0 013.5 11h4a2.5 2.5 0 012.5 2.5v1.25a.75.75 0 01-.75.75H1.75a.75.75 0 01-.75-.75V13.5zm2.5-1a1 1 0 00-1 1v.5h7v-.5a1 1 0 00-1-1h-4zm7.5 1a1 1 0 011-1h1.5a2.5 2.5 0 012.5 2.5v1.25a.75.75 0 01-.75.75h-3.75a.75.75 0 010-1.5H14v-.5a1 1 0 00-1-1H12v-.5z"></path></svg> <span>Penulis</span></a></li>
+        <li class="capsule-nav-item"><a href="/about"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.586c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v9.086A1.75 1.75 0 0112.75 16h-9A1.75 1.75 0 012 14.25V1.75z"></path></svg> <span>About</span></a></li>
+      </ul>
+
+      <!-- Integrated Toolbar & Actions -->
+      <div class="capsule-tools">
+        <button class="capsule-tool-btn" id="btnCapsuleSearch" aria-label="Search articles" title="Instant Search (Ctrl+F)">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <button class="capsule-tool-btn" id="btnCapsuleDark" aria-label="Toggle dark mode" title="Toggle Dark Theme">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="capsule-tool-btn capsule-mobile-toggle" id="btnCapsuleMobile" aria-label="Toggle mobile menu">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ================= INSTANT SEARCH PURE WHITE POPUP MODAL ================= -->
+  <div class="capsule-search-modal-backdrop" id="capsuleSearchModal" aria-hidden="true" style="display: none;">
+    <div class="capsule-search-modal-container">
+      <div class="capsule-search-dialog" role="dialog" aria-modal="true" aria-label="Search articles">
+        <div class="capsule-search-header">
+          <span class="capsule-search-header-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            id="capsuleSearchModalInput" 
+            class="capsule-search-dialog-input" 
+            placeholder="Search articles by topic, title, keyword..." 
+            autocomplete="off" 
+            spellcheck="false" 
+          />
+          <div class="capsule-search-actions">
+            <span class="capsule-search-shortcut-hint"><kbd>ESC</kbd></span>
+            <button type="button" class="capsule-search-close-btn" id="btnCloseSearchModal" aria-label="Close search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="capsule-search-quick-tags" id="searchQuickTags">
+          <span class="quick-tag-label">Suggested:</span>
+          <button type="button" class="quick-tag-pill" data-query="Architecture">Architecture</button>
+          <button type="button" class="quick-tag-pill" data-query="Performance">Performance</button>
+          <button type="button" class="quick-tag-pill" data-query="UI Design">UI Design</button>
+          <button type="button" class="quick-tag-pill" data-query="DevOps">DevOps</button>
+          <button type="button" class="quick-tag-pill" data-query="Notion">Notion</button>
+        </div>
+
+        <div class="capsule-search-results" id="capsuleSearchResults"></div>
+
+        <div class="capsule-search-footer">
+          <div class="search-tip">
+            <kbd>Ctrl</kbd> + <kbd>F</kbd> shortcut &bull; <kbd>Esc</kbd> to cancel
+          </div>
+          <div class="search-count" id="searchModalCount">
+            6 articles indexed
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SINGLE AUTHOR SECTION ================= -->
+  <main class="capsule-archive">
+    <div class="card-grid-container" style="padding-top: 40px;">
+      <!-- Breadcrumb -->
+      <nav class="post-breadcrumb" aria-label="Breadcrumb" style="margin-bottom: 24px;">
+        <a href="/theme">Home</a>
+        <span>/</span>
+        <a href="/authors">Authors</a>
+        <span>/</span>
+        <span id="authorBreadcrumbName" style="color: var(--theme-primary); font-weight: 600;">Dev Team</span>
+      </nav>
+
+      <!-- Single Author Hero Capsule -->
+      <header class="author-hero-capsule">
+        <div class="author-hero-avatar-wrap">
+          <img id="authorHeroAvatar" src="/src/themes/fruition-capsule/assets/avatar-dev.svg" alt="Dev Team" class="author-hero-avatar" />
+        </div>
+        <div class="author-hero-content">
+          <h1 id="authorHeroName" class="author-hero-name">Dev Team</h1>
+          <div class="author-hero-badges" style="margin-bottom: 12px;">
+            <span id="authorHeroRole" class="author-card-role" style="margin-bottom: 0;">System Architecture & Core Engine</span>
+            <span id="authorHeroCount" class="capsule-version-pill">2 Published Articles</span>
+          </div>
+          <p id="authorHeroBio" class="author-hero-bio">
+            Lead architecture and engineering team building high-velocity static site workflows, recursive Notion schema parsing, and edge-cached modern web experiences.
+          </p>
+        </div>
+      </header>
+
+      <!-- Section Title: Published Articles -->
+      <div class="card-grid-header">
+        <div class="archive-heading-group">
+          <h2 class="grid-section-title">
+            <span>Published Articles</span>
+            <span id="authorArticlesCountBadge" class="capsule-version-pill">2 Posts</span>
+          </h2>
+          <div id="authorArticlesMetaDesc" class="archive-meta-count">
+            Articles authored and published by Dev Team
+          </div>
+        </div>
+      </div>
+
+      <!-- Articles Card Grid -->
+      <div class="capsule-card-grid" id="capsuleCardGrid">
+        <!-- Post 1 -->
+        <article class="capsule-card" data-category="Architecture">
+          <div class="card-cover-wrap">
+            <div class="card-pastel-cover pastel-blossom"></div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta-row">
+              <span class="card-badge">Architecture</span>
+              <span class="card-reading-time">5 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="/post" class="card-title-link">Mastering Notion as a Headless CMS with Fruition Mini</a>
+            </h3>
+            <p class="card-excerpt">
+              Learn how Notion Fruit connectors pull structured schema, map blocks recursively, and generate pure static Astro assets.
+            </p>
+            <div class="card-footer">
+              <a href="/author" class="card-author-link" title="View Dev Team profile">
+                <img src="/src/themes/fruition-capsule/assets/avatar-dev.svg" alt="Dev Team" class="card-author-avatar-img" />
+                <span class="card-author-name">Dev Team</span>
+              </a>
+              <span class="card-date">28/10/2026</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="capsule-card" data-category="Notion">
+          <div class="card-cover-wrap">
+            <div class="card-pastel-cover pastel-mint"></div>
+          </div>
+          <div class="card-content">
+            <div class="card-meta-row">
+              <span class="card-badge">Notion</span>
+              <span class="card-reading-time">8 min read</span>
+            </div>
+            <h3 class="card-title">
+              <a href="/post" class="card-title-link">Content Modeling: Relations, Rollups, and Formulas in Static Sites</a>
+            </h3>
+            <p class="card-excerpt">
+              How to preserve complex relational databases without sacrificing page generation speed.
+            </p>
+            <div class="card-footer">
+              <a href="/author" class="card-author-link" title="View Dev Team profile">
+                <img src="/src/themes/fruition-capsule/assets/avatar-dev.svg" alt="Dev Team" class="card-author-avatar-img" />
+                <span class="card-author-name">Dev Team</span>
+              </a>
+              <span class="card-date">15/10/2026</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="capsule-footer">
+    <div class="footer-brand">
+      <img src="/logo.png" alt="blogs" class="capsule-logo-img" style="height: 24px;" />
+      <span class="footer-divider">--</span>
+      <span class="footer-copyright">
+        2026 Made with <span class="heartbeat-pulse" aria-label="heartbeat"><svg class="gh-icon" viewBox="0 0 16 16" width="13" height="13" fill="#e11d48" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path></svg></span> by headless blogs
+      </span>
+    </div>
+
+    <ul class="footer-nav">
+      <li><a href="/sitemap.xml"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zm6.5 8a6.47 6.47 0 01-.76 3.03l-1.74-1.74a1.5 1.5 0 00-1.06-.44H9.5V7a1 1 0 00-1-1H7V4.5A.5.5 0 017.5 4h1a2 2 0 002-2V1.58A6.51 6.51 0 0114.5 8zm-13 0c0-.85.16-1.66.46-2.41L4.5 8.12V9a1 1 0 001 1h2v1.5a.5.5 0 01-.5.5H5.8a1.5 1.5 0 00-1.06.44L2.8 14.38A6.47 6.47 0 011.5 8z"></path></svg> <span>sitemap.xml</span></a></li>
+      <li><a href="/rss"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75zm1.75-.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75zM7.25 8a.75.75 0 01-.22.53l-2.25 2.25a.75.75 0 01-1.06-1.06L5.44 8 3.72 6.28a.75.75 0 011.06-1.06l2.25 2.25c.141.14.22.331.22.53zm1.5 2.25a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75z"></path></svg> <span>rss</span></a></li>
+      <li><a href="/robots.txt"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.429 1.525a6.593 6.593 0 011.142 0c.036.003.108.036.137.146l.289 1.105c.147.56.55.967 1.075 1.185.525.217 1.116.154 1.58-.168l.9-.624c.092-.064.15-.045.174-.035a6.6 6.6 0 01.807.807c.01.024.029.082-.035.174l-.624.9c-.322.464-.385 1.055-.168 1.58.218.525.625.928 1.185 1.075l1.105.289c.11.029.143.101.146.137a6.6 6.6 0 010 1.142c-.003.036-.036.108-.146.137l-1.105.289c-.56.147-.967.55-1.185 1.075-.217.525-.154 1.116.168 1.58l.624.9c.064.092.045.15.035.174a6.593 6.593 0 01-.807.807c-.024.01-.082.029-.174-.035l-.9-.624c-.464-.322-1.055-.385-1.58-.168-.525.218-.928.625-1.075 1.185l-.289 1.105c-.029.11-.101.143-.137.146a6.6 6.6 0 01-1.142 0c-.036-.003-.108-.036-.137-.146l-.289-1.105c-.147-.56-.55-.967-1.075-1.185-.525-.217-1.116-.154-1.58.168l-.9.624c-.092.064-.15.045-.174.035a6.6 6.6 0 01-.807-.807c-.01-.024-.029-.082.035-.174l.624-.9c.322-.464.385-1.055.168-1.58-.218-.525-.625-.928-1.185-1.075l-1.105-.289c-.11-.029-.143-.101-.146-.137a6.6 6.6 0 010-1.142c.003-.036.036-.108.146-.137l1.105-.289c.56-.147.967-.55 1.185-1.075.217-.525.154-1.116-.168-1.58l-.624-.9c-.064-.092-.045-.15-.035-.174a6.593 6.593 0 01.807-.807c.024-.01.082-.029.174.035l.9.624c.464.322 1.055.385 1.58.168.525-.218.928-.625 1.075-1.185l.289-1.105c.029-.11.101-.143.137-.146zM8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"></path></svg> <span>robots.txt</span></a></li>
+      <li><a href="/llms.txt"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.586c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v9.086A1.75 1.75 0 0112.75 16h-9A1.75 1.75 0 012 14.25V1.75z"></path></svg> <span>llms.txt</span></a></li>
+    </ul>
+  </footer>
+
+  <!-- ================= LIVE PREVIEW CONTROLLER BAR ================= -->
+  <aside class="preview-controller-bar" aria-label="Theme Preview Controls">
+    <span class="controller-label">Presets:</span>
+    <button class="controller-btn" data-preset="light" id="btnPresetLight">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#fff; border:1px solid #cbd5e1;"></span>
+      Light
+    </button>
+    <button class="controller-btn" data-preset="mono" id="btnPresetMono">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#000;"></span>
+      Mono
+    </button>
+    <button class="controller-btn active" data-preset="blue-sky" id="btnPresetBlue">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#0284c7;"></span>
+      Blue Sky
+    </button>
+    <button class="controller-btn" data-preset="candy-pop" id="btnPresetCandy">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#e11d48;"></span>
+      Candy Pop
+    </button>
+
+    <div class="controller-sep"></div>
+
+    <button class="controller-btn" id="btnDarkToggleQuick">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678A5.5 5.5 0 1011.214 3.536z"></path></svg> <span>Dark Mode</span>
+    </button>
+
+    <div class="controller-sep"></div>
+
+    <a href="/admin" class="btn-admin-link">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.429 1.525a6.593 6.593 0 011.142 0c.036.003.108.036.137.146l.289 1.105c.147.56.55.967 1.075 1.185.525.217 1.116.154 1.58-.168l.9-.624c.092-.064.15-.045.174-.035a6.6 6.6 0 01.807.807c.01.024.029.082-.035.174l-.624.9c-.322.464-.385 1.055-.168 1.58.218.525.625.928 1.185 1.075l1.105.289c.11.029.143.101.146.137a6.6 6.6 0 010 1.142c-.003.036-.036.108-.146.137l-1.105.289c-.56.147-.967.55-1.185 1.075-.217.525-.154 1.116.168 1.58l.624.9c.064.092.045.15.035.174a6.593 6.593 0 01-.807.807c-.024.01-.082.029-.174-.035l-.9-.624c-.464-.322-1.055-.385-1.58-.168-.525.218-.928.625-1.075 1.185l-.289 1.105c-.029.11-.101.143-.137.146a6.6 6.6 0 01-1.142 0c-.036-.003-.108-.036-.137-.146l-.289-1.105c-.147-.56-.55-.967-1.075-1.185-.525-.217-1.116-.154-1.58.168l-.9.624c-.092.064-.15.045-.174.035a6.6 6.6 0 01-.807-.807c-.01-.024-.029-.082.035-.174l.624-.9c.322-.464.385-1.055.168-1.58-.218-.525-.625-.928-1.185-1.075l-1.105-.289c-.11-.029-.143-.101-.146-.137a6.6 6.6 0 010-1.142c.003-.036.036-.108.146-.137l1.105-.289c.56-.147.967-.55 1.185-1.075.217-.525.154-1.116-.168-1.58l-.624-.9c-.064-.092-.045-.15-.035-.174a6.593 6.593 0 01.807-.807c.024-.01.082-.029.174.035l.9.624c.464.322 1.055.385 1.58.168.525-.218.928-.625 1.075-1.185l.289-1.105c.029-.11.101-.143.137-.146zM8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"></path></svg> <span>Open Admin</span>
+    </a>
+  </aside>
+
+  <!-- Interactive Client Script -->
+  <script>
+    // Presets & Dark Mode
+    const presetBtns = document.querySelectorAll('.controller-btn[data-preset]');
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presetBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const preset = btn.getAttribute('data-preset');
+        document.documentElement.setAttribute('data-theme-preset', preset);
+        document.body.setAttribute('data-theme-preset', preset);
+        localStorage.setItem('fruition_theme_preset', preset);
+      });
+    });
+
+    const darkBtns = [document.getElementById('btnCapsuleDark'), document.getElementById('btnDarkToggleQuick')];
+    darkBtns.forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+          document.documentElement.classList.toggle('dark');
+        });
+      }
+    });
+
+    // Make whole card clickable while keeping author links interactive
+    function bindCardClicks() {
+      document.querySelectorAll('.capsule-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          const target = e.target;
+          if (target.closest('.card-author-link') || target.closest('.card-badge') || target.closest('a')) {
+            return;
+          }
+          const link = card.querySelector('.card-title-link') || card.querySelector('.card-title a');
+          if (link && link.href) {
+            window.location.href = link.href;
+          }
+        });
+      });
+    }
+    bindCardClicks();
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('btnCapsuleMobile');
+    const navList = document.getElementById('capsuleNavList');
+    if (mobileBtn && navList) {
+      mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navList.classList.toggle('mobile-open');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navList.contains(e.target) && !mobileBtn.contains(e.target)) {
+          navList.classList.remove('mobile-open');
+        }
+      });
+
+      navList.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navList.classList.remove('mobile-open');
+        });
+      });
+    }
+
+    // Instant Search Modal & Shortcuts
+    const searchModal = document.getElementById('capsuleSearchModal');
+    const searchInput = document.getElementById('capsuleSearchModalInput');
+    const closeBtn = document.getElementById('btnCloseSearchModal');
+    const resultsContainer = document.getElementById('capsuleSearchResults');
+    const countDisplay = document.getElementById('searchModalCount');
+    const quickTags = document.querySelectorAll('.quick-tag-pill');
+    const searchTriggerBtn = document.getElementById('btnCapsuleSearch');
+
+    const indexedArticles = [
+      {
+        title: "Mastering Notion as a Headless CMS with Fruition Mini",
+        url: "/post",
+        category: "Architecture",
+        excerpt: "Learn how Notion Fruit connectors pull structured schema, map blocks recursively, and generate pure static Astro assets."
+      },
+      {
+        title: "High-Performance Image Optimization with Sharp WebP Pipeline",
+        url: "/post",
+        category: "Performance",
+        excerpt: "Eliminate expiring Notion S3 AWS URLs by converting all remote assets into compressed local WebP during SSG build."
+      },
+      {
+        title: "Crafting Glassmorphic Micro-Interactions in CSS3",
+        url: "/post",
+        category: "UI Design",
+        excerpt: "Explore backdrop-filter techniques, hardware acceleration, and seamless capsule animations for modern UI navigation."
+      },
+      {
+        title: "Zero-Latency GitOps Workflow for Indie Writers & Teams",
+        url: "/post",
+        category: "DevOps",
+        excerpt: "Deploying static blogs effortlessly with commit-driven synchronization and atomic JSON state stores."
+      },
+      {
+        title: "Single-Capsule Responsive Layouts: Mobile to Ultra-Wide",
+        url: "/post",
+        category: "Frontend",
+        excerpt: "A deep dive into fluid typography, viewport clamping, and adaptive hamburger collapsing strategies."
+      },
+      {
+        title: "Content Modeling: Relations, Rollups, and Formulas in Static Sites",
+        url: "/post",
+        category: "Notion",
+        excerpt: "How to preserve complex relational databases without sacrificing page generation speed."
+      }
+    ];
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    function renderSearchResults(query = '') {
+      if (!resultsContainer) return;
+      const cleanQuery = query.toLowerCase().trim();
+      const matches = cleanQuery
+        ? indexedArticles.filter(item => 
+            item.title.toLowerCase().includes(cleanQuery) ||
+            item.category.toLowerCase().includes(cleanQuery) ||
+            item.excerpt.toLowerCase().includes(cleanQuery)
+          )
+        : indexedArticles;
+
+      if (countDisplay) {
+        countDisplay.textContent = cleanQuery 
+          ? `${matches.length} result${matches.length === 1 ? '' : 's'} for "${query}"`
+          : `${indexedArticles.length} articles indexed`;
+      }
+
+      if (matches.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="search-empty-state">
+            No articles found matching "<strong>${escapeHtml(query)}</strong>". Try searching for <em>Notion</em>, <em>Architecture</em>, or <em>DevOps</em>.
+          </div>
+        `;
+        return;
+      }
+
+      resultsContainer.innerHTML = matches.map(item => `
+        <a href="${item.url}" class="search-result-item">
+          <div class="search-result-content">
+            <span class="search-result-title">${escapeHtml(item.title)}</span>
+            <span class="search-result-desc">${escapeHtml(item.excerpt)}</span>
+          </div>
+          <span class="search-result-badge">${escapeHtml(item.category)}</span>
+        </a>
+      `).join('');
+    }
+
+    function openSearchModal(initialQuery = '') {
+      if (!searchModal) return;
+      searchModal.style.display = 'flex';
+      setTimeout(() => {
+        searchModal.classList.add('active');
+        searchModal.setAttribute('aria-hidden', 'false');
+      }, 10);
+      if (searchInput) {
+        if (initialQuery) {
+          searchInput.value = initialQuery;
+        }
+        renderSearchResults(searchInput.value);
+        setTimeout(() => {
+          searchInput.focus();
+          searchInput.select();
+        }, 50);
+      }
+    }
+
+    function closeSearchModal() {
+      if (!searchModal) return;
+      searchModal.classList.remove('active');
+      searchModal.setAttribute('aria-hidden', 'true');
+      setTimeout(() => {
+        searchModal.style.display = 'none';
+      }, 220);
+    }
+
+    if (searchTriggerBtn) {
+      searchTriggerBtn.addEventListener('click', () => openSearchModal());
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeSearchModal);
+    }
+
+    if (searchModal) {
+      searchModal.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target === searchModal || target.classList.contains('capsule-search-modal-container') || target.classList.contains('capsule-search-modal-backdrop')) {
+          closeSearchModal();
+        }
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        renderSearchResults(e.target.value);
+      });
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const first = resultsContainer?.querySelector('.search-result-item');
+          if (first) first.click();
+        }
+      });
+    }
+
+    quickTags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        const q = tag.getAttribute('data-query') || '';
+        if (searchInput) {
+          searchInput.value = q;
+        }
+        renderSearchResults(q);
+        searchInput?.focus();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        const modal = searchModal || document.getElementById('capsuleSearchModal');
+        if (modal && (modal.classList.contains('active') || modal.style.display !== 'none')) {
+          e.preventDefault();
+          closeSearchModal();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

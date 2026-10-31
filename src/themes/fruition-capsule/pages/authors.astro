@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const authors = [
+  {
+    name: "Dev Team",
+    slug: "dev-team",
+    role: "System Architecture & Core Engine",
+    bio: "Specializing in Notion headless CMS infrastructure, Astro static compilation, and zero-latency SSG pipelines.",
+    avatarUrl: "/assets/avatar-dev.svg",
+    articleCount: 2
+  },
+  {
+    name: "Infra",
+    slug: "infra",
+    role: "Cloud & Performance Infrastructure",
+    bio: "Focuses on Sharp WebP image processing, edge CDN caching, and ultra-fast static asset delivery.",
+    avatarUrl: "/assets/avatar-infra.svg",
+    articleCount: 1
+  },
+  {
+    name: "Design",
+    slug: "design",
+    role: "Design Systems & Micro-Interactions",
+    bio: "Crafting glassmorphic design systems, fluid micro-interactions, and accessible typography tokens.",
+    avatarUrl: "/assets/avatar-design.svg",
+    articleCount: 1
+  },
+  {
+    name: "Ops",
+    slug: "ops",
+    role: "DevOps & Automation",
+    bio: "Passionate about commit-driven GitOps workflows, automated CI/CD static deployments, and atomic JSON stores.",
+    avatarUrl: "/assets/avatar-ops.svg",
+    articleCount: 1
+  },
+  {
+    name: "Frontend",
+    slug: "frontend",
+    role: "Modern CSS & Responsive Layouts",
+    bio: "Dedicated to responsive fluid viewport geometry, Astro island architecture, and modern CSS layout models.",
+    avatarUrl: "/assets/avatar-frontend.svg",
+    articleCount: 1
+  }
+];
+---
+
+<BaseLayout title="Editorial Authors — Fruition Blog" description="Meet the writers, engineers, and designers behind Fruition Capsule.">
+  <div class="capsule-archive">
+    <div class="card-grid-container" style="padding-top: 40px;">
+      <div class="card-grid-header">
+        <div class="archive-heading-group">
+          <h2 class="grid-section-title">
+            <span>Editorial Authors</span>
+            <span class="capsule-version-pill">{authors.length} Authors</span>
+          </h2>
+          <div class="archive-meta-count">
+            Meet the writers, engineers, and designers crafting technical insights
+          </div>
+        </div>
+      </div>
+
+      <!-- Authors Cards Grid -->
+      <div class="capsule-authors-grid">
+        {authors.map((author) => (
+          <a href={`/author?author=${author.slug}`} class="author-card">
+            <div class="author-card-avatar-wrap">
+              <img src={author.avatarUrl} alt={author.name} class="author-card-avatar" />
+            </div>
+            <h3 class="author-card-name">{author.name}</h3>
+            <span class="author-card-role">{author.role}</span>
+            <p class="author-card-bio">{author.bio}</p>
+            <div class="author-card-footer">
+              <span class="author-card-articles-count">{author.articleCount} {author.articleCount === 1 ? 'Article' : 'Articles'}</span>
+              <span class="author-card-link-btn">
+                <span>View Articles</span>
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

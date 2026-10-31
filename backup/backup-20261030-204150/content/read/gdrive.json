@@ -1,0 +1,172 @@
+{
+  "id": "3f893701-058a-80c1-9e62-c9c95bb850d0",
+  "title": "Script penyalin google drive",
+  "slug": "gdrive",
+  "postType": "read",
+  "published": true,
+  "createdTime": "2026-10-13T13:53:00.000Z",
+  "lastEditedTime": "2026-10-29T02:12:00.000Z",
+  "date": "2026-10-13",
+  "formattedDate": "13/10/2026",
+  "category": "Tech",
+  "tags": [
+    "app script"
+  ],
+  "description": "Script penyalin folder google drive otomatis",
+  "coverImage": "/assets/notion/read-gdrive-cover.png",
+  "fallbackPastel": "pastel-mint",
+  "author": {
+    "id": "40293701-058a-801f-b786-eaff5882e64b",
+    "name": "Deddy Hidayat",
+    "title": "Deddy Hidayat",
+    "slug": "deddy-hidayat",
+    "role": "Educator",
+    "bio": "Cats lover",
+    "avatar": "/assets/notion/author-deddy-hidayat.webp",
+    "published": true
+  },
+  "readingTime": "3 min read",
+  "wordCount": 497,
+  "toc": [
+    {
+      "id": "cara-penggunaan-3f89",
+      "text": "cara penggunaan",
+      "level": 2
+    },
+    {
+      "id": "batasan-3f89",
+      "text": "Batasan",
+      "level": 2
+    }
+  ],
+  "contentHtml": "<p class=\"notion-paragraph\">Script ini berfungsi untuk <strong>menyalin link google drive </strong>ke google drive anda. </p>\n<p class=\"notion-paragraph\">kapan anda perlu script ini? google tidak menyediakan cara menyalin “folder sekaligus” jadi cara ini praktis untuk menyalin semua isi folder</p>\n<figure class=\"notion-image-figure\">\n          <img src=\"/assets/notion/read-gdrive-block-1.png\" alt=\"Article illustration\" loading=\"lazy\" />\n          \n        </figure>\n<h2 id=\"cara-penggunaan-3f89\" class=\"notion-h2\">cara penggunaan</h2>\n<ol class=\"notion-numbered-list\">\n  <li class=\"notion-list-item\">buka <a href=\"https://script.google.com/home\" class=\"notion-link\" target=\"_blank\" rel=\"noopener\">google app script</a></li>\n  <li class=\"notion-list-item\">klik <code class=\"notion-inline-code\">new projects</code></li>\n  <li class=\"notion-list-item\">copy script (yang ada dibawah), salin ke project anda</li>\n  <li class=\"notion-list-item\">edit dan sesuaikan : “<u>link google drive</u>” dan “<u>nama folder</u>” yang inginkan</li>\n  <li class=\"notion-list-item\">klik <code class=\"notion-inline-code\">run</code> {jalankan), </li>\n  <li class=\"notion-list-item\">pertama kali script dijalankan, muncul pop up untuk meminta izin </li>\n  <li class=\"notion-list-item\">tunggu script jalan sampai selesai menyalin</li>\n  <li class=\"notion-list-item\">hasilnya silahkan cek di google drive </li>\n</ol>\n<h2 id=\"batasan-3f89\" class=\"notion-h2\">Batasan</h2>\n<div class=\"notion-callout post-callout notion-color-green_background\">\n          <span class=\"notion-callout-icon post-callout-icon\">⚠️</span>\n          <div class=\"notion-callout-content\">\n            <div class=\"notion-callout-title\">untuk akun google versi gratisan, waktu menjalankan script dibatasi selama 6 menit.</div>\n            \n          </div>\n        </div>\n<p class=\"notion-paragraph\">solusinya, anda cukup <strong>klik tombol &quot;</strong><strong><code class=\"notion-inline-code\">Run</code></strong><strong>&quot; (Jalankan) sekali lagi</strong> di halaman Google Apps Script.</p>\n<ul class=\"notion-bulleted-list\">\n  <li class=\"notion-list-item\">Skrip akan langsung mendeteksi folder hasil salinan sebelumnya.</li>\n  <li class=\"notion-list-item\">Skrip akan memeriksa file yang sudah masuk, lalu otomatis melanjutkan menyalin file dan sub-folder yang <strong>belum sempat tersalin</strong> sebelum waktu habis.</li>\n  <li class=\"notion-list-item\">Anda tidak perlu khawatir file akan menjadi ganda (duplikat), karena skrip sudah dilengkapi fitur pengecekan nama file.</li>\n</ul>\n<div class=\"notion-code-block\">\n          <div class=\"notion-code-header\">\n            <span class=\"notion-code-lang\">\n              <svg viewBox=\"0 0 16 16\" width=\"12\" height=\"12\" fill=\"currentColor\" style=\"opacity:0.65;\">\n                <path d=\"M4.72 3.22a.75.75 0 0 1 1.06 1.06L2.06 8l3.72 3.72a.75.75 0 1 1-1.06 1.06L.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25Zm6.56 0a.75.75 0 1 0-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 1 0 1.06 1.06l4.25-4.25a.75.75 0 0 0 0-1.06l-4.25-4.25Z\"/>\n              </svg>\n              <span>JavaScript</span>\n            </span>\n            <div class=\"notion-code-actions\">\n              <button type=\"button\" class=\"notion-code-btn\" onclick=\"const pre=this.closest('.notion-code-block').querySelector('.notion-code-pre'); pre.classList.toggle('is-wrapped'); this.classList.toggle('active');\" title=\"Toggle Wrap Code\">\n                <span>Wrap</span>\n              </button>\n              <button type=\"button\" class=\"notion-code-btn\" onclick=\"const code=this.closest('.notion-code-block').querySelector('code').innerText; navigator.clipboard.writeText(code); const s=this.querySelector('span'); const old=s.textContent; s.textContent='Copied!'; setTimeout(()=>s.textContent=old, 1600);\" title=\"Copy code to clipboard\">\n                <svg viewBox=\"0 0 24 24\" width=\"13\" height=\"13\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">\n                  <rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\"></rect>\n                  <path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"></path>\n                </svg>\n                <span>Copy</span>\n              </button>\n            </div>\n          </div>\n          <pre class=\"notion-code-pre\" data-lang=\"JavaScript\"><code class=\"language-javascript\"><span class=\"tok-kw\">function</span> jalankanPenyalinan() {\n  <span class=\"tok-comment\">// ==========================================</span>\n  <span class=\"tok-comment\">// PENGATURAN: TEMPEL URL FOLDER DI SINI</span>\n  <span class=\"tok-comment\">// ==========================================</span>\n  <span class=\"tok-kw\">var</span> urlFolderSumber = <span class=\"tok-str\">&quot;TEMPEL_URL_FOLDER_DI_SINI&quot;</span>;\n  <span class=\"tok-kw\">var</span> namaFolderBaru = <span class=\"tok-str\">&quot;Hasil Salinan Folder&quot;</span>; \n  <span class=\"tok-comment\">// ==========================================</span>\n\n  <span class=\"tok-kw\">var</span> idSumber = ambilIdDariUrl(urlFolderSumber);\n  <span class=\"tok-kw\">if</span> (!idSumber) {\n    Logger.log(<span class=\"tok-str\">&quot;Error: URL Folder tidak valid!&quot;</span>);\n    <span class=\"tok-kw\">return</span>;\n  }\n\n  <span class=\"tok-kw\">var</span> properti = PropertiesService.getUserProperties();\n  <span class=\"tok-kw\">var</span> idTujuan = properti.getProperty(<span class=\"tok-str\">&quot;ID_FOLDER_TUJUAN&quot;</span>);\n  \n  <span class=\"tok-kw\">var</span> folderSumber = DriveApp.getFolderById(idSumber);\n  <span class=\"tok-kw\">var</span> folderTujuan;\n\n  <span class=\"tok-kw\">if</span> (!idTujuan) {\n    folderTujuan = DriveApp.createFolder(namaFolderBaru);\n    properti.setProperty(<span class=\"tok-str\">&quot;ID_FOLDER_TUJUAN&quot;</span>, folderTujuan.getId());\n    Logger.log(<span class=\"tok-str\">&quot;Membuat folder induk baru: &quot;</span> + folderTujuan.getName());\n  } <span class=\"tok-kw\">else</span> {\n    <span class=\"tok-kw\">try</span> {\n      folderTujuan = DriveApp.getFolderById(idTujuan);\n      Logger.log(<span class=\"tok-str\">&quot;Melanjutkan penyalinan ke folder yang sudah ada...&quot;</span>);\n    } <span class=\"tok-kw\">catch</span>(e) {\n      folderTujuan = DriveApp.createFolder(namaFolderBaru);\n      properti.setProperty(<span class=\"tok-str\">&quot;ID_FOLDER_TUJUAN&quot;</span>, folderTujuan.getId());\n    }\n  }\n\n  <span class=\"tok-kw\">var</span> waktuMulai = <span class=\"tok-kw\">new</span> Date().getTime();\n  \n  <span class=\"tok-comment\">// Jalankan proses penyalinan dengan pengecekan waktu</span>\n  <span class=\"tok-kw\">var</span> selesai = salinIsiFolderDenganWaktu(folderSumber, folderTujuan, waktuMulai, properti);\n  \n  <span class=\"tok-kw\">if</span> (selesai) {\n    Logger.log(<span class=\"tok-str\">&quot;PROSES SELESAI Sempurna! Seluruh file telah disalin.&quot;</span>);\n    properti.deleteProperty(<span class=\"tok-str\">&quot;ID_FOLDER_TUJUAN&quot;</span>); <span class=\"tok-comment\">// Reset status jika selesai</span>\n  } <span class=\"tok-kw\">else</span> {\n    Logger.log(<span class=\"tok-str\">&quot;⚠️ Waktu hampir habis (5 menit). Skrip dihentikan sementara untuk keamanan.&quot;</span>);\n    Logger.log(<span class=\"tok-str\">&quot;Silakan KLIK TOMBOL RUN LAGI untuk melanjutkan sisa file.&quot;</span>);\n  }\n}\n\n<span class=\"tok-kw\">function</span> salinIsiFolderDenganWaktu(sumber, tujuan, waktuMulai, properti) {\n  <span class=\"tok-comment\">// 1. Salin File</span>\n  <span class=\"tok-kw\">var</span> file2 = sumber.getFiles();\n  <span class=\"tok-kw\">while</span> (file2.hasNext()) {\n    <span class=\"tok-comment\">// Cek apakah waktu eksekusi sudah berjalan lebih dari 5 menit (300.000 milidetik)</span>\n    <span class=\"tok-kw\">if</span> (<span class=\"tok-kw\">new</span> Date().getTime() - waktuMulai &gt; <span class=\"tok-num\">300000</span>) {\n      <span class=\"tok-kw\">return</span> <span class=\"tok-kw\">false</span>; \n    }\n    \n    <span class=\"tok-kw\">var</span> file = file2.next();\n    \n    <span class=\"tok-comment\">// Validasi agar tidak menyalin file dengan nama yang sama di folder tujuan saat resume</span>\n    <span class=\"tok-kw\">var</span> fileSudahAda = tujuan.getFilesByName(file.getName());\n    <span class=\"tok-kw\">if</span> (!fileSudahAda.hasNext()) {\n      file.makeCopy(file.getName(), tujuan);\n      Logger.log(<span class=\"tok-str\">&quot;Berhasil menyalin file: &quot;</span> + file.getName());\n    }\n  }\n  \n  <span class=\"tok-comment\">// 2. Salin Sub-Folder</span>\n  <span class=\"tok-kw\">var</span> subFolders = sumber.getFolders();\n  <span class=\"tok-kw\">while</span> (subFolders.hasNext()) {\n    <span class=\"tok-kw\">var</span> subFolder = subFolders.next();\n    <span class=\"tok-kw\">var</span> folderTujuanBerikutnya;\n    \n    <span class=\"tok-kw\">var</span> subFolderSudahAda = tujuan.getFoldersByName(subFolder.getName());\n    <span class=\"tok-kw\">if</span> (subFolderSudahAda.hasNext()) {\n      folderTujuanBerikutnya = subFolderSudahAda.next();\n    } <span class=\"tok-kw\">else</span> {\n      folderTujuanBerikutnya = tujuan.createFolder(subFolder.getName());\n      Logger.log(<span class=\"tok-str\">&quot;Membuat sub-folder: &quot;</span> + subFolder.getName());\n    }\n    \n    <span class=\"tok-kw\">var</span> subSelesai = salinIsiFolderDenganWaktu(subFolder, folderTujuanBerikutnya, waktuMulai, properti);\n    <span class=\"tok-kw\">if</span> (!subSelesai) {\n      <span class=\"tok-kw\">return</span> <span class=\"tok-kw\">false</span>;\n    }\n  }\n  \n  <span class=\"tok-kw\">return</span> <span class=\"tok-kw\">true</span>;\n}\n\n<span class=\"tok-kw\">function</span> ambilIdDariUrl(url) {\n  <span class=\"tok-kw\">var</span> id = <span class=\"tok-str\">&quot;&quot;</span>;\n  <span class=\"tok-kw\">var</span> match = url.match(/[-\\w]{<span class=\"tok-num\">25</span>,}/);\n  <span class=\"tok-kw\">if</span> (match) { id = match[<span class=\"tok-num\">0</span>]; }\n  <span class=\"tok-kw\">return</span> id;\n}\n\n<span class=\"tok-comment\">// Gunakan fungsi ini jika Anda ingin mengulang proses dari awal sekali lagi</span>\n<span class=\"tok-kw\">function</span> resetProgres() {\n  PropertiesService.getUserProperties().deleteProperty(<span class=\"tok-str\">&quot;ID_FOLDER_TUJUAN&quot;</span>);\n  Logger.log(<span class=\"tok-str\">&quot;Progres berhasil di-reset. Skrip akan membuat folder baru saat dijalankan.&quot;</span>);\n}\n</code></pre>\n          \n        </div>\n<div class=\"notion-blank-line\" aria-hidden=\"true\"></div>\n",
+  "properties": {
+    "Meta_description": {
+      "id": "DGM%3B",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Script penyalin folder google drive otomatis",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Script penyalin folder google drive otomatis",
+          "href": null
+        }
+      ]
+    },
+    "Slug": {
+      "id": "De%40%3D",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "gdrive",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "gdrive",
+          "href": null
+        }
+      ]
+    },
+    "Tags": {
+      "id": "PKij",
+      "type": "multi_select",
+      "multi_select": [
+        {
+          "id": "30c4e292-f894-4724-b5d7-365353867958",
+          "name": "app script",
+          "color": "pink"
+        }
+      ]
+    },
+    "Authors": {
+      "id": "QhXd",
+      "type": "relation",
+      "relation": [
+        {
+          "id": "40293701-058a-801f-b786-eaff5882e64b"
+        }
+      ],
+      "has_more": false
+    },
+    "Published": {
+      "id": "W%3F_i",
+      "type": "checkbox",
+      "checkbox": true
+    },
+    "OG": {
+      "id": "YC%7Bg",
+      "type": "files",
+      "files": [
+        {
+          "name": "img_blogs_web_id (5).png",
+          "type": "file",
+          "file": {
+            "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/ef593701-058a-8115-9ed9-0003bf0511a7/72b1c335-1251-45df-8364-43961094352f/img_blogs_web_id_%285%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4663AWIPJKF%2F20261030%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20261030T083824Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEGgaCXVzLXdlc3QtMiJHMEUCIQCsXGeXFmfY%2FAiZqgS8n9NFUlIEb2iHG3o%2B9drEg5%2F5ugIgXIMLowqj3OwXiwKfpy71UmuiDUx9JVPbity6sA2Ptecq%2FwMIMRAAGgw2Mzc0MjMxODM4MDUiDCaKhO%2BECv98NfxwYyrcA%2FqJrdt%2B5p4QEPn85hD1%2Fdr14s7mU%2BHWUMDHxewQw8LOUD3be%2Blv0g3XF9b%2BAOaTBfmIZMDV4NKWbX5q8P2gKRAHoXAYQXnf8xWthfu0MjbbpqAvKrExfZrLpRTj31PTRbJ3q6znujNfHjrpAqcg7d%2FGNuMQTDtpMux%2BXaTwuLydoex9pFj8ZnsxefBimd7apO9ib%2B7yquRJ41tt7L2zewSmOblAUOPPwUrHuGIvbgCU6%2Fn9BFrcpADaMIDlfsAzI%2FdWR2QOPRJv%2BjtWMkpHv2jen3pBXq5a5ZFJS4lrJmZx%2FGOIiDS3v1rVM1Ts1puNXr7RQxVaKga2wd8xvrjqc2phNGRsm1%2FpzkvREMY8fStqfxqLktBWEemtdH6YbkRIMIEPLtk1IJKbHewbZ2zaIK56VD3cFNNIa%2FJJzsRtYkuBU%2B%2F%2FqA1x%2BXHAsLFYQckkyMAIO6%2Bo860URCdbySjNF0sqDSlGcaMid2Y%2BA%2BRn%2BFwRQiiWuut1lNcIEXTclEe19xq8Cvs6FcJ8RAkNZC%2FFknwrtKqUsasw3gSQJylHlJg3NxEm5Sc4ieZ0058pkJTJh9f1vr3pqOCKxS%2BWEpz3YMFcAH3ooJDrK5gmvbuZUKQiQJZOmzctuLH4I7ZrMKyWkdcGOqUBdcGosOXOPMu9EF0O%2F8MfHIS3u9uzMx9jrcZS7XB4FGlv0fPwfVjwP6n9WgCy23Wo1%2F4D6UoAKylOmzfP6Xp%2FJHjKoTfZ0hzo7Pa8YJqKCVviMqqGfGxWFgSCbD%2BABATXVFwmlRJet6YPxUrZsZeMAgneDyxAZxh6GpVhtiN9manO9rMjtup%2BL4c9DYTGW%2Fsk8EKgVnDiGMNuEXhuwQ7I0nkEzfa0&X-Amz-Signature=91504c697f79fa29515524f24dce84ae9992b9cb239cb87d0132b01bf1bba21e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+            "expiry_time": "2026-10-30T09:38:24.911Z"
+          }
+        }
+      ]
+    },
+    "Date": {
+      "id": "%5B%40n%7C",
+      "type": "date",
+      "date": {
+        "start": "2026-10-13",
+        "end": null,
+        "time_zone": null
+      }
+    },
+    "Category": {
+      "id": "yNSK",
+      "type": "select",
+      "select": {
+        "id": "dee89da7-80b1-44e2-9c36-dddf9baed4b2",
+        "name": "Tech",
+        "color": "default"
+      }
+    },
+    "Title": {
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "Script penyalin google drive",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "Script penyalin google drive",
+          "href": null
+        }
+      ]
+    }
+  }
+}

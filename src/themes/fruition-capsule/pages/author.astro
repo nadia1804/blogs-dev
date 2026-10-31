@@ -1,0 +1,189 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export interface Props {
+  author?: {
+    name: string;
+    slug?: string;
+    role: string;
+    bio: string;
+    avatarUrl: string;
+    articlesCount?: number;
+  };
+}
+
+const contentDir = path.resolve("./content");
+let loadedAuthors: any[] = [];
+const authorsDir = path.join(contentDir, "authors");
+if (fs.existsSync(authorsDir)) {
+  loadedAuthors = fs.readdirSync(authorsDir)
+    .filter((f: string) => f.endsWith(".json"))
+    .map((f: string) => {
+      try { return JSON.parse(fs.readFileSync(path.join(authorsDir, f), "utf-8")); } catch { return null; }
+    })
+    .filter(Boolean);
+}
+
+const firstAuthor = loadedAuthors[0] || {};
+const defaultAuthor = {
+  name: firstAuthor.name || firstAuthor.title || "Deddy Hidayat",
+  slug: firstAuthor.slug || "deddy-hidayat",
+  role: firstAuthor.role || "Educator & Writer",
+  bio: firstAuthor.bio || firstAuthor.description || "Penulis dan kontributor kurasi konten.",
+  avatarUrl: firstAuthor.avatar || "/assets/notion/author-deddy-hidayat.webp"
+};
+
+const { author = defaultAuthor } = Astro.props;
+
+// Load all posts across all Fruit collections
+const allPosts: any[] = [];
+if (fs.existsSync(contentDir)) {
+  const dirs = fs.readdirSync(contentDir).filter((d: string) => {
+    try {
+      return fs.statSync(path.join(contentDir, d)).isDirectory() && !["settings", "authors", "pages", "fruits", "node_modules"].includes(d);
+    } catch {
+      return false;
+    }
+  });
+
+  dirs.forEach((dirName: string) => {
+    const fullPath = path.join(contentDir, dirName);
+    fs.readdirSync(fullPath).filter((f: string) => f.endsWith(".json")).forEach((f: string) => {
+      try {
+        const item = JSON.parse(fs.readFileSync(path.join(fullPath, f), "utf-8"));
+        if (item && item.published !== false) {
+          allPosts.push({ ...item, postType: item.postType || dirName });
+        }
+      } catch {}
+    });
+  });
+}
+
+const targetSlug = (author.slug || "deddy-hidayat").toLowerCase();
+const targetName = (author.name || "Deddy Hidayat").toLowerCase();
+
+const authorPosts = allPosts.filter((post: any) => {
+  const candidates: any[] = [];
+  if (post.author) candidates.push(post.author);
+  if (post.authors) {
+    if (Array.isArray(post.authors)) candidates.push(...post.authors);
+    else candidates.push(post.authors);
+  }
+  return candidates.some((c: any) => {
+    if (!c) return false;
+    if (typeof c === "string") {
+      const s = c.toLowerCase();
+      return s === targetSlug || s === targetName;
+    }
+    const cSlug = String(c.slug || "").toLowerCase();
+    const cName = String(c.name || c.title || "").toLowerCase();
+    return cSlug === targetSlug || cName === targetName;
+  });
+}).sort((a: any, b: any) => new Date(b.date || 0).getTime() - new Date(a.date || 0).getTime());
+
+function truncateText(text: string, maxLength: number = 80): string {
+  if (!text) return "";
+  const clean = text.trim();
+  if (clean.length <= maxLength) return clean;
+  return clean.slice(0, maxLength).trim() + "...";
+}
+---
+
+<BaseLayout title={`${author.name} — Author Profile`} description={author.bio}>
+  <div class="capsule-archive">
+    <div class="card-grid-container" style="padding-top: 40px;">
+      <!-- Breadcrumb -->
+      <nav class="post-breadcrumb" aria-label="Breadcrumb" style="margin-bottom: 24px;">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/authors">Authors</a>
+        <span>/</span>
+        <span style="color: var(--theme-primary); font-weight: 600;">{author.name}</span>
+      </nav>
+
+      <!-- Single Author Hero Capsule -->
+      <header class="author-hero-capsule">
+        <div class="author-hero-avatar-wrap">
+          <img src={author.avatarUrl || '/assets/notion/author-deddy-hidayat.webp'} alt={author.name} class="author-hero-avatar" />
+        </div>
+        <div class="author-hero-content">
+          <h1 class="author-hero-name">{author.name}</h1>
+          <div class="author-hero-badges" style="margin-bottom: 12px;">
+            <span class="author-card-role" style="margin-bottom: 0;">{author.role}</span>
+            <span class="capsule-version-pill">{authorPosts.length} Published Articles</span>
+          </div>
+          <p class="author-hero-bio">{author.bio}</p>
+        </div>
+      </header>
+
+      <!-- Section: Published Articles -->
+      <div class="card-grid-header">
+        <div class="archive-heading-group">
+          <h2 class="grid-section-title">
+            <span>Published Articles</span>
+            <span class="capsule-version-pill">{authorPosts.length} Posts</span>
+          </h2>
+          <div class="archive-meta-count">
+            Articles authored and published by {author.name}
+          </div>
+        </div>
+      </div>
+
+      <!-- Articles Card Grid -->
+      <div class="capsule-card-grid" id="capsuleCardGrid">
+        {authorPosts.map((post: any) => (
+          <article class="capsule-card" data-category={post.category || 'General'}>
+            <div class="card-cover-wrap">
+              {post.coverImage ? (
+                <div class={`card-pastel-cover ${post.fallbackPastel || 'pastel-blossom'}`} style="overflow:hidden;">
+                  <img src={post.coverImage} alt={post.title} style="width:100%; height:100%; object-fit:cover;" />
+                </div>
+              ) : (
+                <div class={`card-pastel-cover ${post.fallbackPastel || 'pastel-blossom'}`}></div>
+              )}
+            </div>
+            <div class="card-content">
+              <div class="card-meta-row">
+                {post.category && <span class="card-badge">{post.category}</span>}
+                <span class="card-reading-time">{post.readingTime || '2 min read'}</span>
+              </div>
+              <h3 class="card-title">
+                <a href={`/${post.postType || 'read'}/${post.slug}`} class="card-title-link">{post.title}</a>
+              </h3>
+              <p class="card-excerpt">{truncateText(post.description || '', 80)}</p>
+              <div class="card-footer">
+                <a href={`/authors/${author.slug || 'deddy-hidayat'}`} class="card-author-link" title={`View ${author.name}'s profile`}>
+                  <img 
+                    src={author.avatarUrl || '/assets/notion/author-deddy-hidayat.webp'} 
+                    alt={author.name} 
+                    class="card-author-avatar-img" 
+                  />
+                  <span class="card-author-name">{author.name}</span>
+                </a>
+                <span class="card-date">{post.formattedDate || post.date || ''}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll('.capsule-card');
+    cards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target.closest('.card-author-link') || target.closest('.card-badge') || target.closest('a')) {
+          return;
+        }
+        const link = card.querySelector('.card-title-link') as HTMLAnchorElement;
+        if (link && link.href) {
+          window.location.href = link.href;
+        }
+      });
+    });
+  </script>
+</BaseLayout>

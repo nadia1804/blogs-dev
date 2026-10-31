@@ -1,0 +1,256 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  lastUpdated?: string;
+}
+
+const {
+  title = "Architecture & Design System Specification",
+  subtitle = "Complete design tokens, geometry guidelines, and Notion Headless CMS integration specs.",
+  lastUpdated = "29/10/2026"
+} = Astro.props;
+---
+
+<BaseLayout title={`${title} — Fruition Blog`} description={subtitle}>
+  <article class="capsule-single-page">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">Specification</span>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="post-header-capsule">
+      <h1 class="post-title">{title}</h1>
+      <p class="post-lead">{subtitle}</p>
+    </header>
+
+    <!-- Page Content Layout -->
+    <div class="post-body-layout">
+      <div class="post-prose">
+        <p>
+          This single-page template serves static document-style Notion entries such as architectural manifests, privacy policies, terms of service, and documentation manuals.
+        </p>
+
+        <h2 id="unified-layout">1. Unified Max-Width Architecture</h2>
+        <p>
+          To maintain visual equilibrium on widescreen and high-DPI displays, every layout tier—from the floating glassmorphic header capsule to the card grid and footer—conforms to the CSS variable <code>--site-max-width: 1200px</code>.
+        </p>
+
+        <div class="post-callout">
+          <span class="post-callout-icon">📐</span>
+          <div>
+            <strong style="color: var(--theme-primary);">Geometric Rhythm:</strong>
+            <p style="margin: 4px 0 0; font-size: 0.95rem; color: var(--theme-text-muted);">
+              Content containers use <code>max-width: calc(var(--site-max-width, 1200px) + (var(--container-padding-x, 24px) * 2))</code> with <code>padding: ... 24px</code>, guaranteeing that the inner content area exactly matches the 1200px floating pill.
+            </p>
+          </div>
+        </div>
+
+        <h2 id="typography">2. Fluid Typography & Design Tokens</h2>
+        <p>
+          Headings dynamically clamp between mobile and desktop scales using CSS <code>clamp()</code> functions, preventing unexpected text wrapping while preserving optimal readability.
+        </p>
+
+        <blockquote>
+          "Simplicity is prerequisite for reliability. Unified geometry ensures the reader never feels cognitive friction from awkward container misalignments."
+        </blockquote>
+
+        <h2 id="components">3. Component Capabilities</h2>
+        <ul>
+          <li><strong>Glassmorphic Navbar:</strong> Floating pill with backdrop blur, heartbeat pulse, and quick actions.</li>
+          <li><strong>Hero Units:</strong> Interchangeable centered pill and split-media layouts.</li>
+          <li><strong>Responsive Card Grids:</strong> Dual-mode display supporting standard 3-column grid and editorial ratio.</li>
+          <li><strong>Article Pages & Static Pages:</strong> Structured prose with sticky table of contents and reading progress.</li>
+        </ul>
+      </div>
+
+      <!-- Sticky Sidebar -->
+      <aside class="post-sidebar">
+        <div class="sidebar-widget post-toc-card post-toc capsule-toc">
+          <div class="sidebar-widget-title">On This Page</div>
+          <ul class="toc-list">
+            <li><a href="#unified-layout" class="active">Unified Layout</a></li>
+            <li><a href="#typography">Typography & Tokens</a></li>
+            <li><a href="#components">Component System</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+  </article>
+
+  <!-- Floating Go-to-Top Button (Fixed Left, Post & Page Only, with Reading Progress) -->
+  <button type="button" class="capsule-go-top" id="capsuleGoTop" aria-label="Go to top of page" title="Go to top">
+    <svg class="capsule-go-top-ring" viewBox="0 0 44 44" aria-hidden="true">
+      <circle class="capsule-progress-track" cx="22" cy="22" r="19" fill="none" stroke-width="2.5" />
+      <circle class="capsule-progress-bar" id="capsuleProgressCircle" cx="22" cy="22" r="19" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="119.38" stroke-dashoffset="119.38" transform="rotate(-90 22 22)" />
+    </svg>
+    <div class="capsule-go-top-inner">
+      <svg class="capsule-go-top-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+      </svg>
+      <span class="capsule-go-top-percent" id="capsuleGoTopPercent">0%</span>
+    </div>
+  </button>
+
+  <script>
+    function initGoTop() {
+      const goTopBtn = document.getElementById('capsuleGoTop');
+      if (!goTopBtn) return;
+
+      const progressCircle = document.getElementById('capsuleProgressCircle');
+      const percentText = document.getElementById('capsuleGoTopPercent');
+      const circumference = 119.38;
+
+      let lastScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      let isScrollingToTop = false;
+
+      function updateReadingProgress(currentScrollY) {
+        const prose = document.querySelector('.post-prose') || document.querySelector('article');
+        let percent = 0;
+        if (prose) {
+          const rect = prose.getBoundingClientRect();
+          const proseTop = rect.top + currentScrollY;
+          const proseHeight = prose.offsetHeight;
+          const windowHeight = window.innerHeight;
+          const start = proseTop - 80;
+          const end = proseTop + proseHeight - windowHeight;
+          if (end > start) {
+            percent = Math.round(((currentScrollY - start) / (end - start)) * 100);
+          } else {
+            const total = document.documentElement.scrollHeight - windowHeight;
+            percent = total > 0 ? Math.round((currentScrollY / total) * 100) : 0;
+          }
+        } else {
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          percent = total > 0 ? Math.round((currentScrollY / total) * 100) : 0;
+        }
+        percent = Math.max(0, Math.min(100, percent));
+
+        if (progressCircle) {
+          const offset = circumference - (circumference * percent / 100);
+          progressCircle.style.strokeDashoffset = offset.toFixed(2);
+        }
+        if (percentText) {
+          percentText.textContent = `${percent}%`;
+        }
+        goTopBtn.setAttribute('title', `Go to top (${percent}%)`);
+        goTopBtn.setAttribute('aria-valuenow', String(percent));
+      }
+
+      function handleScroll() {
+        const currentScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+
+        updateReadingProgress(currentScrollY);
+
+        // If programmatic scroll to top is active, suppress re-showing until top area is reached
+        if (isScrollingToTop) {
+          if (currentScrollY <= 150) {
+            isScrollingToTop = false;
+          } else if (currentScrollY > lastScrollY) {
+            isScrollingToTop = false;
+          } else {
+            goTopBtn.classList.remove('is-visible');
+            lastScrollY = Math.max(0, currentScrollY);
+            return;
+          }
+        }
+
+        // 1. Initial near-top check (<= 150px always hidden)
+        if (currentScrollY <= 150) {
+          goTopBtn.classList.remove('is-visible');
+          lastScrollY = Math.max(0, currentScrollY);
+          return;
+        }
+
+        // 2. Footer collision boundary check: hide when approaching or passing .footer-brand
+        const footerBrand = document.querySelector('.footer-brand') || document.querySelector('.capsule-footer');
+        if (footerBrand) {
+          const footerTop = footerBrand.getBoundingClientRect().top;
+          if (footerTop <= windowHeight - 16) {
+            goTopBtn.classList.remove('is-visible');
+            lastScrollY = Math.max(0, currentScrollY);
+            return;
+          }
+        }
+
+        // 3. Share section / content boundary check
+        const shareSection = document.querySelector('.post-social-share') || document.querySelector('.share-label');
+        const prose = document.querySelector('.post-prose') || document.querySelector('article');
+        let isBelowShare = false;
+
+        if (shareSection) {
+          isBelowShare = shareSection.getBoundingClientRect().top <= windowHeight * 0.85;
+        } else if (prose) {
+          isBelowShare = prose.getBoundingClientRect().bottom <= windowHeight;
+        }
+
+        if (isBelowShare) {
+          goTopBtn.classList.add('is-visible');
+        } else {
+          if (currentScrollY > lastScrollY && currentScrollY > 250) {
+            goTopBtn.classList.add('is-visible');
+          } else if (currentScrollY < lastScrollY) {
+            goTopBtn.classList.remove('is-visible');
+          }
+        }
+
+        lastScrollY = Math.max(0, currentScrollY);
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      goTopBtn.addEventListener('click', () => {
+        isScrollingToTop = true;
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        goTopBtn.classList.remove('is-visible');
+        goTopBtn.blur();
+      });
+    }
+
+    function initTOC() {
+      document.querySelectorAll('.toc-list a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const targetId = anchor.getAttribute('href');
+          if (targetId && targetId.length > 1) {
+            const target = document.querySelector(targetId);
+            if (target) {
+              e.preventDefault();
+              document.querySelectorAll('.toc-list a').forEach(a => {
+                if (a.getAttribute('href') === targetId) {
+                  a.classList.add('active');
+                } else {
+                  a.classList.remove('active');
+                }
+              });
+              const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+              target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+              history.pushState(null, '', targetId);
+            }
+          }
+        });
+      });
+    }
+
+    function initPage() {
+      initGoTop();
+      initTOC();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPage);
+    } else {
+      initPage();
+    }
+    document.addEventListener('astro:page-load', initPage);
+  </script>
+</BaseLayout>
+

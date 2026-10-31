@@ -1,0 +1,28 @@
+{
+  "id": "pages-static",
+  "name": "Static Pages",
+  "databaseId": "3f793701058a80179e2be1ee2b03f668",
+  "postType": "page",
+  "routePattern": "/[slug]",
+  "archiveUrl": null,
+  "targetCollection": "pages",
+  "showOnIndex": false,
+  "status": "active",
+  "lastSync": "2026-10-31T11:57:24.258Z",
+  "totalItems": 1,
+  "webpMediaCount": 1,
+  "schemaMapping": {
+    "title": "Nama",
+    "slug": "Slug",
+    "status": "Published",
+    "statusPublishedValue": "true",
+    "date": "Date",
+    "author": "Authors",
+    "category": "Category",
+    "cover": "Cover"
+  },
+  "settings": {
+    "autoConvertWebp": true,
+    "fallbackColor": "Pastel Mint"
+  }
+}

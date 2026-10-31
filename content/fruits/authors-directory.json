@@ -1,0 +1,25 @@
+{
+  "id": "authors-directory",
+  "name": "Authors & Contributors",
+  "databaseId": "40293701058a80e99537f7a4404ea0c7",
+  "postType": "authors",
+  "routePattern": "/authors/[author-name]",
+  "archiveUrl": "/authors",
+  "targetCollection": "authors",
+  "showOnIndex": false,
+  "status": "active",
+  "schemaMapping": {
+    "title": "Name",
+    "slug": "Slug",
+    "bio": "Bio",
+    "avatar": "Pic",
+    "role": "Role"
+  },
+  "settings": {
+    "autoConvertWebp": true,
+    "fallbackColor": "Pastel Periwinkle"
+  },
+  "totalItems": 1,
+  "webpMediaCount": 1,
+  "lastSync": "2026-10-31T11:57:23.495Z"
+}

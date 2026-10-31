@@ -1,0 +1,25 @@
+{
+  "id": "safelink",
+  "name": "Safelink Link Protector",
+  "version": "1.0.0",
+  "enabled": true,
+  "description": "Mengarahkan tautan keluar (eksternal) di dalam artikel ke halaman safelink berhitung mundur dengan slot monetasi iklan.",
+  "author": "Fruition Team",
+  "settings": {
+    "countdownSeconds": 10,
+    "safelinkPath": "/safelink",
+    "urlParam": "url",
+    "encryption": "base64",
+    "whitelist": [
+      "localhost",
+      "127.0.0.1",
+      "github.com"
+    ],
+    "pageTitle": "Link Protection & Verification",
+    "pageDescription": "Tautan tujuan Anda sedang disiapkan dan diverifikasi keamanannya. Harap tunggu hitungan mundur di bawah ini.",
+    "buttonText": "Lanjutkan ke Tautan Tujuan →",
+    "autoRedirectInternal": false,
+    "autoRedirectNewTab": true,
+    "autoBackOrigin": true
+  }
+}

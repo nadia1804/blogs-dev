@@ -1,0 +1,80 @@
+{
+  "id": "3f793701-058a-8071-bd8e-ece39038a51e",
+  "title": "about",
+  "slug": "about",
+  "postType": "page",
+  "published": true,
+  "createdTime": "2026-10-12T02:41:00.000Z",
+  "lastEditedTime": "2026-10-28T08:48:00.000Z",
+  "date": "2026-10-12T02:41:00.000Z",
+  "formattedDate": "12/10/2026",
+  "category": "General",
+  "tags": [],
+  "description": "",
+  "coverImage": "",
+  "fallbackPastel": "pastel-blossom",
+  "author": {
+    "name": "Deddy Hidayat",
+    "slug": "deddy-hidayat",
+    "role": "Educator",
+    "bio": "Cats lover",
+    "avatar": "/assets/notion/author-deddy-hidayat.webp"
+  },
+  "readingTime": "1 min read",
+  "wordCount": 145,
+  "toc": [],
+  "contentHtml": "<p class=\"notion-paragraph\"><strong>Selamat datang di blogs.web.id!</strong></p>\n<p class=\"notion-paragraph\">Sebagai sebuah <strong>Ruang Baca &amp; Catatan Terkurasi</strong>, web personal ini hadir menjadi ruang digital sederhana untuk mengarsipkan proses belajar, berbagi wawasan, dan menyimpan berbagai dokumentasi.</p>\n<p class=\"notion-paragraph\"><strong>Apa yang akan Anda temukan di sini?</strong><br/>Halaman ini difungsikan semacam perpustakaan kecil yang memuat kumpulan tulisan dan catatan. Beberapa hal yang dibagikan meliputi:</p>\n<ul class=\"notion-bulleted-list\">\n  <li class=\"notion-list-item\"><strong>Tulisan:</strong> Catatan, pemikiran, dan refleksi ringan dari keseharian.</li>\n  <li class=\"notion-list-item\"><strong>Dokumentasi:</strong> Catatan teknis seputar eksplorasi, pengembangan web, serta hal-hal administratif atau proyek yang sedang dikerjakan.</li>\n</ul>\n<p class=\"notion-paragraph\"><strong>Di balik layar blogs.web.id</strong><br/>Web personal ini <strong>dibangun menggunakan Notion</strong>. Penggunaan Notion sebagai pusat manajemen konten (CMS) sekadar untuk memudahkan pengelolaan ide, draf, dan dokumentasi dalam satu tempat. Pendekatan ini cukup membantu agar proses menulis dan merapikan catatan menjadi lebih praktis tanpa harus banyak mengurus sisi teknis.</p>\n<p class=\"notion-paragraph\">Terima kasih sudah meluangkan waktu untuk berkunjung. Silakan menelusuri catatan yang ada, dan semoga ada hal bermanfaat yang bisa ditemukan di sini.</p>\n",
+  "properties": {
+    "Meta description": {
+      "id": "Ab%3D%5E",
+      "type": "rich_text",
+      "rich_text": []
+    },
+    "Slug": {
+      "id": "REwo",
+      "type": "rich_text",
+      "rich_text": [
+        {
+          "type": "text",
+          "text": {
+            "content": "about",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "about",
+          "href": null
+        }
+      ]
+    },
+    "Nama": {
+      "id": "title",
+      "type": "title",
+      "title": [
+        {
+          "type": "text",
+          "text": {
+            "content": "about",
+            "link": null
+          },
+          "annotations": {
+            "bold": false,
+            "italic": false,
+            "strikethrough": false,
+            "underline": false,
+            "code": false,
+            "color": "default"
+          },
+          "plain_text": "about",
+          "href": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,64 @@
+---
+export interface CtaButton {
+  label: string;
+  href: string;
+}
+
+export interface Props {
+  enabled?: boolean;
+  title?: string;
+  highlightedTitle?: string;
+  description?: string;
+  showPrimaryCta?: boolean;
+  primaryCta?: CtaButton;
+  showSecondaryCta?: boolean;
+  secondaryCta?: CtaButton;
+}
+
+const {
+  enabled = true,
+  title = "Ruang Baca &",
+  highlightedTitle = "Catatan Terkurasi",
+  description = "Kumpulan tulisan, modul pelajaran, dan dokumentasi",
+  showPrimaryCta = false,
+  primaryCta = { label: "Explore Articles", href: "#articles" },
+  showSecondaryCta = false,
+  secondaryCta = { label: "Authors", href: "/authors" }
+} = Astro.props;
+---
+
+{enabled && (
+  <section class="capsule-hero" id="hero">
+    <div class="hero-centered-pill">
+      <h1 class="hero-title">
+        {title} {highlightedTitle && <span class="hero-title-gradient">{highlightedTitle}</span>}
+      </h1>
+
+      {description && (
+        <p class="hero-desc">
+          {description}
+        </p>
+      )}
+
+      {(showPrimaryCta || showSecondaryCta) && (
+        <div class="hero-actions">
+          {showPrimaryCta && primaryCta && (
+            <a href={primaryCta.href} class="btn-primary-capsule">
+              <span>{primaryCta.label}</span>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          )}
+
+          {showSecondaryCta && secondaryCta && (
+            <a href={secondaryCta.href} class="btn-secondary-capsule">
+              <span>{secondaryCta.label}</span>
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  </section>
+)}

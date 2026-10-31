@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../themes/fruition-capsule/layouts/BaseLayout.astro";
+import CardGrid from "../../themes/fruition-capsule/components/CardGrid.astro";
+import { getAllFruits, getCollectionItems, getSiteSettings, getThemeConfig } from "../../utils/content.js";
+
+export async function getStaticPaths() {
+  const fruits = getAllFruits().filter((f: any) => (f.postType || f.id) !== 'page' && (f.postType || f.id) !== 'authors');
+  return fruits.map((fruit: any) => {
+    const postType = fruit.postType || fruit.id;
+    const targetColl = fruit.targetCollection || postType;
+    const items = getCollectionItems(targetColl);
+    return {
+      params: { fruit: postType },
+      props: { fruit, posts: items }
+    };
+  });
+}
+
+const { fruit, posts } = Astro.props;
+const siteSettings = getSiteSettings();
+const themeConfig = getThemeConfig();
+
+const activePreset = (themeConfig.defaultPreset || "Blue Sky").toLowerCase().replace(/\s+/g, '-');
+const cardSettings = themeConfig.components?.cards || {};
+
+const formattedPosts = posts.map((p: any) => ({
+  id: p.id,
+  title: p.title,
+  slug: p.slug,
+  fruitType: fruit.postType || fruit.id,
+  description: p.description || p.metaDescription || "",
+  category: p.category || fruit.name,
+  date: p.formattedDate || p.date || "",
+  readingTime: p.readingTime || "3 min read",
+  coverImage: p.coverImage || "",
+  author: {
+    name: p.author?.name || "Author",
+    slug: p.author?.slug || "author",
+    avatarUrl: p.author?.avatar || "/assets/author-deddy-hidayat.webp"
+  },
+  pastelFallback: (fruit.settings?.fallbackColor || "blossom").toLowerCase().replace('pastel ', '')
+}));
+---
+
+<BaseLayout 
+  title={`${fruit.name || "Arsip"} — ${siteSettings.siteName || "blogs"}`}
+  description={`Arsip konten kategori ${fruit.name || fruit.id}`}
+  preset={activePreset}
+>
+  <div style="max-width: 1200px; margin: 40px auto 20px; padding: 0 20px;">
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">{fruit.name || fruit.id}</span>
+    </nav>
+    <h1 style="font-size: 2rem; font-weight: 800; color: var(--theme-text); margin-top: 12px; margin-bottom: 6px;">
+      {fruit.name || fruit.id}
+    </h1>
+    <p style="font-size: 1rem; color: var(--theme-text-muted); margin-bottom: 30px;">
+      Koleksi arsip {fruit.name || fruit.id} ({posts.length} artikel terindeks)
+    </p>
+  </div>
+
+  <CardGrid 
+    mode="default"
+    sectionTitle={`Daftar ${fruit.name || "Artikel"}`}
+    posts={formattedPosts}
+    gridColumns={cardSettings.gridColumns || { sm: 1, md: 2, lg: 3 }}
+  />
+</BaseLayout>

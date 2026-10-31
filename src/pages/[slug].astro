@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../themes/fruition-capsule/layouts/BaseLayout.astro";
+import { getCollectionItems, getSiteSettings, getThemeConfig } from "../utils/content.js";
+
+export async function getStaticPaths() {
+  const pages = getCollectionItems('pages');
+  return pages.map((page: any) => ({
+    params: { slug: page.slug || page.id },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props;
+const siteSettings = getSiteSettings();
+const themeConfig = getThemeConfig();
+const activePreset = (themeConfig.defaultPreset || "Blue Sky").toLowerCase().replace(/\s+/g, '-');
+---
+
+<BaseLayout 
+  title={`${page.title} — ${siteSettings.siteName || "blogs"}`}
+  description={page.description || siteSettings.siteDescription}
+  preset={activePreset}
+>
+  <article class="capsule-single-post" style="max-width: 860px; margin: 40px auto; padding: 0 20px;">
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">{page.title}</span>
+    </nav>
+
+    <header class="post-header-capsule" style="margin-bottom: 28px;">
+      <h1 class="post-title" style="font-size: 2.4rem; font-weight: 800; color: var(--theme-text);">{page.title}</h1>
+      {page.description && <p class="post-lead">{page.description}</p>}
+    </header>
+
+    <div class="notion-article-body" set:html={page.contentHtml || "<p>Belum ada isi konten.</p>"}></div>
+  </article>
+</BaseLayout>

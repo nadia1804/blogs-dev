@@ -1,0 +1,49 @@
+---
+import { getPluginConfig } from "../../utils/content.js";
+
+export interface Props {
+  slotKey?: "header" | "belowTitle" | "inArticle" | "belowArticle" | "safelinkTop" | "safelinkBottom";
+  slotId?: string;
+  format?: "auto" | "rectangle" | "horizontal" | "vertical";
+  className?: string;
+}
+
+const { slotKey, slotId: explicitSlotId, format: explicitFormat, className = "" } = Astro.props;
+
+const adsConfig = getPluginConfig("adsense", { enabled: false, settings: { slots: {} } });
+const isPluginEnabled = Boolean(adsConfig.enabled);
+const clientId = (adsConfig.settings?.clientId || "").trim();
+
+let activeSlotId = explicitSlotId || "";
+let activeFormat = explicitFormat || "auto";
+let isSlotActive = false;
+
+if (slotKey && adsConfig.settings?.slots?.[slotKey]) {
+  const slotConf = adsConfig.settings.slots[slotKey];
+  if (slotConf.enabled !== false && slotConf.slotId) {
+    activeSlotId = slotConf.slotId;
+    activeFormat = slotConf.format || activeFormat;
+    isSlotActive = true;
+  }
+} else if (explicitSlotId) {
+  isSlotActive = true;
+}
+
+const shouldRender = isPluginEnabled && Boolean(clientId) && isSlotActive && Boolean(activeSlotId);
+---
+
+{shouldRender ? (
+  <div class={`adsense-wrapper adsense-${slotKey || "custom"} ${className}`} style="margin: 20px auto; text-align: center; overflow: hidden;">
+    <ins 
+      class="adsbygoogle"
+      style="display:block; min-height: 90px;"
+      data-ad-client={clientId}
+      data-ad-slot={activeSlotId}
+      data-ad-format={activeFormat}
+      data-full-width-responsive="true"
+    ></ins>
+    <script is:inline>
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+) : null}

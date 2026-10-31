@@ -1,0 +1,14 @@
+{
+  "id": "backup-20261030-204150",
+  "label": "Snapshot Awal v0.2.3",
+  "createdAt": "2026-10-30T12:41:50.959Z",
+  "version": "0.2.3",
+  "stats": {
+    "fruitsCount": 4,
+    "postsCount": 8,
+    "contentFiles": 15,
+    "assetFiles": 23,
+    "totalFiles": 40,
+    "sizeBytes": 6510379
+  }
+}

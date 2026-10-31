@@ -1,0 +1,17 @@
+---
+import { getPluginConfig } from "../../utils/content.js";
+
+const adsConfig = getPluginConfig("adsense", { enabled: false, settings: {} });
+const isEnabled = Boolean(adsConfig.enabled);
+const clientId = (adsConfig.settings?.clientId || "").trim();
+const enableAutoAds = Boolean(adsConfig.settings?.enableAutoAds);
+---
+
+{isEnabled && clientId && (
+  <script 
+    is:inline 
+    async 
+    src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`}
+    crossorigin="anonymous"
+  ></script>
+)}

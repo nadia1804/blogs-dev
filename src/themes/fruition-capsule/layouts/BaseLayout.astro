@@ -1,0 +1,143 @@
+---
+import siteSettings from "../../../../content/settings/site.json";
+import { getGithubIcon } from "../../../icons/github-icons.js";
+import CapsuleHeader from "./CapsuleHeader.astro";
+import AdSenseScript from "../../../plugins/adsense/AdSenseScript.astro";
+import SafelinkScript from "../../../plugins/safelink/SafelinkScript.astro";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  preset?: "light" | "mono" | "blue-sky" | "candy-pop" | string;
+  siteTitle?: string;
+  logoUrl?: string;
+  showSiteTitle?: boolean;
+  siteIcon?: string;
+  footerText?: string;
+}
+
+const {
+  title = "Fruition-capsule Theme Preview",
+  description = "Single-capsule floating header glassmorphism and modern static publishing.",
+  preset = "blue-sky",
+  siteTitle = siteSettings.siteName || "blogs",
+  logoUrl = siteSettings.logoUrl || "/logo.png",
+  showSiteTitle = Boolean(siteSettings.showSiteName),
+  siteIcon = siteSettings.siteIcon || "",
+  footerText = ""
+} = Astro.props;
+
+const footerItems = (siteSettings.footerNav && siteSettings.footerNav.length > 0)
+  ? siteSettings.footerNav.filter((f: any) => f.visible !== false)
+  : [
+      { id: "foot-1", icon: "globe", label: "sitemap.xml", url: "/sitemap.xml", target: "_self" },
+      { id: "foot-2", icon: "terminal", label: "rss", url: "/rss", target: "_self" },
+      { id: "foot-3", icon: "gear", label: "robots.txt", url: "/robots.txt", target: "_self" },
+      { id: "foot-4", icon: "file", label: "llms.txt", url: "/llms.txt", target: "_self" }
+    ];
+
+const rawCopyright = siteSettings.footerCopyright || '{yyyy} Made with {heart} by headless blogs';
+const formattedCopyright = rawCopyright
+  .replace(/\{yyyy\}/g, String(new Date().getFullYear()))
+  .replace(/\{heart\}|\{heartbeat\}|\{heart\s*beat\}|\{heart-beat\}|❤️|&#10084;&#65039;|&#x2764;&#xfe0f;/gi, `<span class="heartbeat-pulse" aria-label="heartbeat">${getGithubIcon('heart', { size: 13, color: '#e11d48' })}</span>`);
+---
+
+<!DOCTYPE html>
+<html lang="en" data-theme-preset={preset}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- Capsule Stylesheet -->
+  <link rel="stylesheet" href="/capsule.css" />
+  
+  <!-- Plugin: Google AdSense Header Script (Conditional) -->
+  <AdSenseScript />
+
+  <slot name="head" />
+</head>
+<body class="fruition-capsule-body" data-theme-preset={preset}>
+  
+  <!-- Floating Single-Capsule Header -->
+  <CapsuleHeader logoUrl={logoUrl} siteTitle={siteTitle} showSiteTitle={showSiteTitle} siteIcon={siteIcon} />
+
+  <!-- Main Page Content Slot -->
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <!-- Clean Floating / Static Footer -->
+  <footer class="capsule-footer">
+    <div class="footer-brand">
+      {logoUrl ? (
+        <img src={logoUrl} alt={siteTitle || "blogs"} class="capsule-logo-img" style="height: 24px;" />
+      ) : siteIcon ? (
+        <span class="capsule-icon-wrap" style="width: 24px; height: 24px; font-size: 0.9rem;">{siteIcon}</span>
+      ) : (
+        <img src="/logo.png" alt="blogs" class="capsule-logo-img" style="height: 24px;" />
+      )}
+      <span class="footer-divider">--</span>
+      <span class="footer-copyright" set:html={formattedCopyright}></span>
+    </div>
+
+    <ul class="footer-nav">
+      {footerItems.map((item: any) => (
+        <li>
+          <a href={item.url} target={item.target || "_self"}>
+            {item.icon && item.icon !== "none" && (
+              <Fragment set:html={getGithubIcon(item.icon, { size: 13, className: 'footer-link-icon' }) + " "} />
+            )}
+            <span>{item.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    {footerText && (
+      <div style="font-size: 0.82rem; color: var(--theme-text-muted);">
+        {footerText}
+      </div>
+    )}
+  </footer>
+
+  <!-- Live Sandbox Sync Script (Listens to parent postMessage from Admin) -->
+  <script>
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data) return;
+      
+      // Preset switcher
+      if (data.type === 'CHANGE_PRESET' && data.preset) {
+        document.documentElement.setAttribute('data-theme-preset', data.preset);
+        document.body.setAttribute('data-theme-preset', data.preset);
+      }
+      
+      // Dark mode toggle
+      if (data.type === 'TOGGLE_DARK') {
+        const isDark = data.darkMode !== undefined ? data.darkMode : !document.body.classList.contains('dark-mode');
+        document.body.classList.toggle('dark-mode', isDark);
+        document.documentElement.classList.toggle('dark', isDark);
+      }
+
+      // Editorial Mobile layout live sync
+      if (data.type === 'CHANGE_EDITORIAL_MOBILE') {
+        const grid = document.getElementById('capsuleCardGrid');
+        if (grid) {
+          const m = String(data.mobile);
+          grid.setAttribute('data-editorial-mobile', m);
+          grid.classList.toggle('editorial-mobile-2', m === '2');
+        }
+      }
+    });
+  </script>
+
+  <!-- Plugin: Safelink External Link Protection Interceptor -->
+  <SafelinkScript />
+</body>
+</html>

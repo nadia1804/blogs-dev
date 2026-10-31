@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-preset="blue-sky">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastering Notion as a Headless CMS — blogs</title>
+  <link rel="stylesheet" href="/capsule.css">
+  <style>
+    /* Live Preview Controller Dock */
+    .preview-controller-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 18px;
+      background: rgba(15, 23, 42, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 9999px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+      font-size: 0.85rem;
+      color: #f8fafc;
+    }
+    .controller-label {
+      font-weight: 600;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .controller-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .controller-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .controller-btn.active {
+      background: #0284c7;
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+    }
+    .controller-sep {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .btn-admin-link {
+      background: #10b981;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-admin-link:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body class="fruition-capsule-body" data-theme-preset="blue-sky">
+
+  <!-- ================= FLOATING SINGLE-CAPSULE HEADER ================= -->
+  <header class="capsule-header-wrapper" id="capsuleHeaderWrapper">
+    <nav class="capsule-header" aria-label="Main Navigation">
+      <!-- Brand / Capsule Identity with Uploaded Logo -->
+      <a href="/theme" class="capsule-brand">
+        <img src="/logo.png" alt="blogs" class="capsule-logo-img" />
+      </a>
+
+      <!-- Navigation links -->
+      <ul class="capsule-nav" id="capsuleNavList">
+        <li class="capsule-nav-item"><a href="/theme" class="active"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 011 8a7 7 0 017-7 .75.75 0 01.75.75v12.5A.75.75 0 018 15zm-.75-1.52A5.502 5.502 0 012.5 8c0-2.614 1.82-4.802 4.25-5.36v10.84zM5.25 5.5a.75.75 0 100-1.5.75.75 0 000 1.5zm-1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5zm1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg> <span>Home</span></a></li>
+        <li class="capsule-nav-item"><a href="/read"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.002 1H15.25a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.248a2.25 2.25 0 00-1.748.837l-.256.32a.75.75 0 01-1.176 0l-.256-.32a2.25 2.25 0 00-1.748-.837H.75a.75.75 0 01-.75-.75V1.75zM1.5 2.5v8.75h3.503c.71 0 1.385.247 1.928.694A3.75 3.75 0 018 10.75v-7.5a2.25 2.25 0 00-2.247-2.25H1.5zm8 8.25c.572-.447 1.248-.694 1.958-.694H14.5V2.5h-3.498a2.25 2.25 0 00-2.252 2.25v7.5z"></path></svg> <span>Catatan</span></a></li>
+        <li class="capsule-nav-item"><a href="/pelajaran"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1h-8a1 1 0 00-1 1v6.708A2.486 2.486 0 014.5 9h8V1.5z"></path></svg> <span>Pendidikan</span></a></li>
+        <li class="capsule-nav-item"><a href="/authors"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.5 3.5a2 2 0 100 4 2 2 0 000-4zM2 5.5a3.5 3.5 0 117 0 3.5 3.5 0 01-7 0zm9 0a2 2 0 100-4 2 2 0 000 4zm1.5 2a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0zM1 13.5A2.5 2.5 0 013.5 11h4a2.5 2.5 0 012.5 2.5v1.25a.75.75 0 01-.75.75H1.75a.75.75 0 01-.75-.75V13.5zm2.5-1a1 1 0 00-1 1v.5h7v-.5a1 1 0 00-1-1h-4zm7.5 1a1 1 0 011-1h1.5a2.5 2.5 0 012.5 2.5v1.25a.75.75 0 01-.75.75h-3.75a.75.75 0 010-1.5H14v-.5a1 1 0 00-1-1H12v-.5z"></path></svg> <span>Penulis</span></a></li>
+        <li class="capsule-nav-item"><a href="/about"><svg class="gh-icon nav-link-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.586c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v9.086A1.75 1.75 0 0112.75 16h-9A1.75 1.75 0 012 14.25V1.75z"></path></svg> <span>About</span></a></li>
+      </ul>
+
+      <!-- Integrated Toolbar & Actions -->
+      <div class="capsule-tools">
+        <button class="capsule-tool-btn" id="btnCapsuleSearch" aria-label="Search articles" title="Instant Search">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <button class="capsule-tool-btn" id="btnCapsuleDark" aria-label="Toggle dark mode" title="Toggle Dark/Light Mode">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile toggle -->
+        <button class="capsule-tool-btn capsule-mobile-toggle" id="btnCapsuleMobile" aria-label="Menu">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Glassmorphic Instant Search Popup Modal -->
+  <div class="capsule-search-modal-backdrop" id="capsuleSearchModal" aria-hidden="true" style="display: none;">
+    <div class="capsule-search-modal-container">
+      <div class="capsule-search-dialog" role="dialog" aria-modal="true" aria-label="Search articles">
+        <div class="capsule-search-header">
+          <span class="capsule-search-header-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            id="capsuleSearchModalInput" 
+            class="capsule-search-dialog-input" 
+            placeholder="Search articles by topic, title, keyword..." 
+            autocomplete="off" 
+            spellcheck="false" 
+          />
+          <div class="capsule-search-actions">
+            <span class="capsule-search-shortcut-hint"><kbd>ESC</kbd></span>
+            <button type="button" class="capsule-search-close-btn" id="btnCloseSearchModal" aria-label="Close search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="capsule-search-quick-tags" id="searchQuickTags">
+          <span class="quick-tag-label">Suggested:</span>
+          <button type="button" class="quick-tag-pill" data-query="Architecture">Architecture</button>
+          <button type="button" class="quick-tag-pill" data-query="Performance">Performance</button>
+          <button type="button" class="quick-tag-pill" data-query="UI Design">UI Design</button>
+          <button type="button" class="quick-tag-pill" data-query="DevOps">DevOps</button>
+          <button type="button" class="quick-tag-pill" data-query="Notion">Notion</button>
+        </div>
+
+        <div class="capsule-search-results" id="capsuleSearchResults"></div>
+
+        <div class="capsule-search-footer">
+          <div class="search-tip">
+            <kbd>Ctrl</kbd> + <kbd>F</kbd> shortcut &bull; <kbd>Esc</kbd> to cancel
+          </div>
+          <div class="search-count" id="searchModalCount">
+            6 articles indexed
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= SINGLE POST CONTENT (UNIFIED 1200PX CONTAINER) ================= -->
+  <main class="capsule-single-post">
+    <!-- Breadcrumb -->
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/theme">Home</a>
+      <span>/</span>
+      <a href="/posts">Articles</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">Architecture</span>
+    </nav>
+
+    <!-- Post Header -->
+    <header class="post-header-capsule">
+      <h1 class="post-title">Mastering Notion as a Headless CMS with Fruition Mini</h1>
+
+      <p class="post-lead">
+        Learn how Notion Fruit connectors pull structured schema, map complex blocks recursively, and generate pure static Astro assets with zero runtime latency.
+      </p>
+
+      <!-- Meta Bar with Capsule Pill & Print Button -->
+      <div class="post-meta-bar">
+        <div class="post-meta-capsule" role="group" aria-label="Article metadata">
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Published 28/10/2026
+          </span>
+          <span class="meta-item">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            5 min read
+          </span>
+        </div>
+
+        <button type="button" class="btn-print-article" onclick="window.print()" title="Print only article content">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          <span>Print Article</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Featured Media Banner (Plain pastel fallback) -->
+    <div class="post-featured-media">
+      <div class="card-pastel-cover pastel-blossom" style="height: 380px; position: relative;"></div>
+    </div>
+
+    <!-- Post Body Grid: Main Content + Sticky Sidebar -->
+    <div class="post-body-layout">
+      <!-- Article Prose -->
+      <article class="post-prose">
+        <!-- Table of Contents (Mobile & Tablet Viewport: Inlined before article content) -->
+        <div class="mobile-toc-box">
+          <div class="sidebar-widget-title" style="margin-bottom: 12px;">Table of Contents</div>
+          <ul class="toc-list">
+            <li><a href="#why-headless-notion">Why Headless Notion?</a></li>
+            <li><a href="#the-pipeline">Ingestion Pipeline</a></li>
+            <li><a href="#code-example">Code Example: Strongly Typed Connector</a></li>
+            <li><a href="#conclusion">Summary & Best Practices</a></li>
+          </ul>
+        </div>
+
+        <p>
+          Notion is celebrated for its unmatched editing ergonomics, flexible relational databases, and effortless collaborative drafting. However, treating Notion as a live web production backend has historically plagued web architects with unpredictable latency, rate limits, and expiring AWS S3 asset signatures.
+        </p>
+
+        <h2 id="why-headless-notion">Why Decouple Notion for Web Delivery?</h2>
+        <p>
+          When you serve web traffic directly by querying Notion's API at runtime, every single visitor request is subject to multi-second delays and potential rate limit throttling. In contrast, <em>Fruition-capsule</em> operates under a static compilation paradigm:
+        </p>
+
+        <div class="post-callout">
+          <span class="post-callout-icon">💡</span>
+          <div>
+            <strong style="color: var(--theme-primary);">Zero Runtime Notion Latency:</strong>
+            <p style="margin: 4px 0 0; font-size: 0.95rem; color: var(--theme-text-muted);">
+              All database properties, markdown syntax, and remote media files are extracted at build time. The user receives pure, static HTML delivered at 0ms edge speed with 100% lighthouse compliance.
+            </p>
+          </div>
+        </div>
+
+        <h2 id="the-pipeline">The Atomic Ingestion Pipeline</h2>
+        <p>
+          To maintain data integrity without sacrificing publishing velocity, our ingestion pipeline executes in 4 distinct phases:
+        </p>
+
+        <ul>
+          <li><strong>Database Introspection:</strong> Traverses Notion databases and pulls schema types, relations, and select dropdown metadata.</li>
+          <li><strong>Recursive Block Traversal:</strong> Maps paragraphs, headings, bulleted lists, toggles, callouts, and code snippets into clean semantic DOM nodes.</li>
+          <li><strong>Sharp WebP Media Conversion:</strong> Downloads remote image URLs and transforms them into lightweight local WebP assets saved to <code>/public/assets/</code>.</li>
+          <li><strong>Unified Theme Injection:</strong> Applies the <code>1200px</code> container standard across all generated pages so the floating capsule header and reading content match precisely.</li>
+        </ul>
+
+        <blockquote>
+          "A static blog should feel as fast as opening a native terminal application. Clean geometry, zero bloatware."
+        </blockquote>
+
+        <h2 id="code-example">Code Example: Strongly Typed Connector</h2>
+        <p>
+          The Fruit connector abstracts the raw Notion payload into clean, type-safe schema:
+        </p>
+
+        <pre><code>// fruit-connector.ts
+import { Client } from "@notionhq/client";
+
+export async function fetchNotionPost(pageId: string): Promise&lt;PostItem&gt; {
+  const notion = new Client({ auth: process.env.NOTION_TOKEN });
+  const page = await notion.pages.retrieve({ page_id: pageId });
+  const blocks = await notion.blocks.children.list({ block_id: pageId });
+  
+  return {
+    id: page.id,
+    title: extractPlainText(page.properties.Title),
+    slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
+    category: page.properties.Category?.select?.name || "Architecture",
+    date: formatDate(page.created_time),
+    readingTime: calculateReadingTime(blocks)
+  };
+}</code></pre>
+
+        <h2 id="conclusion">Summary & Best Practices</h2>
+        <p>
+          By locking all page containers to <code>--site-max-width: 1200px</code>, the user interface achieves visual balance. Readers on widescreen monitors enjoy a centered, floating capsule navigation that seamlessly frames the underlying editorial content.
+        </p>
+
+        <!-- Social Share Bar (Below Article Content) -->
+        <div class="post-social-share">
+          <div class="share-label">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>Share this article:</span>
+          </div>
+          <div class="share-buttons">
+            <a href="https://twitter.com/intent/tweet?text=Mastering%20Notion%20as%20a%20Headless%20CMS" target="_blank" rel="noopener" class="btn-share" title="Share on X / Twitter">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              <span>X</span>
+            </a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4321/post" target="_blank" rel="noopener" class="btn-share" title="Share on Facebook">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span>Facebook</span>
+            </a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4321/post" target="_blank" rel="noopener" class="btn-share" title="Share on LinkedIn">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.45 1.45 0 0 0 0-2.9 1.45 1.45 0 0 0 0 2.9m1.4 9.74V9.93H5.06v8.57h2.8z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://api.whatsapp.com/send?text=Mastering%20Notion%20as%20a%20Headless%20CMS%20http://localhost:4321/post" target="_blank" rel="noopener" class="btn-share" title="Share on WhatsApp">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24"/>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+            <a href="https://t.me/share/url?url=http://localhost:4321/post&text=Mastering%20Notion" target="_blank" rel="noopener" class="btn-share" title="Share on Telegram">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+              </svg>
+              <span>Telegram</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Authors Box (Mobile & Tablet Viewport: Inlined below article content) -->
+        <div class="mobile-authors-box">
+          <div class="sidebar-widget-title">Authors</div>
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;">
+            <div class="post-author-avatar-lg">FM</div>
+            <div>
+              <div style="font-weight: 700; font-size: 1rem; color: var(--theme-text);">Fruition Core Team</div>
+              <div style="font-size: 0.82rem; color: var(--theme-text-muted);">Systems Architecture</div>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--theme-text-muted); line-height: 1.55;">
+            Engineers building zero-latency static site publishing tools with glassmorphic aesthetics.
+          </p>
+        </div>
+      </article>
+
+      <!-- Sticky Sidebar (Desktop & Tablet) -->
+      <aside class="post-sidebar">
+        <!-- Table of Contents -->
+        <div class="sidebar-widget post-toc-card post-toc capsule-toc">
+          <div class="sidebar-widget-title">Table of Contents</div>
+          <ul class="toc-list">
+            <li><a href="#why-headless-notion" class="active">Why Headless Notion?</a></li>
+            <li><a href="#the-pipeline">Ingestion Pipeline</a></li>
+            <li><a href="#code-example">Code Example</a></li>
+            <li><a href="#conclusion">Summary & Best Practices</a></li>
+          </ul>
+        </div>
+
+        <!-- Authors Widget -->
+        <div class="sidebar-widget post-author-sidebar author-sidebar-card post-author-box">
+          <div class="sidebar-widget-title">Authors</div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <div class="post-author-avatar-lg" style="width: 40px; height: 40px; font-size: 0.95rem;">FM</div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.95rem; color: var(--theme-text);">Fruition Core Team</div>
+              <div style="font-size: 0.8rem; color: var(--theme-text-muted);">Systems Architecture</div>
+            </div>
+          </div>
+          <p style="font-size: 0.86rem; color: var(--theme-text-muted); line-height: 1.5; margin-bottom: 16px;">
+            Engineers building zero-latency static site publishing tools with glassmorphic aesthetics.
+          </p>
+          <a href="/author" class="card-link-arrow" style="font-size: 0.85rem;">
+            <span>View Full Profile</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Adjacent Posts Navigation -->
+    <nav class="post-nav-capsule" aria-label="Adjacent Articles">
+      <a href="/post" class="post-nav-card">
+        <div class="post-nav-dir">&larr; Previous Article</div>
+        <div class="post-nav-card-title">Crafting Glassmorphic Micro-Interactions in CSS3</div>
+      </a>
+      <a href="/post" class="post-nav-card" style="text-align: right;">
+        <div class="post-nav-dir">Next Article &rarr;</div>
+        <div class="post-nav-card-title">Zero-Latency GitOps Workflow for Indie Writers</div>
+      </a>
+    </nav>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="capsule-footer">
+    <div class="footer-brand">
+      <img src="/logo.png" alt="blogs" class="capsule-logo-img" style="height: 24px;" />
+      <span class="footer-divider">--</span>
+      <span class="footer-copyright">
+        2026 Made with <span class="heartbeat-pulse" aria-label="heartbeat"><svg class="gh-icon" viewBox="0 0 16 16" width="13" height="13" fill="#e11d48" aria-hidden="true"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path></svg></span> by headless blogs
+      </span>
+    </div>
+
+    <ul class="footer-nav">
+      <li><a href="/sitemap.xml"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zm6.5 8a6.47 6.47 0 01-.76 3.03l-1.74-1.74a1.5 1.5 0 00-1.06-.44H9.5V7a1 1 0 00-1-1H7V4.5A.5.5 0 017.5 4h1a2 2 0 002-2V1.58A6.51 6.51 0 0114.5 8zm-13 0c0-.85.16-1.66.46-2.41L4.5 8.12V9a1 1 0 001 1h2v1.5a.5.5 0 01-.5.5H5.8a1.5 1.5 0 00-1.06.44L2.8 14.38A6.47 6.47 0 011.5 8z"></path></svg> <span>sitemap.xml</span></a></li>
+      <li><a href="/rss"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75zm1.75-.25a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75zM7.25 8a.75.75 0 01-.22.53l-2.25 2.25a.75.75 0 01-1.06-1.06L5.44 8 3.72 6.28a.75.75 0 011.06-1.06l2.25 2.25c.141.14.22.331.22.53zm1.5 2.25a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75z"></path></svg> <span>rss</span></a></li>
+      <li><a href="/robots.txt"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.429 1.525a6.593 6.593 0 011.142 0c.036.003.108.036.137.146l.289 1.105c.147.56.55.967 1.075 1.185.525.217 1.116.154 1.58-.168l.9-.624c.092-.064.15-.045.174-.035a6.6 6.6 0 01.807.807c.01.024.029.082-.035.174l-.624.9c-.322.464-.385 1.055-.168 1.58.218.525.625.928 1.185 1.075l1.105.289c.11.029.143.101.146.137a6.6 6.6 0 010 1.142c-.003.036-.036.108-.146.137l-1.105.289c-.56.147-.967.55-1.185 1.075-.217.525-.154 1.116.168 1.58l.624.9c.064.092.045.15.035.174a6.593 6.593 0 01-.807.807c-.024.01-.082.029-.174-.035l-.9-.624c-.464-.322-1.055-.385-1.58-.168-.525.218-.928.625-1.075 1.185l-.289 1.105c-.029.11-.101.143-.137.146a6.6 6.6 0 01-1.142 0c-.036-.003-.108-.036-.137-.146l-.289-1.105c-.147-.56-.55-.967-1.075-1.185-.525-.217-1.116-.154-1.58.168l-.9.624c-.092.064-.15.045-.174.035a6.6 6.6 0 01-.807-.807c-.01-.024-.029-.082.035-.174l.624-.9c.322-.464.385-1.055.168-1.58-.218-.525-.625-.928-1.185-1.075l-1.105-.289c-.11-.029-.143-.101-.146-.137a6.6 6.6 0 010-1.142c.003-.036.036-.108.146-.137l1.105-.289c.56-.147.967-.55 1.185-1.075.217-.525.154-1.116-.168-1.58l-.624-.9c-.064-.092-.045-.15-.035-.174a6.593 6.593 0 01.807-.807c.024-.01.082-.029.174.035l.9.624c.464.322 1.055.385 1.58.168.525-.218.928-.625 1.075-1.185l.289-1.105c.029-.11.101-.143.137-.146zM8 5.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"></path></svg> <span>robots.txt</span></a></li>
+      <li><a href="/llms.txt"><svg class="gh-icon footer-link-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.586c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v9.086A1.75 1.75 0 0112.75 16h-9A1.75 1.75 0 012 14.25V1.75z"></path></svg> <span>llms.txt</span></a></li>
+    </ul>
+  </footer>
+
+  <!-- Floating Go-to-Top Button (Fixed Left, Post & Page Only, with Reading Progress) -->
+  <button type="button" class="capsule-go-top" id="capsuleGoTop" aria-label="Go to top of page" title="Go to top">
+    <svg class="capsule-go-top-ring" viewBox="0 0 44 44" aria-hidden="true">
+      <circle class="capsule-progress-track" cx="22" cy="22" r="19" fill="none" stroke-width="2.5" />
+      <circle class="capsule-progress-bar" id="capsuleProgressCircle" cx="22" cy="22" r="19" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="119.38" stroke-dashoffset="119.38" transform="rotate(-90 22 22)" />
+    </svg>
+    <div class="capsule-go-top-inner">
+      <svg class="capsule-go-top-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+      </svg>
+      <span class="capsule-go-top-percent" id="capsuleGoTopPercent">0%</span>
+    </div>
+  </button>
+
+  <!-- ================= LIVE PREVIEW CONTROLLER BAR ================= -->
+  <aside class="preview-controller-bar" aria-label="Theme Preview Controls">
+    <span class="controller-label">Presets:</span>
+    <button class="controller-btn" data-preset="light" id="btnPresetLight">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#fff; border:1px solid #cbd5e1;"></span>
+      Light
+    </button>
+    <button class="controller-btn" data-preset="mono" id="btnPresetMono">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#000;"></span>
+      Mono
+    </button>
+    <button class="controller-btn active" data-preset="blue-sky" id="btnPresetBlue">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#0284c7;"></span>
+      Blue Sky
+    </button>
+    <button class="controller-btn" data-preset="candy-pop" id="btnPresetCandy">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#e11d48;"></span>
+      Candy Pop
+    </button>
+
+    <div class="controller-sep"></div>
+
+    <button class="controller-btn" id="btnDarkToggleQuick">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678A5.5 5.5 0 1011.214 3.536z"></path></svg> <span>Dark Mode</span>
+    </button>
+
+    <div class="controller-sep"></div>
+
+    <button type="button" class="controller-btn" onclick="window.print()">
+      <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3.75 2A1.75 1.75 0 002 3.75v3.5C2 8.216 2.784 9 3.75 9h8.5A1.75 1.75 0 0014 7.25v-3.5A1.75 1.75 0 0012.25 2H3.75zm0 1.5h8.5a.25.25 0 01.25.25v3.5a.25.25 0 01-.25.25H3.75a.25.25 0 01-.25-.25v-3.5a.25.25 0 01.25-.25zM12 5.5a.75.75 0 100-1.5.75.75 0 000 1.5zM3.5 10.5A1.5 1.5 0 002 12v1.5c0 .276.224.5.5.5h11a.5.5 0 00.5-.5V12a1.5 1.5 0 00-1.5-1.5h-9zM3 13.5v-1.5a.5.5 0 01.5-.5h9a.5.5 0 01.5.5v1.5H3z"></path></svg> <span>Print</span>
+    </button>
+  </aside>
+
+  <script>
+    // Preset Switching
+    const presetBtns = document.querySelectorAll('.controller-btn[data-preset]');
+    presetBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presetBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const preset = btn.getAttribute('data-preset');
+        document.documentElement.setAttribute('data-theme-preset', preset);
+        document.body.setAttribute('data-theme-preset', preset);
+        localStorage.setItem('fruition_theme_preset', preset);
+      });
+    });
+
+    // Dark Mode Toggle
+    const darkBtns = [document.getElementById('btnCapsuleDark'), document.getElementById('btnDarkToggleQuick')];
+    darkBtns.forEach(btn => {
+      if (btn) {
+        btn.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+          document.documentElement.classList.toggle('dark');
+        });
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById('btnCapsuleMobile');
+    const navList = document.getElementById('capsuleNavList');
+    if (mobileBtn && navList) {
+      mobileBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navList.classList.toggle('mobile-open');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!navList.contains(e.target) && !mobileBtn.contains(e.target)) {
+          navList.classList.remove('mobile-open');
+        }
+      });
+
+      navList.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navList.classList.remove('mobile-open');
+        });
+      });
+    }
+
+    // Live Sandbox postMessage Synchronization (when loaded in Admin iframe)
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data) return;
+
+      if (data.type === 'CHANGE_PRESET' && data.preset) {
+        document.documentElement.setAttribute('data-theme-preset', data.preset);
+        document.body.setAttribute('data-theme-preset', data.preset);
+        presetBtns.forEach(b => {
+          if (b.getAttribute('data-preset') === data.preset) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      }
+
+      if (data.type === 'TOGGLE_DARK') {
+        const isDark = data.darkMode !== undefined ? data.darkMode : !document.body.classList.contains('dark-mode');
+        document.body.classList.toggle('dark-mode', isDark);
+        document.documentElement.classList.toggle('dark', isDark);
+      }
+    });
+
+    // Instant Search Glassmorphic Modal & Shortcuts (Ctrl+F, Esc)
+    const searchModal = document.getElementById('capsuleSearchModal');
+    const searchInput = document.getElementById('capsuleSearchModalInput');
+    const closeBtn = document.getElementById('btnCloseSearchModal');
+    const resultsContainer = document.getElementById('capsuleSearchResults');
+    const countDisplay = document.getElementById('searchModalCount');
+    const quickTags = document.querySelectorAll('.quick-tag-pill');
+    const searchTriggerBtn = document.getElementById('btnCapsuleSearch');
+
+    const indexedArticles = [
+      {
+        title: "Mastering Notion as a Headless CMS with Fruition Mini",
+        url: "/post",
+        category: "Architecture",
+        excerpt: "Learn how Notion Fruit connectors pull structured schema, map blocks recursively, and generate pure static Astro assets."
+      },
+      {
+        title: "High-Performance Image Optimization with Sharp WebP Pipeline",
+        url: "/post",
+        category: "Performance",
+        excerpt: "Eliminate expiring Notion S3 AWS URLs by converting all remote assets into compressed local WebP during SSG build."
+      },
+      {
+        title: "Crafting Glassmorphic Micro-Interactions in CSS3",
+        url: "/post",
+        category: "UI Design",
+        excerpt: "Explore backdrop-filter techniques, hardware acceleration, and seamless capsule animations for modern UI navigation."
+      },
+      {
+        title: "Zero-Latency GitOps Workflow for Indie Writers & Teams",
+        url: "/post",
+        category: "DevOps",
+        excerpt: "Deploying static blogs effortlessly with commit-driven synchronization and atomic JSON state stores."
+      },
+      {
+        title: "Single-Capsule Responsive Layouts: Mobile to Ultra-Wide",
+        url: "/post",
+        category: "Frontend",
+        excerpt: "A deep dive into fluid typography, viewport clamping, and adaptive hamburger collapsing strategies."
+      },
+      {
+        title: "Content Modeling: Relations, Rollups, and Formulas in Static Sites",
+        url: "/post",
+        category: "Notion",
+        excerpt: "How to preserve complex relational databases without sacrificing page generation speed."
+      }
+    ];
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    function renderSearchResults(query = '') {
+      if (!resultsContainer) return;
+      const cleanQuery = query.toLowerCase().trim();
+      const matches = cleanQuery
+        ? indexedArticles.filter(item => 
+            item.title.toLowerCase().includes(cleanQuery) ||
+            item.category.toLowerCase().includes(cleanQuery) ||
+            item.excerpt.toLowerCase().includes(cleanQuery)
+          )
+        : indexedArticles;
+
+      if (countDisplay) {
+        countDisplay.textContent = cleanQuery 
+          ? `${matches.length} result${matches.length === 1 ? '' : 's'} for "${query}"`
+          : `${indexedArticles.length} articles indexed`;
+      }
+
+      if (matches.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="search-empty-state">
+            No articles found matching "<strong>${escapeHtml(query)}</strong>". Try searching for <em>Notion</em>, <em>Architecture</em>, or <em>DevOps</em>.
+          </div>
+        `;
+        return;
+      }
+
+      resultsContainer.innerHTML = matches.map(item => `
+        <a href="${item.url}" class="search-result-item">
+          <div class="search-result-content">
+            <span class="search-result-title">${escapeHtml(item.title)}</span>
+            <span class="search-result-desc">${escapeHtml(item.excerpt)}</span>
+          </div>
+          <span class="search-result-badge">${escapeHtml(item.category)}</span>
+        </a>
+      `).join('');
+    }
+
+    function openSearchModal(initialQuery = '') {
+      if (!searchModal) return;
+      searchModal.style.display = 'flex';
+      requestAnimationFrame(() => {
+        searchModal.classList.add('active');
+        searchModal.setAttribute('aria-hidden', 'false');
+      });
+      document.body.style.overflow = 'hidden';
+      if (searchInput) {
+        if (initialQuery) {
+          searchInput.value = initialQuery;
+        }
+        renderSearchResults(searchInput.value);
+        setTimeout(() => {
+          searchInput.focus();
+          searchInput.select();
+        }, 50);
+      }
+    }
+
+    function closeSearchModal() {
+      if (!searchModal) return;
+      searchModal.classList.remove('active');
+      searchModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        if (!searchModal.classList.contains('active')) {
+          searchModal.style.display = 'none';
+        }
+      }, 220);
+    }
+
+    if (searchTriggerBtn) {
+      searchTriggerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openSearchModal();
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeSearchModal);
+    }
+
+    if (searchModal) {
+      searchModal.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target === searchModal || target.classList.contains('capsule-search-modal-container') || target.classList.contains('capsule-search-modal-backdrop')) {
+          closeSearchModal();
+        }
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        renderSearchResults(e.target.value);
+      });
+      searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const first = resultsContainer?.querySelector('.search-result-item');
+          if (first) first.click();
+        }
+      });
+    }
+
+    quickTags.forEach(tag => {
+      tag.addEventListener('click', () => {
+        const q = tag.getAttribute('data-query') || '';
+        if (searchInput) {
+          searchInput.value = q;
+        }
+        renderSearchResults(q);
+        searchInput?.focus();
+      });
+    });
+
+    // Global Keyboard Shortcuts: Ctrl+F to open, Esc to cancel
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
+        e.preventDefault();
+        openSearchModal();
+      }
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        const modal = searchModal || document.getElementById('capsuleSearchModal');
+        if (modal && (modal.classList.contains('active') || modal.style.display !== 'none')) {
+          e.preventDefault();
+          closeSearchModal();
+        }
+      }
+    });
+
+    // Floating Go-to-Top Button (with Reading Progress & Boundary Visibility)
+    const goTopBtn = document.getElementById('capsuleGoTop');
+    if (goTopBtn) {
+      const progressCircle = document.getElementById('capsuleProgressCircle');
+      const percentText = document.getElementById('capsuleGoTopPercent');
+      const circumference = 119.38;
+
+      let lastScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      let isScrollingToTop = false;
+
+      function updateReadingProgress(currentScrollY) {
+        const prose = document.querySelector('.post-prose') || document.querySelector('article');
+        let percent = 0;
+        if (prose) {
+          const rect = prose.getBoundingClientRect();
+          const proseTop = rect.top + currentScrollY;
+          const proseHeight = prose.offsetHeight;
+          const windowHeight = window.innerHeight;
+          const start = proseTop - 80;
+          const end = proseTop + proseHeight - windowHeight;
+          if (end > start) {
+            percent = Math.round(((currentScrollY - start) / (end - start)) * 100);
+          } else {
+            const total = document.documentElement.scrollHeight - windowHeight;
+            percent = total > 0 ? Math.round((currentScrollY / total) * 100) : 0;
+          }
+        } else {
+          const total = document.documentElement.scrollHeight - window.innerHeight;
+          percent = total > 0 ? Math.round((currentScrollY / total) * 100) : 0;
+        }
+        percent = Math.max(0, Math.min(100, percent));
+
+        if (progressCircle) {
+          const offset = circumference - (circumference * percent / 100);
+          progressCircle.style.strokeDashoffset = offset.toFixed(2);
+        }
+        if (percentText) {
+          percentText.textContent = `${percent}%`;
+        }
+        goTopBtn.setAttribute('title', `Go to top (${percent}%)`);
+        goTopBtn.setAttribute('aria-valuenow', String(percent));
+      }
+
+      function handleScroll() {
+        const currentScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+
+        updateReadingProgress(currentScrollY);
+
+        // If programmatic scroll to top is active, suppress re-showing until top area is reached
+        if (isScrollingToTop) {
+          if (currentScrollY <= 150) {
+            isScrollingToTop = false;
+          } else if (currentScrollY > lastScrollY) {
+            isScrollingToTop = false;
+          } else {
+            goTopBtn.classList.remove('is-visible');
+            lastScrollY = Math.max(0, currentScrollY);
+            return;
+          }
+        }
+
+        // 1. Initial near-top check (<= 150px always hidden)
+        if (currentScrollY <= 150) {
+          goTopBtn.classList.remove('is-visible');
+          lastScrollY = Math.max(0, currentScrollY);
+          return;
+        }
+
+        // 2. Footer collision boundary check: hide when approaching or passing .footer-brand
+        const footerBrand = document.querySelector('.footer-brand') || document.querySelector('.capsule-footer');
+        if (footerBrand) {
+          const footerTop = footerBrand.getBoundingClientRect().top;
+          if (footerTop <= windowHeight - 16) {
+            goTopBtn.classList.remove('is-visible');
+            lastScrollY = Math.max(0, currentScrollY);
+            return;
+          }
+        }
+
+        // 3. Share section boundary check
+        const shareSection = document.querySelector('.post-social-share') || document.querySelector('.share-label');
+        const prose = document.querySelector('.post-prose') || document.querySelector('article');
+        let isBelowShare = false;
+
+        if (shareSection) {
+          isBelowShare = shareSection.getBoundingClientRect().top <= windowHeight * 0.85;
+        } else if (prose) {
+          isBelowShare = prose.getBoundingClientRect().bottom <= windowHeight;
+        }
+
+        if (isBelowShare) {
+          // Permanently visible in/below the share section down until the footer brand
+          goTopBtn.classList.add('is-visible');
+        } else {
+          // Above the share section: apply previous scroll rules (scrolling down shows, scrolling up hides)
+          if (currentScrollY > lastScrollY && currentScrollY > 250) {
+            goTopBtn.classList.add('is-visible');
+          } else if (currentScrollY < lastScrollY) {
+            goTopBtn.classList.remove('is-visible');
+          }
+        }
+
+        lastScrollY = Math.max(0, currentScrollY);
+      }
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      goTopBtn.addEventListener('click', () => {
+        isScrollingToTop = true;
+        const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        goTopBtn.classList.remove('is-visible');
+        goTopBtn.blur();
+      });
+    }
+
+    // TOC Smooth Scroll Offset Handler
+    document.querySelectorAll('.toc-list a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const targetId = anchor.getAttribute('href');
+        if (targetId && targetId.length > 1) {
+          const target = document.querySelector(targetId);
+          if (target) {
+            e.preventDefault();
+            document.querySelectorAll('.toc-list a').forEach(a => {
+              if (a.getAttribute('href') === targetId) {
+                a.classList.add('active');
+              } else {
+                a.classList.remove('active');
+              }
+            });
+            const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+            history.pushState(null, '', targetId);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

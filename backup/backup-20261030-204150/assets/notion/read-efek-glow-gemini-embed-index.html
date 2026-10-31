@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Gemini Underglow (Elemen Selalu di Atas Glow)</title>
+  <style>
+    /* ========================================================
+       THEME VARIABLES: LIGHT & DARK MODE
+       ======================================================== */
+    :root {
+      --border-radius: 24px;
+      --sys-motion--curve-standard: cubic-bezier(0.4, 0, 0.2, 1);
+      --hover-fade-duration: 400ms;
+    }
+
+    /* LIGHT MODE */
+    [data-theme="light"] {
+      --bg-color: #f8fafd;
+      --bg-radial-1: rgba(49, 134, 255, 0.08);
+      --bg-radial-2: rgba(249, 107, 214, 0.06);
+      --card-bg: #ffffff;
+      --card-text: #1f1f1f;
+      --card-subtext: #444746;
+      --card-headline: #1f1f1f;
+      --card-category: #0b57d0;
+      --card-border-idle: #e0e2ec;
+      --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+      
+      --btn-primary-bg: #1a73e8;
+      --btn-primary-text: #ffffff;
+      --btn-primary-border: #1a73e8;
+
+      --btn-surface-bg: #ffffff;
+      --btn-surface-text: #1f1f1f;
+      --btn-surface-border: #e0e2ec;
+
+      --input-bg: #ffffff;
+      --input-text: #1f1f1f;
+      --input-placeholder: #747775;
+      --input-border: #e0e2ec;
+
+      --chip-bg: #ffffff;
+      --chip-text: #1f1f1f;
+      --chip-border: #e0e2ec;
+
+      --icon-bg: #f0f4f9;
+      --icon-border: #e0e2ec;
+      
+      --badge-bg: rgba(11, 87, 208, 0.08);
+      --badge-border: rgba(11, 87, 208, 0.18);
+      --badge-text: #0b57d0;
+      
+      --glow-outer-opacity: 0.85;
+      --title-gradient: linear-gradient(135deg, #1f1f1f 40%, #0b57d0 100%);
+      --author-text: #444746;
+    }
+
+    /* DARK MODE */
+    [data-theme="dark"] {
+      --bg-color: #0d0f12;
+      --bg-radial-1: rgba(49, 134, 255, 0.08);
+      --bg-radial-2: rgba(249, 107, 214, 0.05);
+      --card-bg: #16181d;
+      --card-text: #e8eaed;
+      --card-subtext: #9aa0a6;
+      --card-headline: #ffffff;
+      --card-category: #8ab4f8;
+      --card-border-idle: rgba(255, 255, 255, 0.1);
+      --card-shadow: none;
+      --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.4);
+      
+      --btn-primary-bg: #3186ff;
+      --btn-primary-text: #ffffff;
+      --btn-primary-border: #3186ff;
+
+      --btn-surface-bg: #1e2025;
+      --btn-surface-text: #e8eaed;
+      --btn-surface-border: rgba(255, 255, 255, 0.12);
+
+      --input-bg: #16181d;
+      --input-text: #e8eaed;
+      --input-placeholder: #8e918f;
+      --input-border: rgba(255, 255, 255, 0.12);
+
+      --chip-bg: #1e2025;
+      --chip-text: #e8eaed;
+      --chip-border: rgba(255, 255, 255, 0.12);
+
+      --icon-bg: rgba(255, 255, 255, 0.05);
+      --icon-border: rgba(255, 255, 255, 0.12);
+      
+      --badge-bg: rgba(255, 255, 255, 0.06);
+      --badge-border: rgba(255, 255, 255, 0.1);
+      --badge-text: #8ab4f8;
+      
+      --glow-outer-opacity: 0.7;
+      --title-gradient: linear-gradient(135deg, #ffffff 40%, #a8c7fa 100%);
+      --author-text: #c4c7c5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Google Sans", Helvetica, Arial, sans-serif;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--card-text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 3rem 1.5rem;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 50% 10%, var(--bg-radial-1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 90%, var(--bg-radial-2) 0%, transparent 40%);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      max-width: 720px;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      font-size: 0.8rem;
+      color: var(--badge-text);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #0ebc5f;
+      box-shadow: 0 0 8px #0ebc5f;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      background: var(--title-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--card-subtext);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .controls-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* ========================================================
+       ARSITEKTUR PASTI: GLOW SELALU DI BAWAH, ELEMEN DI ATAS
+       - Layer 1 (z-index: 1): .glow-underlay (Di Bawah Elemen)
+       - Layer 2 (z-index: 2): .element-surface (Di Atas Glow, Solid Menutup)
+       ======================================================== */
+
+    .glow-wrapper {
+      position: relative;
+      display: inline-flex;
+      cursor: pointer;
+      user-select: none;
+
+      --gradient-angle: 0deg;
+      --glow-opacity: 0;
+      --glow-blur: 12px;
+      --glow-spread: -3px;
+
+      /* Google Gemini Conic Gradient - Simetris Sempurna (30% Kiri, 30% Kanan) */
+      --glif-gradient: conic-gradient(
+        from var(--gradient-angle, 0deg),
+        rgba(49, 134, 255, 0) 20%,
+        rgba(49, 134, 255, 0.3) 28%,
+        rgba(147, 120, 255, 0.6) 35%,
+        rgba(249, 107, 214, 0.85) 40%,
+        rgba(252, 65, 61, 1) 46%,
+        rgba(255, 107, 43, 1) 50%,
+        rgba(254, 199, 0, 1) 54%,
+        rgba(136, 222, 66, 1) 60%,
+        rgba(14, 188, 95, 1) 65%,
+        rgba(0, 169, 187, 0.85) 70%,
+        rgba(49, 134, 255, 0.3) 75%,
+        rgba(49, 134, 255, 0) 80%
+      );
+    }
+
+    /* 
+      1. GLOW UNDERLAY (z-index: 1)
+      SECARA MUTLAK BERADA DI BAWAH / DI BELAKANG ELEMEN.
+      Hanya meluap ke luar dari balik tepi elemen.
+    */
+    .glow-wrapper .glow-underlay {
+      position: absolute;
+      inset: var(--glow-spread);
+      border-radius: inherit;
+      background: var(--glif-gradient);
+      filter: blur(var(--glow-blur));
+      opacity: calc(var(--glow-opacity, 0) * var(--glow-outer-opacity, 0.85));
+      pointer-events: none;
+      z-index: 1; /* DI BAWAH ELEMEN */
+      transition: opacity var(--hover-fade-duration) var(--sys-motion--curve-standard);
+      will-change: opacity;
+    }
+
+    /* 
+      2. ELEMENT SURFACE (z-index: 2)
+      SECARA MUTLAK BERADA DI ATAS EFEK GLOW.
+      Permukaannya 100% SOLID OPAQUE dan MENUTUPI SELURUH BAGIAN TENGAH GLOW.
+      Tidak ada pixel glow yang bisa naik ke atas elemen ini!
+    */
+    .glow-wrapper .element-surface {
+      position: relative;
+      z-index: 2; /* DI ATAS GLOW */
+      border-radius: inherit;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* ========================================================
+       1. ACTION BUTTONS (Glow di Bawah, Button di Atas)
+       ======================================================== */
+    .btn-showcase {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .btn-primary-wrapper {
+      border-radius: 999px;
+      --glow-blur: 8px;
+      --glow-spread: -2px;
+    }
+
+    .btn-primary-wrapper .btn-primary-surface {
+      background: var(--btn-primary-bg);
+      border: 1px solid var(--btn-primary-border);
+      color: var(--btn-primary-text);
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 10px rgba(26, 115, 232, 0.15);
+    }
+
+    .btn-secondary-wrapper {
+      border-radius: 999px;
+      --glow-blur: 8px;
+      --glow-spread: -2px;
+    }
+
+    .btn-secondary-wrapper .btn-secondary-surface {
+      background: var(--btn-surface-bg);
+      border: 1px solid var(--btn-surface-border);
+      color: var(--btn-surface-text);
+      padding: 12px 22px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-icon-wrapper {
+      border-radius: 50%;
+      --glow-blur: 7px;
+      --glow-spread: -2px;
+    }
+
+    .btn-icon-wrapper .btn-icon-surface {
+      width: 48px;
+      height: 48px;
+      background: var(--btn-surface-bg);
+      border: 1px solid var(--btn-surface-border);
+      color: var(--btn-surface-text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-icon-surface svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* ========================================================
+       2. OMNIBOX / SEARCH INPUT (Glow di Bawah, Input di Atas)
+       ======================================================== */
+    .search-showcase {
+      width: 100%;
+      max-width: 620px;
+      margin-bottom: 3.5rem;
+    }
+
+    .search-wrapper {
+      width: 100%;
+      border-radius: 100px;
+      --glow-blur: 10px;
+      --glow-spread: -3px;
+    }
+
+    .search-wrapper .search-surface {
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-wrapper:hover .search-surface,
+    .search-wrapper:focus-within .search-surface {
+      border-color: #1a73e8;
+      transform: translateY(-1px);
+    }
+
+    .search-surface .search-icon {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: #1a73e8;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    .search-surface input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--input-text);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-surface input::placeholder {
+      color: var(--input-placeholder);
+    }
+
+    .search-surface .voice-btn {
+      background: transparent;
+      border: none;
+      color: #1a73e8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========================================================
+       3. FILTER CHIPS (Glow di Bawah, Chip di Atas)
+       ======================================================== */
+    .chips-showcase {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+
+    .chip-wrapper {
+      border-radius: 100px;
+      --glow-blur: 6px;
+      --glow-spread: -1.5px;
+    }
+
+    .chip-wrapper .chip-surface {
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-border);
+      color: var(--chip-text);
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chip-wrapper:hover .chip-surface {
+      transform: translateY(-1px);
+    }
+
+    /* ========================================================
+       4. NEW MODEL: GEMINI AI STUDIO MODEL CARD
+       Desain baru, bersih, modern, dan fungsional
+       ======================================================== */
+    .card-grid {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: 1100px;
+      perspective: 1200px;
+      margin-bottom: 4rem;
+    }
+
+    .ai-card-wrapper {
+      border-radius: var(--border-radius);
+      width: 380px;
+      --glow-blur: 12px;
+      --glow-spread: -3.5px;
+    }
+
+    .ai-card-wrapper .ai-card-surface {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-idle);
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      box-shadow: var(--card-shadow);
+      border-radius: inherit;
+    }
+
+    .ai-card-wrapper:hover .ai-card-surface {
+      box-shadow: var(--card-shadow-hover);
+      border-color: #c4c7c5;
+    }
+
+    /* Card Top Bar */
+    .ai-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .ai-model-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ai-model-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(49, 134, 255, 0.12), rgba(249, 107, 214, 0.12));
+      border: 1px solid rgba(49, 134, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a73e8;
+      flex-shrink: 0;
+    }
+
+    .ai-model-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--card-headline);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .ai-model-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .ai-status-pill {
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: rgba(14, 188, 95, 0.1);
+      color: #0ebc5f;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .ai-status-pill::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #0ebc5f;
+    }
+
+    .ai-model-tag {
+      font-size: 0.72rem;
+      color: var(--card-subtext);
+      font-weight: 500;
+    }
+
+    .ai-bookmark-btn {
+      background: transparent;
+      border: none;
+      color: var(--card-subtext);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-bookmark-btn:hover {
+      color: var(--card-headline);
+      background: var(--icon-bg);
+    }
+
+    /* Card Interactive Preview Box */
+    .ai-preview-box {
+      background: var(--icon-bg);
+      border: 1px solid var(--card-border-idle);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .ai-prompt-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--card-subtext);
+    }
+
+    .ai-prompt-line span.prompt-text {
+      color: var(--card-headline);
+      font-weight: 500;
+    }
+
+    .ai-response-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-idle);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      font-family: ui-monospace, SFMono-Regular, "Courier New", monospace;
+      color: #0b57d0;
+      width: fit-content;
+    }
+
+    /* Stats Grid */
+    .ai-stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .ai-stat-card {
+      background: var(--icon-bg);
+      border: 1px solid var(--card-border-idle);
+      border-radius: 12px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .ai-stat-val {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--card-headline);
+    }
+
+    .ai-stat-lbl {
+      font-size: 0.68rem;
+      color: var(--card-subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    /* Card Bottom Action */
+    .ai-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border-idle);
+      margin-top: 0.25rem;
+    }
+
+    .ai-price-tag {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ai-price-title {
+      font-size: 0.72rem;
+      color: var(--card-subtext);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ai-price-val {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #0ebc5f;
+    }
+
+    .ai-studio-btn {
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-text);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(26, 115, 232, 0.2);
+      transition: opacity 0.2s ease;
+    }
+
+    .ai-studio-btn:hover {
+      opacity: 0.92;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--card-category);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .control-btn {
+      background: var(--btn-surface-bg);
+      border: 1px solid var(--btn-surface-border);
+      color: var(--btn-surface-text);
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    .control-btn:hover {
+      border-color: #1a73e8;
+      transform: translateY(-1px);
+    }
+
+    .control-btn.active {
+      border-color: #1a73e8;
+      color: #1a73e8;
+    }
+
+    .docs-section {
+      max-width: 850px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border-idle);
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .docs-section h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      color: var(--card-headline);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .docs-section pre {
+      background: var(--icon-bg);
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      font-family: ui-monospace, SFMono-Regular, "Courier New", monospace;
+      font-size: 0.85rem;
+      color: #0b57d0;
+      overflow-x: auto;
+      border: 1px solid var(--card-border-idle);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-badge">
+      <span class="badge-dot"></span>
+      100% Guaranteed: Elemen di Atas, Glow di Bawah
+    </div>
+    <h1>Elemen Menutup Efek Glow Secara Total</h1>
+    <p class="subtitle">
+      Bodi elemen (Button, Card, Input, Chip) <strong>berada 100% di atas efek glow (z-index: 2)</strong> dengan warna solid yang menutup sempurna. Efek glow <strong>selalu berada di bawah elemen (z-index: 1)</strong> dan hanya memancarkan cahaya dari balik tepi elemen.
+    </p>
+  </header>
+
+  <!-- Controls Bar -->
+  <div class="controls-bar">
+    <button class="control-btn active" id="btnTheme">
+      <span>🌓</span> Mode: <strong id="lblTheme">Light</strong>
+    </button>
+    <button class="control-btn active" id="btnTilt">
+      <span>📐</span> 3D Tilt Effect: <strong>ON</strong>
+    </button>
+  </div>
+
+  <!-- SHOWCASE 1: ACTION BUTTONS -->
+  <div class="section-title">1. Komponen Action Button (Glow di Bawah Tombol)</div>
+  <div class="btn-showcase">
+    
+    <!-- Primary Button -->
+    <div class="glow-wrapper btn-primary-wrapper">
+      <div class="glow-underlay"></div>
+      <button class="element-surface btn-primary-surface">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        <span>✨ Generate with Gemini</span>
+      </button>
+    </div>
+
+    <!-- Secondary Button -->
+    <div class="glow-wrapper btn-secondary-wrapper">
+      <div class="glow-underlay"></div>
+      <button class="element-surface btn-secondary-surface">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        <span>Deploy Model</span>
+      </button>
+    </div>
+
+    <!-- Outlined Button -->
+    <div class="glow-wrapper btn-secondary-wrapper">
+      <div class="glow-underlay"></div>
+      <button class="element-surface btn-secondary-surface">
+        <span>Explore Documentation &rarr;</span>
+      </button>
+    </div>
+
+    <!-- Icon Button -->
+    <div class="glow-wrapper btn-icon-wrapper">
+      <div class="glow-underlay"></div>
+      <button class="element-surface btn-icon-surface" title="Favorite">
+        <svg viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- SHOWCASE 2: OMNIBOX / SEARCH INPUT -->
+  <div class="section-title">2. Komponen Search Bar (Glow di Bawah Input)</div>
+  <div class="search-showcase">
+    <div class="glow-wrapper search-wrapper">
+      <div class="glow-underlay"></div>
+      <div class="element-surface search-surface">
+        <svg class="search-icon" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" placeholder="Tanyakan apa saja kepada Gemini AI..." />
+        <button class="voice-btn" title="Voice Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+            <line x1="8" y1="23" x2="16" y2="23"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHOWCASE 3: CHIPS / BADGES -->
+  <div class="section-title">3. Komponen Filter Chips</div>
+  <div class="chips-showcase">
+    <div class="glow-wrapper chip-wrapper">
+      <div class="glow-underlay"></div>
+      <div class="element-surface chip-surface"><span>⚡ Fast Response</span></div>
+    </div>
+    <div class="glow-wrapper chip-wrapper">
+      <div class="glow-underlay"></div>
+      <div class="element-surface chip-surface"><span>🧠 Deep Reasoning</span></div>
+    </div>
+    <div class="glow-wrapper chip-wrapper">
+      <div class="glow-underlay"></div>
+      <div class="element-surface chip-surface"><span>🎨 Vision &amp; Image</span></div>
+    </div>
+    <div class="glow-wrapper chip-wrapper">
+      <div class="glow-underlay"></div>
+      <div class="element-surface chip-surface"><span>💻 Python SDK</span></div>
+    </div>
+  </div>
+
+  <!-- SHOWCASE 4: CARDS -->
+  <div class="section-title">4. Komponen Card (Model AI Studio Baru)</div>
+  <div class="card-grid">
+
+    <!-- Brand New Gemini AI Studio Card Model -->
+    <div class="glow-wrapper ai-card-wrapper" id="glowAnimationWrapper">
+      <div class="glow-underlay"></div>
+      <div class="element-surface ai-card-surface">
+        
+        <!-- Top Bar: Model Icon, Title, Status, Bookmark -->
+        <div class="ai-card-top">
+          <div class="ai-model-identity">
+            <div class="ai-model-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+              </svg>
+            </div>
+            <div>
+              <div class="ai-model-name">Gemini 2.0 Flash</div>
+              <div class="ai-model-meta">
+                <span class="ai-status-pill">Active</span>
+                <span class="ai-model-tag">Multimodal Native</span>
+              </div>
+            </div>
+          </div>
+          <div class="glow-wrapper btn-icon-wrapper" style="--glow-blur: 6px; --glow-spread: -2px;">
+            <div class="glow-underlay"></div>
+            <button class="element-surface btn-icon-surface" style="width: 36px; height: 36px;" title="Bookmark Model">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Interactive AI Prompt & Response Snippet -->
+        <div class="ai-preview-box">
+          <div class="ai-prompt-line">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1a73e8" stroke-width="2">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+            <span class="prompt-text">"Explain Quantum Computing in 1 sentence"</span>
+          </div>
+          <div class="ai-response-pill">
+            <span>⚡ Computation using superposition &amp; qubits</span>
+          </div>
+        </div>
+
+        <!-- Metric Grid -->
+        <div class="ai-stats-row">
+          <div class="ai-stat-card">
+            <div class="ai-stat-val">1M</div>
+            <div class="ai-stat-lbl">Context</div>
+          </div>
+          <div class="ai-stat-card">
+            <div class="ai-stat-val">140 t/s</div>
+            <div class="ai-stat-lbl">Speed</div>
+          </div>
+          <div class="ai-stat-card">
+            <div class="ai-stat-val">98.4%</div>
+            <div class="ai-stat-lbl">Benchmark</div>
+          </div>
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div class="ai-card-bottom">
+          <div class="ai-price-tag">
+            <span class="ai-price-title">API Access</span>
+            <span class="ai-price-val">Free Tier Active</span>
+          </div>
+
+          <!-- Studio Button with Energy Glow Effect -->
+          <div class="glow-wrapper btn-primary-wrapper" style="border-radius: 100px; --glow-blur: 8px; --glow-spread: -2px;">
+            <div class="glow-underlay"></div>
+            <button class="element-surface btn-primary-surface" style="padding: 9px 18px; font-size: 0.85rem; border-radius: inherit;">
+              <span>Open Studio</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- DOCUMENTATION -->
+  <div class="docs-section">
+    <h3>💡 Struktur HTML &amp; CSS: Elemen Selalu di Atas Glow</h3>
+    <pre>
+&lt;!-- Stuktur yang menjamin Elemen di Depan dan Glow di Bawah: --&gt;
+&lt;div class="glow-wrapper"&gt;
+  &lt;!-- 1. Glow SELALU DI BAWAH (z-index: 1) --&gt;
+  &lt;div class="glow-underlay"&gt;&lt;/div&gt;
+
+  &lt;!-- 2. Elemen SELALU DI ATAS (z-index: 2, Solid Menutup) --&gt;
+  &lt;button class="element-surface"&gt;
+    &lt;span&gt;Tombol Saya&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;
+
+/* Aturan CSS Sederhana &amp; Pasti: */
+.glow-wrapper .glow-underlay {
+  position: absolute;
+  inset: -6px; /* Meluap ke luar dari bawah */
+  z-index: 1;  /* MUTLAK DI BAWAH */
+  filter: blur(18px);
+  opacity: var(--glow-opacity, 0); /* Hilang total saat leave */
+}
+
+.glow-wrapper .element-surface {
+  position: relative;
+  z-index: 2; /* MUTLAK DI ATAS (Menutup tengahnya 100%) */
+  background: #ffffff; /* Solid opaque */
+}</pre>
+  </div>
+
+  <script>
+    // Configuration states
+    let enableTilt = true;
+    let currentTheme = 'light';
+
+    // Theme Toggle
+    const btnTheme = document.getElementById('btnTheme');
+    const lblTheme = document.getElementById('lblTheme');
+    btnTheme.addEventListener('click', () => {
+      currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      lblTheme.textContent = currentTheme === 'light' ? 'Light' : 'Dark';
+    });
+
+    // Toggle 3D Tilt for cards
+    const btnTilt = document.getElementById('btnTilt');
+    btnTilt.addEventListener('click', () => {
+      enableTilt = !enableTilt;
+      btnTilt.classList.toggle('active', enableTilt);
+      btnTilt.innerHTML = `<span>📐</span> 3D Tilt Effect: <strong>${enableTilt ? 'ON' : 'OFF'}</strong>`;
+      if (!enableTilt) {
+        document.querySelectorAll('.card-wrapper .element-surface, .ai-card-wrapper .element-surface').forEach(c => c.style.transform = '');
+      }
+    });
+
+    // Interpolate shortest angular distance (Lerp)
+    function lerpAngle(current, target, factor) {
+      let diff = (target - current) % 360;
+      if (diff < -180) diff += 360;
+      if (diff > 180) diff -= 360;
+      return current + diff * factor;
+    }
+
+    /**
+     * UNIVERSAL ENERGY GLOW TRACKER
+     * Dipasang ke setiap .glow-wrapper
+     */
+    function attachEnergyGlow(wrapper) {
+      const glowUnderlay = wrapper.querySelector(':scope > .glow-underlay');
+      const elementSurface = wrapper.querySelector(':scope > .element-surface');
+      if (!glowUnderlay) return;
+
+      let currentAngle = 0;
+      let targetAngle = 0;
+      let isHovered = false;
+      let rafId = null;
+      let fadeTimeout = null;
+      const isCard = wrapper.classList.contains('ai-card-wrapper') || wrapper.classList.contains('card-wrapper');
+      const isNested = !!wrapper.closest('.ai-card-surface, .card-surface');
+
+      const peakOffset = 180;
+
+      function renderFrame() {
+        if (!isHovered) {
+          wrapper.style.setProperty('--glow-opacity', '0');
+          if (isCard && enableTilt && elementSurface) {
+            elementSurface.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+          }
+        }
+
+        currentAngle = lerpAngle(currentAngle, targetAngle, 0.15);
+        wrapper.style.setProperty('--gradient-angle', `${currentAngle}deg`);
+
+        if (isHovered) {
+          rafId = requestAnimationFrame(renderFrame);
+        }
+      }
+
+      wrapper.addEventListener('mouseenter', (e) => {
+        if (isNested) e.stopPropagation();
+        if (fadeTimeout) clearTimeout(fadeTimeout);
+        isHovered = true;
+        wrapper.style.setProperty('--glow-opacity', '1');
+
+        const rect = wrapper.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rad = Math.atan2(mouseY - centerY, mouseX - centerX);
+        const deg = (rad * (180 / Math.PI)) + 90;
+        targetAngle = deg - peakOffset;
+        currentAngle = targetAngle;
+
+        wrapper.style.setProperty('--gradient-angle', `${currentAngle}deg`);
+
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(renderFrame);
+      });
+
+      wrapper.addEventListener('mousemove', (e) => {
+        if (isNested) e.stopPropagation();
+        const rect = wrapper.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rad = Math.atan2(mouseY - centerY, mouseX - centerX);
+        const deg = (rad * (180 / Math.PI)) + 90;
+        targetAngle = deg - peakOffset;
+
+        if (isCard && enableTilt && elementSurface) {
+          const tiltX = -((mouseY - centerY) / centerY) * 7;
+          const tiltY = ((mouseX - centerX) / centerX) * 7;
+          elementSurface.style.transform = `perspective(1200px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg)`;
+        }
+      });
+
+      wrapper.addEventListener('mouseleave', (e) => {
+        if (isNested) e.stopPropagation();
+        isHovered = false;
+        
+        // HILANG TOTAL SAAT LEAVE
+        wrapper.style.setProperty('--glow-opacity', '0');
+
+        if (isCard && enableTilt && elementSurface) {
+          elementSurface.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+        }
+
+        fadeTimeout = setTimeout(() => {
+          if (!isHovered && rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+        }, 450);
+      });
+
+      // Search input focus support
+      if (wrapper.querySelector('input')) {
+        const input = wrapper.querySelector('input');
+        input.addEventListener('focus', () => {
+          isHovered = true;
+          wrapper.style.setProperty('--glow-opacity', '1');
+          if (!rafId) rafId = requestAnimationFrame(renderFrame);
+        });
+        input.addEventListener('blur', () => {
+          isHovered = false;
+          wrapper.style.setProperty('--glow-opacity', '0');
+        });
+      }
+    }
+
+    // Aktifkan ke semua .glow-wrapper
+    document.querySelectorAll('.glow-wrapper').forEach(attachEnergyGlow);
+  </script>
+</body>
+</html>

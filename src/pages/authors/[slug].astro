@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../themes/fruition-capsule/layouts/BaseLayout.astro";
+import CardGrid from "../../themes/fruition-capsule/components/CardGrid.astro";
+import { getAllAuthors, getAllPostsAcrossAllFruits, getSiteSettings, getThemeConfig } from "../../utils/content.js";
+
+export async function getStaticPaths() {
+  const authors = getAllAuthors();
+  const allPosts = getAllPostsAcrossAllFruits();
+
+  return authors.map((author: any) => {
+    // Filter posts written by this author (by author slug or author name match)
+    const authorPosts = allPosts.filter((p: any) => {
+      const aSlug = p.author?.slug;
+      const aName = p.author?.name;
+      return (aSlug && aSlug === author.slug) || (aName && aName.toLowerCase() === author.name.toLowerCase());
+    });
+
+    return {
+      params: { slug: author.slug },
+      props: { author, posts: authorPosts }
+    };
+  });
+}
+
+const { author, posts } = Astro.props;
+const siteSettings = getSiteSettings();
+const themeConfig = getThemeConfig();
+const activePreset = (themeConfig.defaultPreset || "Blue Sky").toLowerCase().replace(/\s+/g, '-');
+const cardSettings = themeConfig.components?.cards || {};
+
+const formattedPosts = posts.map((p: any) => ({
+  id: p.id,
+  title: p.title,
+  slug: p.slug,
+  fruitType: p.fruitType,
+  description: p.description || p.metaDescription || "",
+  category: p.category || "General",
+  date: p.formattedDate || p.date || "",
+  readingTime: p.readingTime || "3 min read",
+  coverImage: p.coverImage || "",
+  author: {
+    name: author.name,
+    slug: author.slug,
+    avatarUrl: author.avatarUrl || "/assets/author-deddy-hidayat.webp"
+  },
+  pastelFallback: p.fallbackColor || "blossom"
+}));
+---
+
+<BaseLayout 
+  title={`${author.name} — ${siteSettings.siteName || "blogs"}`}
+  description={author.bio || `Artikel yang ditulis oleh ${author.name}`}
+  preset={activePreset}
+>
+  <div style="max-width: 1200px; margin: 40px auto 30px; padding: 0 20px;">
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/authors">Authors</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">{author.name}</span>
+    </nav>
+
+    <!-- Author Profile Header -->
+    <div style="display: flex; align-items: center; gap: 24px; margin: 24px 0 36px; padding: 28px; background: var(--theme-surface); border: 1px solid var(--theme-border); border-radius: 20px; flex-wrap: wrap;">
+      <img src={author.avatarUrl || "/assets/author-deddy-hidayat.webp"} alt={author.name} style="width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 3px solid var(--theme-primary);" />
+      <div style="flex: 1; min-width: 250px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+          <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--theme-text); margin: 0;">{author.name}</h1>
+          <span class="card-badge">{author.role || "Author"}</span>
+        </div>
+        <p style="font-size: 1rem; color: var(--theme-text-muted); line-height: 1.5; margin: 0 0 10px;">
+          {author.bio || "Penulis dan kontributor."}
+        </p>
+        <span style="font-size: 0.85rem; color: var(--theme-text-muted);">
+          Memiliki <strong>{posts.length}</strong> artikel dipublikasikan di lintas topik.
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <CardGrid 
+    mode="default"
+    sectionTitle={`Artikel Ditulis oleh ${author.name}`}
+    posts={formattedPosts}
+    gridColumns={cardSettings.gridColumns || { sm: 1, md: 2, lg: 3 }}
+  />
+</BaseLayout>

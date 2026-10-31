@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../../themes/fruition-capsule/layouts/BaseLayout.astro";
+import { getAllAuthors, getSiteSettings, getThemeConfig } from "../../utils/content.js";
+
+const authors = getAllAuthors();
+const siteSettings = getSiteSettings();
+const themeConfig = getThemeConfig();
+const activePreset = (themeConfig.defaultPreset || "Blue Sky").toLowerCase().replace(/\s+/g, '-');
+---
+
+<BaseLayout 
+  title={`Penulis & Kontributor — ${siteSettings.siteName || "blogs"}`}
+  description="Daftar profil penulis dan kontributor blog"
+  preset={activePreset}
+>
+  <div style="max-width: 1200px; margin: 40px auto 30px; padding: 0 20px;">
+    <nav class="post-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <span style="color: var(--theme-primary); font-weight: 600;">Authors</span>
+    </nav>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--theme-text); margin-top: 12px; margin-bottom: 8px;">
+      Penulis &amp; Kontributor
+    </h1>
+    <p style="font-size: 1rem; color: var(--theme-text-muted); margin-bottom: 30px;">
+      Tim penulis dan kreator konten di balik {siteSettings.siteName || "blogs"}.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+      {authors.map((author: any) => (
+        <div class="capsule-card" style="padding: 24px; display: flex; flex-direction: column; gap: 14px; border-radius: 16px; background: var(--theme-surface); border: 1px solid var(--theme-border);">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <img src={author.avatarUrl || "/assets/author-deddy-hidayat.webp"} alt={author.name} style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover;" />
+            <div>
+              <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--theme-text); margin: 0;">{author.name}</h2>
+              <span class="card-badge" style="margin-top: 4px; display: inline-block;">{author.role}</span>
+            </div>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--theme-text-muted); line-height: 1.5; margin: 0;">
+            {author.bio}
+          </p>
+          <a href={`/authors/${author.slug}`} class="btn-primary-capsule" style="margin-top: auto; justify-content: center; text-decoration: none;">
+            <span>Lihat Profil &amp; Artikel &rarr;</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

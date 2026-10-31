@@ -1,0 +1,34 @@
+{
+  "id": "adsense",
+  "name": "Google AdSense & Monetization",
+  "version": "1.0.0",
+  "enabled": false,
+  "description": "Integrasi resmi Google AdSense untuk menampilkan unit iklan responsif di header, bawah judul artikel, tengah konten, footer, dan halaman safelink.",
+  "author": "Fruition Team",
+  "settings": {
+    "clientId": "",
+    "enableAutoAds": false,
+    "slots": {
+      "belowTitle": {
+        "enabled": false,
+        "slotId": "",
+        "format": "auto"
+      },
+      "belowArticle": {
+        "enabled": false,
+        "slotId": "",
+        "format": "auto"
+      },
+      "safelinkTop": {
+        "enabled": false,
+        "slotId": "",
+        "format": "auto"
+      },
+      "safelinkBottom": {
+        "enabled": false,
+        "slotId": "",
+        "format": "auto"
+      }
+    }
+  }
+}

@@ -1,0 +1,2484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fruition Mini Admin — Backend & Fruit Engine</title>
+  <link rel="stylesheet" href="styles/github-shell.css">
+</head>
+<body class="gh-shell">
+
+  <!-- ================= DOCK 3: STICKY TOP NAV / SMART BREADCRUMBS ================= -->
+  <header class="dock-top-nav" id="dockTopNav">
+    <div class="top-nav-left">
+      <!-- Brand Logo / Fruit Capsule -->
+      <div class="gh-brand">
+        <svg class="gh-logo-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0969da" fill="#ddf4ff"/>
+          <path d="M12 7v5l3 3" stroke="#0969da" stroke-linecap="round"/>
+        </svg>
+        <span class="gh-brand-title">fruition-mini</span>
+        <span class="gh-tag-pill">v0.2.8</span>
+      </div>
+
+      <span class="breadcrumb-separator">/</span>
+
+      <!-- Smart Back Button -->
+      <button class="btn-smart-back" id="btnSmartBack" title="Kembali ke overview">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back</span>
+      </button>
+
+      <!-- Interactive Breadcrumb Hierarchy (Semua Segmen Dapat Diklik) -->
+      <nav class="gh-breadcrumbs" id="ghBreadcrumbs" aria-label="Breadcrumb">
+        <a href="#home" class="bc-item" data-bc="home">Home</a>
+        <span class="bc-sep">/</span>
+        <span class="bc-item active" data-bc="section">Overview</span>
+      </nav>
+    </div>
+
+    <div class="top-nav-right">
+      <!-- Environment & Sync Status Indicator -->
+      <div class="env-badge local-env">
+        <span class="status-dot online"></span>
+        <span class="env-name">Localhost :4321</span>
+      </div>
+
+      <!-- Multi-Preview Sandbox Button (Pindah ke Atas di Samping View Theme) -->
+      <button type="button" class="gh-btn btn-preview" id="btnPreview" style="padding: 3px 10px; font-size: 12px; gap: 6px;" title="Buka Multi-Preview Sandbox Responsif (SM / MD / LG)">
+        <div class="btn-icon-pastel pastel-peach" style="width: 16px; height: 16px;">
+          <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <span>Preview Sandbox</span>
+      </button>
+
+      <!-- Direct Link to Theme Preview (Icon SVG ↗ di Kiri Tulisan View Theme) -->
+      <a href="/theme" target="_blank" class="gh-btn" style="padding: 3px 10px; font-size: 12px; gap: 6px; text-decoration: none;" title="Buka Theme Preview di tab baru">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+        <span>View Theme</span>
+      </a>
+
+      <div class="git-branch-badge">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="6" y1="3" x2="6" y2="15"></line>
+          <circle cx="18" cy="6" r="3"></circle>
+          <circle cx="6" cy="18" r="3"></circle>
+          <path d="M18 9a9 9 0 0 1-9 9"></path>
+        </svg>
+        <span>main</span>
+      </div>
+
+      <button class="btn-icon-minimal" id="btnToggleDark" title="Toggle Light/Dark Theme">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN APP LAYOUT (DOCK 1 + DOCK 2) ================= -->
+  <div class="app-layout">
+    
+    <!-- ================= DOCK 1: COLLAPSIBLE SIDEBAR ================= -->
+    <aside class="dock-sidebar" id="dockSidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-title">WORKSPACES</span>
+        <button class="btn-toggle-collapse" id="btnToggleSidebar" title="Collapse / Expand Sidebar">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 6 Main Menus according to Specification -->
+      <nav class="sidebar-nav">
+        <!-- 1. Home (State Awal ketika Server Dimulai) -->
+        <a href="#home" class="nav-link active" data-menu="home">
+          <div class="nav-icon-badge pastel-blossom">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </div>
+          <span class="nav-text">Home</span>
+          <span class="nav-count">Overview</span>
+        </a>
+
+        <!-- 2. Fruit -->
+        <a href="#fruit" class="nav-link" data-menu="fruit">
+          <div class="nav-icon-badge pastel-mint">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Fruit</span>
+          <span class="nav-badge gh-counter highlight" id="fruitSidebarBadge">3 Active</span>
+        </a>
+
+        <!-- 3. Navigasi -->
+        <a href="#navigation" class="nav-link" data-menu="navigation">
+          <div class="nav-icon-badge pastel-periwinkle">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="6" x2="20" y2="6"></line>
+              <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+          </div>
+          <span class="nav-text">Navigasi</span>
+        </a>
+
+        <!-- 4. Themes -->
+        <a href="#themes" class="nav-link" data-menu="themes">
+          <div class="nav-icon-badge pastel-peach">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2z"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Themes</span>
+          <span class="nav-badge gh-counter">1 Active</span>
+        </a>
+
+        <!-- 5. Plugins -->
+        <a href="#plugins" class="nav-link" data-menu="plugins">
+          <div class="nav-icon-badge pastel-lilac">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Plugins</span>
+          <span class="nav-count" id="pluginSidebarBadge">2</span>
+        </a>
+
+        <!-- 6. Settings -->
+        <a href="#settings" class="nav-link" data-menu="settings">
+          <div class="nav-icon-badge pastel-gray">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </div>
+          <span class="nav-text">Settings</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer / GitOps Info -->
+      <div class="sidebar-meta">
+        <div class="meta-repo">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+          </svg>
+          <span>astro-fruition-core</span>
+        </div>
+        <div class="meta-tag">SSG Engine: Active</div>
+      </div>
+    </aside>
+
+    <!-- ================= DOCK 2: MAIN WORKSPACE (LAYERED) ================= -->
+    <main class="dock-workspace" id="dockWorkspace">
+      
+      <!-- Content View Container -->
+      <div class="workspace-scroll-area">
+        <div class="gh-container">
+
+          <!-- ================= WORKSPACE VIEW: HOME (GRAFIK WAWASAN SISTEM & ANALITIK ARSITEKTUR) ================= -->
+          <div class="workspace-view active" id="viewHome">
+            <!-- Section Banner (GitHub Subhead) -->
+            <div class="gh-subhead">
+              <div class="subhead-heading">
+                <h2>Home — Grafik Wawasan Sistem &amp; Analitik Arsitektur</h2>
+                <span class="subhead-meta">Overview real-time indeksasi konten, distribusi koleksi Fruit, alokasi penyimpanan disk, dan kesehatan sistem</span>
+              </div>
+              <div class="subhead-actions" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span class="badge-tag green" id="homeBootSessionBadge" title="ID Sesi Boot Server Aktif" style="font-size: 11px; padding: 4px 10px;">
+                  Sesi Server Aktif
+                </span>
+                <button type="button" class="gh-btn" id="btnRefreshSystemOverview" title="Muat ulang data grafik wawasan sistem">
+                  <div class="btn-icon-pastel pastel-periwinkle">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                    </svg>
+                  </div>
+                  <span>Segarkan Grafik</span>
+                </button>
+                <button type="button" class="gh-btn gh-btn-primary" id="btnGoToFruitsFromHome">
+                  <div class="btn-icon-pastel pastel-mint" style="background: rgba(255,255,255,0.25); color: white;">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                    </svg>
+                  </div>
+                  <span>Kelola Fruit Connectors &rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 4 KPI Utama Wawasan Sistem -->
+            <div class="stats-metric-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 20px;">
+              <!-- KPI 1: Total Dokumen Terindeks -->
+              <div class="gh-box" style="margin-bottom: 0; padding: 14px 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gh-fg-muted);">Total Konten Terindeks</span>
+                  <div class="nav-icon-badge pastel-mint" style="width: 24px; height: 24px;">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                      <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="homeKpiTotalDocs">7 Dokumen</div>
+                <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 4px;" id="homeKpiCollectionsSub">Dari 3 Koleksi Fruit • ~0 kata</div>
+              </div>
+
+              <!-- KPI 2: Optimasi Media WebP -->
+              <div class="gh-box" style="margin-bottom: 0; padding: 14px 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gh-fg-muted);">Pipeline Visual WebP</span>
+                  <div class="nav-icon-badge pastel-peach" style="width: 24px; height: 24px;">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="homeKpiWebpCount">5 Aset WebP</div>
+                <div style="font-size: 11px; color: #1a7f37; margin-top: 4px;" id="homeKpiCoverRatio">100% Sampul Artikel Terkompresi</div>
+              </div>
+
+              <!-- KPI 3: Status Produksi Statis (dist/) -->
+              <div class="gh-box" style="margin-bottom: 0; padding: 14px 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gh-fg-muted);">Build Produksi (dist/)</span>
+                  <div class="nav-icon-badge pastel-periwinkle" style="width: 24px; height: 24px;">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                      <polyline points="2 17 12 22 22 17"></polyline>
+                      <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                  </div>
+                </div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="homeKpiDistStatus">Siap Build</div>
+                <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 4px;" id="homeKpiDistDetail">Memeriksa direktori dist/...</div>
+              </div>
+
+              <!-- KPI 4: Snapshot Backup & Total Disk -->
+              <div class="gh-box" style="margin-bottom: 0; padding: 14px 16px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                  <span style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: var(--gh-fg-muted);">Cadangan &amp; Penyimpanan</span>
+                  <div class="nav-icon-badge pastel-lilac" style="width: 24px; height: 24px;">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                      <polyline points="7 10 12 15 17 10"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                  </div>
+                </div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="homeKpiBackupCount">0 Snapshot</div>
+                <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 4px;" id="homeKpiTotalDisk">Total Penggunaan Disk: 0 KB</div>
+              </div>
+            </div>
+
+            <!-- BARIS 1 GRAFIK: Distribusi Koleksi Fruit vs Alokasi Penyimpanan Disk -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 16px; margin-bottom: 16px;">
+              
+              <!-- Grafik 1: Distribusi Konten, Kata & Aset Media per Koleksi Fruit -->
+              <div class="gh-box" style="margin-bottom: 0;">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="18" y1="20" x2="18" y2="10"></line>
+                      <line x1="12" y1="20" x2="12" y2="4"></line>
+                      <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <span>Grafik Distribusi Konten &amp; Media per Koleksi Fruit</span>
+                  </div>
+                  <span class="gh-counter" id="homeChartCollectionsBadge">3 Koleksi</span>
+                </div>
+                <div class="gh-box-body" id="homeChartCollections" style="padding: 16px;">
+                  <div style="font-size: 12px; color: var(--gh-fg-muted); text-align: center; padding: 24px 0;">
+                    Memuat grafik distribusi koleksi Fruit...
+                  </div>
+                </div>
+                <div class="gh-box-footer" style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="footer-help">Proporsi jumlah dokumen Markdown (<code>.md</code>), sampul WebP, dan kepadatan kata per database Fruit.</span>
+                </div>
+              </div>
+
+              <!-- Grafik 2: Komposisi Alokasi Penyimpanan & Disk Proyek -->
+              <div class="gh-box" style="margin-bottom: 0;">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
+                      <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
+                    </svg>
+                    <span>Grafik Komposisi Penyimpanan &amp; Penggunaan Disk</span>
+                  </div>
+                  <span class="gh-counter" id="homeChartStorageTotalBadge">0 KB</span>
+                </div>
+                <div class="gh-box-body" id="homeChartStorage" style="padding: 16px;">
+                  <div style="font-size: 12px; color: var(--gh-fg-muted); text-align: center; padding: 24px 0;">
+                    Memuat grafik alokasi penyimpanan proyek...
+                  </div>
+                </div>
+                <div class="gh-box-footer">
+                  <span class="footer-help">Perbandingan ukuran riil direktori <code>content/</code>, <code>assets/</code>, <code>dist/</code>, dan <code>backup/</code> pada disk lokal.</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- BARIS 2 GRAFIK: Distribusi Topik/Kategori & Kesehatan Sistem -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 16px; margin-bottom: 20px;">
+              
+              <!-- Grafik 3: Distribusi Kategori Artikel & Rasio Sampul Visual -->
+              <div class="gh-box" style="margin-bottom: 0;">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
+                    <span>Grafik Topik Artikel &amp; Rasio Kelengkapan Visual</span>
+                  </div>
+                  <span class="gh-counter" id="homeChartCategoriesBadge">Topik &amp; Sampul</span>
+                </div>
+                <div class="gh-box-body" id="homeChartCategories" style="padding: 16px;">
+                  <div style="font-size: 12px; color: var(--gh-fg-muted); text-align: center; padding: 24px 0;">
+                    Memuat grafik distribusi kategori artikel...
+                  </div>
+                </div>
+                <div class="gh-box-footer">
+                  <span class="footer-help">Distribusi taksonomi kategori artikel di <code>content/blog/</code> serta persentase ketersediaan gambar sampul WebP.</span>
+                </div>
+              </div>
+
+              <!-- Panel 4: Kesehatan Sistem, Konfigurasi Tema Aktif & Pintasan Cepat -->
+              <div class="gh-box" style="margin-bottom: 0;">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <span>Wawasan Konfigurasi Tema &amp; Kesehatan Sistem</span>
+                  </div>
+                  <span class="badge-tag green" style="font-size: 11px;">SSG Ready</span>
+                </div>
+                <div class="gh-box-body" id="homeSystemHealthList" style="padding: 16px;">
+                  <div style="font-size: 12px; color: var(--gh-fg-muted); text-align: center; padding: 24px 0;">
+                    Memuat status kesehatan sistem...
+                  </div>
+                </div>
+                <div class="gh-box-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                  <span class="footer-help">Klik pintasan di atas untuk langsung melompat ke sub-panel konfigurasi terkait.</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ================= WORKSPACE VIEW: FRUIT (BACKEND CONNECTOR ENGINE) ================= -->
+          <div class="workspace-view" id="viewFruit" style="display: none;">
+            <!-- Section Banner (GitHub Subhead) -->
+            <div class="gh-subhead">
+              <div class="subhead-heading">
+                <h2>Fruit Connectors & Notion Engine</h2>
+                <span class="subhead-meta">content/fruits/ • 1 Fruit Database == 1 Koleksi Konten Statis</span>
+              </div>
+              <div class="subhead-actions">
+                <button type="button" class="gh-btn" id="btnSyncAllFruits">
+                  <div class="btn-icon-pastel pastel-peach">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                    </svg>
+                  </div>
+                  <span>Sync All Notion DBs</span>
+                </button>
+                <button type="button" class="gh-btn gh-btn-primary" id="btnOpenNewFruitModal">
+                  <div class="btn-icon-pastel pastel-mint" style="background: rgba(255,255,255,0.25); color: white;">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                  </div>
+                  <span>+ New Fruit Connector</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Stats Metric Cards (GitHub Metric Box) -->
+            <div class="stats-metric-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin-bottom: 20px;">
+              <div class="stat-card" style="background: var(--gh-canvas); border: 1px solid var(--gh-border-default); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gh-fg-subtle); margin-bottom: 4px;">Active Connectors</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="statActiveFruits">3 Fruits</div>
+                <div style="font-size: 11px; color: var(--gh-success-fg); margin-top: 4px;">● Posts, Pages, Authors</div>
+              </div>
+
+              <div class="stat-card" style="background: var(--gh-canvas); border: 1px solid var(--gh-border-default); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gh-fg-subtle); margin-bottom: 4px;">Synced Content Items</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="statTotalItems">37 Items</div>
+                <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 4px;">Atomic JSON cache valid</div>
+              </div>
+
+              <div class="stat-card" style="background: var(--gh-canvas); border: 1px solid var(--gh-border-default); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gh-fg-subtle); margin-bottom: 4px;">Local .webp Pipeline</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);" id="statWebpCount">80 Images</div>
+                <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 4px;">Sharp WebP Optimizer</div>
+              </div>
+
+              <div class="stat-card" style="background: var(--gh-canvas); border: 1px solid var(--gh-border-default); border-radius: 6px; padding: 14px 16px;">
+                <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; color: var(--gh-fg-subtle); margin-bottom: 4px;">Rate Limit Queue</div>
+                <div style="font-size: 22px; font-weight: 700; color: var(--gh-fg-default);">350 ms</div>
+                <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 4px;">Anti-HTTP 429 Throttle</div>
+              </div>
+            </div>
+
+            <!-- Fruit Connectors Main Table (GitHub Box Style) -->
+            <div class="gh-box">
+              <div class="gh-box-header">
+                <div class="box-title">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                  </svg>
+                  <span>Configured Notion Database Connectors</span>
+                </div>
+                <div class="box-actions">
+                  <span class="text-muted text-small" id="fruitHeaderCount">3 Registered</span>
+                </div>
+              </div>
+
+              <!-- Table Body -->
+              <table class="gh-table" id="fruitTable">
+                <thead>
+                  <tr>
+                    <th>Fruit & Post Type</th>
+                    <th>Pola Rute URL</th>
+                    <th>Tampil di Index</th>
+                    <th>Notion Database ID</th>
+                    <th>Synced Items</th>
+                    <th>Last Sync</th>
+                    <th style="text-align: right;">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="fruitTableBody">
+                  <!-- Dynamically populated from /api/fruits -->
+                </tbody>
+              </table>
+
+              <div class="gh-box-footer">
+                <span class="footer-help">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  Setiap Fruit Database menghasilkan satu koleksi statis mandiri. Token <code>NOTION_API_KEY</code> tetap tersimpan aman di <code>.env</code> lokal dan GitHub Secrets saat online.
+                </span>
+              </div>
+            </div>
+
+            <!-- Architectural Principle Box -->
+            <div class="gh-box" style="margin-top: 24px;">
+              <div class="gh-box-header">
+                <div class="box-title">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                  <span>Workflow & Pipeline Ekstraksi Data Notion</span>
+                </div>
+              </div>
+              <div class="gh-box-body" style="font-size: 13px; color: var(--gh-fg-muted); line-height: 1.6;">
+                <ol style="padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                  <li><strong>Handshake & Schema Mapping Cache:</strong> Sistem mengidentifikasi properti tipe Notion (Title, Slug, Status, Date, Author, Cover) dan menyimpannya di <code>content/fruits/[fruit-id].json</code>.</li>
+                  <li><strong>Penarikan Rekursif (Recursive Block Fetcher):</strong> Menelusuri seluruh sub-blok, nested bullet list, toggle, dan tabel Notion hingga level terdalam dengan rate limiter 350ms anti-HTTP 429.</li>
+                  <li><strong>Konversi Gambar Permanen (.webp):</strong> Tautan gambar AWS S3 Notion yang kedaluwarsa setelah 1 jam otomatis diunduh dan dikonversi ke format <code>.webp</code> melalui pustaka <code>sharp</code> di <code>public/images/fruit/[slug]/</code>.</li>
+                  <li><strong>Penyimpanan Atomik (.tmp &rarr; rename):</strong> Penulisan data JSON dilakukan secara atomik sehingga mencegah file korup saat proses sinkronisasi terhenti di tengah jalan.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= WORKSPACE VIEW: NAVIGATION ================= -->
+          <div class="workspace-view" id="viewNavigation" style="display: none;">
+            <!-- Section Banner (GitHub Subhead) -->
+            <div class="gh-subhead">
+              <div class="subhead-heading">
+                <h2>Navigasi & Tata Letak Situs</h2>
+                <span class="subhead-meta">content/settings/site.json • Pengatur Tautan Menu Header Kapsul, Toolbar, dan Tautan Footer</span>
+              </div>
+            </div>
+
+            <!-- Card 1: Daftar Menu Header Kapsul -->
+            <div class="gh-box" style="margin-bottom: 20px;">
+              <div class="gh-box-header">
+                <div class="box-title">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                  <span>Tautan Menu Header Kapsul (Header Navigation Links)</span>
+                </div>
+                <button type="button" class="gh-btn" id="btnAddHeaderItem" style="padding: 2px 10px; font-size: 12px;">
+                  <span>+ Tambah Menu</span>
+                </button>
+              </div>
+
+              <div style="overflow-x: auto; width: 100%;">
+                <table class="gh-table gh-table-compact" id="headerNavTable" style="table-layout: fixed; width: 100%; min-width: 720px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 64px; text-align: center;" title="Atur urutan menu (drag & drop atau klik tombol panah)">Urutan</th>
+                      <th style="width: 215px;">Ikon & Label Menu</th>
+                      <th style="min-width: 170px;">URL Tujuan (Pilih / Kustom)</th>
+                      <th style="width: 120px;">Target Jendela</th>
+                      <th style="width: 50px; text-align: center;" title="Pilih menu yang aktif">Aktif</th>
+                      <th style="width: 60px; text-align: center;">Tampil</th>
+                      <th style="width: 45px; text-align: right;">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="headerNavTableBody">
+                    <!-- Dynamically populated from content/settings/site.json -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="gh-box-footer">
+                <span class="footer-help">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  Gunakan pegangan <svg class="gh-icon" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm4-4a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm4-4a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2z"></path></svg> untuk drag & drop urutan atau klik tombol panah <svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11"><path fill-rule="evenodd" d="M3.22 9.78a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-1.06 1.06L8 6.06 4.28 9.78a.75.75 0 01-1.06 0z"></path></svg> / <svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11"><path fill-rule="evenodd" d="M12.78 6.22a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06 0L3.22 7.28a.75.75 0 011.06-1.06L8 9.94l3.72-3.72a.75.75 0 011.06 0z"></path></svg> untuk menaikkan/menurunkan posisi menu. Gunakan dropdown URL untuk memilih artikel, halaman statis, atau penulis yang sudah ada secara otomatis. Klik tombol edit <svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11"><path fill-rule="evenodd" d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM9.75 4.81L3.94 10.62c-.07.07-.12.155-.15.25l-.64 2.24 2.24-.64c.094-.027.18-.08.25-.15L11.44 6.51 9.75 4.81z"></path></svg> jika ingin mengetik URL manual.
+                </span>
+              </div>
+            </div>
+
+            <!-- Card 3: Toolbar Kapsul Terintegrasi -->
+            <div class="gh-box" style="margin-bottom: 20px;">
+              <div class="gh-box-header">
+                <div class="box-title">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                  </svg>
+                  <span>Toolbar Kapsul Kanan (Smart Tools)</span>
+                </div>
+              </div>
+              <div class="gh-box-body">
+                <div class="form-group-row">
+                  <div class="form-info">
+                    <div class="form-label">Pencarian Instan (Instant Search Pop-up Modal)</div>
+                    <div class="form-hint">Menampilkan tombol <svg class="gh-icon" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path></svg> dan pintasan keyboard <kbd>Ctrl + F</kbd> / <kbd>Esc</kbd></div>
+                  </div>
+                  <label class="gh-switch">
+                    <input type="checkbox" id="navToolSearch" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="form-group-row">
+                  <div class="form-info">
+                    <div class="form-label">Pengalih Mode Gelap / Terang (Dark Mode Switch)</div>
+                    <div class="form-hint">Menampilkan tombol <svg class="gh-icon" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678A5.5 5.5 0 1011.214 3.536z"></path></svg> di ujung kanan kapsul</div>
+                  </div>
+                  <label class="gh-switch">
+                    <input type="checkbox" id="navToolDark" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="form-group-row">
+                  <div class="form-info">
+                    <div class="form-label">Mode Baca Fokus (Read Mode)</div>
+                    <div class="form-hint">Format bebas distraksi untuk kenyamanan membaca artikel panjang</div>
+                  </div>
+                  <label class="gh-switch">
+                    <input type="checkbox" id="navToolRead" checked>
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 4: Pengaturan Footer -->
+            <div class="gh-box">
+              <div class="gh-box-header">
+                <div class="box-title">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                  </svg>
+                  <span>Pengaturan Footer & Tautan Teknis</span>
+                </div>
+                <button type="button" class="gh-btn" id="btnAddFooterItem" style="padding: 2px 10px; font-size: 12px;">
+                  <span>+ Tambah Link Footer</span>
+                </button>
+              </div>
+
+              <div style="overflow-x: auto; width: 100%;">
+                <table class="gh-table gh-table-compact" id="footerNavTable" style="table-layout: fixed; width: 100%; min-width: 680px;">
+                  <thead>
+                    <tr>
+                      <th style="width: 64px; text-align: center;" title="Atur urutan tautan (drag & drop atau klik tombol panah)">Urutan</th>
+                      <th style="width: 215px;">Ikon & Label Teks</th>
+                      <th style="min-width: 170px;">URL File / Rute (Pilih / Kustom)</th>
+                      <th style="width: 120px;">Target Jendela</th>
+                      <th style="width: 60px; text-align: center;">Tampil</th>
+                      <th style="width: 45px; text-align: right;">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="footerNavTableBody">
+                    <!-- Dynamically populated from content/settings/site.json -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="gh-box-footer">
+                <span class="footer-help">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  Gunakan pegangan <svg class="gh-icon" viewBox="0 0 16 16" width="12" height="12"><path fill-rule="evenodd" d="M10 13a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm4-4a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2zm4-4a1 1 0 100-2 1 1 0 000 2zm-4 0a1 1 0 100-2 1 1 0 000 2z"></path></svg> untuk drag & drop urutan atau klik tombol panah <svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11"><path fill-rule="evenodd" d="M3.22 9.78a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 0l4.25 4.25a.75.75 0 01-1.06 1.06L8 6.06 4.28 9.78a.75.75 0 01-1.06 0z"></path></svg> / <svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11"><path fill-rule="evenodd" d="M12.78 6.22a.75.75 0 010 1.06l-4.25 4.25a.75.75 0 01-1.06 0L3.22 7.28a.75.75 0 011.06-1.06L8 9.94l3.72-3.72a.75.75 0 011.06 0z"></path></svg> untuk menaikkan/menurunkan posisi tautan footer. Gunakan dropdown URL untuk memilih halaman, artikel, atau berkas teknis secara otomatis. Klik tombol edit <svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11"><path fill-rule="evenodd" d="M11.013 1.427a1.75 1.75 0 012.474 0l1.086 1.086a1.75 1.75 0 010 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 01-.927-.928l.929-3.25a1.75 1.75 0 01.445-.758l8.61-8.61zm1.414 1.06a.25.25 0 00-.354 0L10.811 3.75l1.439 1.44 1.263-1.263a.25.25 0 000-.354l-1.086-1.086zM9.75 4.81L3.94 10.62c-.07.07-.12.155-.15.25l-.64 2.24 2.24-.64c.094-.027.18-.08.25-.15L11.44 6.51 9.75 4.81z"></path></svg> jika ingin mengetik URL manual.
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= WORKSPACE VIEW: THEMES (LIST VIEW + TABBED SETTINGS) ================= -->
+          <div class="workspace-view" id="viewThemes" style="display: none;">
+            
+            <!-- LAYER 1: THEMES CATALOG LIST (FORMAT LIST VIEW) -->
+            <div id="themesLayer1" class="theme-layer-view">
+              <!-- Section Banner (GitHub Subhead) -->
+              <div class="gh-subhead">
+                <div class="subhead-heading">
+                  <h2>Katalog & Daftar Tema (Theme List)</h2>
+                  <span class="subhead-meta">src/themes/ • Terintegrasi secara native dengan ekosistem Astro SSG</span>
+                </div>
+                <div class="subhead-actions">
+                  <button type="button" class="gh-btn gh-btn-primary" id="btnInstallThemeMock">
+                    <span>+ Pasang Tema Baru</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Themes List View (GitHub Box Table) -->
+              <div class="gh-box">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="8" y1="6" x2="21" y2="6"></line>
+                      <line x1="8" y1="12" x2="21" y2="12"></line>
+                      <line x1="8" y1="18" x2="21" y2="18"></line>
+                      <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                      <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                      <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg>
+                    <span>Daftar Tema Terpasang di Proyek</span>
+                  </div>
+                  <span class="gh-counter">2 Tema Tersedia</span>
+                </div>
+
+                <table class="gh-table" id="themesListTable">
+                  <thead>
+                    <tr>
+                      <th>Nama Tema & Versi</th>
+                      <th>Status</th>
+                      <th>Folder Sumber</th>
+                      <th>Preset Warna Bawaan</th>
+                      <th>Pembuat</th>
+                      <th style="text-align: right;">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- Item 1: Fruition-capsule (Active Flagship) -->
+                    <tr style="background: rgba(9, 105, 218, 0.02);">
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                          <div class="nav-icon-badge pastel-peach" style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; color: #9E2A2B;">
+                            <svg class="gh-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path fill-rule="evenodd" d="M8 15A7 7 0 011 8a7 7 0 017-7 .75.75 0 01.75.75v12.5A.75.75 0 018 15zm-.75-1.52A5.502 5.502 0 012.5 8c0-2.614 1.82-4.802 4.25-5.36v10.84zM5.25 5.5a.75.75 0 100-1.5.75.75 0 000 1.5zm-1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5zm1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg>
+                          </div>
+                          <div>
+                            <div style="font-weight: 700; font-size: 13px; color: var(--gh-fg-default);">
+                              Fruition-capsule
+                              <span class="gh-tag-pill" style="margin-left: 4px;">v0.2.8</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 1px;">
+                              Single-capsule floating glassmorphic header & editorial grid
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge-tag green" style="font-weight: 600;">✓ Tema Aktif</span>
+                      </td>
+                      <td>
+                        <code>src/themes/fruition-capsule/</code>
+                      </td>
+                      <td>
+                        <span id="themeTablePresetSummary" style="font-size: 12px; color: var(--gh-fg-default);">
+                          <strong style="color: #0284c7;">Blue Sky</strong> (Aktif), Mono, Candy Pop
+                        </span>
+                      </td>
+                      <td>
+                        <span style="font-size: 12px; color: var(--gh-fg-muted);">Fruition Team</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <button type="button" class="gh-btn gh-btn-primary btn-open-theme-settings" data-theme="fruition-capsule" style="padding: 3px 10px; font-size: 12px;">
+                          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                          </svg>
+                          <span>Pengaturan Tema &rarr;</span>
+                        </button>
+                      </td>
+                    </tr>
+
+                    <!-- Item 2: Fruition-minimal (Standby Catalog) -->
+                    <tr>
+                      <td>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                          <div class="nav-icon-badge pastel-gray" style="width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gh-fg-muted);">
+                            <svg class="gh-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 1.5a.25.25 0 00-.25.25v12.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25V6H9.75A1.75 1.75 0 018 4.25V1.5H3.75zm5.75.56v2.19c0 .138.112.25.25.25h2.19L9.5 2.06zM2 1.75C2 .784 2.784 0 3.75 0h5.586c.464 0 .909.184 1.237.513l3.414 3.414c.329.328.513.773.513 1.237v9.086A1.75 1.75 0 0112.75 16h-9A1.75 1.75 0 012 14.25V1.75z"></path></svg>
+                          </div>
+                          <div>
+                            <div style="font-weight: 700; font-size: 13px; color: var(--gh-fg-default);">
+                              Fruition-minimal
+                              <span class="gh-tag-pill" style="margin-left: 4px;">v0.1.0</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 1px;">
+                              Ultra-clean monochrome typography & fast reading layout
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <span class="badge-tag">Katalog Lokal</span>
+                      </td>
+                      <td>
+                        <code>src/themes/fruition-minimal/</code>
+                      </td>
+                      <td>
+                        <span style="font-size: 12px; color: var(--gh-fg-muted);">Pure White, Ink Dark</span>
+                      </td>
+                      <td>
+                        <span style="font-size: 12px; color: var(--gh-fg-muted);">Fruition Team</span>
+                      </td>
+                      <td style="text-align: right;">
+                        <button type="button" class="gh-btn btn-mock-activate" style="padding: 3px 10px; font-size: 12px;">
+                          <span>Aktifkan Tema</span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="gh-box-footer">
+                  <span class="footer-help">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="16" x2="12" y2="12"></line>
+                      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Semua berkas tema tersimpan langsung di <code>src/themes/[nama-tema]/</code> sesuai arsitektur native Astro.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- LAYER 2: PENGATURAN TEMA FRUITION-CAPSULE (TAB BAR DI BAWAH STICKY SUBHEAD) -->
+            <div id="themesLayer2" class="theme-layer-view" style="display: none;">
+              
+              <!-- Section Banner (GitHub Subhead) -->
+              <div class="gh-subhead" style="margin-bottom: 0; padding-bottom: 12px;">
+                <div class="subhead-heading">
+                  <h2>Pengaturan Tema: Fruition-capsule v0.2.8</h2>
+                  <span class="subhead-meta">src/themes/fruition-capsule/ • Konfigurasi tata letak visual, preset warna, dan komponen</span>
+                </div>
+              </div>
+
+              <!-- Horizontal Underline Tabs (Tepat di Bawah Sticky Subhead) -->
+              <div class="gh-subnav-tabs" id="themeSettingsTabs" style="margin-top: 14px; margin-bottom: 20px;">
+                <button type="button" class="tab-item active" data-themetab="header">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                  </svg>
+                  <span>Header & Navigation</span>
+                </button>
+                <button type="button" class="tab-item" data-themetab="hero">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                  </svg>
+                  <span>Hero Unit</span>
+                </button>
+                <button type="button" class="tab-item" data-themetab="cardgrid">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                  <span>Card Grid System</span>
+                </button>
+                <button type="button" class="tab-item" data-themetab="footer">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                  </svg>
+                  <span>Footer & Variables</span>
+                </button>
+                <button type="button" class="tab-item" data-themetab="presets">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                  </svg>
+                  <span>Color Presets & Tokens</span>
+                </button>
+              </div>
+
+              <!-- TAB PANELS CONTAINER (Form Berganti Langsung di Bawah Tab) -->
+              <div id="themeTabPanels">
+                
+                <!-- PANEL 1: Header & Navigation -->
+                <div class="theme-tab-panel" id="panelThemeHeader">
+                  <!-- Box 1: Identitas Brand Header Kapsul (Dipindahkan dari Navigasi ke Pengaturan Tema) -->
+                  <div class="gh-box" style="margin-bottom: 20px;">
+                    <div class="gh-box-header">
+                      <div class="box-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="9"></circle>
+                          <path d="M12 7v5l3 3"></path>
+                        </svg>
+                        <span>Identitas Brand Header Kapsul</span>
+                      </div>
+                      <span class="text-muted text-small">content/settings/site.json • CapsuleHeader.astro</span>
+                    </div>
+                    <div class="gh-box-body">
+                      <!-- Row 1: Logo Upload & Visual Preview -->
+                      <div style="display: flex; gap: 20px; align-items: center; padding: 14px; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 6px; margin-bottom: 16px;">
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
+                          <div id="navLogoPreviewWrap" style="width: 140px; height: 50px; background: var(--gh-canvas); border: 1px dashed var(--gh-border-default); border-radius: 6px; display: flex; align-items: center; justify-content: center; padding: 4px; overflow: hidden;">
+                            <img id="navLogoPreviewImg" src="/logo.png" alt="Logo Preview" style="max-height: 38px; max-width: 100%; object-fit: contain;">
+                            <span id="navLogoEmojiFallback" style="display: none; align-items: center; justify-content: center; color: var(--gh-accent-fg);">
+                              <svg class="gh-icon" viewBox="0 0 16 16" width="28" height="28" fill="currentColor"><path fill-rule="evenodd" d="M8 15A7 7 0 011 8a7 7 0 017-7 .75.75 0 01.75.75v12.5A.75.75 0 018 15zm-.75-1.52A5.502 5.502 0 012.5 8c0-2.614 1.82-4.802 4.25-5.36v10.84zM5.25 5.5a.75.75 0 100-1.5.75.75 0 000 1.5zm-1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5zm1 3.5a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg>
+                            </span>
+                          </div>
+                          <span style="font-size: 11px; color: var(--gh-fg-subtle); font-weight: 500;">Preview Navbar</span>
+                        </div>
+
+                        <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                          <div>
+                            <div style="font-weight: 600; font-size: 13px; color: var(--gh-fg-default);">Logo Gambar Navbar (Brand Logo)</div>
+                            <div class="form-hint" style="margin-top: 2px;">Format yang didukung: PNG transparan, SVG, WebP, atau JPG. Tinggi proporsional navbar.</div>
+                          </div>
+                          <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                            <input type="file" id="navLogoFileInput" accept="image/png,image/svg+xml,image/webp,image/jpeg" style="display: none;">
+                            <button type="button" class="gh-btn gh-btn-primary" id="btnUploadLogo" style="padding: 4px 12px; font-size: 12px; display: inline-flex; align-items: center; gap: 6px;">
+                              <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M2.75 14A1.75 1.75 0 011 12.25v-2.5a.75.75 0 011.5 0v2.5c0 .138.112.25.25.25h10.5a.25.25 0 00.25-.25v-2.5a.75.75 0 011.5 0v2.5A1.75 1.75 0 0113.25 14H2.75zM7.22 1.47a.75.75 0 011.06 0l3.5 3.5a.75.75 0 01-1.06 1.06L8.75 4.06v6.69a.75.75 0 01-1.5 0V4.06L5.28 6.03a.75.75 0 01-1.06-1.06l3.5-3.5z"></path></svg>
+                              <span>Unggah Logo Baru</span>
+                            </button>
+                            <button type="button" class="gh-btn" id="btnRemoveLogo" style="padding: 4px 10px; font-size: 12px; color: var(--gh-danger-fg); display: inline-flex; align-items: center; gap: 6px;" title="Hapus gambar logo dan gunakan ikon SVG">
+                              <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M11 1.75V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6zM6.5 1.75V3h3V1.75a.25.25 0 00-.25-.25h-2.5a.25.25 0 00-.25.25z"></path></svg>
+                              <span>Hapus Logo (Gunakan Ikon)</span>
+                            </button>
+                            <span id="logoUploadStatus" style="font-size: 12px; color: var(--gh-fg-muted);"></span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Row 2: Form Inputs -->
+                      <div style="display: grid; grid-template-columns: 120px 1.3fr 1.4fr; gap: 14px; align-items: flex-end;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                          <label class="form-label">Ikon Brand (SVG)</label>
+                          <input type="text" id="navSiteIcon" class="gh-input" style="border-radius: 6px; text-align: center; font-size: 13px; font-weight: 600;" value="fruit" placeholder="fruit">
+                          <span class="form-hint">Icon Pack GitHub</span>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <label class="form-label" style="margin-bottom: 0;">Nama Situs (Site Title)</label>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                              <span id="navSiteNameToggleLabel" style="font-size: 11px; font-weight: 500; color: var(--gh-fg-subtle);">Nonaktif</span>
+                              <label class="gh-switch" style="transform: scale(0.8); transform-origin: right center;" title="Aktifkan atau nonaktifkan teks nama situs di navbar">
+                                <input type="checkbox" id="navShowSiteName">
+                                <span class="slider"></span>
+                              </label>
+                            </div>
+                          </div>
+                          <input type="text" id="navSiteName" class="gh-input" style="border-radius: 6px;" value="My Fruition Blog">
+                          <span class="form-hint">Teks judul situs di navbar kapsul (On/Off)</span>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0;">
+                          <label class="form-label">Path / URL Logo</label>
+                          <input type="text" id="navLogoUrl" class="gh-input" style="border-radius: 6px; font-family: monospace; font-size: 12px;" value="/logo.png" placeholder="/logo.png atau URL luar">
+                          <span class="form-hint">Terisi otomatis saat mengunggah berkas</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Box 2: Konfigurasi Single-Capsule Floating Header -->
+                  <div class="gh-box">
+                    <div class="gh-box-header">
+                      <div class="box-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                          <line x1="3" y1="9" x2="21" y2="9"></line>
+                        </svg>
+                        <span>Konfigurasi Single-Capsule Floating Header</span>
+                      </div>
+                      <span class="text-muted text-small">src/themes/fruition-capsule/layouts/CapsuleHeader.astro</span>
+                    </div>
+
+                    <div class="gh-box-body">
+                      <!-- Field 1: Container Mode -->
+                      <div class="form-group">
+                        <div class="form-label-wrap">
+                          <label class="form-label">Gaya Wadah Header Kapsul</label>
+                          <span class="form-hint">Format visual kapsul mengambang di tengah atas</span>
+                        </div>
+                        <div class="segmented-control">
+                          <button type="button" class="segment-btn active">Single-Capsule (Default Flagship)</button>
+                          <button type="button" class="segment-btn">Docked Top Bar</button>
+                          <button type="button" class="segment-btn">Minimal Pill</button>
+                        </div>
+                      </div>
+
+                      <!-- Field 2: Glassmorphism / Blur -->
+                      <div class="form-group-row">
+                        <div class="form-info">
+                          <div class="form-label">Efek Kaca Buram (Glassmorphism / Backdrop Blur)</div>
+                          <div class="form-hint">Memberikan efek blur frosted 20px saat navbar melayang di atas artikel</div>
+                        </div>
+                        <div class="switch-wrap">
+                          <label class="gh-switch">
+                            <input type="checkbox" id="themeHeaderGlassmorphism" checked>
+                            <span class="slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <!-- Field 3: Sticky by default -->
+                      <div class="form-group-row">
+                        <div class="form-info">
+                          <div class="form-label">Mode Sticky by Default (Mengikuti Scroll Halaman)</div>
+                          <div class="form-hint">Navbar tetap menempel di puncak layar saat pembaca menggulir konten</div>
+                        </div>
+                        <div class="switch-wrap">
+                          <label class="gh-switch">
+                            <input type="checkbox" id="themeHeaderSticky" checked>
+                            <span class="slider"></span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <!-- Field 4: Adaptive Breakpoint -->
+                      <div class="form-group">
+                        <div class="form-label-wrap">
+                          <label class="form-label">Ambang Batas Menguncup ke Hamburger (Mobile Threshold)</label>
+                          <span class="form-hint">Otomatis berubah menjadi tombol hamburger jika layar sempit</span>
+                        </div>
+                        <div class="input-with-addon">
+                          <input type="text" class="gh-input" value="767px" readonly>
+                          <span class="input-addon">px</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PANEL 2: Hero Unit -->
+                <div class="theme-tab-panel" id="panelThemeHero" style="display: none;">
+                  <div class="gh-box">
+                    <div class="gh-box-header">
+                      <div class="box-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                          <polyline points="2 17 12 22 22 17"></polyline>
+                        </svg>
+                        <span>Konfigurasi Komponen Hero Unit</span>
+                      </div>
+                      <span class="text-muted text-small">src/themes/fruition-capsule/components/HeroUnit.astro</span>
+                    </div>
+
+                    <div class="gh-box-body">
+                      <!-- Field: Hero Layout -->
+                      <div class="form-group">
+                        <label class="form-label">Pilihan Tata Letak Hero</label>
+                        <div class="segmented-control">
+                          <button type="button" class="segment-btn active">Centered Pill Hero (Default)</button>
+                          <button type="button" class="segment-btn">Split Media Hero</button>
+                        </div>
+                      </div>
+
+                      <!-- Field: Headline Title -->
+                      <div class="form-group">
+                        <label class="form-label">Judul Utama Hero (Headline)</label>
+                        <input type="text" class="gh-input" id="heroTitleInput" style="border-radius: 6px;" value="Ruang Baca & Catatan Terkurasi">
+                        <span class="form-hint">Judul yang menyambut pengunjung di beranda tema</span>
+                      </div>
+
+                      <!-- Field: Description -->
+                      <div class="form-group">
+                        <label class="form-label">Teks Deskripsi Hero</label>
+                        <textarea class="gh-input" id="heroDescInput" rows="2" style="border-radius: 6px; resize: vertical;">Kumpulan tulisan, modul pelajaran, dan dokumentasi</textarea>
+                      </div>
+
+                      <!-- Field: Explore Articles Button -->
+                      <div class="form-group-row">
+                        <div class="form-info">
+                          <div class="form-label">Tombol "Explore Articles"</div>
+                          <div class="form-hint">Secara default disembunyikan (*hidden by default*)</div>
+                        </div>
+                        <div class="switch-wrap">
+                          <label class="gh-switch">
+                            <input type="checkbox" id="heroExploreToggle">
+                            <span class="slider"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PANEL 3: Card Grid System -->
+                <div class="theme-tab-panel" id="panelThemeCardGrid" style="display: none;">
+                  <div class="gh-box">
+                    <div class="gh-box-header">
+                      <div class="box-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="3" y="3" width="7" height="7"></rect>
+                          <rect x="14" y="3" width="7" height="7"></rect>
+                          <rect x="14" y="14" width="7" height="7"></rect>
+                          <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        <span>Sistem Card Grid & Tata Letak Responsif</span>
+                      </div>
+                      <span class="text-muted text-small">src/themes/fruition-capsule/components/CardGrid.astro</span>
+                    </div>
+
+                    <div class="gh-box-body">
+                      <!-- Field: Card Mode -->
+                      <div class="form-group">
+                        <label class="form-label">Mode Tata Letak Kartu</label>
+                        <input type="hidden" id="themeCardMode" value="default">
+                        <div class="segmented-control" id="cardModeSegmentedControl">
+                          <button type="button" class="segment-btn active" id="btnCardModeDefault" data-cardmode="default">Default Card (Ukuran Seragam)</button>
+                          <button type="button" class="segment-btn" id="btnCardModeEditorial" data-cardmode="editorial">Editorial Card (1 Kartu Utama Besar)</button>
+                        </div>
+                        <span id="cardModeDesc" class="form-hint" style="margin-top: 6px;">Format kartu standar berjejer seragam dan simetris sesuai distribusi kolom.</span>
+                      </div>
+
+                      <!-- Khusus Editorial Card: Pengaturan Susunan Kolom Bertingkat (Muncul Otomatis Saat Mode Editorial Dipilih) -->
+                      <div class="form-group" id="editorialSettingsWrap" style="display: none; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-accent-fg); border-radius: 8px; padding: 16px; margin-top: 14px;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                          <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="badge-tag blue" style="font-weight: 700; font-size: 11px;">Khusus Editorial Card</span>
+                            <span style="font-weight: 700; font-size: 13px; color: var(--gh-fg-default);">Struktur Kolom Bertingkat (Tiered Grid Columns)</span>
+                          </div>
+                          <span id="editorialPatternBadge" class="badge-tag green" style="font-size: 11px; font-weight: 700;">Pola: 1 - 2 - 4</span>
+                        </div>
+
+                        <div class="form-hint" style="margin-bottom: 14px; font-size: 12px; line-height: 1.5;">
+                          Pilih kombinasi susunan kolom artikel beranda (misal: <strong>1 - 2 - 4</strong> atau <strong>1 - 3 - 3</strong>) atau tentukan jumlah kolom per baris:
+                        </div>
+
+                        <!-- Tombol Preset Pola Cepat -->
+                        <div style="margin-bottom: 14px;">
+                          <div style="font-size: 11px; font-weight: 600; color: var(--gh-fg-muted); margin-bottom: 6px;">Pilihan Pola Distribusi Kolom (Preset):</div>
+                          <div class="segmented-control" id="editorialPresetButtons" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                            <button type="button" class="segment-btn" data-pattern="1-2-3" title="1 Utama, 2 Sedang, 3 Grid Standar">1 - 2 - 3 (Klasik)</button>
+                            <button type="button" class="segment-btn active" data-pattern="1-2-4" title="1 Utama, 2 Sedang, 4 Grid Standar">1 - 2 - 4 (Showcase)</button>
+                            <button type="button" class="segment-btn" data-pattern="1-3-3" title="1 Utama, 3 Sedang, 3 Grid Standar">1 - 3 - 3 (Balanced Trio)</button>
+                            <button type="button" class="segment-btn" data-pattern="1-3-4" title="1 Utama, 3 Sedang, 4 Grid Standar">1 - 3 - 4 (High Density)</button>
+                            <button type="button" class="segment-btn" data-pattern="1-2-2" title="1 Utama, 2 Sedang, 2 Grid Standar">1 - 2 - 2 (Magazine)</button>
+                          </div>
+                        </div>
+
+                        <!-- 3 Kolom Dropdown Penentu Baris -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 14px;">
+                          <!-- Tier 1: Kartu Utama (Hero) -->
+                          <div style="background: var(--gh-canvas-default); padding: 12px; border: 1px solid var(--gh-border-default); border-radius: 6px; text-align: center;">
+                            <div style="font-size: 11px; font-weight: 700; color: var(--gh-accent-fg); margin-bottom: 6px;">Baris 1 (Utama)</div>
+                            <input type="text" class="gh-input" value="1 Kartu (Span 12 Penuh)" readonly style="font-weight: 700; font-size: 11px; text-align: center; border-radius: 4px; padding: 5px; width: 100%; background: var(--gh-canvas-subtle); color: var(--gh-fg-muted); cursor: not-allowed;" title="Kartu pertama selalu membentang penuh 12 span">
+                            <div style="font-size: 10px; color: var(--gh-fg-subtle); margin-top: 6px;">1 Kartu Hero Besar</div>
+                          </div>
+
+                          <!-- Tier 2: Kartu Sekunder -->
+                          <div style="background: var(--gh-canvas-default); padding: 12px; border: 1px solid var(--gh-border-default); border-radius: 6px; text-align: center;">
+                            <div style="font-size: 11px; font-weight: 700; color: var(--gh-fg-default); margin-bottom: 6px;">Baris 2 (Sekunder)</div>
+                            <select id="themeEditorialTier2" class="gh-input" style="font-weight: 700; font-size: 12px; text-align: center; border-radius: 4px; padding: 5px; width: 100%;">
+                              <option value="2" selected>2 Kolom (2 Kartu)</option>
+                              <option value="3">3 Kolom (3 Kartu)</option>
+                            </select>
+                            <div style="font-size: 10px; color: var(--gh-fg-subtle); margin-top: 6px;">Sub-featured di bawah hero</div>
+                          </div>
+
+                          <!-- Tier 3: Grid Seterusnya -->
+                          <div style="background: var(--gh-canvas-default); padding: 12px; border: 1px solid var(--gh-border-default); border-radius: 6px; text-align: center;">
+                            <div style="font-size: 11px; font-weight: 700; color: var(--gh-fg-default); margin-bottom: 6px;">Baris 3+ (Seterusnya)</div>
+                            <select id="themeEditorialTier3" class="gh-input" style="font-weight: 700; font-size: 12px; text-align: center; border-radius: 4px; padding: 5px; width: 100%;">
+                              <option value="2">2 Kolom</option>
+                              <option value="3">3 Kolom</option>
+                              <option value="4" selected>4 Kolom</option>
+                            </select>
+                            <div style="font-size: 10px; color: var(--gh-fg-subtle); margin-top: 6px;">Grid artikel reguler</div>
+                          </div>
+                        </div>
+
+                        <!-- Opsi Versi Mobile untuk Mode Editorial (1 Card vs 2 Card) -->
+                        <div style="background: var(--gh-canvas-default); padding: 12px 14px; border: 1px solid var(--gh-border-default); border-radius: 6px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                          <div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                              <span style="font-size: 12px; font-weight: 700; color: var(--gh-fg-default);">Distribusi Versi Mobile SM (Layar &le; 767px)</span>
+                              <span class="badge-tag green" id="editorialMobileBadge" style="font-size: 10px; font-weight: 700;">2 Card</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); margin-top: 3px;">
+                              Pilih apakah kartu setelah Kartu Utama ditampilkan 1 baris 1 kartu atau 2 kartu sejajar pada smartphone.
+                            </div>
+                          </div>
+                          <div style="min-width: 180px;">
+                            <select id="themeEditorialMobileCol" class="gh-input" style="font-weight: 700; font-size: 12px; border-radius: 4px; padding: 6px 10px; width: 100%;">
+                              <option value="1">1 Card (1 Kolom Penuh)</option>
+                              <option value="2" selected>2 Card (2 Kolom Sejajar)</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <!-- Skema Visual Layout Balok -->
+                        <div style="background: var(--gh-canvas-default); border: 1px dashed var(--gh-border-muted); border-radius: 6px; padding: 12px;">
+                          <div style="font-size: 11px; font-weight: 600; color: var(--gh-fg-muted); margin-bottom: 8px;">Skema Visual Distribusi Grid:</div>
+                          <div id="editorialVisualSchematic" style="display: flex; flex-direction: column; gap: 6px;">
+                            <!-- Rendered dynamically -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Field: Breakpoint Columns (Default Grid) -->
+                      <div class="form-group" id="defaultColDistributionWrap">
+                        <div class="form-label-wrap">
+                          <label class="form-label">Distribusi Kolom Responsif (Default Grid)</label>
+                          <span class="form-hint">Atur jumlah kolom grid yang diinginkan untuk setiap ukuran layar pada mode Default Card</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px;">
+                          <!-- SM Mobile -->
+                          <div style="background: var(--gh-canvas-subtle); padding: 12px; border: 1px solid var(--gh-border-default); border-radius: 6px; text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--gh-fg-subtle); margin-bottom: 6px;">SM (Mobile)</div>
+                            <select id="themeGridColSm" class="gh-input" style="font-weight: 700; font-size: 13px; text-align: center; border-radius: 4px; padding: 5px; width: 100%;">
+                              <option value="1" selected>1 Kolom</option>
+                              <option value="2">2 Kolom</option>
+                            </select>
+                            <div style="font-size: 11px; color: var(--gh-fg-subtle); margin-top: 6px;">Layar &le; 767px</div>
+                          </div>
+                          <!-- MD Tablet -->
+                          <div style="background: var(--gh-canvas-subtle); padding: 12px; border: 1px solid var(--gh-border-default); border-radius: 6px; text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--gh-fg-subtle); margin-bottom: 6px;">MD (Tablet)</div>
+                            <select id="themeGridColMd" class="gh-input" style="font-weight: 700; font-size: 13px; text-align: center; border-radius: 4px; padding: 5px; width: 100%;">
+                              <option value="1">1 Kolom</option>
+                              <option value="2" selected>2 Kolom</option>
+                              <option value="3">3 Kolom</option>
+                            </select>
+                            <div style="font-size: 11px; color: var(--gh-fg-subtle); margin-top: 6px;">768px – 1024px</div>
+                          </div>
+                          <!-- LG Desktop -->
+                          <div style="background: var(--gh-canvas-subtle); padding: 12px; border: 1px solid var(--gh-border-default); border-radius: 6px; text-align: center;">
+                            <div style="font-size: 11px; font-weight: 600; color: var(--gh-fg-subtle); margin-bottom: 6px;">LG (Desktop)</div>
+                            <select id="themeGridColLg" class="gh-input" style="font-weight: 700; font-size: 13px; text-align: center; border-radius: 4px; padding: 5px; width: 100%;">
+                              <option value="2">2 Kolom</option>
+                              <option value="3" selected>3 Kolom</option>
+                              <option value="4">4 Kolom</option>
+                            </select>
+                            <div style="font-size: 11px; color: var(--gh-fg-subtle); margin-top: 6px;">Layar &gt; 1024px</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PANEL 4: Footer & Dynamic Variables -->
+                <div class="theme-tab-panel" id="panelThemeFooter" style="display: none;">
+                  <div class="gh-box">
+                    <div class="gh-box-header">
+                      <div class="box-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <path d="M12 6v6l4 2"></path>
+                        </svg>
+                        <span>Variabel Dinamis Footer & Brand</span>
+                      </div>
+                      <span class="text-muted text-small">src/themes/fruition-capsule/layouts/BaseLayout.astro</span>
+                    </div>
+
+                    <div class="gh-box-body">
+                      <!-- Field: Teks Hak Cipta & Brand Footer (Sisi Kiri) -->
+                      <div class="form-group">
+                        <label class="form-label">Teks Hak Cipta & Brand Footer (Sisi Kiri)</label>
+                        <input type="text" id="navFooterCopyright" class="gh-input" style="border-radius: 6px;" value="{yyyy} Made with {heart} by headless blogs">
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                          <span class="form-hint" style="margin: 0;">Token dinamis: <code>{yyyy}</code> = tahun berjalan, <code>{heart}</code> = ikon hati berdetak (animasi SVG heartbeat).</span>
+                          <span id="copyrightPreviewWrap" style="font-size: 11px; color: var(--gh-fg-muted); background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-muted); border-radius: 6px; padding: 3px 10px; display: inline-flex; align-items: center; gap: 6px;">
+                            Pratinjau Langsung: <span id="copyrightPreviewText" style="color: var(--gh-fg-default); font-weight: 500;"></span>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- Field: Technical Links -->
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Tautan Standar Footer Kanan</label>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px;">
+                          <span class="badge-tag green">sitemap.xml</span>
+                          <span class="badge-tag green">rss</span>
+                          <span class="badge-tag green">robots.txt</span>
+                          <span class="badge-tag green">llms.txt</span>
+                        </div>
+                        <span class="form-hint" style="display: block; margin-top: 6px;">Daftar item tautan kanan footer dapat dikelola pada menu <strong>Navigasi &rarr; Pengaturan Footer & Tautan Teknis</strong>.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PANEL 5: Color Presets & Tokens -->
+                <div class="theme-tab-panel" id="panelThemePresets" style="display: none;">
+                  <div class="gh-box">
+                    <div class="gh-box-header">
+                      <div class="box-title">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        </svg>
+                        <span>Pilihan Preset Warna Global (CSS Custom Properties)</span>
+                      </div>
+                      <span class="text-muted text-small">src/themes/fruition-capsule/styles/capsule.css</span>
+                    </div>
+
+                    <div class="gh-box-body">
+                      <input type="hidden" id="themeActivePreset" value="Blue Sky">
+                      <p class="form-hint" style="margin-top: 0; margin-bottom: 14px;">
+                        Klik salah satu kartu preset di bawah untuk mengaktifkan skema warna global tema secara langsung pada seluruh halaman situs (otomatis tersimpan ke <code>theme.json</code>).
+                      </p>
+
+                      <div class="preset-cards-grid" id="themePresetCardsGrid">
+                        <!-- Preset: Light (Silver, Light Cream, Putih) -->
+                        <div class="preset-card active" data-preset="Light" data-preset-slug="light" style="cursor: pointer;">
+                          <div class="preset-header">
+                            <span class="preset-name">Light</span>
+                            <span class="preset-status-indicator"><span class="preset-badge">Active</span></span>
+                          </div>
+                          <div style="font-size: 11px; color: var(--gh-fg-muted); margin-bottom: 10px;">
+                            Harmonisasi perak (silver), kanvas light cream hangat, dan kartu putih bersih.
+                          </div>
+                          <div class="preset-colors">
+                            <span class="color-swatch" style="background: #FAF8F5; border: 1px solid #dcdad5;" title="Canvas: Light Cream #FAF8F5"></span>
+                            <span class="color-swatch" style="background: #FFFFFF; border: 1px solid #cbd5e1;" title="Surface: Putih #FFFFFF"></span>
+                            <span class="color-swatch" style="background: #E2E4E9; border: 1px solid #c2c6cf;" title="Border: Silver #E2E4E9"></span>
+                            <span class="color-swatch" style="background: #1E2229;" title="Text/Primary: #1E2229"></span>
+                          </div>
+                        </div>
+
+                        <!-- Preset 1: Mono -->
+                        <div class="preset-card" data-preset="Mono" data-preset-slug="mono" style="cursor: pointer;">
+                          <div class="preset-header">
+                            <span class="preset-name">Mono</span>
+                            <span class="preset-status-indicator"><span class="preset-radio"></span></span>
+                          </div>
+                          <div style="font-size: 11px; color: var(--gh-fg-muted); margin-bottom: 10px;">
+                            Monokrom kontras tinggi minimalis untuk fokus membaca maksimal.
+                          </div>
+                          <div class="preset-colors">
+                            <span class="color-swatch" style="background: #0F172A;" title="Primary: #0F172A"></span>
+                            <span class="color-swatch" style="background: #475569;" title="Secondary: #475569"></span>
+                            <span class="color-swatch" style="background: #FFFFFF; border: 1px solid #cbd5e1;" title="Canvas: #FFFFFF"></span>
+                          </div>
+                        </div>
+
+                        <!-- Preset 2: Blue Sky -->
+                        <div class="preset-card" data-preset="Blue Sky" data-preset-slug="blue-sky" style="cursor: pointer;">
+                          <div class="preset-header">
+                            <span class="preset-name">Blue Sky</span>
+                            <span class="preset-status-indicator"><span class="preset-radio"></span></span>
+                          </div>
+                          <div style="font-size: 11px; color: var(--gh-fg-muted); margin-bottom: 10px;">
+                            Nuansa biru langit cerah dengan permukaan bersih dan bayangan halus.
+                          </div>
+                          <div class="preset-colors">
+                            <span class="color-swatch" style="background: #0284C7;" title="Primary: #0284C7"></span>
+                            <span class="color-swatch" style="background: #38BDF8;" title="Accent: #38BDF8"></span>
+                            <span class="color-swatch" style="background: #F8FAFC; border: 1px solid #cbd5e1;" title="Canvas: #F8FAFC"></span>
+                          </div>
+                        </div>
+
+                        <!-- Preset 3: Candy Pop -->
+                        <div class="preset-card" data-preset="Candy Pop" data-preset-slug="candy-pop" style="cursor: pointer;">
+                          <div class="preset-header">
+                            <span class="preset-name">Candy Pop</span>
+                            <span class="preset-status-indicator"><span class="preset-radio"></span></span>
+                          </div>
+                          <div style="font-size: 11px; color: var(--gh-fg-muted); margin-bottom: 10px;">
+                            Palet energetik dengan aksen merah semangka, kuning lemon, dan kanvas hangat.
+                          </div>
+                          <div class="preset-colors">
+                            <span class="color-swatch" style="background: #E11D48;" title="Primary: #E11D48"></span>
+                            <span class="color-swatch" style="background: #FDE047;" title="Accent: #FDE047"></span>
+                            <span class="color-swatch" style="background: #FFFDF9; border: 1px solid #cbd5e1;" title="Canvas: #FFFDF9"></span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Live CSS Custom Properties Token Inspector -->
+                      <div style="margin-top: 18px; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 14px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                          <span style="font-size: 12px; font-weight: 700; color: var(--gh-fg-default);">Token CSS Aktif (<code id="activePresetTokenCode">[data-theme-preset="blue-sky"]</code>)</span>
+                          <span class="badge-tag blue" id="activePresetBadgeLabel">Preset: Blue Sky</span>
+                        </div>
+                        <div id="presetTokensGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px;">
+                          <!-- Diisi secara dinamis oleh app.js -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ================= WORKSPACE VIEW: PLUGINS (EXTENSIONS & MONETIZATION) ================= -->
+          <div class="workspace-view" id="viewPlugins" style="display: none;">
+            
+            <!-- LAYER 1: PLUGINS CATALOG LIST -->
+            <div id="pluginsLayer1" class="plugin-layer-view">
+              <div class="gh-subhead">
+                <div class="subhead-heading">
+                  <h2>Daftar Plugin &amp; Ekstensi Terpasang</h2>
+                  <span class="subhead-meta">content/plugins/ • Ekstensi modular untuk monetasi, keamanan tautan, dan fitur kustom</span>
+                </div>
+                <div class="subhead-actions">
+                  <span class="badge-tag green" style="font-size: 11px;">2 Plugin Terpasang</span>
+                </div>
+              </div>
+
+              <div class="gh-box">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    </svg>
+                    <span>Katalog Ekstensi &amp; Plugin Jamstack</span>
+                  </div>
+                  <span class="gh-counter" id="pluginActiveCounter">1 Aktif</span>
+                </div>
+
+                <div class="gh-box-body" style="padding: 0;">
+                  <!-- Item 1: Safelink Protector -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--gh-border-muted); flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 14px; max-width: 650px;">
+                      <div class="nav-icon-badge pastel-mint" style="width: 36px; height: 36px; flex-shrink: 0; margin-top: 2px;">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                      </div>
+                      <div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <strong style="font-size: 14px; color: var(--gh-fg-default);">Safelink Link Protector</strong>
+                          <span class="gh-tag-pill">v1.0.0</span>
+                          <span class="badge-tag green" id="badgeStatusSafelink">Aktif</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--gh-fg-muted); margin: 4px 0 0; line-height: 1.5;">
+                          Mengarahkan seluruh tautan luar situs di dalam artikel ke halaman safelink berhitung mundur (default 10 detik, dapat diatur) dengan slot iklan dan daftar pengecualian domain.
+                        </p>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <label class="gh-switch" title="Aktifkan / Nonaktifkan Plugin Safelink">
+                        <input type="checkbox" id="togglePluginSafelink" checked>
+                        <span class="slider"></span>
+                      </label>
+                      <button type="button" class="gh-btn btn-open-plugin-settings" data-plugin="safelink" style="padding: 4px 12px; font-size: 12px;">
+                        <span>Konfigurasi &rarr;</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Item 2: Google AdSense -->
+                  <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: flex-start; gap: 14px; max-width: 650px;">
+                      <div class="nav-icon-badge pastel-peach" style="width: 36px; height: 36px; flex-shrink: 0; margin-top: 2px;">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                      </div>
+                      <div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                          <strong style="font-size: 14px; color: var(--gh-fg-default);">Google AdSense &amp; Monetization</strong>
+                          <span class="gh-tag-pill">v1.0.0</span>
+                          <span class="badge-tag gray" id="badgeStatusAdsense">Nonaktif</span>
+                        </div>
+                        <p style="font-size: 12px; color: var(--gh-fg-muted); margin: 4px 0 0; line-height: 1.5;">
+                          Integrasi resmi Google AdSense untuk menginjeksi script publisher dan slot iklan responsif ke header, bawah judul artikel, footer, dan halaman safelink (nonaktif secara default).
+                        </p>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <label class="gh-switch" title="Aktifkan / Nonaktifkan Plugin Google AdSense">
+                        <input type="checkbox" id="togglePluginAdsense">
+                        <span class="slider"></span>
+                      </label>
+                      <button type="button" class="gh-btn btn-open-plugin-settings" data-plugin="adsense" style="padding: 4px 12px; font-size: 12px;">
+                        <span>Konfigurasi &rarr;</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="gh-box-footer">
+                  <span class="footer-help">
+                    Seluruh konfigurasi plugin disimpan secara atomik pada <code>content/plugins/[plugin-id].json</code> dan diinjeksi saat proses build Astro.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- LAYER 2: FORM PENGATURAN PLUGIN SAFELINK -->
+            <div id="pluginsLayer2Safelink" class="plugin-layer-view" style="display: none;">
+              <div class="gh-subhead">
+                <div class="subhead-heading">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <button type="button" class="gh-btn btn-back-to-pluginlist" style="padding: 2px 8px; font-size: 11px;">
+                      &larr; Kembali
+                    </button>
+                    <h2 style="margin: 0;">Pengaturan Plugin: Safelink Protector</h2>
+                  </div>
+                  <span class="subhead-meta">content/plugins/safelink.json • Atur durasi countdown, rute halaman, dan daftar domain pengecualian</span>
+                </div>
+                <div class="subhead-actions">
+                  <button type="button" class="gh-btn gh-btn-primary" id="btnSaveSafelinkPlugin">
+                    <span>Simpan Pengaturan Safelink</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="gh-box">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>Konfigurasi Perilaku &amp; Timer Safelink</span>
+                  </div>
+                </div>
+
+                <div class="gh-box-body">
+                  <!-- Row 1: Master Enable Toggle -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Status Proteksi Safelink</div>
+                      <div class="form-hint">Mengarahkan link eksternal di dalam artikel ke halaman safelink secara otomatis</div>
+                    </div>
+                    <label class="gh-switch">
+                      <input type="checkbox" id="safelinkFormEnabled" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <!-- Row 2: Countdown Timer (Detik) -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Durasi Countdown Hitung Mundur (Detik)</div>
+                      <div class="form-hint">Jumlah detik pengunjung harus menunggu sebelum tombol tautan tujuan muncul (Default: 10 detik)</div>
+                    </div>
+                    <div style="width: 160px;">
+                      <input type="number" id="safelinkFormCountdown" class="gh-input" value="10" min="1" max="60" style="text-align: center; font-weight: 700; font-size: 14px;">
+                    </div>
+                  </div>
+
+                  <!-- Row 3: Safelink Path & Param -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Rute URL Safelink</div>
+                      <div class="form-hint">Rute halaman tujuan safelink di situs (Default: <code>/safelink</code>)</div>
+                    </div>
+                    <div style="width: 240px;">
+                      <input type="text" id="safelinkFormPath" class="gh-input" value="/safelink">
+                    </div>
+                  </div>
+
+                  <!-- Row 4: Page Title & Button Text -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Teks Tombol Lanjutkan</div>
+                      <div class="form-hint">Label pada tombol setelah hitungan mundur selesai</div>
+                    </div>
+                    <div style="width: 280px;">
+                      <input type="text" id="safelinkFormButtonText" class="gh-input" value="Lanjutkan ke Tautan Tujuan &rarr;">
+                    </div>
+                  </div>
+
+                  <!-- Row 5: Auto Redirect to Open New Tab -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Auto Redirect ke Link Tujuan (Open New Tab)</div>
+                      <div class="form-hint">Otomatis membuka tautan tujuan di tab browser baru begitu hitungan mundur waktu habis tanpa harus menekan tombol secara manual</div>
+                    </div>
+                    <label class="gh-switch">
+                      <input type="checkbox" id="safelinkFormAutoRedirectNewTab" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <!-- Row 6: Auto Back to Origin Page -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Auto Back ke Halaman Asal Artikel</div>
+                      <div class="form-hint">Otomatis mengembalikan tab halaman safelink ini ke halaman artikel tempat link berasal setelah waktu habis</div>
+                    </div>
+                    <label class="gh-switch">
+                      <input type="checkbox" id="safelinkFormAutoBackOrigin" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <!-- Row 7: Domain Whitelist Textarea -->
+                  <div style="padding: 14px 0 6px;">
+                    <div class="form-label" style="margin-bottom: 4px;">Daftar Pengecualian Domain (Whitelist)</div>
+                    <div class="form-hint" style="margin-bottom: 8px;">
+                      Tautan ke domain-domain berikut tidak akan diarahkan ke safelink (tetap langsung menuju tujuan). Masukkan 1 domain per baris tanpa <code>http://</code> atau <code>/</code>.
+                    </div>
+                    <textarea id="safelinkFormWhitelist" class="gh-input" rows="5" style="width: 100%; font-family: monospace; font-size: 12px; line-height: 1.5;" placeholder="localhost&#10;127.0.0.1&#10;github.com&#10;google.com"></textarea>
+                  </div>
+                </div>
+
+                <div class="gh-box-footer">
+                  <span class="footer-help">
+                    Halaman safelink terpasang di <code>src/pages/safelink.astro</code> dan siap menampung slot iklan Google AdSense atas &amp; bawah.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- LAYER 3: FORM PENGATURAN PLUGIN ADSENSE -->
+            <div id="pluginsLayer3Adsense" class="plugin-layer-view" style="display: none;">
+              <div class="gh-subhead">
+                <div class="subhead-heading">
+                  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <button type="button" class="gh-btn btn-back-to-pluginlist" style="padding: 2px 8px; font-size: 11px;">
+                      &larr; Kembali
+                    </button>
+                    <h2 style="margin: 0;">Pengaturan Plugin: Google AdSense &amp; Monetization</h2>
+                  </div>
+                  <span class="subhead-meta">content/plugins/adsense.json • Kelola Publisher ID dan penempatan slot iklan di tema &amp; safelink</span>
+                </div>
+                <div class="subhead-actions">
+                  <button type="button" class="gh-btn gh-btn-primary" id="btnSaveAdsensePlugin">
+                    <span>Simpan Pengaturan AdSense</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="gh-box">
+                <div class="gh-box-header">
+                  <div class="box-title">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>Kredensial &amp; Konfigurasi Google AdSense</span>
+                  </div>
+                </div>
+
+                <div class="gh-box-body">
+                  <!-- Row 1: Master Enable Toggle -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Status Google AdSense</div>
+                      <div class="form-hint">Aktifkan untuk menginjeksi script AdSense ke seluruh halaman tema (Nonaktif secara default)</div>
+                    </div>
+                    <label class="gh-switch">
+                      <input type="checkbox" id="adsenseFormEnabled">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <!-- Row 2: Publisher Client ID -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Google AdSense Publisher ID (Client ID)</div>
+                      <div class="form-hint">Contoh: <code>ca-pub-1234567890123456</code> (Kosongkan jika belum mendaftar)</div>
+                    </div>
+                    <div style="width: 320px;">
+                      <input type="text" id="adsenseFormClientId" class="gh-input" placeholder="ca-pub-xxxxxxxxxxxxxxxx">
+                    </div>
+                  </div>
+
+                  <!-- Row 3: Auto Ads Toggle -->
+                  <div class="form-group-row">
+                    <div class="form-info">
+                      <div class="form-label">Google Auto Ads (Iklan Otomatis)</div>
+                      <div class="form-hint">Izinkan Google menempatkan iklan secara otomatis di area yang direkomendasikan AI Google</div>
+                    </div>
+                    <label class="gh-switch">
+                      <input type="checkbox" id="adsenseFormAutoAds">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <!-- Section: Slot Penempatan Iklan -->
+                  <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--gh-border-muted);">
+                    <div style="font-weight: 700; font-size: 13px; color: var(--gh-fg-default); margin-bottom: 12px;">
+                      Penempatan Slot Iklan Khusus (Ad Unit Slots)
+                    </div>
+
+                    <!-- Slot 1: Bawah Judul Artikel -->
+                    <div class="form-group-row" style="margin-bottom: 12px;">
+                      <div class="form-info">
+                        <div class="form-label">1. Slot Di Bawah Judul / Sampul Artikel</div>
+                        <div class="form-hint">Menampilkan banner iklan tepat sebelum teks artikel dimulai</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="text" id="adsenseSlotBelowTitle" class="gh-input" placeholder="ID Slot (misal: 1234567890)" style="width: 220px;">
+                        <label class="gh-switch">
+                          <input type="checkbox" id="adsenseSlotBelowTitleActive">
+                          <span class="slider"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- Slot 2: Bawah Isi Artikel -->
+                    <div class="form-group-row" style="margin-bottom: 12px;">
+                      <div class="form-info">
+                        <div class="form-label">2. Slot Di Bawah Isi Artikel (Sebelum Komentar/Share)</div>
+                        <div class="form-hint">Menampilkan banner iklan setelah pembaca selesai membaca artikel</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="text" id="adsenseSlotBelowArticle" class="gh-input" placeholder="ID Slot (misal: 2345678901)" style="width: 220px;">
+                        <label class="gh-switch">
+                          <input type="checkbox" id="adsenseSlotBelowArticleActive">
+                          <span class="slider"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- Slot 3: Safelink Top Banner -->
+                    <div class="form-group-row" style="margin-bottom: 12px;">
+                      <div class="form-info">
+                        <div class="form-label">3. Slot Halaman Safelink: Banner Atas</div>
+                        <div class="form-hint">Unit iklan di atas kotak hitung mundur halaman safelink</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="text" id="adsenseSlotSafelinkTop" class="gh-input" placeholder="ID Slot (misal: 3456789012)" style="width: 220px;">
+                        <label class="gh-switch">
+                          <input type="checkbox" id="adsenseSlotSafelinkTopActive">
+                          <span class="slider"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <!-- Slot 4: Safelink Bottom Banner -->
+                    <div class="form-group-row">
+                      <div class="form-info">
+                        <div class="form-label">4. Slot Halaman Safelink: Banner Bawah</div>
+                        <div class="form-hint">Unit iklan di bawah tombol tujuan halaman safelink</div>
+                      </div>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <input type="text" id="adsenseSlotSafelinkBottom" class="gh-input" placeholder="ID Slot (misal: 4567890123)" style="width: 220px;">
+                        <label class="gh-switch">
+                          <input type="checkbox" id="adsenseSlotSafelinkBottomActive">
+                          <span class="slider"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="gh-box-footer">
+                  <span class="footer-help">
+                    Unit iklan hanya akan dirender ketika Status Google AdSense di atas telah diaktifkan dan Client ID terisi.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- ================= WORKSPACE VIEW: SETTINGS (GLOBAL & SYSTEM CONFIG) ================= -->
+          <div class="workspace-view" id="viewSettings" style="display: none;">
+            
+            <!-- Section Banner (GitHub Subhead) -->
+            <div class="gh-subhead" style="margin-bottom: 0; padding-bottom: 12px;">
+              <div class="subhead-heading">
+                <h2>Pengaturan Sistem & Lingkungan (Settings)</h2>
+                <span class="subhead-meta">.env • content/settings/site.json • Kredensial Notion API, GitOps GitHub, dan Konfigurasi SSG</span>
+              </div>
+            </div>
+
+            <!-- Horizontal Underline Tabs (Tepat di Bawah Sticky Subhead) -->
+            <div class="gh-subnav-tabs" id="settingsTabs" style="margin-top: 14px; margin-bottom: 20px;">
+              <button type="button" class="tab-item active" data-settingstab="general">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>General (Situs)</span>
+              </button>
+              <button type="button" class="tab-item" data-settingstab="notion">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+                <span>Notion API & Kredensial</span>
+              </button>
+              <button type="button" class="tab-item" data-settingstab="gitops">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitOps & GitHub Repo</span>
+              </button>
+              <button type="button" class="tab-item" data-settingstab="build">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                <span>Build, Pipeline & Cache</span>
+              </button>
+              <button type="button" class="tab-item" data-settingstab="backup">
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                  <path fill-rule="evenodd" d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75zM1.5 2.75a.25.25 0 01.25-.25H5c.18 0 .35.09.45.23l.9 1.2c.33.44.85.7 1.4.7h6.5a.25.25 0 01.25.25v8.5a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25V2.75z"></path>
+                </svg>
+                <span>Backup & Restore</span>
+              </button>
+            </div>
+
+            <!-- TAB PANELS CONTAINER -->
+            <div id="settingsTabPanels">
+              
+              <!-- PANEL 1: General (Situs) -->
+              <div class="settings-tab-panel" id="panelSettingsGeneral">
+                <div class="gh-box">
+                  <div class="gh-box-header">
+                    <div class="box-title">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                      </svg>
+                      <span>Identitas Situs & Metadata Utama</span>
+                    </div>
+                    <span class="text-muted text-small">content/settings/site.json</span>
+                  </div>
+                  <div class="gh-box-body">
+                    <!-- Favicon Upload & Site Title -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; align-items: start;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Favicon Situs (ICO / PNG / SVG / WebP)</label>
+                        <div style="display: flex; align-items: center; gap: 12px; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 10px 12px;">
+                          <div id="sysFaviconPreviewBox" style="width: 40px; height: 40px; border-radius: 8px; border: 1px dashed var(--gh-border-default); background: var(--gh-canvas-default); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+                            <img id="sysFaviconPreviewImg" src="" alt="Favicon Preview" style="width: 28px; height: 28px; object-fit: contain; display: none;" />
+                            <span id="sysFaviconDefaultIcon" style="display: inline-flex; align-items: center; justify-content: center; color: var(--gh-accent-fg);">
+                              <svg class="gh-icon" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm6.5-.25A.75.75 0 017.25 7h1.5a.75.75 0 01.75.75v2.75h.25a.75.75 0 010 1.5h-2a.75.75 0 010-1.5h.25v-2h-.25a.75.75 0 01-.75-.75zM8 6a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+                            </span>
+                          </div>
+                          <div style="flex: 1; min-width: 0;">
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+                              <input type="file" id="sysFaviconFileInput" accept=".ico,.png,.svg,.webp,image/*" style="display: none;" />
+                              <input type="hidden" id="sysFaviconUrl" value="" />
+                              <input type="hidden" id="sysSiteIcon" value="fruit" />
+                              <button type="button" class="gh-btn" id="btnUploadFavicon" style="padding: 4px 10px; font-size: 12px; display: inline-flex; align-items: center; gap: 5px;">
+                                <svg class="gh-icon" viewBox="0 0 16 16" width="13" height="13" fill="currentColor"><path fill-rule="evenodd" d="M8.53 1.22a.75.75 0 00-1.06 0L3.72 4.97a.75.75 0 001.06 1.06l2.47-2.47v6.69a.75.75 0 001.5 0V3.56l2.47 2.47a.75.75 0 101.06-1.06L8.53 1.22zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"></path></svg>
+                                <span>Upload Favicon</span>
+                              </button>
+                              <button type="button" class="gh-btn" id="btnRemoveFavicon" style="padding: 4px 8px; font-size: 12px; color: var(--gh-danger-fg); display: none;">
+                                <span>Hapus</span>
+                              </button>
+                            </div>
+                            <div id="sysFaviconStatusText" class="form-hint" style="margin-top: 4px;">Ikon tab browser (disimpan ke <code>src/themes/fruition-capsule/assets/</code>)</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Nama Blog / Judul Situs (Site Title)</label>
+                        <input type="text" id="sysSiteName" class="gh-input" style="border-radius: 6px; height: 38px;" value="My Fruition Blog">
+                        <span class="form-hint" style="display: block; margin-top: 6px;">Digunakan pada judul tab halaman utama, feed RSS, dan metadata situs.</span>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Tagline & Deskripsi Singkat</label>
+                      <input type="text" id="sysSiteDesc" class="gh-input" style="border-radius: 6px;" value="A fast, beautiful static blog powered by Notion & Astro SSG">
+                      <span class="form-hint">Digunakan untuk tag meta SEO & pratinjau media sosial (Open Graph).</span>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label">Base URL / Domain Produksi</label>
+                      <input type="text" id="sysSiteUrl" class="gh-input" style="border-radius: 6px;" value="http://localhost:4321">
+                      <span class="form-hint">URL kanonis yang digunakan untuk pembuatan sitemap.xml dan feed RSS.</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Bahasa Utama (Locale)</label>
+                        <select id="sysSiteLocale" class="gh-select" style="width: 100%;">
+                          <option value="id" selected>Bahasa Indonesia (id-ID)</option>
+                          <option value="en">English (en-US)</option>
+                          <option value="ja">日本語 (ja-JP)</option>
+                        </select>
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Zona Waktu (Timezone)</label>
+                        <select id="sysSiteTimezone" class="gh-select" style="width: 100%;">
+                          <option value="Asia/Jakarta" selected>WIB - Asia/Jakarta (UTC+07:00)</option>
+                          <option value="Asia/Makassar">WITA - Asia/Makassar (UTC+08:00)</option>
+                          <option value="Asia/Jayapura">WIT - Asia/Jayapura (UTC+09:00)</option>
+                          <option value="UTC">UTC (Universal Coordinated Time)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Target Platform Hosting (Publish To) & Header Generator -->
+                    <div style="border-top: 1px solid var(--gh-border-muted); margin-top: 18px; padding-top: 16px;">
+                      <div class="form-label-wrap" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label class="form-label" style="margin-bottom: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
+                          <svg viewBox="0 0 16 16" width="15" height="15" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7.75 1.5a.75.75 0 00-.75.75V3H4.25A2.25 2.25 0 002 5.25v6.5A2.25 2.25 0 004.25 14h7.5A2.25 2.25 0 0014 11.75v-6.5A2.25 2.25 0 0011.75 3H9V2.25a.75.75 0 00-.75-.75h-.5zM3.5 5.25a.75.75 0 01.75-.75h7.5a.75.75 0 01.75.75v6.5a.75.75 0 01-.75.75h-7.5a.75.75 0 01-.75-.75v-6.5z"></path>
+                          </svg>
+                          <span>Publish To (Target Platform Hosting &amp; Generator Header)</span>
+                        </label>
+                        <span class="badge-tag green" id="badgePublishHeaderStatus">Auto HTTP Headers</span>
+                      </div>
+                      <span class="form-hint" style="margin-bottom: 12px; display: block;">
+                        Pilih platform hosting tempat blog dipublikasikan. Saat dipilih atau di-publish, sistem otomatis memproduksi file konfigurasi HTTP &amp; Security Headers (CSP, X-Frame-Options, HSTS, Caching Aset) sesuai standar platform tersebut.
+                      </span>
+
+                      <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                          <label class="form-label" for="sysPublishPlatform">Pilih Target Hosting Platform</label>
+                          <select id="sysPublishPlatform" class="gh-select" style="width: 100%; height: 38px; font-weight: 500;">
+                            <option value="vercel">Vercel — menghasilkan vercel.json (Headers, Clean URLs &amp; Cache)</option>
+                            <option value="netlify">Netlify — menghasilkan _headers (Security Headers &amp; Immutable Cache)</option>
+                            <option value="github">GitHub Pages — menghasilkan .nojekyll &amp; CNAME</option>
+                            <option value="firebase">Firebase Hosting — menghasilkan firebase.json (Hosting Rules &amp; Headers)</option>
+                          </select>
+                        </div>
+
+                        <!-- Platform Quick Selector Cards -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px;">
+                          <div class="platform-btn-card" data-platform="vercel" style="border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 10px 12px; background: var(--gh-canvas-subtle); cursor: pointer; transition: all 0.15s ease;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                              <span style="font-weight: 600; font-size: 13px; color: var(--gh-fg-default);">▲ Vercel</span>
+                              <span class="badge-tag blue" style="font-size: 10px;">vercel.json</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); line-height: 1.4;">Header HTTP &amp; Immutable Cache (1 thn) untuk aset _astro.</div>
+                          </div>
+
+                          <div class="platform-btn-card" data-platform="netlify" style="border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 10px 12px; background: var(--gh-canvas-subtle); cursor: pointer; transition: all 0.15s ease;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                              <span style="font-weight: 600; font-size: 13px; color: var(--gh-fg-default);">◆ Netlify</span>
+                              <span class="badge-tag blue" style="font-size: 10px;">_headers</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); line-height: 1.4;">Berkas <code>_headers</code> di public &amp; dist/ dengan strict security rules.</div>
+                          </div>
+
+                          <div class="platform-btn-card" data-platform="github" style="border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 10px 12px; background: var(--gh-canvas-subtle); cursor: pointer; transition: all 0.15s ease;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                              <span style="font-weight: 600; font-size: 13px; color: var(--gh-fg-default);">● GitHub Pages</span>
+                              <span class="badge-tag blue" style="font-size: 10px;">.nojekyll</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); line-height: 1.4;">Bypass Jekyll processor via <code>.nojekyll</code> + domain CNAME.</div>
+                          </div>
+
+                          <div class="platform-btn-card" data-platform="firebase" style="border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 10px 12px; background: var(--gh-canvas-subtle); cursor: pointer; transition: all 0.15s ease;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+                              <span style="font-weight: 600; font-size: 13px; color: var(--gh-fg-default);">⚡ Firebase</span>
+                              <span class="badge-tag blue" style="font-size: 10px;">firebase.json</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--gh-fg-muted); line-height: 1.4;">Konfigurasi hosting headers &amp; cleanUrls di <code>firebase.json</code>.</div>
+                          </div>
+                        </div>
+
+                        <!-- Live Header Inspector Box -->
+                        <div style="background: var(--gh-canvas-default); border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 12px;">
+                          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                              <span style="font-size: 12px; font-weight: 600; color: var(--gh-fg-default);">Header File Generator:</span>
+                              <code id="headerPreviewFilename" style="font-size: 11px; padding: 2px 6px; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 4px;">vercel.json</code>
+                            </div>
+                            <button type="button" class="gh-btn" id="btnGeneratePlatformHeaders" style="padding: 3px 10px; font-size: 11px; display: inline-flex; align-items: center; gap: 6px;">
+                              <svg class="gh-icon" viewBox="0 0 16 16" width="12" height="12" fill="currentColor"><path fill-rule="evenodd" d="M8.53 1.22a.75.75 0 00-1.06 0L3.72 4.97a.75.75 0 001.06 1.06l2.47-2.47v6.69a.75.75 0 001.5 0V3.56l2.47 2.47a.75.75 0 101.06-1.06L8.53 1.22zM3.75 13a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5z"></path></svg>
+                              <span>Tulis File Header Sekarang</span>
+                            </button>
+                          </div>
+                          <pre id="headerPreviewContent" style="margin: 0; padding: 10px 12px; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-muted); border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; line-height: 1.45; max-height: 180px; overflow-y: auto; color: var(--gh-fg-default); white-space: pre-wrap; word-break: break-all;"></pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANEL 2: Notion API & Kredensial -->
+              <div class="settings-tab-panel" id="panelSettingsNotion" style="display: none;">
+                <div class="gh-box">
+                  <div class="gh-box-header">
+                    <div class="box-title">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                        <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                      </svg>
+                      <span>Kredensial Integrasi Notion (Internal Integration)</span>
+                    </div>
+                    <span class="badge-tag green" id="badgeNotionStatus">● Status Terkoneksi</span>
+                  </div>
+                  <div class="gh-box-body">
+                    <div class="form-group">
+                      <div class="form-label-wrap" style="display: flex; justify-content: space-between; align-items: center;">
+                        <label class="form-label">Notion API Secret Token (<code>NOTION_API_KEY</code>)</label>
+                        <span class="text-small text-muted">Tersimpan di file <code>.env</code> lokal</span>
+                      </div>
+                      <div style="display: flex; gap: 8px;">
+                        <div style="position: relative; flex: 1;">
+                          <input type="password" id="sysNotionApiKey" class="gh-input" style="border-radius: 6px; width: 100%; padding-right: 40px;" placeholder="secret_xxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                          <button type="button" id="btnToggleNotionKey" class="gh-btn" style="position: absolute; right: 4px; top: 3px; bottom: 3px; padding: 0 8px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;" title="Lihat/Sembunyikan Token">
+                            <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M1.679 7.932c.412-.621 1.242-1.75 2.366-2.717C5.175 4.242 6.527 3.5 8 3.5c1.473 0 2.824.742 3.955 1.715 1.124.967 1.954 2.096 2.366 2.717a.119.119 0 010 .136c-.412.621-1.242 1.75-2.366 2.717C10.825 11.758 9.473 12.5 8 12.5c-1.473 0-2.824-.742-3.955-1.715C2.92 9.818 2.09 8.69 1.679 8.068a.119.119 0 010-.136zM8 2c-1.981 0-3.67.992-4.933 2.078C1.797 5.169.88 6.423.43 7.1a1.619 1.619 0 000 1.798c.45.678 1.367 1.932 2.637 3.024C4.329 13.008 6.019 14 8 14c1.981 0 3.67-.992 4.933-2.078 1.27-1.091 2.187-2.345 2.637-3.023a1.619 1.619 0 000-1.798c-.45-.678-1.367-1.932-2.637-3.023C11.671 2.992 9.981 2 8 2zm0 8a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                          </button>
+                        </div>
+                        <button type="button" class="gh-btn" id="btnValidateNotionKey" style="flex-shrink: 0;">
+                          <span>Cek Token</span>
+                        </button>
+                      </div>
+                      <span class="form-hint">Dapatkan token dari <a href="https://www.notion.so/my-integrations" target="_blank" style="color: var(--gh-accent-fg); text-decoration: underline;">notion.so/my-integrations</a>. Token ini hanya tersimpan di komputer lokal dan tidak pernah dipublikasikan ke Git.</span>
+                    </div>
+
+                    <!-- Notion Handshake Guide Callout -->
+                    <div style="background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 6px; padding: 14px 16px; margin-top: 16px;">
+                      <div style="font-weight: 600; font-size: 13px; color: var(--gh-fg-default); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="16" x2="12" y2="12"></line>
+                          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        <span>3 Langkah Cepat Integrasi Database Notion ke Fruition Mini:</span>
+                      </div>
+                      <ol style="margin: 0; padding-left: 20px; font-size: 12px; color: var(--gh-fg-muted); line-height: 1.7;">
+                        <li>Buka <a href="https://www.notion.so/my-integrations" target="_blank" style="color: var(--gh-accent-fg);">notion.so/my-integrations</a> lalu buat integrasi baru bernama <strong>Fruition Blog</strong>.</li>
+                        <li>Salin <strong>Internal Integration Secret</strong> dan tempelkan ke kolom <code>NOTION_API_KEY</code> di atas.</li>
+                        <li>Buka halaman Database Notion Anda di browser &rarr; klik ikon titik tiga (•••) di pojok kanan atas &rarr; pilih <strong>Connect to</strong> &rarr; pilih integrasi <strong>Fruition Blog</strong>.</li>
+                      </ol>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANEL 3: GitOps & GitHub Repo -->
+              <div class="settings-tab-panel" id="panelSettingsGitOps" style="display: none;">
+                <div class="gh-box">
+                  <div class="gh-box-header">
+                    <div class="box-title">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                      <span>Konfigurasi GitOps & Repositori GitHub</span>
+                    </div>
+                    <span class="text-muted text-small">.env & GitOps Engine</span>
+                  </div>
+                  <div class="gh-box-body">
+                    <!-- Penjelasan 2 Metode Publish -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                      <div style="background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 12px;">
+                        <div style="font-weight: 600; font-size: 12px; color: var(--gh-fg-default); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                          <span class="badge-tag green" style="font-size: 10px;">Mode 1 (Default)</span>
+                          <span>Publish Lokal ke Folder <code>dist/</code></span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--gh-fg-muted); line-height: 1.5;">
+                          Tombol <strong>Publish (dist/)</strong> selalu tersedia di bilah bawah untuk mengompilasi seluruh halaman HTML, CSS, aset media, dan feed XML langsung ke folder lokal <code>dist/</code>.
+                        </div>
+                      </div>
+                      <div style="background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 12px;">
+                        <div style="font-weight: 600; font-size: 12px; color: var(--gh-fg-default); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                          <span class="badge-tag blue" style="font-size: 10px;">Mode 2 (Opsional)</span>
+                          <span>Publish via Git (GitHub Push)</span>
+                        </div>
+                        <div style="font-size: 11px; color: var(--gh-fg-muted); line-height: 1.5;">
+                          Jika sakelar di bawah diaktifkan, tombol kedua <strong>Publish via Git</strong> akan muncul di bilah bawah untuk mem-build <code>dist/</code> sekaligus melakukan commit &amp; push ke GitHub.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group-row">
+                      <div class="form-info">
+                        <div class="form-label">Aktifkan Metode 2: Publish via Git (Tampilkan Tombol "Publish via Git")</div>
+                        <div class="form-hint">Saat diaktifkan, tombol khusus <strong>Publish via Git</strong> akan tampil di samping tombol Publish lokal (<code>dist/</code>) pada bilah aksi bawah.</div>
+                      </div>
+                      <div class="switch-wrap">
+                        <label class="gh-switch">
+                          <input type="checkbox" id="sysGitAutoSync">
+                          <span class="slider"></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">GitHub Repository Owner (Username / Org)</label>
+                        <input type="text" id="sysGitOwner" class="gh-input" style="border-radius: 6px;" placeholder="contoh: username">
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">GitHub Repository Name</label>
+                        <input type="text" id="sysGitRepo" class="gh-input" style="border-radius: 6px;" value="blogs-dev">
+                      </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px;">
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">Target Git Branch</label>
+                        <input type="text" id="sysGitBranch" class="gh-input" style="border-radius: 6px;" value="main">
+                      </div>
+                      <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label">GitHub Personal Access Token (<code>GITHUB_TOKEN</code>)</label>
+                        <div style="position: relative;">
+                          <input type="password" id="sysGitToken" class="gh-input" style="border-radius: 6px; width: 100%; padding-right: 40px;" placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx">
+                          <button type="button" id="btnToggleGitToken" class="gh-btn" style="position: absolute; right: 4px; top: 3px; bottom: 3px; padding: 0 8px; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                            <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M1.679 7.932c.412-.621 1.242-1.75 2.366-2.717C5.175 4.242 6.527 3.5 8 3.5c1.473 0 2.824.742 3.955 1.715 1.124.967 1.954 2.096 2.366 2.717a.119.119 0 010 .136c-.412.621-1.242 1.75-2.366 2.717C10.825 11.758 9.473 12.5 8 12.5c-1.473 0-2.824-.742-3.955-1.715C2.92 9.818 2.09 8.69 1.679 8.068a.119.119 0 010-.136zM8 2c-1.981 0-3.67.992-4.933 2.078C1.797 5.169.88 6.423.43 7.1a1.619 1.619 0 000 1.798c.45.678 1.367 1.932 2.637 3.024C4.329 13.008 6.019 14 8 14c1.981 0 3.67-.992 4.933-2.078 1.27-1.091 2.187-2.345 2.637-3.023a1.619 1.619 0 000-1.798c-.45-.678-1.367-1.932-2.637-3.023C11.671 2.992 9.981 2 8 2zm0 8a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANEL 4: Build, Pipeline & Cache -->
+              <div class="settings-tab-panel" id="panelSettingsBuild" style="display: none;">
+                <div class="gh-box">
+                  <div class="gh-box-header">
+                    <div class="box-title">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                      </svg>
+                      <span>Pipeline Optimasi Media, Throttle & Manajemen Cache</span>
+                    </div>
+                    <span class="text-muted text-small">Sharp WebP & Notion Rate-Limiter</span>
+                  </div>
+                  <div class="gh-box-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                      <div class="form-group">
+                        <label class="form-label">Kualitas Kompresi Sharp WebP (Quality %)</label>
+                        <input type="number" id="sysSharpQuality" class="gh-input" style="border-radius: 6px;" value="80" min="40" max="100">
+                        <span class="form-hint">Nilai rekomendasi 80% (keseimbangan optimal ukuran file & kejernihan visual).</span>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Notion API Throttle Delay (Milidetik)</label>
+                        <input type="number" id="sysRateLimitDelay" class="gh-input" style="border-radius: 6px;" value="350" min="100" max="2000" step="50">
+                        <span class="form-hint">Mencegah batasan tingkat (Rate Limit HTTP 429) dari Notion API.</span>
+                      </div>
+                    </div>
+
+                    <!-- Maintenance Actions -->
+                    <div style="border-top: 1px solid var(--gh-border-muted); padding-top: 16px; margin-top: 10px;">
+                      <label class="form-label" style="margin-bottom: 8px;">Aksi Pemeliharaan & Cache</label>
+                      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button type="button" class="gh-btn" id="btnClearJsonCache" style="display: inline-flex; align-items: center; gap: 6px;">
+                          <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M11 1.75V3h2.25a.75.75 0 010 1.5H2.75a.75.75 0 010-1.5H5V1.75C5 .784 5.784 0 6.75 0h2.5C10.216 0 11 .784 11 1.75zM4.496 6.675a.75.75 0 10-1.492.15l.66 6.6A1.75 1.75 0 005.405 15h5.19c.9 0 1.652-.681 1.741-1.576l.66-6.6a.75.75 0 00-1.492-.149l-.66 6.6a.25.25 0 01-.249.225h-5.19a.25.25 0 01-.249-.225l-.66-6.6zM6.5 1.75V3h3V1.75a.25.25 0 00-.25-.25h-2.5a.25.25 0 00-.25.25z"></path></svg>
+                          <span>Bersihkan Cache JSON Konten</span>
+                        </button>
+                        <button type="button" class="gh-btn" id="btnClearWebpCache" style="display: inline-flex; align-items: center; gap: 6px;">
+                          <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M1.75 2.5a.25.25 0 00-.25.25v10.5c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V2.75a.25.25 0 00-.25-.25H1.75zM0 2.75C0 1.784.784 1 1.75 1h12.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0114.25 15H1.75A1.75 1.75 0 010 13.25V2.75zm13.25 7.5L9.5 6.5l-3.25 4-2-2.5L2 11.5h12v-.75a.5.5 0 00-.75-.5zM6 4.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path></svg>
+                          <span>Bersihkan Cache Media WebP</span>
+                        </button>
+                        <button type="button" class="gh-btn" id="btnRestartDevServer" style="display: inline-flex; align-items: center; gap: 6px;">
+                          <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M8 2.5a5.487 5.487 0 00-4.131 1.869l1.204 1.204A.25.25 0 014.896 6H1.25A.25.25 0 011 5.75V2.104a.25.25 0 01.427-.177l1.38 1.38A7.001 7.001 0 0115 8a.75.75 0 01-1.5 0 5.5 5.5 0 00-5.5-5.5zm-7 5.5a.75.75 0 011.5 0 5.5 5.5 0 005.5 5.5 5.487 5.487 0 004.13-1.869l-1.204-1.204A.25.25 0 0111.104 10h3.646a.25.25 0 01.25.25v3.646a.25.25 0 01-.427.177l-1.38-1.38A7.001 7.001 0 011 8z"></path></svg>
+                          <span>Muat Ulang Konfigurasi Server</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PANEL 5: Backup & Restore (folder backup/) -->
+              <div class="settings-tab-panel" id="panelSettingsBackup" style="display: none;">
+                <div class="gh-box">
+                  <div class="gh-box-header">
+                    <div class="box-title">
+                      <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+                        <path fill-rule="evenodd" d="M1.75 1A1.75 1.75 0 000 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.25v-8.5A1.75 1.75 0 0014.25 3H7.5a.25.25 0 01-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75zM1.5 2.75a.25.25 0 01.25-.25H5c.18 0 .35.09.45.23l.9 1.2c.33.44.85.7 1.4.7h6.5a.25.25 0 01.25.25v8.5a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25V2.75z"></path>
+                      </svg>
+                      <span>Manajemen Snapshot Backup & Restore (<code>backup/</code>)</span>
+                    </div>
+                    <span class="badge-tag blue" id="backupCountBadge">0 Snapshot</span>
+                  </div>
+                  <div class="gh-box-body">
+                    <p class="form-hint" style="margin-top: 0; margin-bottom: 14px;">
+                      Setiap snapshot backup mencadangkan seluruh konfigurasi <code>content/</code> (Fruits, artikel, halaman, penulis, navigasi, <code>site.json</code>), manifest tema <code>theme.json</code>, serta aset media/logo/favicon ke dalam folder lokal <strong><code>backup/</code></strong>.
+                    </p>
+
+                    <!-- Form Buat Backup Baru -->
+                    <div style="display: flex; gap: 10px; align-items: center; background: var(--gh-canvas-subtle); border: 1px solid var(--gh-border-default); border-radius: 8px; padding: 12px; margin-bottom: 18px;">
+                      <div style="flex: 1;">
+                        <input type="text" id="backupLabelInput" class="gh-input" style="border-radius: 6px; width: 100%;" placeholder="Catatan / label snapshot opsional (misal: Sebelum rombak tema & navigasi)">
+                      </div>
+                      <button type="button" class="gh-btn gh-btn-primary" id="btnCreateBackup" style="display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;">
+                        <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M7.75 2a.75.75 0 01.75.75V7h4.25a.75.75 0 110 1.5H8.5v4.25a.75.75 0 11-1.5 0V8.5H2.75a.75.75 0 010-1.5H7V2.75A.75.75 0 017.75 2z"></path></svg>
+                        <span>Buat Backup Sekarang</span>
+                      </button>
+                    </div>
+
+                    <!-- Daftar Riwayat Backup -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                      <label class="form-label" style="margin-bottom: 0;">Riwayat Snapshot Tersimpan di <code>backup/</code></label>
+                      <button type="button" class="gh-btn" id="btnRefreshBackups" style="padding: 3px 8px; font-size: 11px;"> Segarkan Daftar </button>
+                    </div>
+                    <div id="backupHistoryList" style="border: 1px solid var(--gh-border-default); border-radius: 8px; overflow: hidden;">
+                      <div style="padding: 20px; text-align: center; color: var(--gh-fg-muted); font-size: 12px;">
+                        Memuat daftar backup dari folder <code>backup/</code>...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ================= DOCK 4: STICKY BOTTOM ACTION BAR ================= -->
+  <footer class="dock-action-bar" id="dockActionBar">
+    <div class="action-bar-left">
+      <!-- Sync & Change Status -->
+      <div class="status-indicator">
+        <span class="status-pulse green" id="statusPulse"></span>
+        <span class="status-label" id="statusLabel">All Fruit connectors active</span>
+        <span class="gh-counter" id="statusCounter" style="margin-left: 6px;">Ready</span>
+      </div>
+      <div class="git-status-note">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 14 14"></polyline>
+        </svg>
+        <span>Atomic autosave enabled</span>
+      </div>
+    </div>
+
+    <div class="action-bar-right">
+      <!-- Action 1: Save (Pastel Mint Accent) -->
+      <button class="gh-btn btn-save" id="btnSave">
+        <div class="btn-icon-pastel pastel-mint">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+        </div>
+        <span>Save Changes</span>
+        <span class="kbd-shortcut">Ctrl+S</span>
+      </button>
+
+      <!-- Action 2: Mode 1 — Publish Lokal ke Folder dist/ -->
+      <button type="button" class="gh-btn gh-btn-primary btn-publish" id="btnPublish" title="Mode 1: Build seluruh file statis ke folder lokal dist/">
+        <div class="btn-icon-pastel pastel-blossom" style="background: rgba(255,255,255,0.2); color: white;">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </div>
+        <span>Publish (dist/)</span>
+      </button>
+
+      <!-- Action 3: Mode 2 — Publish via Git (Muncul jika GitOps diaktifkan) -->
+      <button type="button" class="gh-btn btn-publish-git" id="btnPublishGit" style="display: none; background: #1f2328; color: #ffffff; border-color: rgba(27,31,36,0.15);" title="Mode 2: Build ke dist/ lalu Commit & Push ke GitHub Repository">
+        <div class="btn-icon-pastel pastel-periwinkle" style="background: rgba(255,255,255,0.16); color: #ffffff;">
+          <svg viewBox="0 0 16 16" width="13" height="13" fill="currentColor">
+            <path fill-rule="evenodd" d="M11.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122V6A2.5 2.5 0 0110 8.5H6a1 1 0 00-1 1v1.128a2.251 2.251 0 11-1.5 0V5.372a2.25 2.25 0 111.5 0v1.836A2.492 2.492 0 016 7h4a1 1 0 001-1v-.628A2.25 2.25 0 019.5 3.25zM4.25 12a.75.75 0 100 1.5.75.75 0 000-1.5zM3.5 3.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0z"></path>
+          </svg>
+        </div>
+        <span>Publish via Git</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ================= FRUIT CONNECTOR MODAL (LEVEL 2 LAYERED WORKSPACE) ================= -->
+  <div class="sandbox-modal-backdrop" id="fruitModal" style="display: none;">
+    <div class="sandbox-modal-window" style="max-width: 760px; height: auto; max-height: 90vh;">
+      
+      <!-- Modal Header -->
+      <div class="sandbox-header">
+        <div class="sandbox-brand">
+          <div class="nav-icon-badge pastel-mint" style="width: 22px; height: 22px;">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+          </div>
+          <strong id="fruitModalTitle">New Notion Fruit Connector</strong>
+          <span class="badge-tag">1 DB == 1 Static Collection</span>
+        </div>
+        <button class="btn-icon-minimal" id="btnCloseFruitModal" title="Close">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <form id="fruitForm" style="overflow-y: auto; padding: 20px 24px; display: flex; flex-direction: column; gap: 16px;">
+        <input type="hidden" id="formFruitIsEdit" value="false">
+
+        <!-- Row 1: Fruit ID and Name -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">Fruit Identifier (Slug) *</label>
+            <input type="text" id="formFruitId" class="gh-input" style="border-radius: 6px;" placeholder="e.g. read" required>
+            <span class="form-hint">Nama file penyimpanan di <code>content/fruits/[id].json</code></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Display Name *</label>
+            <input type="text" id="formFruitName" class="gh-input" style="border-radius: 6px;" placeholder="e.g. Artikel Bacaan" required>
+            <span class="form-hint">Label nama konektor di antarmuka Admin</span>
+          </div>
+        </div>
+
+        <!-- Row 2: Post Type & Notion Database ID -->
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 14px;">
+          <div class="form-group">
+            <label class="form-label">Post Type *</label>
+            <input type="text" id="formFruitPostType" class="gh-input" style="border-radius: 6px;" placeholder="e.g. read, page, authors" value="read" required>
+            <span class="form-hint" id="formFruitRoutePreview">Rute Single: <code>/read/[slug]</code> | Arsip: <code>/read</code></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Notion Database ID *</label>
+            <input type="text" id="formFruitDatabaseId" class="gh-input" style="border-radius: 6px; font-family: monospace;" placeholder="32-char Notion Database UUID" required>
+            <span class="form-hint">Salin ID dari tautan Notion Database Anda</span>
+          </div>
+        </div>
+
+        <!-- Row 3: Index Feed Visibility Toggle (Konsep Fruit: Tampil di Beranda) -->
+        <div class="form-group-row" style="background: var(--gh-canvas-subtle); padding: 12px 14px; border: 1px solid var(--gh-border-default); border-radius: 6px;">
+          <div class="form-info">
+            <div class="form-label" style="font-size: 13px; font-weight: 600;">Munculkan di Beranda (Show on Index Feed)</div>
+            <div class="form-hint" style="font-size: 11px;">Aktifkan toggle ini jika artikel dari post type ini ingin ditampilkan pada feed daftar postingan di halaman utama website. Jika dinonaktifkan, konten hanya akan muncul di halaman arsipnya sendiri (<code>/[post-type]</code>).</div>
+          </div>
+          <div class="switch-wrap">
+            <label class="gh-switch">
+              <input type="checkbox" id="formFruitShowOnIndex" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Schema Mapping Section Header -->
+        <div style="padding-top: 8px; border-top: 1px solid var(--gh-border-muted);">
+          <div style="font-size: 13px; font-weight: 600; color: var(--gh-fg-default); margin-bottom: 4px;">Notion Property Schema Mapping</div>
+          <span style="font-size: 12px; color: var(--gh-fg-muted);">Petakan nama kolom Notion asli ke field skema Fruition Mini</span>
+        </div>
+
+        <!-- Schema Mapping Grid -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: var(--gh-canvas-subtle); padding: 14px; border: 1px solid var(--gh-border-default); border-radius: 6px;">
+          <div class="form-group">
+            <label class="form-label" style="font-size: 12px;">Title Column</label>
+            <input type="text" id="formMapTitle" class="gh-input" style="border-radius: 4px;" value="Title">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 12px;">Slug Column</label>
+            <input type="text" id="formMapSlug" class="gh-input" style="border-radius: 4px;" value="Slug">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 12px;">Status Column</label>
+            <input type="text" id="formMapStatus" class="gh-input" style="border-radius: 4px;" value="Status">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 12px;">Published Value Match</label>
+            <input type="text" id="formMapStatusVal" class="gh-input" style="border-radius: 4px;" value="Published">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 12px;">Date Column</label>
+            <input type="text" id="formMapDate" class="gh-input" style="border-radius: 4px;" value="Date">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" style="font-size: 12px;">Author Relation Column</label>
+            <input type="text" id="formMapAuthor" class="gh-input" style="border-radius: 4px;" value="Author">
+          </div>
+        </div>
+
+        <!-- Settings: Auto WebP & Fallback -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: center;">
+          <label class="gh-checkbox-item" style="margin: 0;">
+            <input type="checkbox" id="formOptWebp" checked>
+            <div class="cb-content">
+              <span class="cb-title" style="font-size: 12px;">Auto .webp Media Pipeline</span>
+              <span class="cb-desc" style="font-size: 11px;">Konversi permanen via Sharp</span>
+            </div>
+          </label>
+
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" style="font-size: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+              <span>Cover Fallback Color</span>
+              <span id="selectedFallbackLabel" style="font-size: 11px; font-weight: 600; color: #9E2A2B; background: #FDE2E4; padding: 2px 8px; border-radius: 12px;">Blossom</span>
+            </label>
+            <input type="hidden" id="formOptFallback" value="Pastel Blossom">
+            <div class="fallback-color-swatches" id="fruitFallbackSwatches">
+              <button type="button" class="swatch-btn active" data-color="Pastel Blossom" data-name="Blossom" data-fg="#9E2A2B" data-bg="#FDE2E4" title="Blossom (#FDE2E4)" style="--swatch-bg: #FDE2E4; --swatch-fg: #9E2A2B; background-color: #FDE2E4;">
+                <span class="swatch-check"><svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></span>
+              </button>
+              <button type="button" class="swatch-btn" data-color="Pastel Mint" data-name="Mint" data-fg="#2D6A4F" data-bg="#E2ECE9" title="Mint (#E2ECE9)" style="--swatch-bg: #E2ECE9; --swatch-fg: #2D6A4F; background-color: #E2ECE9;">
+                <span class="swatch-check"><svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></span>
+              </button>
+              <button type="button" class="swatch-btn" data-color="Pastel Periwinkle" data-name="Periwinkle" data-fg="#2B4C7E" data-bg="#DFE7FD" title="Periwinkle (#DFE7FD)" style="--swatch-bg: #DFE7FD; --swatch-fg: #2B4C7E; background-color: #DFE7FD;">
+                <span class="swatch-check"><svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></span>
+              </button>
+              <button type="button" class="swatch-btn" data-color="Pastel Peach" data-name="Peach" data-fg="#9C6644" data-bg="#FFF1E6" title="Peach (#FFF1E6)" style="--swatch-bg: #FFF1E6; --swatch-fg: #9C6644; background-color: #FFF1E6;">
+                <span class="swatch-check"><svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></span>
+              </button>
+              <button type="button" class="swatch-btn" data-color="Pastel Lilac" data-name="Lilac" data-fg="#6A4C93" data-bg="#F0E6EF" title="Lilac (#F0E6EF)" style="--swatch-bg: #F0E6EF; --swatch-fg: #6A4C93; background-color: #F0E6EF;">
+                <span class="swatch-check"><svg class="gh-icon" viewBox="0 0 16 16" width="11" height="11" fill="currentColor"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid var(--gh-border-muted);">
+          <button type="button" class="gh-btn" id="btnTestHandshake" style="display: inline-flex; align-items: center; gap: 6px;">
+            <svg class="gh-icon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor"><path fill-rule="evenodd" d="M8.58 1.055a.75.75 0 00-1.16.89l1.636 2.805H4.75a.75.75 0 00-.638 1.144l4.5 7.5a.75.75 0 001.268-.789L8.244 9.75h4.006a.75.75 0 00.638-1.144l-4.308-7.551z"></path></svg>
+            <span>Test Connection Handshake</span>
+          </button>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="gh-btn" id="btnCancelFruitModal">Cancel</button>
+            <button type="submit" class="gh-btn gh-btn-primary" id="btnSaveFruit">Save Fruit Connector</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= HYBRID MULTI-PREVIEW SANDBOX MODAL ================= -->
+  <div class="sandbox-modal-backdrop" id="sandboxModal" style="display: none;">
+    <div class="sandbox-modal-window">
+      
+      <!-- Sandbox Header Toolbar -->
+      <div class="sandbox-header">
+        <div class="sandbox-title-wrap">
+          <div class="sandbox-brand">
+            <span class="status-pulse green"></span>
+            <strong>Hybrid Smart Preview Sandbox</strong>
+            <span class="badge-tag">postMessage RAM Live Sync</span>
+          </div>
+        </div>
+
+        <!-- Viewport Switcher (SM, MD, LG) -->
+        <div class="viewport-switcher">
+          <button class="vp-btn" data-vp="sm" title="Mobile Phone Viewport (375px)">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span>SM (375px)</span>
+          </button>
+          
+          <button class="vp-btn" data-vp="md" title="Tablet Viewport (768px)">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span>MD (768px)</span>
+          </button>
+
+          <button class="vp-btn active" data-vp="lg" title="Desktop Viewport (1200px)">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>LG (Desktop 1200px)</span>
+          </button>
+        </div>
+
+        <!-- Modal Controls -->
+        <div class="sandbox-window-actions">
+          <button class="btn-icon-minimal" id="btnOpenNewTab" title="Open in New Tab via BroadcastChannel">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </button>
+          <button class="btn-icon-minimal" id="btnCloseModal" title="Close Preview Sandbox">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sandbox Iframe Container Simulation -->
+      <div class="sandbox-frame-stage">
+        <div class="sandbox-viewport-wrapper vp-lg" id="viewportWrapper">
+          <!-- Live Theme Preview Iframe -->
+          <iframe id="themePreviewIframe" src="/theme" title="Fruition-capsule Theme Live Preview" style="width: 100%; height: 100%; min-height: 800px; border: none; display: block; background: #ffffff;"></iframe>
+        </div>
+      </div>
+
+      <!-- Sandbox Footer Info -->
+      <div class="sandbox-footer">
+        <span>Displaying live state in memory without recompilation or file modification.</span>
+        <span>Resolution: <strong id="vpLabel">1200 x 820 px</strong></span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Toast Notification Floating Widget -->
+  <div id="adminToast" style="display: none; position: fixed; bottom: 70px; right: 24px; background: #0f172a; color: white; padding: 10px 18px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.25); font-size: 13px; z-index: 200; align-items: center; gap: 8px;">
+    <span class="status-pulse green" style="width: 8px; height: 8px;"></span>
+    <span id="toastMsg">Fruit connector synchronized!</span>
+  </div>
+
+  <script src="scripts/github-icons.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

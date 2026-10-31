@@ -1,0 +1,101 @@
+{
+  "siteName": "My Fruition Blog",
+  "siteIcon": "fruit",
+  "logoUrl": "/logo.png",
+  "showSiteName": false,
+  "headerNav": [
+    {
+      "id": "nav-1",
+      "icon": "fruit",
+      "label": "Home",
+      "url": "/theme",
+      "target": "_self",
+      "visible": true,
+      "active": true
+    },
+    {
+      "id": "nav-2",
+      "icon": "book",
+      "label": "Catatan",
+      "url": "/read",
+      "target": "_self",
+      "visible": true,
+      "active": false
+    },
+    {
+      "id": "nav-3",
+      "icon": "repo",
+      "label": "Pendidikan",
+      "url": "/pelajaran",
+      "target": "_self",
+      "visible": true,
+      "active": false
+    },
+    {
+      "id": "nav-4",
+      "icon": "people",
+      "label": "Penulis",
+      "url": "/authors",
+      "target": "_self",
+      "visible": true,
+      "active": false
+    },
+    {
+      "id": "nav-5",
+      "icon": "file",
+      "label": "About",
+      "url": "/about",
+      "target": "_self",
+      "visible": true,
+      "active": false
+    }
+  ],
+  "headerTools": {
+    "enableSearch": true,
+    "enableDarkMode": true,
+    "enableReadMode": true
+  },
+  "footerNav": [
+    {
+      "id": "foot-1",
+      "icon": "globe",
+      "label": "sitemap.xml",
+      "url": "/sitemap.xml",
+      "target": "_self",
+      "visible": true
+    },
+    {
+      "id": "foot-2",
+      "icon": "terminal",
+      "label": "rss",
+      "url": "/rss",
+      "target": "_self",
+      "visible": true
+    },
+    {
+      "id": "foot-3",
+      "icon": "gear",
+      "label": "robots.txt",
+      "url": "/robots.txt",
+      "target": "_self",
+      "visible": true
+    },
+    {
+      "id": "foot-4",
+      "icon": "",
+      "label": "llms.txt",
+      "url": "/llms.txt",
+      "target": "_self",
+      "visible": true
+    }
+  ],
+  "footerCopyright": "{yyyy} Made with {heart} by headless blogs",
+  "siteDescription": "A fast, beautiful static blog powered by Notion & Astro SSG",
+  "siteUrl": "http://localhost:4321",
+  "siteLanguage": "id",
+  "siteTimezone": "Asia/Jakarta",
+  "gitopsAutoSync": true,
+  "gitopsBranch": "main",
+  "sharpQuality": 80,
+  "rateLimitDelay": 350
+}
