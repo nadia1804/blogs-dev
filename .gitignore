@@ -1,0 +1,16 @@
+node_modules/
+dist/
+preview/
+.cache/
+shell/.build/
+
+# Tidak ikut repo: cache turunan, draft autosave, dan token.
+# (Backup zip memuat draft, tapi tidak memuat cache dan token.)
+data/.index/
+data/.drafts/
+data/.secrets.json
+*.tmp
+
+# Salinan data lama yang disisihkan saat restore backup.
+data.sebelum-pulih-*/
+data.memulihkan/

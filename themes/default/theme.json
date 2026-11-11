@@ -1,0 +1,101 @@
+{
+  "id": "default",
+  "name": "Blogs Default",
+  "version": "1.1.0",
+  "description": "Tema bawaan: bentuk kapsul, warna pastel, dominan putih, huruf Nunito.",
+  "styles": { "engine": "tailwind", "entry": "styles.css" },
+  "menus": ["header", "footer"],
+  "locked": true,
+  "settings": [
+    {
+      "id": "navbar",
+      "label": "Navbar",
+      "fields": [
+        {
+          "key": "navPreset",
+          "label": "Gaya navbar",
+          "type": "select",
+          "default": "bar",
+          "options": [
+            { "value": "bar", "label": "Bilah penuh" },
+            { "value": "capsule", "label": "Kapsul melayang" }
+          ]
+        },
+        { "key": "logo", "label": "Logo navbar", "type": "image", "default": "", "hint": "Kosong = memakai logo di Settings > Identitas situs." },
+        { "key": "logoHeight", "label": "Tinggi logo", "type": "number", "default": 28, "min": 16, "max": 64, "suffix": "px" },
+        { "key": "showBrandText", "label": "Tampilkan teks di samping logo", "type": "boolean", "default": false },
+        { "key": "brandText", "label": "Teks", "type": "text", "default": "", "hint": "Kosong = judul situs.", "showIf": { "key": "showBrandText", "equals": true } }
+      ]
+    },
+    {
+      "id": "hero",
+      "label": "Hero beranda",
+      "fields": [
+        {
+          "key": "heroPreset",
+          "label": "Gaya hero",
+          "type": "select",
+          "default": "boxed",
+          "options": [
+            { "value": "boxed", "label": "Dalam kotak berwarna" },
+            { "value": "plain", "label": "Tanpa kotak" }
+          ],
+          "hint": "Judul dan subjudul hero diatur di Settings > Identitas situs."
+        },
+        { "key": "heroTypeLinks", "label": "Tampilkan pil post type", "type": "boolean", "default": true },
+        { "key": "heroButton", "label": "Tampilkan tombol", "type": "boolean", "default": false },
+        { "key": "heroButtonLabel", "label": "Teks tombol", "type": "text", "default": "Mulai membaca", "showIf": { "key": "heroButton", "equals": true } },
+        { "key": "heroButtonLink", "label": "Tautan tombol", "type": "text", "default": "/blog/", "hint": "Alamat di situs ini seperti /blog/, atau alamat lengkap.", "showIf": { "key": "heroButton", "equals": true } }
+      ]
+    },
+    {
+      "id": "cards",
+      "label": "Kartu di beranda",
+      "fields": [
+        {
+          "key": "cardPreset",
+          "label": "Susunan kartu",
+          "type": "select",
+          "default": "featured",
+          "options": [
+            { "value": "featured", "label": "1 besar, 1 sedang, sisanya kecil" },
+            { "value": "uniform", "label": "Semua kartu seukuran" }
+          ]
+        },
+        { "key": "homeCount", "label": "Jumlah post di beranda", "type": "number", "default": 13, "min": 1, "max": 60 },
+        { "key": "colsMobile", "label": "Kartu per baris di ponsel", "type": "number", "default": 2, "min": 1, "max": 2, "hint": "Lebar layar di bawah 640 px." },
+        { "key": "colsTablet", "label": "Kartu per baris di tablet", "type": "number", "default": 3, "min": 2, "max": 4, "hint": "Lebar layar 640 sampai 1023 px." },
+        { "key": "colsDesktop", "label": "Kartu per baris di desktop", "type": "number", "default": 4, "min": 3, "max": 5, "hint": "Lebar layar 1024 px ke atas." },
+        { "key": "homePostTypes", "label": "Post type di beranda", "type": "postTypes", "default": [], "hint": "Tanpa centang = semua post type." }
+      ]
+    },
+    {
+      "id": "footer",
+      "label": "Footer",
+      "fields": [
+        {
+          "key": "footerPreset",
+          "label": "Isi footer",
+          "type": "select",
+          "default": "brand",
+          "options": [
+            { "value": "brand", "label": "Logo dan tagline" },
+            { "value": "custom", "label": "Teks sendiri" }
+          ]
+        },
+        {
+          "key": "footerText",
+          "label": "Teks footer",
+          "type": "template",
+          "default": "© [YYYY] [SITE]. Dibuat dengan [HEART]",
+          "variables": [
+            { "token": "[YYYY]", "label": "Tahun" },
+            { "token": "[SITE]", "label": "Judul situs" },
+            { "token": "[HEART]", "label": "Hati berdetak" }
+          ],
+          "showIf": { "key": "footerPreset", "equals": "custom" }
+        }
+      ]
+    }
+  ]
+}

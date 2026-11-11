@@ -1,0 +1,36 @@
+{
+  "id": "0mwbh3z4wa3fdaa1d",
+  "slug": "hello-world",
+  "createdAt": "2026-11-11T02:01:51.776Z",
+  "updatedAt": "2026-11-11T02:25:55.917Z",
+  "title": "Hello World",
+  "status": "draft",
+  "scheduledAt": null,
+  "excerpt": "",
+  "cover": null,
+  "content": [],
+  "seo": {
+    "title": "",
+    "description": "",
+    "canonical": "",
+    "focusKeyword": "",
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "og": {
+      "title": "",
+      "description": "",
+      "image": ""
+    }
+  },
+  "schema": {
+    "type": "BlogPosting",
+    "data": {}
+  },
+  "publishedAt": null,
+  "type": "blog",
+  "categoryIds": [],
+  "authorIds": [],
+  "tags": []
+}

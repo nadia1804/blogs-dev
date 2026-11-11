@@ -1,0 +1,21 @@
+{
+  "id": "blog",
+  "label": "Blog",
+  "labelPlural": "Blog",
+  "icon": "book-check",
+  "system": true,
+  "defaultSchema": "BlogPosting",
+  "fallbackColors": [
+    "peach",
+    "mint",
+    "aqua",
+    "sky",
+    "lilac",
+    "lemon",
+    "sand",
+    "blush",
+    "rose"
+  ],
+  "createdAt": "2026-11-11T01:20:25.762Z",
+  "updatedAt": "2026-11-11T06:52:45.536Z"
+}

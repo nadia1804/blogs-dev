@@ -1,0 +1,213 @@
+{
+  "id": "0mwbhqrdx7ece062a",
+  "slug": "about",
+  "createdAt": "2026-11-11T02:19:34.822Z",
+  "updatedAt": "2026-11-11T06:52:07.032Z",
+  "title": "About",
+  "status": "published",
+  "scheduledAt": null,
+  "excerpt": "",
+  "cover": {
+    "src": "media/uploads/2026/11/about-blogs-web-id-8b8d0d09.png",
+    "alt": "about blogs"
+  },
+  "content": [
+    {
+      "id": "47e4dfad-ac6a-42e4-b947-4c0c89817d00",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "rgb(250, 248, 245)",
+        "textColor": "rgb(24, 27, 32)",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Selamat datang di blogs.web.id!",
+          "styles": {
+            "bold": true
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "c9feae5f-419b-4fd5-9ad8-5968cf2bcf95",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "rgb(250, 248, 245)",
+        "textColor": "rgb(24, 27, 32)",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Sebagai sebuah ",
+          "styles": {}
+        },
+        {
+          "type": "text",
+          "text": "Ruang Baca & Media Belajar",
+          "styles": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": ", web ini hadir menjadi ruang digital untuk mengarsipkan proses belajar, berbagi wawasan, dan menyimpan berbagai dokumentasi.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "1badeaae-3556-4682-8cb4-52b7640dc6ff",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "878b179e-4838-4186-8241-afda30037eaa",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "rgb(250, 248, 245)",
+        "textColor": "rgb(24, 27, 32)",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Halaman ini difungsikan semacam perpustakaan kecil yang memuat kumpulan tulisan dan catatan. Beberapa hal yang dibagikan meliputi:",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "e033e98e-6f8e-40e2-b28c-d477cbd1b811",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Tulisan:",
+          "styles": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": " Catatan, pemikiran, dan refleksi ringan dari keseharian.",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "cb53abd3-d12d-48af-8c43-204a4a21d55a",
+      "type": "bulletListItem",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Media Belajar :",
+          "styles": {
+            "bold": true
+          }
+        },
+        {
+          "type": "text",
+          "text": " Sebagai tempat untuk belajar",
+          "styles": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "08f16e11-5815-4276-ba49-b38c0769ceb1",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "f25ee0a4-8482-43d3-97e8-2aa82a549afa",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Silakan jelajahi perpustakaan kecil ini, temukan bacaan yang sesuai dengan kebutuhanmu, dan jadikan blogs.web.id sebagai Ruang Baca dan Media Belajar untuk kegiatan belajar sehari hari.",
+          "styles": {
+            "textColor": "rgb(240, 240, 240)",
+            "backgroundColor": "rgb(24, 24, 25)"
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": "518263a4-771a-413d-8fb8-7df831f5921c",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    },
+    {
+      "id": "2ae3af23-aca8-4c4e-8245-11c5d241aa55",
+      "type": "paragraph",
+      "props": {
+        "backgroundColor": "default",
+        "textColor": "default",
+        "textAlignment": "left"
+      },
+      "content": [],
+      "children": []
+    }
+  ],
+  "seo": {
+    "title": "About blogs",
+    "description": "",
+    "canonical": "",
+    "focusKeyword": "",
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "og": {
+      "title": "",
+      "description": "",
+      "image": ""
+    }
+  },
+  "schema": {
+    "type": "auto",
+    "data": {}
+  },
+  "publishedAt": "2026-11-11T02:40:00.244Z"
+}

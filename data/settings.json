@@ -1,0 +1,83 @@
+{
+  "shell": {
+    "theme": "forest"
+  },
+  "site": {
+    "title": "Blogs",
+    "tagline": "Ruang baca & Media belajar",
+    "description": "Kumpulan tulisan, modul pelajaran, dan dokumentasi.",
+    "language": "id",
+    "url": "https://blogs.web.id",
+    "logo": "media/brand/logo.png",
+    "icon": "media/brand/icon.png",
+    "ogImage": "media/brand/og-default.png"
+  },
+  "hero": {
+    "title": "Ruang baca & Media belajar",
+    "subtitle": "Kumpulan tulisan, modul pelajaran, dan dokumentasi."
+  },
+  "seo": {
+    "titleTemplate": "%title% | %site%",
+    "indexSite": true,
+    "twitterHandle": "",
+    "organizationName": "",
+    "socialProfiles": [],
+    "verification": {
+      "google": "",
+      "bing": ""
+    }
+  },
+  "images": {
+    "webpQuality": 50,
+    "avif": true,
+    "avifQuality": 40,
+    "breakpoints": [
+      360,
+      640,
+      960,
+      1280
+    ],
+    "maxWidth": 1600
+  },
+  "caching": {
+    "prefetch": true,
+    "serviceWorker": false
+  },
+  "watcher": {
+    "idleSeconds": 3,
+    "intervalSeconds": 50
+  },
+  "publish": {
+    "target": "vercel",
+    "siteId": "blogs-dev",
+    "teamId": ""
+  },
+  "github": {
+    "enabled": false,
+    "repository": "",
+    "branch": "main"
+  },
+  "theme": {
+    "active": "default",
+    "options": {
+      "default": {
+        "showBrandText": false,
+        "heroTypeLinks": false,
+        "heroPreset": "boxed",
+        "homePostTypes": [
+          "pelajaran",
+          "game"
+        ],
+        "footerPreset": "custom",
+        "footerText": "© [YYYY] [SITE]. Made with [HEART]",
+        "heroButton": false
+      }
+    }
+  },
+  "plugins": {
+    "search": {
+      "enabled": true,
+      "options": {}
+    }
+  }
+}

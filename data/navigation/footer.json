@@ -1,0 +1,17 @@
+{
+  "id": "footer",
+  "label": "Footer",
+  "items": [
+    {
+      "id": "e2fc8f3d",
+      "label": "Home",
+      "icon": "app-window-mac",
+      "target": {
+        "kind": "home"
+      },
+      "children": []
+    }
+  ],
+  "createdAt": "2026-11-11T01:46:43.312Z",
+  "updatedAt": "2026-11-11T06:18:45.624Z"
+}

@@ -1,0 +1,26 @@
+{
+  "id": "0mwbh1nb08578cdc2",
+  "slug": "matematika",
+  "createdAt": "2026-11-11T02:00:03.132Z",
+  "updatedAt": "2026-11-11T02:00:03.132Z",
+  "postType": "pelajaran",
+  "name": "Matematika",
+  "description": "",
+  "color": "mint",
+  "parentId": null,
+  "seo": {
+    "title": "",
+    "description": "",
+    "canonical": "",
+    "focusKeyword": "",
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "og": {
+      "title": "",
+      "description": "",
+      "image": ""
+    }
+  }
+}

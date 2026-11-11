@@ -1,0 +1,16 @@
+{
+  "id": "game",
+  "label": "Game",
+  "labelPlural": "Games",
+  "icon": "file-text",
+  "system": false,
+  "defaultSchema": "LearningResource",
+  "fallbackColors": [
+    "sky",
+    "mint",
+    "lavender",
+    "sand"
+  ],
+  "createdAt": "2026-11-11T07:01:09.975Z",
+  "updatedAt": "2026-11-11T07:01:09.975Z"
+}

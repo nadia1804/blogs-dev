@@ -1,0 +1,21 @@
+{
+  "id": "google-analytics",
+  "name": "Google Analytics",
+  "version": "1.0.0",
+  "description": "Memasang Google Analytics 4. Skrip dimuat setelah interaksi pertama pengunjung supaya tidak memperlambat halaman.",
+  "locked": true,
+  "settings": [
+    { "key": "measurementId", "label": "ID pengukuran", "type": "text", "default": "", "hint": "Berawalan G-, misalnya G-AB12CD34EF." },
+    {
+      "key": "load",
+      "label": "Waktu memuat skrip",
+      "type": "select",
+      "default": "delayed",
+      "options": [
+        { "value": "delayed", "label": "Setelah interaksi pertama (disarankan)" },
+        { "value": "immediate", "label": "Langsung saat halaman dibuka" }
+      ],
+      "hint": "Pilihan pertama menjaga skor PageSpeed, tapi kunjungan yang sangat singkat tanpa interaksi tidak tercatat."
+    }
+  ]
+}
